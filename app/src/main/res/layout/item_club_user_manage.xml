@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="100px"
+    android:paddingLeft="20px"
+    android:background="@color/black">
+
+    <LinearLayout
+        android:id="@+id/item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/layout_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:id="@+id/iv_user_head"
+                android:layout_width="100px"
+                android:layout_height="100px"
+                android:src="@drawable/default_male_head"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_user_name"
+                android:layout_width="match_parent"
+                android:layout_height="100px"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="20px"
+                android:text="用户名"
+
+                android:textSize="20sp"
+                android:layout_gravity="center_vertical"/>
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/item_delete"
+            android:layout_width="100dp"
+            android:layout_height="100px"
+            android:background="#88ff0000"
+            android:gravity="center"
+            android:text="删除"
+            android:textColor="#ffffff"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_alignParentBottom="true"
+        android:background="#55000000" />
+
+</RelativeLayout>

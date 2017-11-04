@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:id="@+id/switch_parent"
+	android:layout_width="144px"
+	android:layout_height="52px"
+	android:background="@drawable/switch_bg">
+
+	<ImageView
+		android:id="@+id/switch_button"
+		android:layout_width="90px"
+		android:layout_height="52px"
+		android:src="@drawable/switch_btn"
+		/>
+
+</LinearLayout>

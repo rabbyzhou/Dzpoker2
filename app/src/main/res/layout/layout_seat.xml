@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="120px"
+    android:layout_height="140px"
+    android:orientation="vertical"
+    android:padding="0px"
+    >
+
+    <TextView
+        android:id="@+id/tv_user_name"
+        android:layout_width="match_parent"
+        android:layout_height="30px"
+        android:text="马大哈"
+        android:textSize="8dp"
+        android:layout_gravity="center_horizontal"
+        android:gravity="center"
+        android:singleLine="true"/>
+
+    <ImageView
+        android:id="@+id/iv_user_head"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_gravity="center_horizontal"/>
+
+        <TextView
+            android:id="@+id/tv_goldcoin"
+            android:layout_width="80px"
+            android:layout_height="30px"
+            android:text="123"
+            android:gravity="center"
+            android:textSize="8dp"
+            android:background="@drawable/bg001"
+            android:layout_gravity="center_horizontal"/>
+
+
+
+
+</LinearLayout>

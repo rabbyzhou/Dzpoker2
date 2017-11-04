@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#201e2e"
+    >
+
+    <LinearLayout
+        android:id="@+id/layout_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f"
+        >
+
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="规则说明"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="设    置"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="商    城"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="补充记分牌"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="站起围观"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f"
+        >
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="保位留桌"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_7"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="解散房间"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/layout_8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="3px"
+        android:paddingLeft="10px"
+        android:paddingRight="20px"
+        android:background="#332e4f">
+        <ImageView
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/defend_ico"
+            android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/tv_8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="退出牌局"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:layout_marginBottom="8px"
+            android:layout_marginTop="8px"
+            android:layout_marginLeft="5px"
+            android:textSize="16dp"
+            android:layout_weight="1"/>
+
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/layout_window">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="#003366"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center_vertical"
+                android:text="俱乐部"
+                android:drawableLeft="@drawable/exit"
+                android:textSize="18dp"/>
+
+        </LinearLayout>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="新建俱乐部"
+            android:textSize="24dp"
+            android:layout_centerInParent="true"/>
+
+
+    </RelativeLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:layout_marginLeft="80px"
+        android:layout_marginRight="80px"
+        android:layout_marginBottom="80px"
+        android:layout_marginTop="80px"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="150px"
+            >
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/iv_club_head"
+                android:layout_width="300px"
+                android:layout_height="300px"
+                android:src="@drawable/default_club_head"
+                android:layout_gravity="center_horizontal"
+                />
+        </LinearLayout>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_created_number"
+                android:text="已建立俱乐部数"
+                android:layout_marginTop="20px"
+                android:textSize="16dp"
+                android:gravity="center"
+                android:paddingBottom="20px"/>
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+
+                android:text="俱乐部名称"
+                android:textSize="20dp" />
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/et_clubname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLength="20"
+                android:hint="1-20字符"
+                android:gravity="center"
+                android:layout_marginTop="10px"/>
+
+            <LinearLayout
+                android:id="@+id/layout_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_gravity="center_vertical"
+                android:layout_marginTop="10px"
+                android:clickable="true"
+                android:focusable="true"
+                >
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"
+                    android:maxLength="20"
+                    android:hint="所在地"
+                    android:gravity="center"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/arrow_right"
+                    android:focusable="false"
+                    />
+
+
+
+
+            </LinearLayout>
+
+
+            <Button
+                android:id="@+id/btnCreateClub"
+                android:layout_marginTop="30px"
+                android:layout_width="match_parent"
+                android:layout_height="80px"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:background="@drawable/denglu_normal"
+
+                android:text="完成" />
+
+
+
+        </LinearLayout>
+
+
+</LinearLayout>

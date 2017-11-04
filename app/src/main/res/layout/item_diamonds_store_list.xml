@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:clickable="true"
+    android:focusable="true"
+    android:id="@+id/layout_clubinfo"
+    >
+
+
+    <ImageView
+        android:id="@+id/iv_diamonds_head"
+        android:layout_width="80px"
+        android:layout_height="80px"
+        android:layout_marginBottom="10px"
+        android:layout_marginTop="10px"
+        android:layout_marginLeft="40px"
+        android:layout_marginRight="10px"
+        android:src="@drawable/default_club_head"
+
+        />
+
+    <TextView
+        android:id="@+id/tv_diamonds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="60钻石"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginBottom="8px"
+        android:layout_marginTop="8px"
+        android:layout_marginLeft="20px"
+        android:textSize="18dp"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"/>
+
+    <TextView
+        android:id="@+id/tv_cost_rmb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="￥6.00"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:layout_marginBottom="8px"
+        android:layout_marginTop="8px"
+        android:layout_marginLeft="20px"
+        android:layout_marginRight="40px"
+        android:textSize="18dp"
+        android:layout_gravity="center_vertical"
+       />
+
+        </LinearLayout>
+
+
+
+

@@ -1,0 +1,92 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_window"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/background">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dip"
+        android:background="#003366"
+        >
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableLeft="@drawable/exit"
+            android:drawablePadding="2dp"
+            android:text="返回"
+            android:textSize="18dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建牌局"
+            android:textSize="24dp"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#4c4b54"
+        android:paddingBottom="1dp">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_game"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_gravity="bottom"
+            android:background="#4c4b54"
+            android:layout_margin="1dip"
+            android:fillViewport="false"
+            app:tabMode="fixed"
+            app:layout_scrollFlags="scroll"
+            app:tabIndicatorColor="#057523"
+            app:tabIndicatorHeight="0dp"
+            app:tabSelectedTextColor="#057523"
+            app:tabTextColor="#FFFFFF"
+            app:tabBackground="@drawable/tab_background"
+
+            >
+
+
+        </android.support.design.widget.TabLayout>
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_game2"
+            android:layout_width="match_parent"
+            android:layout_height="80px"
+            android:layout_gravity="bottom"
+            android:background="#4c4b54"
+            android:layout_margin="1dip"
+            android:fillViewport="false"
+            app:tabMode="fixed"
+            app:layout_scrollFlags="scroll"
+            app:tabIndicatorColor="@color/red"
+            app:tabIndicatorHeight="2dp"
+            app:tabTextColor="#FFFFFF"
+            app:tabBackground="@drawable/tab_background"
+            >
+
+
+        </android.support.design.widget.TabLayout>
+    </LinearLayout>
+
+    <com.yijian.dzpoker.view.NoScrollViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="600px"
+    android:layout_height="620px"
+
+    android:paddingLeft="50px"
+    android:paddingRight="50px"
+    android:paddingTop="10px"
+    android:paddingBottom="10px"
+    android:background="#152323"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30px"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_buy_coin"
+            android:layout_width="120px"
+            android:layout_height="40px"
+            android:text="购买金币"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:background="@drawable/game_bj"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:layout_weight="1" />
+        <ImageView
+            android:id="@+id/iv_close"
+            android:layout_width="40px"
+            android:layout_height="40px"
+            android:src="@drawable/close"
+           />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="370px"
+        android:layout_marginTop="30px"
+        android:orientation="vertical"
+        android:background="@drawable/game_bj"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80px">
+        <TextView
+            android:id="@+id/tv_message"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text=""
+            android:textSize="12dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:visibility="invisible"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal"
+
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:text="带入记分牌："
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+            <ImageView
+                android:layout_marginLeft="10px"
+                android:layout_width="50px"
+                android:layout_height="50px"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/insure_pot_pull"/>
+            <TextView
+                android:id="@+id/tv_core"
+                android:layout_marginLeft="20px"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:text="500"
+                android:textColor="#ad7b43"
+                android:textSize="24dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+        <com.yijian.dzpoker.view.RangeSliderBar2
+            android:layout_centerInParent="true"
+            android:id="@+id/seekbar_core"
+            android:layout_width="match_parent"
+            android:layout_height="90px"
+            rsv:filledColor="#3c78d8"
+            rsv:emptyColor="#ffffff"
+            rsv:rangeCount="7"
+            rsv:cursorDrawable="@drawable/circular_ico"
+            />
+
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:text="个人财富："
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_marginLeft="5px"
+                android:text="350"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_marginLeft="20px"
+                android:text="服务费："
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_service_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_marginLeft="5px"
+                android:text="20"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+
+
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="60px"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:text="已经带入/总带入："
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:id="@+id/tv_in_coin"
+                android:layout_width="wrap_content"
+                android:layout_height="60px"
+                android:layout_marginLeft="20px"
+                android:text="0/无上限"
+                android:textSize="10dp"
+                android:gravity="center"
+                android:layout_gravity="center_vertical"/>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/button_apply"
+            android:layout_marginTop="20px"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="160px"
+            android:layout_height="50px"
+            android:text="购买金币"
+            android:textColor="@color/black"
+            android:background="@drawable/buy_score_bj"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10px"
+            android:textSize="8dp"
+            android:text="在下一局开始前，为您补充所购记分牌"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="5px"
+            android:textSize="8dp"
+            android:text="牌局结束后，会自动将记分牌兑换成您的财富"/>
+    </LinearLayout>
+
+
+</LinearLayout>
+

@@ -1,0 +1,254 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:rsv="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.yijian.dzpoker.activity.game.fragment.FragmentGameSet1">
+
+    <!-- TODO: Update blank fragment layout -->
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+             android:layout_marginTop="30px"
+            android:orientation="vertical">
+            <EditText
+                android:id="@+id/et_game_name"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:paddingTop="30px"
+                android:paddingLeft="30px"
+                android:paddingBottom="30px"
+                android:hint="请输入要创建的牌局的房间名称"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="#332e4f"
+                android:textSize="18dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                   android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_blinds"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="10/20"
+                        android:textSize="24dp"
+                        android:textColor="#ad7b43"/>
+
+
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_min_in"
+                        android:gravity="center_vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/flower"
+                        android:text="1000"
+                        android:textSize="24dp"
+                        android:textColor="#ad7b43"/>
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="小盲/大盲"
+                        android:textSize="8dp"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="最小带入"
+                        android:textSize="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+
+
+            <SeekBar
+                android:id="@+id/seekBar_blinds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20px"
+                android:layout_marginRight="20px"
+                android:layout_marginTop="20px"
+                android:maxHeight="10dip"
+                android:minHeight="10dip"
+                android:max="10"
+                android:progress="5"
+                android:progressDrawable="@drawable/seekbar_progress_custom"
+
+                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="50px"
+                android:layout_marginRight="50px"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+                    <RadioButton
+                        android:id="@+id/rb_control_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+                    <TextView
+                        android:id="@+id/tv_control_in"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="控制带入"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"
+                    android:gravity="center">
+
+                    <RadioButton
+                        android:id="@+id/rb_insurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
+                    <TextView
+                        android:id="@+id/tv_insurance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="保险"/>
+
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_personl_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="个人财富：0"
+                    android:textSize="18dp"
+                    android:textColor="#c04464"
+
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10px"
+                    android:textSize="10dp"
+                    android:gravity="center"
+
+                    android:text="牌局开始和结束时，系统将自动将金币与记分牌进行兑换"/>
+
+            </LinearLayout>
+
+            <com.yijian.dzpoker.view.RangeSliderBar android:layout_centerInParent="true"
+                android:id="@+id/rsv_custom"
+                android:layout_marginTop="20px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30px"
+                android:layout_marginRight="30px"
+                rsv:filledColor="#00cbff"
+                rsv:emptyColor="#a8aeb8"
+                rsv:rangeCount="8"
+                rsv:cursorDrawable="@mipmap/cursor"
+                rsv:barHeight="10px"
+                rsv:circleRadius="40px"
+                />
+
+            <Button
+                android:id="@+id/btn_high_grade_set"
+                android:layout_width="240px"
+                android:layout_height="80px"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_bg_green"
+                android:layout_marginTop="20px"
+                android:text="高级设置"
+                android:textColor="@color/white"/>
+
+            <TextView
+                android:id="@+id/tv_game_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10px"
+                android:layout_marginLeft="100px"
+                android:layout_marginRight="100px"
+                android:textSize="10dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+
+                android:text="牌局信息"/>
+
+            <Button
+                android:id="@+id/btn_new_game"
+                android:layout_width="480px"
+                android:layout_height="100px"
+                android:layout_gravity="center"
+                android:background="@drawable/btn_bg_red"
+                android:layout_marginTop="20px"
+                android:text="现在开局"
+                android:textColor="@color/white"/>
+
+
+        </LinearLayout>
+
+</FrameLayout>

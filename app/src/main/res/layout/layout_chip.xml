@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="90px"
+    android:layout_height="35px"
+    android:orientation="horizontal"
+    android:background="@drawable/bg_001">
+
+    <ImageView
+        android:layout_gravity="center_vertical"
+        android:layout_width="24px"
+        android:layout_height="24px"
+        android:src="@drawable/chip"/>
+
+
+    <TextView
+        android:id="@+id/tv_chip"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="10000"
+        android:textSize="10dp"
+        android:gravity="center"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/white"
+
+        />
+</LinearLayout>
+
