@@ -112,6 +112,8 @@ public class NewsPageUtils {
 
     private static Bitmap cachedPic(MainPageNews news, Context context){
 
+        if ( news == null ) return null;
+
         Bitmap map = null;
         String url = news.pic;
         if ( url == null || url.isEmpty()) return map;
@@ -165,6 +167,9 @@ public class NewsPageUtils {
     }
 
     private static void addBitmapToMemory(String key,Bitmap bitmap){
+        if ( key == null || key.isEmpty()) return;
+        if ( bitmap == null) return;
+
         if(getBitmapFromMemory(key)==null){
             mMemoryPicCache.put(key, bitmap);
             Log.d(TAG, "add memory cache successful : " + key);
@@ -206,6 +211,8 @@ public class NewsPageUtils {
      * 有请求服务器操作, 需要在子线程中调用
      */
     public static Bitmap getBitmap(MainPageNews news, Context context){
+        if ( news == null ) return null;
+
         Bitmap bitmap = null;
 
         String picName = news.picName;
@@ -226,6 +233,7 @@ public class NewsPageUtils {
     }
 
     private static String getConvertedSimpleName(String url){
+        if ( url == null || url.isEmpty()) return null;
         String result = "";
         String[] items = url.split("/");
         result = items[items.length-1];
@@ -233,6 +241,8 @@ public class NewsPageUtils {
     }
 
     private static Bitmap getBitmapFromFile(String url, Context context){
+
+        if ( url == null || url.isEmpty()) return null;
         Bitmap map = null;
 
         String cachePath = context.getCacheDir().getPath();

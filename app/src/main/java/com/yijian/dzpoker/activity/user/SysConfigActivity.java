@@ -2,8 +2,8 @@ package com.yijian.dzpoker.activity.user;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -43,10 +43,22 @@ public class SysConfigActivity extends BaseBackActivity {
         tv_back.setOnClickListener(this);
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.tv_back:
+                setResult(RESULT_OK);
                 finish();
                 break;
             case R.id.tv_about:

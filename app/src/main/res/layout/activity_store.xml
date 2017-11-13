@@ -1,9 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context="com.yijian.dzpoker.activity.user.StoreActivity">
 
-</android.support.constraint.ConstraintLayout>
+    <include layout="@layout/layout_me_title"/>
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TableRow>
+
+            <RelativeLayout
+                android:layout_width="0.0dp"
+                android:layout_height="35dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:layout_weight="1"
+                android:background="@color/shop_goldcoin_selected">
+
+                <ImageView
+                    android:id="@+id/money_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:paddingLeft="6px"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/store_money"/>
+
+                <TextView
+                    android:id="@+id/store_goldcoin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6dp"
+                    android:gravity="center"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/money_icon"
+                    android:textSize="@dimen/game_record_text_medium_size"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0.0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="@color/shop_goldcoin_selected">
+
+                <ImageView
+                    android:id="@+id/diamond_icon"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:paddingLeft="6px"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/blue_masonry"/>
+
+                <TextView
+                    android:id="@+id/store_diamond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="6px"
+                    android:layout_centerVertical="true"
+                    android:gravity="center"
+                    android:layout_toRightOf="@id/diamond_icon"
+                    android:textSize="@dimen/game_record_text_medium_size"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_vertical"/>
+
+                <ImageView
+                    android:id="@+id/diamond_plus"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:paddingRight="6px"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/shop_plus"/>
+            </RelativeLayout>
+        </TableRow>
+    </TableLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_shop"
+            style="@style/ShopTabLayoutAppearance"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            app:tabBackground="@drawable/bg_shop_tab"
+            app:tabIndicatorHeight="0dp" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_shop"
+            android:layout_width="match_parent"
+            android:layout_height="0.0dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"/>
+
+    </LinearLayout>
+
+</LinearLayout>

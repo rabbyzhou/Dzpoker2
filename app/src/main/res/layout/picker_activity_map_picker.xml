@@ -71,7 +71,7 @@
                     android:visibility="gone"/>
 
                 <ListView
-                    android:id="@+id/list"
+                    android:id="@+id/list_goldcoin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:divider="@drawable/picker_map_nearby_divider"

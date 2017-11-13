@@ -1,13 +1,13 @@
 package com.yijian.dzpoker.activity.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 
 
@@ -17,7 +17,7 @@ import com.yijian.dzpoker.util.DzApplication;
 public abstract class BaseBackActivity extends AppCompatActivity implements View.OnClickListener{
 
     protected TextView tv_back,tv_title;
-    protected DzApplication application;
+    public DzApplication application;
     protected String strLoginName;
     protected int userId;
     protected String remoteURL;
@@ -39,7 +39,15 @@ public abstract class BaseBackActivity extends AppCompatActivity implements View
         strLoginName=application.getLoginName();
         userId=application.getUserId();
         remoteURL=getString(R.string.url_remote);
+
         initViews();
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty() && tv_back != null){
+             tv_back.setText(backText);
+        }
+
     }
 
 

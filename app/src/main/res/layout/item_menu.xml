@@ -4,26 +4,25 @@
     android:layout_height="wrap_content"
     android:layout_weight="1"
     android:orientation="vertical"
-    android:padding="20px"
-
+    android:paddingTop="40dp"
     >
 
 
     <ImageView
         android:id="@+id/iv_menu_pic"
-        android:layout_width="100px"
-        android:layout_height="100px"
+        android:layout_width="150px"
+        android:layout_height="150px"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/default_club_level"
         />
 
         <TextView
             android:id="@+id/tv_menu_name"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="菜单"
-            android:textSize="22dp"
+            android:textSize="14dp"
             android:textColor="@color/white"
             android:layout_gravity="center_horizontal"
             />
