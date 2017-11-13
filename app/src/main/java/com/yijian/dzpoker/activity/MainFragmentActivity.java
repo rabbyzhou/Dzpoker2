@@ -52,6 +52,22 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
         //ViewPager的适配器
         adapter = new MyAdapter(getSupportFragmentManager(), this);
         viewPager.setAdapter(adapter);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                TextView titleView = (TextView) MainFragmentActivity.this.findViewById(R.id.title);
+                titleView.setText(titles[position]);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
         //绑定
         tabLayout.setupWithViewPager(viewPager);
         //设置自定义视图
@@ -61,7 +77,10 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
         }
 
-        tabLayout.getTabAt(1).select();
+        tabLayout.getTabAt(0).select();
+        TextView titleView = (TextView) MainFragmentActivity.this.findViewById(R.id.title);
+        titleView.setText(titles[0]);
+
     }
 
     class MyAdapter extends FragmentPagerAdapter {
