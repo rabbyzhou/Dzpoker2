@@ -83,6 +83,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import cn.jpush.im.android.api.JMessageClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -100,6 +101,7 @@ public class GameActivity extends AppCompatActivity {
     private int port;
     private int operation;
     private int gameId;
+    private String gameHouseName;
     private boolean flag=false;//控制，初次连接的时候，进行业务操作
     private DzApplication application;
     private ImageView iv_voice,iv_info,iv_menu;
@@ -1280,6 +1282,7 @@ public class GameActivity extends AppCompatActivity {
                             JSONObject jsonReturn=new JSONObject(recData[1]);
                             mTableInfo=new TableInfo();
                             mTableInfo.state=jsonReturn.getInt("state");//游戏状态
+                            gameHouseName=mTableInfo.tablename;
 
                             JSONArray temp=jsonReturn.getJSONArray("pots");
                             mTableInfo.pots=new int[temp.length()];//底池
@@ -3823,8 +3826,26 @@ public class GameActivity extends AppCompatActivity {
                 }else{
                     tv_message.setVisibility(View.INVISIBLE);
                     if (mTableInfo.iscontroltakein){
+                        //控制带入要判断
+                        /*if (mTableInfo.iscontroltakein){
+            //控制带入
+            tv_in_coin.setText(takeinchips+"/"+permittakeinchips);
+        }else{
+            //非控制带入
+            String value=mTableInfo.takeinchipsuplimit+"";
+            if (value.equals("0")){
+                value="无上限";
+            }
+            tv_in_coin.setText(takeinchips+"/"+value);
+        }*/
                         //控制带入
-                        button_apply.setText("申请");
+                        if (core+takeinchips>permittakeinchips){
+                            button_apply.setText("申请");
+
+                        }else{
+                            button_apply.setText("确定");
+                        }
+
                     }else{
                         //非控制带入
                         button_apply.setText("确定");
@@ -3891,9 +3912,58 @@ public class GameActivity extends AppCompatActivity {
                     }
 
 
-                }else if(button_apply.getText().equals("申请")){
+                }else if(button_apply.getText().equals("申请")) {
+                    //发送申请
+                    Thread thread=new Thread(new Runnable()
+                    {
+                        @Override
+                        public void run()
+                        {
+                            try{
+                                //拼装url字符串
+
+                                int applycore= Integer.parseInt(tv_core.getText().toString());
+                                DzApplication applicatoin=(DzApplication)getApplication();
+                                JSONObject jsonObj = new JSONObject();
+                                jsonObj.put("userid",applicatoin.getUserId());
+                                jsonObj.put("tableid",gameId);
+                                jsonObj.put("requesttakeinchips",applycore);
+
+                                String strURL=getString(R.string.url_remote);
+                                strURL+="func=requesttakein&param="+jsonObj.toString();
+
+                                URL url = new URL(strURL);
+                                Request request = new Request.Builder().url(strURL).build();
+                                Response response = DzApplication.getHttpClient().newCall(request).execute();
+                                String result=response.body().string();
+
+                                JSONObject jsonObject=new JSONObject(result);
+                                if (jsonObject.getInt("ret")==0){
+                                    // 创建牌局成功,发送IM消息RequestTakeIn|{‘tablename’:abc} tv_buy_coin
+                                    //sendMessage(Message message, MessageSendingOptions options)
+                                    HashMap<String,String> info=new HashMap<String,String>();
+                                    JMessageClient.createSingleTextMessage(mTableInfo.createuserid+"",getString(R.string.app_key),"RequestTakeIn|{‘tablename’:"+gameHouseName+"}");
+//                                    cn.jpush.im.android.api.model.Message message=JMessageClient.createSingleCustomMessage(mTableInfo.createuserid+"",getString(R.string.app_key),info);
+//                                    JMessageClient.sendMessage(message);
+                                    ToastUtil.showToastInScreenCenter(GameActivity.this,"提交申请带入成功，请等待房主或管理员审核！");
+
+                                }else {
+                                    ToastUtil.showToastInScreenCenter(GameActivity.this,"申请带入失败，错误原因："+jsonObject.getString("msg"));
+                                }
+
+
+
+                            }catch (Exception e){
+                                ToastUtil.showToastInScreenCenter(GameActivity.this,"提交申请带入异常，请稍后重试!"+e.toString());
+                            }
+
+                        }
+                    });
+                    thread.start();
 
                 }
+
+
             }
         });
 
