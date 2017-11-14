@@ -141,6 +141,9 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
 
                 break;
             case R.id.btn_next:
+                if (mTimer!=null) {
+                    mTimer.cancel();
+                }
                 //下一步，此处校验短信验证码是否相同,相同则根据opType进入不同的界面
                 if(edtVerifyCode.getText().toString().equals("")){
                     ToastUtil.showToastInScreenCenter(VerifyPhoneNumberActivity.this,"请输入短信验证码！");
@@ -172,6 +175,9 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                 }
                 break;
             case R.id.exit:
+                if (mTimer!=null) {
+                    mTimer.cancel();
+                }
                 finish();
 
 
@@ -225,5 +231,11 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
         }
     }
 
-
+    @Override
+    protected void onResume() {
+        if (mTimer!=null) {
+            mTimer.cancel();
+        }
+        super.onResume();
+    }
 }

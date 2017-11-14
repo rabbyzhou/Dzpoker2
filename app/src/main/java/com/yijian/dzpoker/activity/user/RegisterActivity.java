@@ -21,6 +21,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -109,8 +110,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     @Override
                                     public void gotResult(int i, String s) {
                                         if (i==0){
-                                            ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册成功！");
-                                            finish();
+                                            UserInfo userInfo=JMessageClient.getMyInfo();
+                                            userInfo.setNickname(edNickname.getText().toString());
+                                            JMessageClient.updateMyInfo(UserInfo.Field.nickname, JMessageClient.getMyInfo(), new BasicCallback() {
+                                                @Override
+                                                public void gotResult(int i, String s) {
+                                                    if (i==0) {
+                                                        ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册成功！");
+                                                        finish();
+                                                    }
+                                                }
+                                            });
+
                                         }else{
                                             ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册到IM失败，错误内容："+s);
                                         }

@@ -156,8 +156,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             // Commit the edits!
                                             editor.commit();
                                             //跳转到主界面
+
+
                                             Intent intent = new Intent();
-                                            intent.setClass(LoginActivity.this, MainActivity.class);
+                                            intent.setClass(LoginActivity.this, MainFragmentActivity.class);
                                             startActivity(intent);
                                             ToastUtil.showToastInScreenCenter(LoginActivity.this,"注册成功！");
                                             finish();

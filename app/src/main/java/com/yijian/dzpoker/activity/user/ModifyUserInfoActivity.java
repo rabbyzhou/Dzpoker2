@@ -223,6 +223,17 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
             if (jsonResult.getInt("ret")!=0){
                 ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息出错，错误内容:"+jsonResult.getString("msg"));
             }else{
+               /*UserInfo userInfo= JMessageClient.getMyInfo();
+                userInfo.setNickname(et_user_nickname.getText().toString());
+                JMessageClient.updateMyInfo(UserInfo.Field.nickname, userInfo, new BasicCallback() {
+                    @Override
+                    public void gotResult(int i, String s) {
+                        if (i==0) {
+                            ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息成功");
+                            //finish();
+                        }
+                    }
+                });*/
                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息成功");
             }
             //发送修改成功，主要是扣除钻石，展现钻石数

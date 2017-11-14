@@ -26,6 +26,9 @@ public class NotificationClickEventReceiver {
      * @param notificationClickEvent 通知点击事件
      */
     public void onEvent(NotificationClickEvent notificationClickEvent) {
+
+
+
         if (null == notificationClickEvent) {
             return;
         }

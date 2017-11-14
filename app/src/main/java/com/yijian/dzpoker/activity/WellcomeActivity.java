@@ -214,12 +214,23 @@ public class WellcomeActivity extends AppCompatActivity {
                         myApp.setLoginName(mLoginName);
                         myApp.setUserId(mUserId);
 
-                            //跳转到主界面
-                            Intent intent = new Intent();
-                            //intent.setClass(WellcomeActivity.this, MainActivity.class);
-                            intent.setClass(WellcomeActivity.this, MainFragmentActivity.class);
-                            startActivity(intent);
+                        //取到用户信息之后，利用ID登录IM
+                        JMessageClient.login(user.userId+"", getString(R.string.unite_password), new BasicCallback() {
+                            @Override
+                            public void gotResult(int i, String s) {
+                                if (i==0){
 
+                                    //跳转到主界面
+                                    Intent intent = new Intent();
+                                    //intent.setClass(WellcomeActivity.this, MainActivity.class);
+                                    intent.setClass(WellcomeActivity.this, MainFragmentActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }else{
+                                    ToastUtil.showToastInScreenCenter(WellcomeActivity.this,"注册到IM失败，错误内容："+s);
+                                }
+                            }
+                        });
 
                     }catch (Exception e){
                         ToastUtil.showToastInScreenCenter(WellcomeActivity.this,"与后台通讯出错，请稍后重试!");

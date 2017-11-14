@@ -36,6 +36,24 @@
             android:layout_marginTop="20px"
             android:layout_gravity="top|left"
             />
+        <ImageView
+            android:id="@+id/iv_apply"
+            android:background="@drawable/rule"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginRight="100px"
+            android:layout_marginTop="20px"
+            android:layout_gravity="top|right"
+            />
+        <ImageView
+            android:id="@+id/iv_game_info"
+            android:background="@drawable/menu_operate"
+            android:layout_width="80px"
+            android:layout_height="80px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="20px"
+            android:layout_gravity="top|right"
+            />
 
         <ImageView
             android:id="@+id/iv_info"

@@ -68,7 +68,4 @@ public class SelectCityAdapter extends BaseListAdapter<City, SelectCityAdapter.V
         }
     }
 
-
-
-
 }
