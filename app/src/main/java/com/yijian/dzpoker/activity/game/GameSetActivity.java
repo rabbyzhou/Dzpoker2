@@ -2,27 +2,27 @@ package com.yijian.dzpoker.activity.game;
 
 import android.content.Context;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.MainFragmentActivity;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet1;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet2;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet3;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet4;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet5;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet6;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.view.NoScrollViewPager;
 
 import java.util.ArrayList;
@@ -35,6 +35,7 @@ public class GameSetActivity extends AppCompatActivity implements FragmentGameSe
     private NoScrollViewPager viewPager;
     private List<Fragment> list;
     private MyAdapter adapter;
+    private TextView tvBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +44,17 @@ public class GameSetActivity extends AppCompatActivity implements FragmentGameSe
         tabLayout = (TabLayout) findViewById(R.id.tab_game);
         tabLayout2 = (TabLayout) findViewById(R.id.tab_game2);
 
+        tvBack = (TextView)findViewById(R.id.tv_back);
+        String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            tvBack.setText(backText);
+        }
+        tvBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
 
         for (int i = 0; i < titles1.length; i++) {
             View v = LayoutInflater.from(this).inflate(R.layout.tab_gameset1, null);
@@ -234,5 +246,15 @@ public class GameSetActivity extends AppCompatActivity implements FragmentGameSe
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

@@ -2,18 +2,20 @@ package com.yijian.dzpoker.activity.club;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
-import com.yijian.dzpoker.view.adapter.ClubInfoAdapter;
 import com.yijian.dzpoker.view.adapter.SearchClubAdapter;
 import com.yijian.dzpoker.view.data.ClubInfo;
 
@@ -35,6 +37,7 @@ public class SelectClubToAddActivity extends AppCompatActivity {
     private RecyclerView rv_club_list;
     private LinearLayoutManager mLayoutManager ;
     private SearchClubAdapter mAdapter;
+    private TextView exitView;
 
     public  final static int MESAGE_GETCLUBLIST_OK=0x1001;
 
@@ -75,7 +78,21 @@ public class SelectClubToAddActivity extends AppCompatActivity {
         rv_club_list.setHasFixedSize(true);
         rv_club_list.addItemDecoration(new DividerItemDecoration(
                 this, DividerItemDecoration.VERTICAL));
-        mAdapter = new SearchClubAdapter(this) ;
+
+        exitView = (TextView)findViewById(R.id.tv_exit);
+        exitView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            exitView.setText(backText);
+        }
+        mAdapter = new SearchClubAdapter(this,exitView.getText().toString()) ;
         rv_club_list.setAdapter(mAdapter);
 
     }

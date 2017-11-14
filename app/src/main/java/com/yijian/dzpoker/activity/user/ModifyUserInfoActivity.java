@@ -1,13 +1,10 @@
 package com.yijian.dzpoker.activity.user;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.media.Image;
 import android.net.Uri;
-import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +22,6 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
-import com.yijian.dzpoker.activity.club.ClubInfoActivity;
-import com.yijian.dzpoker.activity.club.ClubInfoManageActivity;
 import com.yijian.dzpoker.activity.club.SelectProvinceActivity;
 import com.yijian.dzpoker.ui.SwitchButton;
 import com.yijian.dzpoker.util.DzApplication;
@@ -144,6 +139,9 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                 break;
             case R.id.iv_user_head://替换头像
                 showWindow(layout_window);
+                break;
+            case R.id.tv_back:
+                finish();
                 break;
         }
 

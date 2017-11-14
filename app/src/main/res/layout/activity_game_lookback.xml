@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <include layout="@layout/layout_me_title"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:textColor="@color/white"
+        android:textSize="10dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="温馨提示:本地只记录了您在牌局中的手牌回顾,离开房间后的回顾不会记录"
+        />
+
+    <!-- 没有数据时, 显示-->
+    <TextView
+        android:id="@+id/tv_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:textColor="@color/white"
+        android:textSize="40dp"
+        android:text="没有数据"
+        android:gravity="center"
+        android:visibility="gone"/>
+
+    <com.yijian.dzpoker.activity.user.LookBackViewPager
+        android:id="@+id/vp_lookback"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"/>
+
+    <!-- 按钮区 -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="5dp">
+
+        <ImageView
+            android:id="@+id/collect"
+            android:layout_width="@dimen/lookback_btn_size"
+            android:layout_height="@dimen/lookback_btn_size"
+            android:background="@drawable/love_btn_ico"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"/>
+
+        <ImageView
+            android:id="@+id/firstpage"
+            android:layout_width="@dimen/lookback_btn_size"
+            android:layout_height="@dimen/lookback_btn_size"
+            android:background="@drawable/towards_btn_ico"
+            android:layout_toRightOf="@+id/collect"
+            android:layout_marginLeft="20dp"/>
+
+        <ImageView
+            android:id="@+id/frontpage"
+            android:layout_width="@dimen/lookback_btn_size"
+            android:layout_height="@dimen/lookback_btn_size"
+            android:background="@drawable/towards_left"
+            android:layout_toRightOf="@+id/firstpage"
+            android:layout_marginLeft="30dp"/>
+
+        <TextView
+            android:id="@+id/page_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:textColor="@color/shop_goldcoin_selected"
+            android:textSize="@dimen/game_record_text_medium_size"
+            tools:text="1/7"/>
+
+        <ImageView
+            android:id="@+id/nextpage"
+            android:layout_width="@dimen/lookback_btn_size"
+            android:layout_height="@dimen/lookback_btn_size"
+            android:background="@drawable/towards_right"
+            android:layout_toLeftOf="@+id/lastpage"
+            android:layout_marginRight="20dp" />
+
+        <ImageView
+            android:id="@+id/lastpage"
+            android:layout_width="@dimen/lookback_btn_size"
+            android:layout_height="@dimen/lookback_btn_size"
+            android:background="@drawable/towards_btn_ico"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"/>
+    </RelativeLayout>
+
+</LinearLayout>

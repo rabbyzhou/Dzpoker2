@@ -483,7 +483,14 @@
 
     -->
 
+    <style name="menu_animation">
+        <item name="android:windowEnterAnimation">@anim/menu_appear</item>
+        <item name="android:windowExitAnimation">@anim/menu_disappear</item>
+    </style>
 
-
+    <style name="ShopTabLayoutAppearance" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">@dimen/game_record_text_medium_size</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 </resources>

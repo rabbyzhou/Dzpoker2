@@ -2,8 +2,8 @@ package com.yijian.dzpoker.activity.user;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +11,8 @@ import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.LoginActivity;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.ui.SwitchButton;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class SysConfigActivity extends BaseBackActivity {
     private SwitchButton sb_audio,sb_msg_sound,sb_msg_shake,sb_hide_club_info;
@@ -43,16 +45,30 @@ public class SysConfigActivity extends BaseBackActivity {
         tv_back.setOnClickListener(this);
     }
 
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
     @Override
     public void onClick(View v) {
         switch(v.getId()){
             case R.id.tv_back:
+                setResult(RESULT_OK);
                 finish();
                 break;
             case R.id.tv_about:
 
                 Intent intent = new Intent();
                 intent.setClass(SysConfigActivity.this, AboutActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivity(intent);
                 break;
             case R.id.tv_logout:
@@ -74,6 +90,8 @@ public class SysConfigActivity extends BaseBackActivity {
                 intent1.putExtra("opType",3 );
                 intent1.putExtra("phonenumber", application.getLoginName());
                 intent1.setClass(SysConfigActivity.this, VerifyPhoneNumberActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent1.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivity(intent1);
                 break;
         }

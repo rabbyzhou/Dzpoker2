@@ -5,11 +5,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,17 +33,14 @@ import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.view.CircleTransform;
 import com.yijian.dzpoker.view.data.ClubInfo;
-import com.yijian.dzpoker.view.data.DiamondStoreGoods;
 import com.yijian.dzpoker.view.data.User;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 import okhttp3.Headers;
@@ -53,6 +49,8 @@ import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class ClubInfoManageActivity extends BaseBackActivity {
     private EditText et_club_name,et_club_location,et_club_abstract;
@@ -180,6 +178,8 @@ public class ClubInfoManageActivity extends BaseBackActivity {
 //                        intent.putExtra("opType",1 );
 //                        intent.putExtra("phonenumber", edUserName.getText().toString());
                 intent.setClass(ClubInfoManageActivity.this, SelectProvinceActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivityForResult(intent,  REQUEST_LOCATION_SELECT);
                 break;
             case R.id.iv_club_head:

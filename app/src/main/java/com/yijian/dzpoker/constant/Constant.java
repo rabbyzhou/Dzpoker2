@@ -122,7 +122,10 @@ public class Constant {
     public static final String INFO_DO_ANIMATION = "infdoanimotion";
     public static final String INFO_BUY_SURANCE= "infbuysurance";
 
-
-
+    //标题栏中, 调用者页面title对应的key
+    public static final String INTENT_KEY_BACKTEXT = "backText";
+    //标题栏中, 显示的 title
+    public static final String INTENT_KEY_TITLE = "title";
 
 }
+

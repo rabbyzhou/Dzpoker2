@@ -61,5 +61,17 @@
     <dimen name="verticalspit_view_width">0.6dp</dimen>
     <dimen name="horizontalspit_view_height">0.6dp</dimen>
     <dimen name="item_emoticon_size_default">32dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
+    <dimen name="bottom_menu_btn_height">48dp</dimen>
+    <dimen name="bottom_menu_corner">6dp</dimen>
+    <dimen name="bottom_menu_btn_margin">2dp</dimen>
+    <dimen name="bottom_menu_btn_text_size">18dp</dimen>
+    <dimen name="bottom_menu_layout_margin">12dp</dimen>
+
+    <dimen name="game_record_text_medium_size">16dp</dimen>
+    <dimen name="game_record_text_small_size">14dp</dimen>
+    <dimen name="game_ring_progress_text_column_space">3dp</dimen>
+    <dimen name="lookback_card_size">40dp</dimen>
+    <dimen name="lookback_btn_size">30dp</dimen>
 </resources>

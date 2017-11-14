@@ -3,36 +3,28 @@ package com.yijian.dzpoker.activity.club;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.ContactsContract;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.LoginActivity;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
-import com.yijian.dzpoker.activity.user.VerifyPhoneNumberActivity;
 import com.yijian.dzpoker.ui.SwitchButton;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.view.CircleTransform;
 import com.yijian.dzpoker.view.adapter.ClubUserHeadAdapter;
-import com.yijian.dzpoker.view.data.City;
 import com.yijian.dzpoker.view.data.ClubInfo;
-import com.yijian.dzpoker.view.data.Province;
 import com.yijian.dzpoker.view.data.User;
 
 import org.json.JSONArray;
@@ -40,10 +32,11 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.List;
 
 import okhttp3.Request;
 import okhttp3.Response;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class ClubInfoActivity extends BaseBackActivity {
     private TextView tv_disband_club,tv_club_name,tv_club_location,tv_club_creator_name,tv_club_leavel,tv_club_member,tv_create_time,tv_club_descript,tv_leave_club,tv_clear_chatmessage,tv_club_member_manage;
@@ -534,7 +527,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 intentClubMemberManage.putExtra("userlist",mUserList);
                 intentClubMemberManage.putExtra("manageruserid",userId);
                 intentClubMemberManage.putExtra("clubid",mClubId);
-
+                intentClubMemberManage.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intentClubMemberManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 intentClubMemberManage.setClass(ClubInfoActivity.this, ClubMemberManageActivity.class);
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentClubMemberManage,1);
@@ -604,6 +598,8 @@ public class ClubInfoActivity extends BaseBackActivity {
             case R.id.tv_club_leavel://俱乐部等级
                 Intent intentClubLevel = new Intent();
                 intentClubLevel.setClass(ClubInfoActivity.this, BuyClubLevelActivity.class);
+                intentClubLevel.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intentClubLevel.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentClubLevel,3);
                 break;
@@ -611,6 +607,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 Intent intentCLubInfoManage=new Intent();
                 intentCLubInfoManage.putExtra("clubinfo",mClubInfo);
                 intentCLubInfoManage.setClass(ClubInfoActivity.this, ClubInfoManageActivity.class);
+                intentCLubInfoManage.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intentCLubInfoManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentCLubInfoManage,2);
 
@@ -621,6 +619,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 Intent intent = new Intent();
                 intent.putExtra("user", mCreator);
                 intent.setClass(ClubInfoActivity.this, ClubUserInfoActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivity(intent);
                 break;
             case R.id.tv_back:

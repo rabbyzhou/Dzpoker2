@@ -8,9 +8,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,13 +28,14 @@ public class QuickGameFragment extends Fragment implements View.OnClickListener{
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private Button btnCreateGame,btnAddintoGame;
+    private LinearLayout btnCreateGame,btnAddintoGame;
 
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
+    View layout_quick;
     private OnFragmentInteractionListener mListener;
 
     public QuickGameFragment() {
@@ -69,7 +73,7 @@ public class QuickGameFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View layout_quick=inflater.inflate(R.layout.fragment_quick_game, container, false);
+        layout_quick=inflater.inflate(R.layout.fragment_quick_game, container, false);
         initViews(layout_quick);
         return layout_quick;
     }
@@ -77,8 +81,8 @@ public class QuickGameFragment extends Fragment implements View.OnClickListener{
 
     private void initViews(View parent){
 
-        btnCreateGame=(Button)parent.findViewById(R.id.btnCreateGame);
-        btnAddintoGame=(Button)parent.findViewById(R.id.btnAddintoGame);
+        btnCreateGame=(LinearLayout)parent.findViewById(R.id.btnCreateGame);
+        btnAddintoGame=(LinearLayout)parent.findViewById(R.id.btnAddintoGame);
         btnCreateGame.setOnClickListener(this);
         btnAddintoGame.setOnClickListener(this);
     }
@@ -89,6 +93,9 @@ public class QuickGameFragment extends Fragment implements View.OnClickListener{
             case R.id.btnCreateGame:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), com.yijian.dzpoker.activity.game.GameSetActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                TextView txCreateGame = (TextView)layout_quick.findViewById(R.id.txCreateGame);
+                intent.putExtra(INTENT_KEY_BACKTEXT, txCreateGame.getText());
                 startActivity(intent);
                 break;
         }

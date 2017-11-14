@@ -14,6 +14,8 @@ import android.widget.TextView;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.club.MyClubActivity;
 
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -32,6 +34,7 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
     private String mParam1;
     private String mParam2;
 
+    TextView tvMyclub;
     private OnFragmentInteractionListener mListener;
 
     public ClubInfoFragment() {
@@ -75,7 +78,7 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
 
         ImageView ivMyclub=(ImageView)clubLayout.findViewById(R.id.image_myclub);
         ivMyclub.setOnClickListener(this);
-        TextView tvMyclub=(TextView)clubLayout.findViewById(R.id.text_myclub);
+        tvMyclub =(TextView)clubLayout.findViewById(R.id.text_myclub);
         tvMyclub.setOnClickListener(this);
         return clubLayout;
 
@@ -123,6 +126,8 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
         //跳转到主界面
         Intent intent = new Intent();
         intent.setClass(getActivity(), MyClubActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(INTENT_KEY_BACKTEXT, tvMyclub.getText());
         startActivity(intent);
 
     }

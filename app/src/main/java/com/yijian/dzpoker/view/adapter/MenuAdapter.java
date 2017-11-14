@@ -3,18 +3,12 @@ package com.yijian.dzpoker.view.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.view.CircleTransform;
-import com.yijian.dzpoker.view.data.ClubLevel;
 import com.yijian.dzpoker.view.data.MenuItemData;
 
 /**
@@ -49,16 +43,15 @@ public class MenuAdapter extends BaseListAdapter<MenuItemData, MenuAdapter.ViewH
         final MenuItemData menuItemData = mData.get(position);
         if (menuItemData == null) return;
 
-
+        /**
             Picasso.with(mContext)
                     .load(menuItemData.menuImageId)
                     .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                     .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
                     .resize(100, 100)
                     .error(R.drawable.default_club_level)
-                    .into(holder.mMenuPic);
-
-
+                    .into(holder.mMenuPic);**/
+        holder.mMenuPic.setImageDrawable(mContext.getResources().getDrawable(menuItemData.menuImageId));
         holder.mMenuname.setText(menuItemData.menuText);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {

@@ -47,7 +47,7 @@ public class DiamonsListAdapter extends BaseListAdapter<DiamondStoreGoods, Diamo
         final DiamondStoreGoods diamondStoreGoods = mData.get(position);
         if (diamondStoreGoods == null) return;
 
-        holder.mDiamons.setText(diamondStoreGoods.diamonds+"钻石");
+        holder.mDiamons.setText(diamondStoreGoods.diamonds+"颗钻石");
         holder.mCostRMB.setText("￥"+ diamondStoreGoods.costrmb+".00");
         if (diamondStoreGoods.pic!=null && !diamondStoreGoods.pic.equals("")) {
             Picasso.with(mContext)

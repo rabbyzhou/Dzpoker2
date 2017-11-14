@@ -1,15 +1,19 @@
 package com.yijian.dzpoker.activity.club;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.view.adapter.SelectProvinceAdapter;
@@ -29,11 +33,27 @@ public class SelectProvinceActivity extends AppCompatActivity {
     private RecyclerView lv_province;
     private LinearLayoutManager mLayoutManager ;
     private SelectProvinceAdapter mAdapter;
+    private LinearLayout exitLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_province);
+
+        exitLayout = (LinearLayout)findViewById(R.id.exit);
+        exitLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            TextView exitText = (TextView)findViewById(R.id.tv_exit);
+            exitText.setText(backText);
+        }
 
         Thread thread=new Thread(new Runnable()
         {

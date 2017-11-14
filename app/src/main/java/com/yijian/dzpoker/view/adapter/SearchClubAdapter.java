@@ -16,17 +16,21 @@ import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.club.ApplyIntoClubActivity;
-import com.yijian.dzpoker.activity.club.ClubChatActivity;
 import com.yijian.dzpoker.view.CircleTransform;
 import com.yijian.dzpoker.view.data.ClubInfo;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 /**
  * Created by koyabr on 10/22/15.
  */
 public class SearchClubAdapter extends BaseListAdapter<ClubInfo, SearchClubAdapter.ViewHolder> {
 
-    public SearchClubAdapter(Context context) {
+    private String mTitle;
+
+    public SearchClubAdapter(Context context,String title) {
         super(context);
+        mTitle = title;
     }
 
     @Override
@@ -67,6 +71,8 @@ public class SearchClubAdapter extends BaseListAdapter<ClubInfo, SearchClubAdapt
                     //记录clubId,并传到下一activity
                     Intent intent = new Intent();
                     intent.putExtra("clubid",clubInfo.clubID);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                    intent.putExtra(INTENT_KEY_BACKTEXT, mTitle);
                     intent.setClass(mContext, ApplyIntoClubActivity.class);
                     mContext.startActivity(intent);
                 }

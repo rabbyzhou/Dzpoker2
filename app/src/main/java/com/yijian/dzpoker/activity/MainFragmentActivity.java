@@ -29,11 +29,12 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+    private TextView titleView ;
 
     private List<Fragment> list;
     private MyAdapter adapter;
-    private String[] titles = {"首页", "游戏", "俱乐部", "我"};
-    private int images[] = {R.drawable.message_unselected, R.drawable.message_unselected,R.drawable.message_unselected, R.drawable.message_unselected};
+    protected String[] titles = {"首页", "游戏", "俱乐部", "我"};
+    private int images[] = {R.drawable.home_page_ico, R.drawable.game_ico,R.drawable.club_ico, R.drawable.me_ico};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +43,7 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
         viewPager = (ViewPager) findViewById(R.id.vp_main);
         tabLayout = (TabLayout) findViewById(R.id.tab_main);
+        titleView = (TextView) findViewById(R.id.title);
         //页面，数据源
         list = new ArrayList<>();
         list.add(new HomeFragment());
@@ -60,7 +62,6 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
             @Override
             public void onPageSelected(int position) {
-                TextView titleView = (TextView) MainFragmentActivity.this.findViewById(R.id.title);
                 titleView.setText(titles[position]);
             }
 
@@ -78,7 +79,6 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
         }
 
         tabLayout.getTabAt(0).select();
-        TextView titleView = (TextView) MainFragmentActivity.this.findViewById(R.id.title);
         titleView.setText(titles[0]);
 
     }
@@ -125,5 +125,8 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
     }
 
+    public String getPageTitle(){
+        return titleView.getText().toString();
+    }
 
 }

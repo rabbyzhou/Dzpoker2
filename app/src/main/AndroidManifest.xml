@@ -201,6 +201,27 @@
         <activity android:name=".activity.game.GameSetHighGradeActivity" android:screenOrientation="portrait" />
         <activity android:name=".activity.game.GameActivity" android:screenOrientation="portrait" ></activity>
         <activity android:name=".activity.news.DetailNewsActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.user.GamesRecordActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.user.GameHistoryRecordActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.user.GameDetailedHistoryActivity" android:screenOrientation="portrait" />
+        <activity android:name=".activity.user.GameRecordLookBack" android:screenOrientation="portrait" />
+
+
+        <!-- 掌付相关-->
+        <activity
+            android:name="main.air.com.youpay.activity.WebActivity"
+            android:screenOrientation="portrait" />
+        <!--支付宝配置-->
+        <activity
+            android:name="com.alipay.sdk.app.H5PayActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
+        <activity
+            android:name="com.alipay.sdk.auth.AuthActivity"
+            android:configChanges="orientation|keyboardHidden|navigation"
+            android:exported="false"
+            android:screenOrientation="behind"/>
     </application>
 
 </manifest>

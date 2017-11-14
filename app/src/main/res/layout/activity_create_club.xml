@@ -23,9 +23,11 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:gravity="center_vertical"
-                android:text="俱乐部"
-                android:drawableLeft="@drawable/exit"
-                android:textSize="18dp"/>
+                android:drawableLeft="@drawable/black_back"
+                android:drawablePadding="2dp"
+                android:text="返回"
+                android:textSize="16dp"
+                android:layout_centerVertical="true" />
 
         </LinearLayout>
         <android.support.v7.widget.AppCompatTextView

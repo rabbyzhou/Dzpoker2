@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="10dp">
+
+        <TextView
+            android:id="@+id/nickName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:layout_alignParentLeft="true"
+            tools:text="aaaaaa"
+            android:textSize="@dimen/game_record_text_medium_size"/>
+
+        <TextView
+            android:id="@+id/lastaction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/blue"
+            android:layout_toRightOf="@+id/nickName"
+            tools:text="(aaaaaa)"
+            android:textSize="@dimen/game_record_text_medium_size"/>
+
+        <TextView
+            android:id="@+id/wincard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:layout_centerHorizontal="true"
+            tools:text="(aaaaaa)"
+            android:textSize="@dimen/game_record_text_medium_size"/>
+
+        <TextView
+            android:id="@+id/winchips"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/green"
+            android:layout_alignParentRight="true"
+            tools:text="(aaaaaa)"
+            android:textSize="@dimen/game_record_text_medium_size"/>
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginBottom="10dp"
+        >
+
+        <ImageView
+            android:id="@+id/headpic"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_alignParentLeft="true"
+            android:src="@drawable/default_male_head"
+            tools:src="@drawable/default_male_head"/>
+
+        <ImageView
+            android:id="@+id/self_card_1"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toRightOf="@+id/headpic"
+            android:visibility="gone"
+            android:src="@drawable/card_bg"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/self_card_2"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toRightOf="@+id/self_card_1"
+            android:visibility="gone"
+            android:src="@drawable/card_bg"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/self_card_3"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toRightOf="@+id/self_card_2"
+            android:visibility="gone"
+            android:src="@drawable/card_bg"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/self_card_4"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toRightOf="@+id/self_card_3"
+            android:visibility="gone"
+            android:src="@drawable/card_bg"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/self_card_5"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toRightOf="@+id/self_card_4"
+            android:visibility="gone"
+            android:src="@drawable/card_bg"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/table_card_1"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toLeftOf="@+id/table_card_2"
+            android:visibility="gone"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/table_card_2"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toLeftOf="@+id/table_card_3"
+            android:visibility="gone"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/table_card_3"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toLeftOf="@+id/table_card_4"
+            android:visibility="gone"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/table_card_4"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_toLeftOf="@+id/table_card_5"
+            android:visibility="gone"
+            tools:src="@drawable/suit2_2"/>
+
+        <ImageView
+            android:id="@+id/table_card_5"
+            android:layout_width="@dimen/lookback_card_size"
+            android:layout_height="@dimen/lookback_card_size"
+            android:layout_alignParentRight="true"
+            android:visibility="gone"
+            tools:src="@drawable/suit2_2"/>
+
+    </RelativeLayout>
+</LinearLayout>

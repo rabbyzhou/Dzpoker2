@@ -12,7 +12,6 @@ import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
@@ -36,19 +35,19 @@ public class DetailNewsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         MainPageNews news = (MainPageNews)intent.getSerializableExtra("news");
 
-        TextView titleView = (TextView)findViewById(R.id.title);
-        RelativeLayout backLayout = (RelativeLayout)findViewById(R.id.rl_back);
-        mWebView = (WebView) findViewById(R.id.webView);
-
-        backLayout.setOnClickListener(new View.OnClickListener(){
+        TextView backText = (TextView) findViewById(R.id.tv_back);
+        backText.setText("首页");
+        backText.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
 
-        titleView.setText(news.title);
+        TextView titleText = (TextView) findViewById(R.id.tv_title);
+        titleText.setText(news.title);
 
+        mWebView = (WebView) findViewById(R.id.webView);
         Log.d(TAG, "link :" + news.link);
         WebSettings ws = mWebView.getSettings();
         ws.setJavaScriptEnabled(true);

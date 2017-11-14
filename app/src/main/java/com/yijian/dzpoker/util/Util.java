@@ -1,16 +1,14 @@
 package com.yijian.dzpoker.util;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 
-import com.soundcloud.android.crop.Crop;
+import com.yijian.dzpoker.R;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -201,6 +199,79 @@ public class Util {
     }
 
 
+    /**
+     * 解析服务器返回的日期, 得到如下格式日期: xx月xx日
+     */
+    public static String getFormatDate(Context context, String timestamp) {
+
+        String[] list = timestamp.split("T");
+        if ( list.length == 2){
+            String date = list[0].trim();
+            String[] dates = date.split("-");
+            return context.getResources().getString(R.string.date_year_month, dates[1],dates[2]);
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * 解析服务器返回的时间, 得到如下格式时间: xx:xx
+     */
+    public static String getFormatTime(Context context, String timestamp) {
+
+        String[] list = timestamp.split("T");
+        if ( list.length == 2){
+            String time = list[1].trim();
+            String[] times = time.split(":");
+            return times[0] + ":" + times[1];
+        } else {
+            return "";
+        }
+    }
 
 
+    /**
+     * 解析服务器返回的时间, 得到如下格式时间: xx月xx日 xx:xx
+     *
+     */
+    public static String getFormatDateTime(Context context, String timestamp) {
+
+        StringBuilder result = new StringBuilder();
+        result.append(getFormatDate(context,timestamp))
+                .append(" ")
+                .append(getFormatTime(context,timestamp));
+
+        return  result.toString();
+    }
+
+    /**
+     * 获取两个时间戳的时间差
+     */
+    public static String getTimeDuration(String startTime, String endTime){
+        StringBuilder result = new StringBuilder();
+
+        SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");//如2016-08-10 20:40
+        startTime = startTime.replace("T"," ");
+        endTime = endTime.replace("T"," ");
+        try {
+            java.util.Date begin=simpleFormat.parse(startTime);
+            java.util.Date end = simpleFormat.parse(endTime);
+
+            long between=(end.getTime()-begin.getTime())/1000;//除以1000是为了转换成秒
+
+            long day=between/(24*3600);
+            long hour=between%(24*3600)/3600;
+            long minute=between%3600/60;
+            long second=between%60/60;
+
+            if ( day > 0) result.append(day).append("天");
+            if ( hour > 0) result.append(hour).append("小时");
+            if ( minute > 0) result.append(minute).append("分钟");
+            if ( second > 0) result.append(second).append("秒");
+
+        } catch (Exception e){
+
+        }
+        return result.toString();
+    }
 }

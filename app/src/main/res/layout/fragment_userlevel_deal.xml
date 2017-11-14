@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/list_userlevel"
+    android:name="com.yijian.dzpoker.activity.fragment.UserLevelFragment"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginTop="20dp"
+    tools:context="com.yijian.dzpoker.activity.fragment.UserLevelFragment"
+    tools:listitem="@layout/fragment_userlevelitem" />

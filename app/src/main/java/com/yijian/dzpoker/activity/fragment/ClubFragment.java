@@ -12,13 +12,17 @@ import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.MainActivity;
 import com.yijian.dzpoker.activity.club.MyClubActivity;
 import com.yijian.dzpoker.constant.Constant;
-import com.yijian.dzpoker.util.ToastUtil;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 /**
  * Created by rabby on 2017/8/10.
  */
 
 public class ClubFragment extends BaseFragment implements View.OnClickListener {
+
+    TextView tvMyclub;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -26,7 +30,7 @@ public class ClubFragment extends BaseFragment implements View.OnClickListener {
                 container, false);
         ImageView ivMyclub=(ImageView)clubLayout.findViewById(R.id.image_myclub);
         ivMyclub.setOnClickListener(this);
-        TextView tvMyclub=(TextView)clubLayout.findViewById(R.id.text_myclub);
+        tvMyclub=(TextView)clubLayout.findViewById(R.id.text_myclub);
         tvMyclub.setOnClickListener(this);
         return clubLayout;
     }
@@ -59,6 +63,8 @@ public class ClubFragment extends BaseFragment implements View.OnClickListener {
         //跳转到主界面
         Intent intent = new Intent();
         intent.setClass(getActivity(), MyClubActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        intent.putExtra(INTENT_KEY_BACKTEXT, tvMyclub.getText());
         startActivity(intent);
 
     }

@@ -24,7 +24,8 @@
     <string name="title_me">我</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="url_remote">http://120.24.243.2:85/func.ashx?</string>
+    <!-- <string name="url_remote">http://120.24.243.2:85/func.ashx?</string>-->
+    <string name="url_remote">http://106.14.221.253:85/func.ashx?</string>
     <string name="url_upload">http://120.24.243.2:85/uploadfile.aspx</string>
     <string name="title_activity_verify_phone_number">VerifyPhoneNumberActivity</string>
     <string name="action_settings">Settings</string>
@@ -34,7 +35,9 @@
     <string name="master_secret">5c7ac55140bfb5d37ffc4739</string>
     <string name="unite_password">texas_123</string>
 
-
+    <!-- 掌付的配置-->
+    <integer name="yps_id">10213</integer>
+    <string name="yps_key">7dd3890dd2482c7897b4c60603766833</string>
     <string name="userName">用户名</string>
 
     <!-- ReLogin/login/register界面中使用到的字符串 -->
@@ -332,7 +335,7 @@
     <string name="group_chat_history_hit">查找聊天内容</string>
     <string name="group_clear_history_hit">清空聊天记录</string>
     <string name="jmui_clear_history_confirm_title">确定清空聊天记录？</string>
-    <string name="jmui_delete_group_confirm_title">确定删除并退出群聊？</string>
+    <string name="jmui_delete_group_confirm_title" translatable="false">确定删除并退出群聊？</string>
     <string name="deleting_hint">删除中</string>
     <string name="group_exit_btn">删除并退出</string>
 
@@ -446,4 +449,22 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="apply_info">申请带入%1$s记分牌，总带入提升为%2$s</string>
 
+    <!-- 我 -> 商店 中使用-->
+    <string name="leveldesc">持续%1$d天, 允许建立%2$d个俱乐部, 同时开%3$d个房间, 并一次性赠送%4$d金币.</string>
+    <string name="userlevel_buying">"购买中..."</string>
+    <string name="costs_rmb">需支付金额(%1$d)元</string>
+    <string name="games_record">赛事战绩</string>
+    <string name="rounds_subtype_gams">%1$d场</string>
+    <string name="rounds_link_info">牌局信息</string>
+    <string name="rounds_link_desc">参与%1$d个牌局</string>
+    <string name="brands_link_info">牌谱信息</string>
+    <string name="brands_link_desc">收录最近7天手牌</string>
+    <string name="all_games">牌局数</string>
+    <string name="all_rounds">总手数</string>
+    <string name="all_play_precent">入池率</string>
+    <string name="all_win_precent">其中胜率</string>
+    <string name="date_year_month">%1$s月%2$s日</string>
+	<string name="game_detail_history_time_desc">%1$s %2$s - %3$s %4$s (总时长:%5$s)</string>
+    <string name="game_detail_history_max_player">%1$d人桌</string>
 </resources>
+
