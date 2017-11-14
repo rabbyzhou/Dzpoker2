@@ -28,6 +28,7 @@ public abstract class BaseBackActivity extends AppCompatActivity implements View
     protected void initViews(){
         tv_back = (TextView) findViewById(R.id.tv_back);
         tv_title = (TextView) findViewById(R.id.tv_title);
+        tv_back.setOnClickListener(this);
 
     }
 

@@ -34,7 +34,7 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
     private List<Fragment> list;
     private MyAdapter adapter;
     protected String[] titles = {"首页", "游戏", "俱乐部", "我"};
-    private int images[] = {R.drawable.message_unselected, R.drawable.message_unselected,R.drawable.message_unselected, R.drawable.message_unselected};
+    private int images[] = {R.drawable.home_page_ico, R.drawable.game_ico,R.drawable.club_ico, R.drawable.me_ico};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Bundle;
+import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +21,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
-import android.os.Handler;
 
 import com.soundcloud.android.crop.Crop;
 import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.LoginActivity;
-import com.yijian.dzpoker.activity.MainActivity;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.FileHelper;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -37,7 +37,6 @@ import com.yijian.dzpoker.view.CircleTransform;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URI;
@@ -47,14 +46,11 @@ import java.util.Date;
 
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.CreateGroupCallback;
-import cn.jpush.im.api.BasicCallback;
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.Request;
 import okhttp3.RequestBody;
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.Response;
 
 public class CreateClubActivity extends AppCompatActivity implements View.OnClickListener {
@@ -168,6 +164,14 @@ public class CreateClubActivity extends AppCompatActivity implements View.OnClic
     }
 
     private void initViews(){
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        TextView exitText = (TextView)findViewById(R.id.tv_exit);
+        if ( backText != null && !backText.isEmpty()){
+            exitText.setText(backText);
+        }
+
         tv_created_number=(TextView)findViewById(R.id.tv_created_number);
         et_clubname=(EditText)findViewById(R.id.et_clubname);
         btnCreateClub=(Button)findViewById(R.id.btnCreateClub);
@@ -502,6 +506,7 @@ public class CreateClubActivity extends AppCompatActivity implements View.OnClic
                         //直接图库选择，进行裁剪
                         Crop.pickImage(CreateClubActivity.this);
                         break;
+
                 }
 
                 if (popupWindow != null) {
@@ -512,5 +517,14 @@ public class CreateClubActivity extends AppCompatActivity implements View.OnClic
         contentView.findViewById(R.id.tv_camera).setOnClickListener(menuItemOnClickListener);
         contentView.findViewById(R.id.tv_map).setOnClickListener(menuItemOnClickListener);
         return contentView;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

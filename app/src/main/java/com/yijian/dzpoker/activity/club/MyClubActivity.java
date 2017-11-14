@@ -3,43 +3,38 @@ package com.yijian.dzpoker.activity.club;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.view.adapter.ClubInfoAdapter;
-import com.yijian.dzpoker.view.data.City;
 import com.yijian.dzpoker.view.data.ClubInfo;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Headers;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class MyClubActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -72,6 +67,16 @@ public class MyClubActivity extends AppCompatActivity implements View.OnClickLis
     };
 
     private void  initViews(){
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        TextView exitText = (TextView)findViewById(R.id.tv_exit);
+        if ( backText != null && !backText.isEmpty()){
+            exitText.setText(backText);
+        }
+        LinearLayout exitLayput = (LinearLayout)findViewById(R.id.exit);
+        exitLayput.setOnClickListener(this);
+
         layout_top=(RelativeLayout)findViewById(R.id.layout_top);
         tv_more=(TextView)findViewById(R.id.tv_more);
         tv_more.setOnClickListener(this);
@@ -195,12 +200,18 @@ public class MyClubActivity extends AppCompatActivity implements View.OnClickLis
             case R.id.tv_more:
                 showWindow(layout_top);
                 break;
-
             case R.id.exit:
                 finish();
-
-
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     private void showWindow(View parent) {
@@ -233,10 +244,17 @@ public class MyClubActivity extends AppCompatActivity implements View.OnClickLis
 //                        intent.putExtra("opType",1 );
 //                        intent.putExtra("phonenumber", edUserName.getText().toString());
                         intent.setClass(MyClubActivity.this, CreateClubActivity.class);
+                        TextView titleView = (TextView)findViewById(R.id.title);
+                        intent.putExtra(INTENT_KEY_BACKTEXT, titleView.getText());
                         startActivityForResult(intent,  1);
                         break;
                     case R.id.tv_addtoclub:
-                        startActivity(new Intent().setClass(MyClubActivity.this, AddIntoClubActivity.class));
+                        Intent intent1 = new Intent();
+                        intent1.setClass(MyClubActivity.this, AddIntoClubActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        TextView titleView1 = (TextView)findViewById(R.id.title);
+                        intent1.putExtra(INTENT_KEY_BACKTEXT, titleView1.getText());
+                        startActivity(intent1);
                         break;
                 }
 

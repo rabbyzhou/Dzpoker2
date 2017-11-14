@@ -2,10 +2,10 @@ package com.yijian.dzpoker.activity.club;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -17,9 +17,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
-import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.view.adapter.SelectCityAdapter;
 import com.yijian.dzpoker.view.adapter.SelectProvinceAdapter;
 import com.yijian.dzpoker.view.data.City;
@@ -29,8 +29,6 @@ import com.yijian.dzpoker.view.data.Province;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.InputStream;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -203,7 +201,15 @@ public class AddIntoClubActivity extends AppCompatActivity implements View.OnCli
     }
 
     private  void initViews(){
+
         tv_exit=(TextView)findViewById(R.id.tv_exit);
+
+        Intent intent = getIntent();
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            tv_exit.setText(backText);
+        }
+
         rv_hotcity=(RecyclerView)findViewById(R.id.rv_hotcity);
         rv_province=(RecyclerView)findViewById(R.id.rv_province);
         et_search=(EditText)findViewById(R.id.et_search);
@@ -356,9 +362,15 @@ public class AddIntoClubActivity extends AppCompatActivity implements View.OnCli
             case R.id.tv_exit:
                 finish();
                 break;
-
-
         }
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

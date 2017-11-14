@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="60dp"
         app:tabSelectedTextColor="#59D"
+        android:background="@color/gray"
         app:tabTextColor="#999"
         app:tabIndicatorHeight="0dp" />
 </LinearLayout>

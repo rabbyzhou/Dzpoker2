@@ -165,8 +165,9 @@ public class MeFragment extends BaseFragment implements View.OnClickListener {
             case R.id.iv_user_head:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ModifyUserInfoActivity.class);
+                String title = ((MainFragmentActivity)getActivity()).getPageTitle();
+                intent.putExtra(Constant.INTENT_KEY_BACKTEXT, title);
                 startActivityForResult(intent,1);
-
         }
 
     }

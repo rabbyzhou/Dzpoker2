@@ -12,6 +12,8 @@ import com.yijian.dzpoker.activity.LoginActivity;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.ui.SwitchButton;
 
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
+
 public class SysConfigActivity extends BaseBackActivity {
     private SwitchButton sb_audio,sb_msg_sound,sb_msg_shake,sb_hide_club_info;
     private TextView tv_changePWD,tv_about,tv_logout;
@@ -65,6 +67,8 @@ public class SysConfigActivity extends BaseBackActivity {
 
                 Intent intent = new Intent();
                 intent.setClass(SysConfigActivity.this, AboutActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivity(intent);
                 break;
             case R.id.tv_logout:
@@ -86,6 +90,8 @@ public class SysConfigActivity extends BaseBackActivity {
                 intent1.putExtra("opType",3 );
                 intent1.putExtra("phonenumber", application.getLoginName());
                 intent1.setClass(SysConfigActivity.this, VerifyPhoneNumberActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent1.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 startActivity(intent1);
                 break;
         }

@@ -1,15 +1,14 @@
 package com.yijian.dzpoker.activity.club;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
-import com.yijian.dzpoker.util.DzApplication;
-import com.yijian.dzpoker.view.data.ClubInfo;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class ClubChatActivity extends BaseBackActivity {
     private TextView tv_club_manage;
@@ -49,6 +48,8 @@ public class ClubChatActivity extends BaseBackActivity {
                 Intent intent = new Intent();
                 intent.putExtra("clubid",mClubId);
                 //intent.putExtra("clubinfo",mClubInfo);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 intent.setClass(ClubChatActivity.this, ClubInfoActivity.class);
                 startActivityForResult(intent,1);
                 //startActivity(intent);

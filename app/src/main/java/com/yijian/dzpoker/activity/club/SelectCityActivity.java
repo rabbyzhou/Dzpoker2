@@ -1,16 +1,19 @@
 package com.yijian.dzpoker.activity.club;
 
 import android.content.Intent;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.view.adapter.SelectCityAdapter;
@@ -25,7 +28,6 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.Callback;
-import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -36,6 +38,7 @@ public class SelectCityActivity extends AppCompatActivity {
     private RecyclerView lv_city;
     private LinearLayoutManager mLayoutManager ;
     private SelectCityAdapter mAdapter;
+    private LinearLayout exitLayout;
 
 
     @Override
@@ -45,6 +48,20 @@ public class SelectCityActivity extends AppCompatActivity {
         //获得传过来的province
         //mProvince="广东省";
         Intent intent = getIntent();
+        exitLayout = (LinearLayout)findViewById(R.id.exit);
+        exitLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            TextView exitText = (TextView)findViewById(R.id.tv_exit);
+            exitText.setText(backText);
+        }
+
         mProvince = intent.getStringExtra("province");
         TextView tv_province=(TextView)findViewById(R.id.tv_province);
         tv_province.setText("已选择 "+mProvince);

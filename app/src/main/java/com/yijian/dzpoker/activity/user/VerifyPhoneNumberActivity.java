@@ -5,13 +5,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.util.WeakRefHandler;
@@ -23,8 +25,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Timer;
 import java.util.TimerTask;
-import com.soundcloud.android.crop.Crop;
-import com.squareup.picasso.Picasso;
+
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
 public class VerifyPhoneNumberActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,6 +39,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
     private EditText edtPhoneNumber;
     private EditText edtVerifyCode;
     private String sVerifyCode;
+    TextView tvTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,8 +63,14 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
         btnAskVerifyCode.setOnClickListener(this);
 
         edtVerifyCode=(EditText)findViewById(R.id.et_verify_code);
-        ImageView ivExit=(ImageView)findViewById(R.id.exit);
+        LinearLayout ivExit=(LinearLayout)findViewById(R.id.exit);
         ivExit.setOnClickListener(this);
+
+        TextView exitText = (TextView)findViewById(R.id.tv_exit);
+        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+        if ( backText != null && !backText.isEmpty()){
+            exitText.setText(backText);
+        }
 
         Button btnNext=(Button)findViewById(R.id.btn_next);
         btnNext.setOnClickListener(this);
@@ -151,6 +160,8 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                             Intent intent = new Intent();
                             intent.putExtra("phonenumber", edtPhoneNumber.getText().toString());
                             intent.setClass(VerifyPhoneNumberActivity.this, RegisterActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            intent.putExtra(INTENT_KEY_BACKTEXT, tvTitle.getText());
                             startActivity(intent);
                             finish();
                             break;
@@ -158,6 +169,8 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                             Intent intent1 = new Intent();
                             intent1.putExtra("phonenumber", edtPhoneNumber.getText().toString());
                             intent1.setClass(VerifyPhoneNumberActivity.this, ResetPWDActivity.class);
+                            intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            intent1.putExtra(INTENT_KEY_BACKTEXT, tvTitle.getText());
                             startActivity(intent1);
                             finish();
                             break;
@@ -165,6 +178,8 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                             Intent intent2 = new Intent();
                             intent2.putExtra("phonenumber", edtPhoneNumber.getText().toString());
                             intent2.setClass(VerifyPhoneNumberActivity.this, ResetPWDActivity.class);
+                            intent2.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                            intent2.putExtra(INTENT_KEY_BACKTEXT, tvTitle.getText());
                             startActivity(intent2);
                             finish();
                             break;
@@ -172,10 +187,21 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
                 }
                 break;
             case R.id.exit:
+                setResult(RESULT_OK);
                 finish();
 
 
         }
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 
     static class WeakHandler extends WeakRefHandler<VerifyPhoneNumberActivity> {

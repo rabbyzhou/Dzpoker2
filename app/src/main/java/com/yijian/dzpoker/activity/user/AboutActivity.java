@@ -1,7 +1,7 @@
 package com.yijian.dzpoker.activity.user;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.yijian.dzpoker.R;
@@ -25,9 +25,18 @@ public class AboutActivity extends BaseBackActivity {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_back:
+                setResult(RESULT_OK);
                 finish();
-                break;
         }
+    }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK ){
+            setResult(RESULT_OK);
+            finish();
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

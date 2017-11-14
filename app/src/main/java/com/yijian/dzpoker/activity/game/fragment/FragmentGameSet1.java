@@ -2,7 +2,6 @@ package com.yijian.dzpoker.activity.game.fragment;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,34 +9,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.LoginActivity;
-import com.yijian.dzpoker.activity.MainActivity;
 import com.yijian.dzpoker.activity.game.GameActivity;
 import com.yijian.dzpoker.activity.game.GameSetHighGradeActivity;
-import com.yijian.dzpoker.activity.user.SysConfigActivity;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.view.RangeSliderBar;
 import com.yijian.dzpoker.view.SeekBarWithValue;
 import com.yijian.dzpoker.view.data.GameParam;
-import com.yijian.dzpoker.view.data.User;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;
-import java.util.ArrayList;
 
-import cn.jpush.im.android.api.JMessageClient;
-import cn.jpush.im.api.BasicCallback;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -217,6 +206,8 @@ public class FragmentGameSet1 extends Fragment implements RangeSliderBar.OnSelec
 
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), GameSetHighGradeActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                //intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
                 //此处要返回值，根据返回值回来更新界面的东西的
                 startActivityForResult(intent,1);
 

@@ -326,6 +326,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.tv_back:
+                setResult(RESULT_OK);
                 finish();
         }
     }
