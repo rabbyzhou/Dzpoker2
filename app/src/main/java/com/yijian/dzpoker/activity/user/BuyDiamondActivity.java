@@ -23,7 +23,6 @@ import com.yijian.dzpoker.view.data.PayMenuItem;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +38,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
     private RecyclerView rv_diamond_list;
     private DiamonsListAdapter mAdapter;
     private List<DiamondStoreGoods> mDiamondStoreGoodsList=new ArrayList<DiamondStoreGoods>();
+    final BottomMenuFragment mBottomMenuFragment = new BottomMenuFragment();
 
     private final int MESAGE_GET_GOODS_OK=0x1001;
     private final int MESAGE_GET_PAYID_OK=0x1002;
@@ -63,7 +63,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
                     break;
                 case MESAGE_GET_PAYID_OK:
                     Bundle bundle = msg.getData();
-                    payBill(bundle.getInt("appId"), bundle.getString("url"), bundle.getInt("payType"), (DiamondStoreGoods) msg.obj);
+                    payBill(bundle.getInt("orderId"), bundle.getString("url"), bundle.getInt("payType"), (DiamondStoreGoods) msg.obj);
                     break;
                 case MESAGE_BUY_FAILED:
                     updateStateAfterDeal();
@@ -87,8 +87,6 @@ public class BuyDiamondActivity extends BaseBackActivity {
 
     private void  confirmToPay(final DiamondStoreGoods goods){
 
-        final BottomMenuFragment bottomMenuFragment = new BottomMenuFragment();
-
         List<PayMenuItem> menuItemList = new ArrayList<PayMenuItem>();
         for(int i=0; i< mPayNames.length; i++){
             PayMenuItem item = new PayMenuItem();
@@ -98,7 +96,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
             if (mPayNames[i].equals("")){
                 item.setText(getString(R.string.costs_rmb, goods.costrmb));
                 item.setStyle(PayMenuItem.MenuItemStyle.COMMON);
-                item.setMenuItemOnClickListener(new MenuItemOnClickListener(bottomMenuFragment, item) {
+                item.setMenuItemOnClickListener(new MenuItemOnClickListener(mBottomMenuFragment, item) {
                     @Override
                     public void onClickMenuItem(View v, PayMenuItem menuItem) {
                         return;
@@ -107,23 +105,24 @@ public class BuyDiamondActivity extends BaseBackActivity {
 
             } else {
                 item.setText(mPayNames[i]);
-                item.setMenuItemOnClickListener(new MenuItemOnClickListener(bottomMenuFragment, item) {
+                item.setMenuItemOnClickListener(new MenuItemOnClickListener(mBottomMenuFragment, item) {
                     @Override
                     public void onClickMenuItem(View v, PayMenuItem menuItem) {
                         // 开始支付, 流程
                         // 1. 向服务器申请支付订单号.
                         // 2. 拿到订单号, 调用第三方接口支付, 成功后服务端会直接充值.
                         StartBuying(goods,menuItem.getPayType());
-                        bottomMenuFragment.dismiss();
+                        mBottomMenuFragment.dismiss();
                     }
                 });
             }
             menuItemList.add(item);
         }
 
-        bottomMenuFragment.setMenuItems(menuItemList);
-        bottomMenuFragment.show(getFragmentManager(), "BottomMenuFragment");
-
+        mBottomMenuFragment.setMenuItems(menuItemList);
+        if ( !mBottomMenuFragment.isVisible()){
+            mBottomMenuFragment.show(getFragmentManager(), "mBottomMenuFragment");
+        }
     }
 
     @Override
@@ -223,7 +222,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
                     Log.d("BuyDiamond", " -- " + orderJson.toString());
 
                     int ret = orderJson.getInt("ret");
-                    int appId = orderJson.getInt("orderid");
+                    int orderId = orderJson.getInt("orderid");
                     String payUrl = orderJson.getString("url");
 
                     //申请成功
@@ -232,7 +231,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
                         message.what = MESAGE_GET_PAYID_OK;
 
                         Bundle bundle = new Bundle();
-                        bundle.putInt("appId",appId);
+                        bundle.putInt("orderId",orderId);
                         bundle.putInt("payType",payType);
                         bundle.putString("url",payUrl);
                         message.setData(bundle);
@@ -279,24 +278,23 @@ public class BuyDiamondActivity extends BaseBackActivity {
 
         }
 
-    private boolean payBill(int appID, String payUrl, int payType, DiamondStoreGoods diamondStoreGoods){
+    private boolean payBill(int orderId, String payUrl, int payType, DiamondStoreGoods diamondStoreGoods){
         boolean ret = false;
 
-        SimpleDateFormat df = new SimpleDateFormat("yyyyMMddHHmmss");
         OrderInfo info = new OrderInfo();
-        info.setAppid(appID);
-        info.setOrderid(df.format(System.currentTimeMillis()));
+        info.setAppid(getResources().getInteger(R.integer.yps_id));
+        info.setOrderid(orderId+"");
         info.setSubject("购买" + diamondStoreGoods.diamonds + "钻石");
         info.setFee(diamondStoreGoods.costrmb * 100 + "");
         info.setTongbu_url(payUrl);
         info.setClientip(YPServiceSDK.getLocalIpAddress(this));
         //如果没有传入appKey，sign参数不能为空
-        info.setAppKey(getString(R.string.app_key));
+        info.setAppKey(getString(R.string.yps_key));
         info.setBack_url(payUrl);
         info.setPaytype(payType);
         String sign = MD5.md5(info.getAppid() + info.getOrderid() + info.getFee() + info.getTongbu_url() + info.getAppKey());
-        //info.setSign("");
-        info.setSign(sign);
+        info.setSign("");
+        //info.setSign(sign);
 
         YPServiceSDK.YPServiceStart(this, info, new OnYPayCodeListener() {
             @Override

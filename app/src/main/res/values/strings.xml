@@ -35,7 +35,9 @@
     <string name="master_secret">5c7ac55140bfb5d37ffc4739</string>
     <string name="unite_password">texas_123</string>
 
-
+    <!-- 掌付的配置-->
+    <integer name="yps_id">10213</integer>
+    <string name="yps_key">7dd3890dd2482c7897b4c60603766833</string>
     <string name="userName">用户名</string>
 
     <!-- ReLogin/login/register界面中使用到的字符串 -->
