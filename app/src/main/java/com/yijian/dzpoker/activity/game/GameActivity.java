@@ -3,6 +3,8 @@ package com.yijian.dzpoker.activity.game;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.ComponentName;
 import android.content.Context;
@@ -27,9 +29,13 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
@@ -64,7 +70,11 @@ import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.view.CircleTransform;
 import com.yijian.dzpoker.view.RangeSliderBar2;
 import com.yijian.dzpoker.view.TextMoveLayout;
+import com.yijian.dzpoker.view.adapter.ControlInApplyAdapter;
+import com.yijian.dzpoker.view.adapter.SelectCityAdapter;
+import com.yijian.dzpoker.view.data.ApplyInfo;
 import com.yijian.dzpoker.view.data.CardInfo;
+import com.yijian.dzpoker.view.data.City;
 import com.yijian.dzpoker.view.data.GameUser;
 import com.yijian.dzpoker.view.data.PlayerHole;
 import com.yijian.dzpoker.view.data.TableInfo;
@@ -84,6 +94,16 @@ import java.util.Iterator;
 import java.util.List;
 
 import cn.jpush.im.android.api.JMessageClient;
+import cn.jpush.im.android.api.content.EventNotificationContent;
+import cn.jpush.im.android.api.content.TextContent;
+import cn.jpush.im.android.api.enums.ContentType;
+import cn.jpush.im.android.api.enums.ConversationType;
+import cn.jpush.im.android.api.event.MessageEvent;
+import cn.jpush.im.android.api.model.GroupInfo;
+import cn.jpush.im.android.api.model.UserInfo;
+import cn.jpush.im.android.api.options.MessageSendingOptions;
+import cn.jpush.im.android.tasks.GetEventNotificationTaskMng;
+import cn.jpush.im.api.BasicCallback;
 import okhttp3.Request;
 import okhttp3.Response;
 
@@ -95,7 +115,7 @@ import static com.yijian.dzpoker.util.Util.calculatePopWindowPos;
 public class GameActivity extends AppCompatActivity {
 
     private LinearLayout layout_parent;
-    private PopupWindow popupWindow,popMenu;
+    private PopupWindow popupWindow,popMenu,popApplyWindow;
     private SocketService.SocketBinder myBinder;
     private String ip;
     private int port;
@@ -104,7 +124,7 @@ public class GameActivity extends AppCompatActivity {
     private String gameHouseName;
     private boolean flag=false;//控制，初次连接的时候，进行业务操作
     private DzApplication application;
-    private ImageView iv_voice,iv_info,iv_menu;
+    private ImageView iv_voice,iv_info,iv_menu,iv_apply,iv_game_info;
 
 //    private HashMap<Integer,User> mTableUser=new HashMap<Integer,User>();//记录进入牌桌的玩家，用户ID为key
 //    private HashMap<Integer,Integer> mUserSeat=new HashMap<Integer,Integer>();//seatindex 与 user映射
@@ -176,6 +196,12 @@ public class GameActivity extends AppCompatActivity {
     private boolean isFirstBuyCore=false;//是否首次购买记分牌
     private int mWantSeatIndex;
 
+    private List<ApplyInfo> mlistApplyInfo= new ArrayList<ApplyInfo>();
+    private RecyclerView rv_apply_info;
+    private LinearLayoutManager mLayoutManager ;
+    private ControlInApplyAdapter mAdapter;
+
+
     //购买记分牌的弹出窗体
     /*
     tv_buy_coin购买金币
@@ -200,6 +226,9 @@ public class GameActivity extends AppCompatActivity {
     private CountDownTimer timer;
 
     private HashMap<Integer,PlayerHole> mPlayerHolebjects=new HashMap<Integer,PlayerHole>();//座位和底牌的映射关系，每一把牌局中的底牌记录
+
+    private NotificationManager notificationManager;//状态栏通知
+
 
 
 
@@ -246,6 +275,11 @@ public class GameActivity extends AppCompatActivity {
     private  final static int MESSAGE_DISMISS_POPWINDOW=0x9001;//去掉购买记分牌界面
     private  final static int MESSAGE_DISMISS_POPMENU=0x9002;//去掉菜单的弹出界面
     private  final static int MESSAGE_TAKEIN_INFO=0x9003;//从后台请求带入信息
+    private  final static int MESSAGE_APPLY_INFO=0x9004;//更新带入申请菜单
+    private  final static int MESSAGE_UPDATE_APPLY_INFO=0x9005;//更新带入申请菜单的列表数据
+
+
+
 
 
 
@@ -333,6 +367,8 @@ public class GameActivity extends AppCompatActivity {
                     iv_voice.setClickable(true);
                     iv_info.setClickable(true);
                     iv_menu.setClickable(true);
+                    iv_apply.setClickable(true);
+                    iv_game_info.setClickable(true);
 
                     break;
                 case MESSAGE_INFO_SIT_SEAT:
@@ -1211,11 +1247,143 @@ public class GameActivity extends AppCompatActivity {
 
                     break;
 
+                case MESSAGE_APPLY_INFO:
+
+                    //popApplyWindow
+                    int layoutId = R.layout.popupwindow_apply;   // 布局ID
+                    View contentView = LayoutInflater.from(GameActivity.this).inflate(layoutId, null);
+                    //绑定数据
+                    ImageView iv_close_Apply=(ImageView)contentView.findViewById(R.id.iv_close);
+                    iv_close_Apply.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            //关闭popwndow
+                            popApplyWindow.dismiss();
+                        }
+                    });
+                    rv_apply_info=(RecyclerView) contentView.findViewById(R.id.rv_apply_info);
+                    mLayoutManager = new LinearLayoutManager(GameActivity.this);
+                    rv_apply_info.setLayoutManager(mLayoutManager);
+                    //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
+                    rv_apply_info.setHasFixedSize(true);
+                    rv_apply_info.addItemDecoration(new DividerItemDecoration(
+                            GameActivity.this, DividerItemDecoration.VERTICAL));
+                    //创建并设置Adapter
 
 
 
+                    //mAdapter = new SelectCityAdapter(mCity);
+                    mAdapter = new ControlInApplyAdapter(GameActivity.this, new ControlInApplyAdapter.onButtonClick() {
+                        @Override
+                        public void onButtonClick(final ApplyInfo applyInfo) {
+                            //提交后台
+                            Thread thread=new Thread(new Runnable()
+                            {
+                                @Override
+                                public void run()
+                                {
+                                    try{
+                                        //拼装url字符串
+
+                                        DzApplication applicatoin=(DzApplication)getApplication();
+                                        JSONObject jsonObj = new JSONObject();
+                                        jsonObj.put("userid",applyInfo.requestuserid);
+                                        jsonObj.put("requestid",applyInfo.requestid);
+                                        if (applyInfo.ispermit==0){
+                                            jsonObj.put("ispermit",false);
+                                        }else if (applyInfo.ispermit==1){
+                                            jsonObj.put("ispermit",true);
+                                        }
+
+
+
+                                        String strURL=getString(R.string.url_remote);
+                                        strURL+="func=setrequesttakeininfo&param="+jsonObj.toString();
+
+                                        URL url = new URL(strURL);
+                                        Request request = new Request.Builder().url(strURL).build();
+                                        Response response = DzApplication.getHttpClient().newCall(request).execute();
+                                        String result=response.body().string();
+                                        //{"requesttakeininfo":[{"requestid":16,"requestuserid":1008,"usernickname":"我是无名","requesttakeinchips":200,"requestpermittakeinchips":200,"ispermit":2}]}
+                                        JSONObject jsonObject=new JSONObject(result);
+                                        if (jsonObject.getInt("ret")==0) {
+                                            jsonObj = new JSONObject();
+                                            jsonObj.put("userid",applicatoin.getUserId());
+                                            jsonObj.put("tableid",gameId);
+
+
+                                            strURL=getString(R.string.url_remote);
+                                            strURL+="func=getrequesttakeininfo&param="+jsonObj.toString();
+
+                                            url = new URL(strURL);
+                                            request = new Request.Builder().url(strURL).build();
+                                            response = DzApplication.getHttpClient().newCall(request).execute();
+                                            result=response.body().string();
+                                            //{"requesttakeininfo":[{"requestid":16,"requestuserid":1008,"usernickname":"我是无名","requesttakeinchips":200,"requestpermittakeinchips":200,"ispermit":2}]}
+                                            jsonObject=new JSONObject(result);
+                                            mlistApplyInfo=new ArrayList<ApplyInfo>();
+                                            JSONArray jsonApplyArray=new JSONArray(jsonObject.getString("requesttakeininfo"));
+                                            for(int i=0;i<jsonApplyArray.length();i++){
+                                                JSONObject jsonApplyInfo=new JSONObject(jsonApplyArray.get(i).toString());
+                                                ApplyInfo applyInfo=new ApplyInfo();
+                                                applyInfo.tableId=gameId;
+                                                applyInfo.tablename=gameHouseName;
+                                                applyInfo.requestid=jsonApplyInfo.getInt("requestid");
+                                                applyInfo.requestuserid=jsonApplyInfo.getInt("requestuserid");
+                                                applyInfo.usernickname=jsonApplyInfo.getString("usernickname");
+                                                applyInfo.requesttakeinchips=jsonApplyInfo.getInt("requesttakeinchips");
+                                                applyInfo.requestpermittakeinchips=jsonApplyInfo.getInt("requestpermittakeinchips");
+                                                applyInfo.ispermit=jsonApplyInfo.getInt("ispermit");
+                                                mlistApplyInfo.add(applyInfo);
+
+
+                                            }
+
+
+
+
+
+                                            handler.sendEmptyMessage(MESSAGE_UPDATE_APPLY_INFO);
+                                        }else{
+                                            ToastUtil.showToastInScreenCenter(GameActivity.this,"带入申请审核不成功!");
+                                        }
+
+                                    }catch (Exception e){
+                                        ToastUtil.showToastInScreenCenter(GameActivity.this,"带入申请审核异常，请稍后重试!"+e.toString());
+                                    }
+
+                                }
+                            });
+                            thread.start();
+
+
+
+                        }
+                    });
+                    rv_apply_info.setAdapter(mAdapter);
+                    mAdapter.setData(mlistApplyInfo);
+
+                    int  width =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+                    int  height =View.MeasureSpec.makeMeasureSpec(0,View.MeasureSpec.UNSPECIFIED);
+                    contentView.measure(width,height);
+                    int height1=contentView.getMeasuredHeight();
+                    int  width1=contentView.getMeasuredWidth();
+                    popApplyWindow = new PopupWindow(contentView,600 ,620 , true);
+
+                    popApplyWindow.setFocusable(true);
+                    // 设置允许在外点击消失
+                    popApplyWindow.setOutsideTouchable(true);
+                    // 如果不设置PopupWindow的背景，有些版本就会出现一个问题：无论是点击外部区域还是Back键都无法dismiss弹框
+                    popApplyWindow.setBackgroundDrawable(new ColorDrawable());
+                    // 设置好参数之后再show
+                    popApplyWindow.showAtLocation(GameActivity.this.getWindow().getDecorView(), Gravity.CENTER,0,0);;
+
+                    break;
+                case  MESSAGE_UPDATE_APPLY_INFO:
+                    mAdapter.setData(mlistApplyInfo);
 
             }
+
 
 
         }
@@ -1282,7 +1450,7 @@ public class GameActivity extends AppCompatActivity {
                             JSONObject jsonReturn=new JSONObject(recData[1]);
                             mTableInfo=new TableInfo();
                             mTableInfo.state=jsonReturn.getInt("state");//游戏状态
-                            gameHouseName=mTableInfo.tablename;
+
 
                             JSONArray temp=jsonReturn.getJSONArray("pots");
                             mTableInfo.pots=new int[temp.length()];//底池
@@ -1399,6 +1567,13 @@ public class GameActivity extends AppCompatActivity {
                             mTableInfo.createuserid=jsonReturn.getInt("createuserid");
                             mTableInfo.curactionseatindex=jsonReturn.getInt("curactionseatindex");
                             mTableInfo.curactionwaittime=jsonReturn.getInt("curactionwaittime");
+                            mTableInfo.tablename=jsonReturn.getString("tablename");
+                            gameHouseName=mTableInfo.tablename;
+
+                            //此处注册接受消息
+
+
+                            JMessageClient.registerEventReceiver(GameActivity.this);
 
                             //根据tableinfo设置界面
                             handler.sendEmptyMessage(MESSAGE_INFO_TABLE);
@@ -1434,6 +1609,7 @@ public class GameActivity extends AppCompatActivity {
                                 }
 
                             }else{
+                                handler.sendEmptyMessage(MESSAGE_DISMISS_POPWINDOW);
                                 ToastUtil.showToastInScreenCenter(GameActivity.this,"处理服务器返回的坐下数据异常,错误信息："+jsonReturn.getString("msg"));
                             }
 
@@ -1677,6 +1853,7 @@ public class GameActivity extends AppCompatActivity {
 
         application=(DzApplication)getApplication();
         mContext=getApplicationContext();
+        notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         initViews();
 
@@ -1709,6 +1886,13 @@ public class GameActivity extends AppCompatActivity {
         iv_info.setClickable(false);
         iv_menu=(ImageView)findViewById(R.id.iv_menu);
         iv_menu.setClickable(false);
+
+        iv_apply=(ImageView)findViewById(R.id.iv_apply);
+        iv_apply.setClickable(false);
+        iv_game_info=(ImageView)findViewById(R.id.iv_game_info);
+        iv_game_info.setClickable(false);
+
+
         iv_voice.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -1725,6 +1909,69 @@ public class GameActivity extends AppCompatActivity {
                 //ToastUtil.showToastInScreenCenter(GameActivity.this,"hahahahah2");
             }
         });
+
+        //点击弹出申请界面
+        iv_apply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //先到后台去取数据
+                //发送申请
+                Thread thread=new Thread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        try{
+                            //拼装url字符串
+
+                            DzApplication applicatoin=(DzApplication)getApplication();
+                            JSONObject jsonObj = new JSONObject();
+                            jsonObj.put("userid",applicatoin.getUserId());
+                            jsonObj.put("tableid",gameId);
+
+
+                            String strURL=getString(R.string.url_remote);
+                            strURL+="func=getrequesttakeininfo&param="+jsonObj.toString();
+
+                            URL url = new URL(strURL);
+                            Request request = new Request.Builder().url(strURL).build();
+                            Response response = DzApplication.getHttpClient().newCall(request).execute();
+                            String result=response.body().string();
+                            //{"requesttakeininfo":[{"requestid":16,"requestuserid":1008,"usernickname":"我是无名","requesttakeinchips":200,"requestpermittakeinchips":200,"ispermit":2}]}
+                            JSONObject jsonObject=new JSONObject(result);
+                            mlistApplyInfo=new ArrayList<ApplyInfo>();
+                            JSONArray jsonApplyArray=new JSONArray(jsonObject.getString("requesttakeininfo"));
+                            for(int i=0;i<jsonApplyArray.length();i++){
+                                JSONObject jsonApplyInfo=new JSONObject(jsonApplyArray.get(i).toString());
+                                ApplyInfo applyInfo=new ApplyInfo();
+                                applyInfo.tableId=gameId;
+                                applyInfo.tablename=gameHouseName;
+                                applyInfo.requestid=jsonApplyInfo.getInt("requestid");
+                                applyInfo.requestuserid=jsonApplyInfo.getInt("requestuserid");
+                                applyInfo.usernickname=jsonApplyInfo.getString("usernickname");
+                                applyInfo.requesttakeinchips=jsonApplyInfo.getInt("requesttakeinchips");
+                                applyInfo.requestpermittakeinchips=jsonApplyInfo.getInt("requestpermittakeinchips");
+                                applyInfo.ispermit=jsonApplyInfo.getInt("ispermit");
+                                mlistApplyInfo.add(applyInfo);
+//                                mlistApplyInfo.add(applyInfo);
+//                                mlistApplyInfo.add(applyInfo);
+                            }
+                            handler.sendEmptyMessage(MESSAGE_APPLY_INFO);
+
+                        }catch (Exception e){
+                            ToastUtil.showToastInScreenCenter(GameActivity.this,"查询申请带入异常，请稍后重试!"+e.toString());
+                        }
+
+                    }
+                });
+                thread.start();
+
+
+
+
+            }
+        });
+
 
         iv_menu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -3941,11 +4188,37 @@ public class GameActivity extends AppCompatActivity {
                                 if (jsonObject.getInt("ret")==0){
                                     // 创建牌局成功,发送IM消息RequestTakeIn|{‘tablename’:abc} tv_buy_coin
                                     //sendMessage(Message message, MessageSendingOptions options)
-                                    HashMap<String,String> info=new HashMap<String,String>();
-                                    JMessageClient.createSingleTextMessage(mTableInfo.createuserid+"",getString(R.string.app_key),"RequestTakeIn|{‘tablename’:"+gameHouseName+"}");
-//                                    cn.jpush.im.android.api.model.Message message=JMessageClient.createSingleCustomMessage(mTableInfo.createuserid+"",getString(R.string.app_key),info);
-//                                    JMessageClient.sendMessage(message);
-                                    ToastUtil.showToastInScreenCenter(GameActivity.this,"提交申请带入成功，请等待房主或管理员审核！");
+//                                    HashMap<String,String> info=new HashMap<String,String>();
+//                                    info.put("applyid",applicatoin.getUserId()+"");
+//                                    info.put("tablename","");
+                                    //createSingleCustomMessage,创建自定义消息
+                                    // cn.jpush.im.android.api.model.Message message=JMessageClient.createSingleCustomMessage(mTableInfo.createuserid+"",getString(R.string.app_key),info);
+
+                                    JSONObject json=new JSONObject();
+                                    json.put("tablename",gameHouseName);
+                                    String sendstr="RequestTakeIn|"+json.toString();
+                                    cn.jpush.im.android.api.model.Message message=JMessageClient.createSingleTextMessage(mTableInfo.createuserid+"",getString(R.string.app_key),sendstr);
+
+//                                    MessageSendingOptions messageSendingOptions=new MessageSendingOptions();
+//                                    messageSendingOptions.setShowNotification(true);
+//                                    messageSendingOptions.setNotificationTitle("带入申请");
+//                                    messageSendingOptions.setNotificationText("收到一条带入申请");
+                                    message.setOnSendCompleteCallback(new BasicCallback() {
+                                        @Override
+                                        public void gotResult(int responseCode, String responseDesc) {
+                                            if (responseCode == 0) {
+                                                handler.sendEmptyMessage(MESSAGE_DISMISS_POPWINDOW);
+                                                ToastUtil.showToastInScreenCenter(GameActivity.this,"提交申请带入成功，请等待房主或管理员审核！");
+                                                // 消息发送成功
+                                            } else {
+                                                // 消息发送失败
+                                                ToastUtil.showToastInScreenCenter(GameActivity.this,"提交申请带入失败，请重新申请！");
+                                            }
+                                        }
+                                    });
+                                    JMessageClient.sendMessage(message);
+                                   // JMessageClient.sendMessage(message,messageSendingOptions);
+
 
                                 }else {
                                     ToastUtil.showToastInScreenCenter(GameActivity.this,"申请带入失败，错误原因："+jsonObject.getString("msg"));
@@ -4045,10 +4318,187 @@ public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onStop() {
+
+
         super.onStop();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        JMessageClient.unRegisterEventReceiver(this);
         this.unbindService(connection);
         Intent Intent = new Intent(this, SocketService.class);
         stopService(Intent);
+        super.onDestroy();
+    }
+
+
+    public void onEvent(GetEventNotificationTaskMng.EventEntity event){
+        //do your own business
+//        int i=0;
+//        i+=1;
+    }
+
+    public void onEvent(MessageEvent event) {
+        //接受消息
+
+        final cn.jpush.im.android.api.model.Message message = event.getMessage();
+        if (message.getContentType() == ContentType.text){
+
+            String msgReturn=((TextContent) message.getContent()).getText();//message.getContent().getStringExtra("text");
+            if (msgReturn.indexOf("RequestTakeIn")==0){
+                //RequestTakeIn|{‘tablename’:我的房间}
+                String[] recData=msgReturn.split("\\|");
+
+                try {
+                    String gameHouseName = new JSONObject(recData[1]).getString("tablename");
+                    String from=message.getFromUser().getNickname();
+                    String showMsg=gameHouseName+"有带入申请";
+                    //新建状态栏通知
+                    showNotification("带入申请",showMsg);
+                }catch (Exception e){
+
+                }
+
+
+            }else if (msgReturn.indexOf("RequestTakeInRet")==0){
+                /*RequestTakeInRet|{‘IsPermit’:true,’permittakein’:300}*/
+                String[] recData=msgReturn.split("\\|");
+
+                try {
+                    JSONObject jsonReturn=new JSONObject(recData[1]);
+                    Boolean isPermit =jsonReturn .getBoolean("IsPermit");
+                    String showMsg;
+                    if (isPermit){
+                        showMsg="您的带入申请已同意，允许带入记分牌为"+jsonReturn.getInt("permittakein");
+                    }else{
+                        showMsg="您的带入申请被拒绝";
+                    }
+                    //新建状态栏通知
+                    showNotification("带入申请处理结果",showMsg);
+                }catch (Exception e){
+
+                }
+
+
+            }
+        }
+
+
+//        //若为群聊相关事件，如添加、删除群成员
+//        if (message.getContentType() == ContentType.eventNotification) {
+//            GroupInfo groupInfo = (GroupInfo) message.getTargetInfo();
+//            long groupId = groupInfo.getGroupID();
+//            EventNotificationContent.EventNotificationType type = ((EventNotificationContent) message
+//                    .getContent()).getEventNotificationType();
+//            if (groupId == mGroupId) {
+//                switch (type) {
+//                    case group_member_added:
+//                        //添加群成员事件
+//                        List<String> userNames = ((EventNotificationContent) message.getContent()).getUserNames();
+//                        //群主把当前用户添加到群聊，则显示聊天详情按钮
+//                        refreshGroupNum();
+//                        if (userNames.contains(mMyInfo.getNickname()) || userNames.contains(mMyInfo.getUserName())) {
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    mChatView.showRightBtn();
+//                                }
+//                            });
+//                        }
+//
+//                        break;
+//                    case group_member_removed:
+//                        //删除群成员事件
+//                        userNames = ((EventNotificationContent) message.getContent()).getUserNames();
+//                        //群主删除了当前用户，则隐藏聊天详情按钮
+//                        if (userNames.contains(mMyInfo.getNickname()) || userNames.contains(mMyInfo.getUserName())) {
+//                            runOnUiThread(new Runnable() {
+//                                @Override
+//                                public void run() {
+//                                    mChatView.dismissRightBtn();
+//                                    GroupInfo groupInfo = (GroupInfo) mConv.getTargetInfo();
+//                                    if (TextUtils.isEmpty(groupInfo.getGroupName())) {
+//                                        mChatView.setChatTitle(R.string.group);
+//                                    } else {
+//                                        mChatView.setChatTitle(groupInfo.getGroupName());
+//                                    }
+//                                    mChatView.dismissGroupNum();
+//                                }
+//                            });
+//                        } else {
+//                            refreshGroupNum();
+//                        }
+//
+//                        break;
+//                    case group_member_exit:
+//                        refreshGroupNum();
+//                        break;
+//                }
+//            }
+//        }
+//        runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (message.getTargetType() == ConversationType.single) {
+//                    UserInfo userInfo = (UserInfo) message.getTargetInfo();
+//                    String targetId = userInfo.getUserName();
+//                    String appKey = userInfo.getAppKey();
+//                    if (mIsSingle && targetId.equals(mTargetId) && appKey.equals(mTargetAppKey)) {
+//                        cn.jpush.im.android.api.model.Message lastMsg = mChatAdapter.getLastMsg();
+//                        if (lastMsg == null || message.getId() != lastMsg.getId()) {
+//                            mChatAdapter.addMsgToList(message);
+//                        } else {
+//                            mChatAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                } else {
+//                    long groupId = ((GroupInfo) message.getTargetInfo()).getGroupID();
+//                    if (groupId == mGroupId) {
+//                        cn.jpush.im.android.api.model.Message lastMsg = mChatAdapter.getLastMsg();
+//                        if (lastMsg == null || message.getId() != lastMsg.getId()) {
+//                            mChatAdapter.addMsgToList(message);
+//                        } else {
+//                            mChatAdapter.notifyDataSetChanged();
+//                        }
+//                    }
+//                }
+//            }
+//        });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+//        JMessageClient.exitConversation();
+//
+    }
+
+    @Override
+    protected void onResume() {
+
+//        if (mTableInfo!=null) {
+//            JMessageClient.enterSingleConversation(mTableInfo.createuserid + "", getString(R.string.app_key));
+//        }
+        super.onResume();
 
     }
+
+    private void showNotification(String title,String showmsg) {
+        // TODO Auto-generated method stub
+        Notification.Builder builder=new Notification.Builder(this);
+        builder.setSmallIcon(R.drawable.icon);//设置图标
+        builder.setTicker(showmsg);//手机状态栏的提示
+        builder.setContentTitle(title);//设置标题
+        builder.setContentText(showmsg);//设置通知内容
+        builder.setWhen(System.currentTimeMillis());//设置通知时间
+        builder.setContentIntent(null);//点击后的意图
+        builder.setDefaults(Notification.DEFAULT_LIGHTS);//设置指示灯
+        builder.setDefaults(Notification.DEFAULT_SOUND);//设置提示声音
+        builder.setDefaults(Notification.DEFAULT_VIBRATE);//设置震动
+        Notification notification=builder.getNotification();//4.1以上，以下要用getNotification()
+        notificationManager.notify(0, notification);
+    }
+
+
 }
