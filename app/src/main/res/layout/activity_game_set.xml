@@ -36,8 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:background="#4c4b54"
-        android:paddingBottom="1dp">
+        android:background="@color/shop_goldcoin_selected">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_game"
@@ -45,7 +44,6 @@
             android:layout_height="80px"
             android:layout_gravity="bottom"
             android:background="#4c4b54"
-            android:layout_margin="1dip"
             android:fillViewport="false"
             app:tabMode="fixed"
             app:layout_scrollFlags="scroll"
@@ -70,7 +68,7 @@
             app:tabMode="fixed"
             app:layout_scrollFlags="scroll"
             app:tabIndicatorColor="@color/red"
-            app:tabIndicatorHeight="2dp"
+            app:tabIndicatorHeight="0dp"
             app:tabTextColor="#FFFFFF"
             app:tabBackground="@drawable/tab_background"
             >

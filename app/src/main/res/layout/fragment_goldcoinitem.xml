@@ -13,7 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center_horizontal"
-        android:background="@color/shop_goldcoin_selected"
+        android:background="#8B7B8B"
         android:orientation="vertical">
 
         <FrameLayout
@@ -45,11 +45,13 @@
                 android:layout_height="wrap_content"
                 android:text="送"
                 android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
             <ImageView
                 android:layout_width="40px"
                 android:layout_height="40px"
+                android:textSize="@dimen/game_record_text_small_size"
                 android:src="@drawable/shop_money"/>
 
             <TextView
@@ -58,6 +60,7 @@
                 android:layout_height="wrap_content"
                 android:text="1000"
                 android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size"
                 android:textAppearance="?attr/textAppearanceListItem" />
 
         </LinearLayout>
@@ -79,7 +82,7 @@
 
         <ImageView
             android:layout_width="25dp"
-            android:layout_height="25dp"
+            android:layout_height="20dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:layout_gravity="center_vertical"
@@ -89,12 +92,12 @@
             android:id="@+id/diamond_cost"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_gravity="center_vertical"
             android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
             android:text="1000"
-            android:textSize="20dp"
             android:textColor="@color/white"
-            android:layout_gravity="center_vertical"/>
+            android:textSize="@dimen/game_record_text_medium_size" />
 
     </LinearLayout>
 

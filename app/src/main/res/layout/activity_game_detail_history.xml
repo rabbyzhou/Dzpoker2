@@ -293,29 +293,29 @@
 
             <ImageView
                 android:id="@+id/shark_icon"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/shark_img"/>
 
             <ImageView
                 android:id="@+id/big_fish_icon"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/big_fish"/>
 
             <ImageView
                 android:id="@+id/rish_icon"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/vulgar_tycoon"/>
 
             <ImageView
                 android:id="@+id/worker_model_icon"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:src="@drawable/model_worker"/>
 
@@ -330,29 +330,29 @@
 
             <ImageView
                 android:id="@+id/shark_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 tools:src="@drawable/default_male_head"/>
 
             <ImageView
                 android:id="@+id/big_fish_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 tools:src="@drawable/default_male_head"/>
 
             <ImageView
                 android:id="@+id/rish_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 tools:src="@drawable/default_male_head"/>
 
             <ImageView
                 android:id="@+id/worker_model_head"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 tools:src="@drawable/default_male_head"/>
 

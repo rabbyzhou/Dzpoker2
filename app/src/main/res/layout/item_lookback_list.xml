@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginTop="10dp"
         android:background="@color/shop_goldcoin_selected">
 
         <TextView
@@ -45,7 +44,6 @@
             android:layout_alignParentRight="true"
             android:textSize="@dimen/game_record_text_medium_size"
             android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"
             android:textColor="@color/btn_primary_color"
             tools:text="100000"/>
     </RelativeLayout>

@@ -31,7 +31,7 @@ import java.util.List;
 public class GameSetActivity extends AppCompatActivity implements FragmentGameSet1.OnFragmentInteractionListener,FragmentGameSet2.OnFragmentInteractionListener,FragmentGameSet3.OnFragmentInteractionListener,FragmentGameSet4.OnFragmentInteractionListener,FragmentGameSet5.OnFragmentInteractionListener,FragmentGameSet6.OnFragmentInteractionListener{
     private TabLayout tabLayout,tabLayout2;
     private String[] titles1 = {"德州扑克", "奥马哈"};
-    private String[] titles2 = {"普通牌局", "SNG比赛", "MTT比赛"};
+    private String[] titles2 = {"普通牌局", "SNG", "MTT"};
     private NoScrollViewPager viewPager;
     private List<Fragment> list;
     private MyAdapter adapter;

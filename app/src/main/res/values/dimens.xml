@@ -69,9 +69,9 @@
     <dimen name="bottom_menu_btn_text_size">18dp</dimen>
     <dimen name="bottom_menu_layout_margin">12dp</dimen>
 
-    <dimen name="game_record_text_medium_size">16dp</dimen>
-    <dimen name="game_record_text_small_size">14dp</dimen>
+    <dimen name="game_record_text_medium_size">14dp</dimen>
+    <dimen name="game_record_text_small_size">12dp</dimen>
     <dimen name="game_ring_progress_text_column_space">3dp</dimen>
-    <dimen name="lookback_card_size">40dp</dimen>
-    <dimen name="lookback_btn_size">30dp</dimen>
+    <dimen name="lookback_card_size">30dp</dimen>
+    <dimen name="lookback_btn_size">15dp</dimen>
 </resources>

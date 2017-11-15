@@ -160,7 +160,7 @@ public class PlayGameFragment extends Fragment implements QuickGameFragment.OnFr
 
         @Override
         public CharSequence getPageTitle(int position) {
-            return position == 0 ? "快读游戏" : "发现游戏";
+            return position == 0 ? "快速游戏" : "发现游戏";
         }
 
     }
