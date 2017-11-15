@@ -12,12 +12,12 @@
         android:orientation="vertical">
 
         <LinearLayout
-            android:id="@+id/exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center_vertical">
             <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/black_back"

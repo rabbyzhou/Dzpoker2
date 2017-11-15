@@ -1289,11 +1289,13 @@ public class GameActivity extends AppCompatActivity {
                                         JSONObject jsonObj = new JSONObject();
                                         jsonObj.put("userid",applyInfo.requestuserid);
                                         jsonObj.put("requestid",applyInfo.requestid);
+                                        Boolean bPermit=false;
                                         if (applyInfo.ispermit==0){
-                                            jsonObj.put("ispermit",false);
+                                            bPermit=false;
                                         }else if (applyInfo.ispermit==1){
-                                            jsonObj.put("ispermit",true);
+                                            bPermit=true;
                                         }
+                                        jsonObj.put("ispermit",bPermit);
 
 
 
@@ -1307,6 +1309,26 @@ public class GameActivity extends AppCompatActivity {
                                         //{"requesttakeininfo":[{"requestid":16,"requestuserid":1008,"usernickname":"我是无名","requesttakeinchips":200,"requestpermittakeinchips":200,"ispermit":2}]}
                                         JSONObject jsonObject=new JSONObject(result);
                                         if (jsonObject.getInt("ret")==0) {
+                                            //告诉申请者，审核结果RequestTakeInRet|{‘IsPermit’:true,’permittakein’:300}
+                                            JSONObject json=new JSONObject();
+                                            json.put("IsPermit",bPermit);
+                                            json.put("permittakein",applyInfo.requesttakeinchips);
+                                            String sendstr="RequestTakeInRet|"+json.toString();
+                                            cn.jpush.im.android.api.model.Message message=JMessageClient.createSingleTextMessage(applyInfo.requestuserid+"",getString(R.string.app_key),sendstr);
+
+                                            message.setOnSendCompleteCallback(new BasicCallback() {
+                                                @Override
+                                                public void gotResult(int responseCode, String responseDesc) {
+                                                    if (responseCode == 0) {
+
+                                                        // 消息发送成功
+                                                    } else {
+                                                        // 消息发送失败
+                                                        ToastUtil.showToastInScreenCenter(GameActivity.this,"发送审核信息失败，请重新申请！");
+                                                    }
+                                                }
+                                            });
+                                            JMessageClient.sendMessage(message);
                                             jsonObj = new JSONObject();
                                             jsonObj.put("userid",applicatoin.getUserId());
                                             jsonObj.put("tableid",gameId);
@@ -4242,15 +4264,19 @@ public class GameActivity extends AppCompatActivity {
 
        if (mTableInfo.iscontroltakein){
            //控制带入
-           button_apply.setText("申请");
-           if (mTableInfo.mintakeinchips>application.getUser().goldcoin){
+           if (mTableInfo.mintakeinchips*11/10>application.getUser().goldcoin){
                button_apply.setText("购买金币");
+           }else if(mTableInfo.mintakeinchips>permittakeinchips){
+               button_apply.setText("申请");
+           }else {
+               button_apply.setText("确定");
            }
+          ;
 
        }else{
            //非控制带入
            button_apply.setText("确定");
-           if (mTableInfo.mintakeinchips>application.getUser().goldcoin){
+           if (mTableInfo.mintakeinchips*11/10>application.getUser().goldcoin){
                button_apply.setText("购买金币");
            }
 
@@ -4347,7 +4373,7 @@ public class GameActivity extends AppCompatActivity {
         if (message.getContentType() == ContentType.text){
 
             String msgReturn=((TextContent) message.getContent()).getText();//message.getContent().getStringExtra("text");
-            if (msgReturn.indexOf("RequestTakeIn")==0){
+            if (msgReturn.indexOf("RequestTakeIn")==0 && msgReturn.indexOf("RequestTakeInRet")==-1){
                 //RequestTakeIn|{‘tablename’:我的房间}
                 String[] recData=msgReturn.split("\\|");
 
