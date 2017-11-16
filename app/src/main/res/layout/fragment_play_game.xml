@@ -9,21 +9,21 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_game"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="wrap_content"
         android:layout_gravity="bottom"
-        android:background="#ffffff"
+        android:background="#CDB5CD"
         android:fillViewport="false"
         app:tabMode="fixed"
         app:layout_scrollFlags="scroll"
-        app:tabIndicatorColor="#057523"
+        app:tabIndicatorColor="@color/black"
         app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="#057523"
-        app:tabTextColor="#ced0d3">
+        app:tabSelectedTextColor="@color/black"
+        app:tabTextColor="@color/white">
 
     <android.support.design.widget.TabItem
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="快递游戏" />
+        android:text="快速游戏" />
 
     <android.support.design.widget.TabItem
         android:layout_width="match_parent"

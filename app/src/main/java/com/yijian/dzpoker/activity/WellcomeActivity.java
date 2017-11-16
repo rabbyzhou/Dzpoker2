@@ -3,19 +3,20 @@ package com.yijian.dzpoker.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.os.CountDownTimer;
+import android.os.Handler;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.club.ClubInfoActivity;
-import com.yijian.dzpoker.activity.club.CreateClubActivity;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
-import com.yijian.dzpoker.view.data.ClubInfo;
 import com.yijian.dzpoker.view.data.User;
 
 import org.json.JSONArray;
@@ -42,6 +43,7 @@ public class WellcomeActivity extends AppCompatActivity {
 
     private static final boolean AUTO_HIDE = true;
     private DzApplication myApp;
+    private boolean isGotoLoginPage = false;
 
     /**
      * If {@link #AUTO_HIDE} is set, the number of milliseconds to wait after
@@ -56,6 +58,7 @@ public class WellcomeActivity extends AppCompatActivity {
     private static final int UI_ANIMATION_DELAY = 300;
     private final Handler mHideHandler = new Handler();
     private View mContentView;
+    /**
     private final Runnable mHidePart2Runnable = new Runnable() {
         @SuppressLint("InlinedApi")
         @Override
@@ -72,7 +75,9 @@ public class WellcomeActivity extends AppCompatActivity {
                     | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
                     | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
         }
-    };
+    };**/
+
+    /**
     private View mControlsView;
     private final Runnable mShowPart2Runnable = new Runnable() {
         @Override
@@ -84,19 +89,23 @@ public class WellcomeActivity extends AppCompatActivity {
             }
             mControlsView.setVisibility(View.VISIBLE);
         }
-    };
+    };**/
     private boolean mVisible;
+    /**
     private final Runnable mHideRunnable = new Runnable() {
         @Override
         public void run() {
             hide();
         }
     };
+
+     **/
     /**
      * Touch listener to use for in-layout UI controls to delay hiding the
      * system UI. This is to prevent the jarring behavior of controls going away
      * while interacting with activity UI.
      */
+    /**
     private final View.OnTouchListener mDelayHideTouchListener = new View.OnTouchListener() {
         @Override
         public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -105,7 +114,7 @@ public class WellcomeActivity extends AppCompatActivity {
             }
             return false;
         }
-    };
+    };**/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,22 +125,71 @@ public class WellcomeActivity extends AppCompatActivity {
         //启动GPS服务，以后每秒取一次，如果取不到，根据网络或者基站信息来取
 
         mVisible = true;
-        mControlsView = findViewById(R.id.fullscreen_content_controls);
+        // = findViewById(R.id.fullscreen_content_controls);
         mContentView = findViewById(R.id.fullscreen_content);
 
+        changeStatusBarBg();
+    }
 
-        // Set up the user interaction to manually show or hide the system UI.
-        mContentView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setupWelcome();
+    }
+
+    private void changeStatusBarBg(){
+        Window window = this.getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.tabBg));
+    }
+
+    private void setupWelcome(){
+        //是否显示过欢迎页
+        boolean isShowed = ((DzApplication)getApplication()).isShowedWelcome();
+        if ( !isShowed ){ //没有显示过
+
+            new MyCountDown().start();
+
+            // Set up the user interaction to manually show or hide the system UI.
+            mContentView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    ((DzApplication)getApplication()).setShowedWelcome(true);
+                    toggle();
+                }
+            });
+
+            // Upon interacting with UI controls, delay any scheduled hide()
+            // operations to prevent the jarring behavior of controls going away
+            // while interacting with the UI.
+            //findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+        }else {
+            if ( getParent() != null || getCallingActivity() != null || isGotoLoginPage == true) {
+                finish();
+            }else {
                 toggle();
             }
-        });
+        }
 
-        // Upon interacting with UI controls, delay any scheduled hide()
-        // operations to prevent the jarring behavior of controls going away
-        // while interacting with the UI.
-        findViewById(R.id.dummy_button).setOnTouchListener(mDelayHideTouchListener);
+    }
+
+    private class MyCountDown extends CountDownTimer {
+        public MyCountDown() {
+            super(getResources().getInteger(R.integer.welcome_page_show_time),
+                    getResources().getInteger(R.integer.welcome_page_show_time));
+        }
+
+        @Override
+        public void onFinish() {
+            ((DzApplication)getApplication()).setShowedWelcome(true);
+            //delayedHide(AUTO_HIDE_DELAY_MILLIS);
+            toggle();
+        }
+
+        @Override
+        public void onTick(long millisUntilFinished) {}
+
     }
 
     @Override
@@ -141,14 +199,10 @@ public class WellcomeActivity extends AppCompatActivity {
         // Trigger the initial hide() shortly after the activity has been
         // created, to briefly hint to the user that UI controls
         // are available.
-        delayedHide(100);
+        //delayedHide(100);
     }
 
     private void toggle() {
-
-
-
-
 
         //根据本地文件里登录用户字符串来判断是否为用户登录状态
         SharedPreferences settings = getSharedPreferences("depoker", 0);
@@ -157,6 +211,7 @@ public class WellcomeActivity extends AppCompatActivity {
 
         if (mLoginName.equals("")) {
             //跳转到登录界面
+            isGotoLoginPage = true;
             Intent intent = new Intent();
             intent.setClass(WellcomeActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -250,6 +305,7 @@ public class WellcomeActivity extends AppCompatActivity {
 //        }
     }
 
+    /**
     private void hide() {
         // Hide UI first
         ActionBar actionBar = getSupportActionBar();
@@ -263,7 +319,8 @@ public class WellcomeActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mShowPart2Runnable);
         mHideHandler.postDelayed(mHidePart2Runnable, UI_ANIMATION_DELAY);
     }
-
+   **/
+    /**
     @SuppressLint("InlinedApi")
     private void show() {
         // Show the system bar
@@ -275,13 +332,15 @@ public class WellcomeActivity extends AppCompatActivity {
         mHideHandler.removeCallbacks(mHidePart2Runnable);
         mHideHandler.postDelayed(mShowPart2Runnable, UI_ANIMATION_DELAY);
     }
+    **/
 
     /**
      * Schedules a call to hide() in [delay] milliseconds, canceling any
      * previously scheduled calls.
      */
+    /**
     private void delayedHide(int delayMillis) {
         mHideHandler.removeCallbacks(mHideRunnable);
         mHideHandler.postDelayed(mHideRunnable, delayMillis);
-    }
+    }**/
 }

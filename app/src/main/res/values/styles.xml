@@ -493,4 +493,10 @@
         <item name="android:textColor">@android:color/white</item>
     </style>
 
+    <style name="CreateGameTabLayoutAppearance" parent="Widget.Design.TabLayout">
+        <item name="android:textSize">@dimen/text_small_size</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="tabSelectedTextColor">@color/black</item>
+    </style>
+
 </resources>

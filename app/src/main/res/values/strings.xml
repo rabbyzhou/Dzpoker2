@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">指尖德州</string>
+    <!-- 单位:毫秒 -->
+    <integer name="welcome_page_show_time">2000</integer>
 
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
@@ -464,7 +466,7 @@
     <string name="all_play_precent">入池率</string>
     <string name="all_win_precent">其中胜率</string>
     <string name="date_year_month">%1$s月%2$s日</string>
-    <string name="game_detail_history_time_desc">%1$s %2$s - %3$s %4$s (总时长:%5$s)</string>
+	<string name="game_detail_history_time_desc">%1$s %2$s - %3$s %4$s (总时长:%5$s)</string>
     <string name="game_detail_history_max_player">%1$d人桌</string>
 </resources>
 

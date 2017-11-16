@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.yijian.dzpoker.R;
 
 import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
+import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_TITLE;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -95,9 +96,20 @@ public class QuickGameFragment extends Fragment implements View.OnClickListener{
                 intent.setClass(getActivity(), com.yijian.dzpoker.activity.game.GameSetActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 TextView txCreateGame = (TextView)layout_quick.findViewById(R.id.txCreateGame);
-                intent.putExtra(INTENT_KEY_BACKTEXT, txCreateGame.getText());
+                intent.putExtra(INTENT_KEY_BACKTEXT, "游戏");
+                intent.putExtra(INTENT_KEY_TITLE, txCreateGame.getText());
                 startActivity(intent);
                 break;
+            case R.id.btnAddintoGame:
+                Intent intent1 = new Intent();
+                intent1.setClass(getActivity(), com.yijian.dzpoker.activity.game.GameAddActivity.class);
+                intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                TextView tvAddintoGame = (TextView)layout_quick.findViewById(R.id.txCreateGame);
+                intent1.putExtra(INTENT_KEY_BACKTEXT, "游戏");
+                intent1.putExtra(INTENT_KEY_TITLE, tvAddintoGame.getText());
+                startActivity(intent1);
+                break;
+
         }
     }
 

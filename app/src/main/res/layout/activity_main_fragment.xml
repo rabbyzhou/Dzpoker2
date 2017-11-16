@@ -35,8 +35,9 @@
         android:id="@+id/tab_main"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        app:tabSelectedTextColor="#59D"
-        android:background="@color/gray"
+        app:tabSelectedTextColor="@color/white"
+        app:tabBackground="@drawable/bg_shop_tab"
+        android:background="@color/black"
         app:tabTextColor="#999"
         app:tabIndicatorHeight="0dp" />
 </LinearLayout>

@@ -7,7 +7,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
-import com.yijian.dzpoker.util.FileHelper;
+import com.yijian.dzpoker.entity.NotificationClickEventReceiver;
+import com.yijian.dzpoker.utils.SharePreferenceManager;
 import com.yijian.dzpoker.view.data.ClubInfo;
 import com.yijian.dzpoker.view.data.GameParam;
 import com.yijian.dzpoker.view.data.User;
@@ -22,13 +23,7 @@ import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
-import cn.jpush.im.api.BasicCallback;
-import okhttp3.Cache;
 import okhttp3.OkHttpClient;
-
-
-import com.yijian.dzpoker.entity.NotificationClickEventReceiver;
-import com.yijian.dzpoker.utils.SharePreferenceManager;
 
 
 /**
@@ -50,6 +45,7 @@ public class DzApplication extends Application {
 
     private String latitude;
     private String longitude;
+    private boolean isShowedWelcome;
 
     public String getLatitude() {
         return latitude;
@@ -97,6 +93,14 @@ public class DzApplication extends Application {
 
     public void setGameParam(GameParam gameParam) {
         this.gameParam = gameParam;
+    }
+
+    public boolean isShowedWelcome() {
+        return isShowedWelcome;
+    }
+
+    public void setShowedWelcome(boolean isShowedWelcome) {
+        this.isShowedWelcome = isShowedWelcome;
     }
 
     public static final String CONV_TITLE = "conv_title";

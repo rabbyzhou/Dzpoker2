@@ -37,10 +37,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
-        android:paddingTop="20px"
-        android:paddingBottom="20px"/>
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
 
 
 </LinearLayout>

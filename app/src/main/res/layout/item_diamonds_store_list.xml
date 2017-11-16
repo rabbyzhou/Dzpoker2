@@ -7,17 +7,15 @@
     android:focusable="true"
     android:layout_marginTop="10dp"
     android:layout_marginBottom="10dp"
-    android:layout_marginLeft="20dp"
     android:id="@+id/layout_clubinfo"
     >
 
 
     <ImageView
         android:id="@+id/iv_diamonds_head"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
         />
 
     <TextView
@@ -27,8 +25,8 @@
         android:text="60钻石"
         android:textColor="@color/blue"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginLeft="20dp"
-        android:textSize="18dp"
+        android:layout_marginLeft="10dp"
+        android:textSize="@dimen/game_record_text_small_size"
         android:layout_weight="1"
         android:layout_gravity="center_vertical"/>
 
@@ -39,8 +37,8 @@
         android:text="￥6.00"
         android:textColor="@color/orange"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:layout_marginRight="20dp"
-        android:textSize="18dp"
+        android:layout_marginRight="10dp"
+        android:textSize="12dp"
         android:layout_gravity="center_vertical"
        />
 

@@ -7,8 +7,8 @@
 
     <ImageView
         android:id="@+id/level_icon"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="15dp"/>
 
@@ -24,7 +24,7 @@
             android:id="@+id/level_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/game_record_text_medium_size"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="5dp"
             android:textColor="@color/orange"/>
@@ -33,15 +33,15 @@
             android:id="@+id/level_desc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
+            android:textSize="@dimen/game_record_text_small_size"
             android:layout_marginBottom="10dp"
             android:textColor="@color/white"/>
     </LinearLayout>
 
     <ImageView
         android:id="@id/diamond_icon"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
         android:src="@drawable/blue_masonry"
         android:layout_gravity="center_vertical"
         android:paddingLeft="5dp"/>
@@ -50,7 +50,7 @@
         android:id="@+id/diamond_cost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="16sp"
+        android:textSize="@dimen/game_record_text_small_size"
         android:paddingLeft="5dp"
         android:layout_marginRight="10dp"
         android:textColor="@color/white"
