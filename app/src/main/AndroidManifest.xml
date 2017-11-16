@@ -35,7 +35,6 @@
     <uses-permission android:name="android.permission.GET_TASKS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-
     <application
         android:name=".util.DzApplication"
         android:allowBackup="true"
@@ -59,9 +58,7 @@
                 <action android:name="cn.jpush.android.intent.PUSH_TIME" />
             </intent-filter>
         </service>
-
-        <service android:name="com.yijian.dzpoker.service.SocketService" >
-        </service>
+        <service android:name=".service.SocketService"></service>
 
         <!-- Required SDK核心功能 -->
         <receiver
@@ -104,8 +101,6 @@
         <receiver
             android:name="cn.jpush.android.service.AlarmReceiver"
             android:exported="false" />
-
-
 
         <!-- Required. For publish channel feature -->
         <!-- JPUSH_CHANNEL 是为了方便开发者统计APK分发渠道。 -->
@@ -187,41 +182,77 @@
         <activity
             android:name=".activity.club.ClubInfoActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.club.ClubUserInfoActivity" android:screenOrientation="portrait"  />
-        <activity android:name=".activity.club.ClubMemberManageActivity" android:screenOrientation="portrait"  />
-        <activity android:name=".activity.club.ClubInfoManageActivity"  android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.BuyDiamondActivity" android:screenOrientation="portrait"  />
-        <activity android:name=".activity.club.BuyClubLevelActivity"  android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.ModifyUserInfoActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.SysConfigActivity"  android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.AboutActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.StoreActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.MainFragmentActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.game.GameSetActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.game.GameSetHighGradeActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.game.GameActivity" android:screenOrientation="portrait" ></activity>
-        <activity android:name=".activity.news.DetailNewsActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.GamesRecordActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.GameHistoryRecordActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.GameDetailedHistoryActivity" android:screenOrientation="portrait" />
-        <activity android:name=".activity.user.GameRecordLookBack" android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.club.ClubUserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.club.ClubMemberManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.club.ClubInfoManageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.BuyDiamondActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.club.BuyClubLevelActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.ModifyUserInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.SysConfigActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.AboutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.StoreActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.MainFragmentActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.game.GameSetActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.game.GameSetHighGradeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.game.GameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.news.DetailNewsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.GamesRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.GameHistoryRecordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.GameDetailedHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.user.GameRecordLookBack"
+            android:screenOrientation="portrait" />
 
-
-        <!-- 掌付相关-->
+        <!-- 掌付相关 -->
         <activity
             android:name="main.air.com.youpay.activity.WebActivity"
             android:screenOrientation="portrait" />
-        <!--支付宝配置-->
+        <!-- 支付宝配置 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind" />
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind"/>
+            android:screenOrientation="behind" />
+        <activity android:name=".activity.game.AddIntoGameActivity"></activity>
     </application>
 
 </manifest>
