@@ -117,17 +117,18 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                                     @Override
                                     public void gotResult(int i, String s) {
                                         if (i==0){
-                                            UserInfo userInfo=JMessageClient.getMyInfo();
-                                            userInfo.setNickname(edNickname.getText().toString());
-                                            JMessageClient.updateMyInfo(UserInfo.Field.nickname, JMessageClient.getMyInfo(), new BasicCallback() {
-                                                @Override
-                                                public void gotResult(int i, String s) {
-                                                    if (i==0) {
-                                                        ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册成功！");
-                                                        finish();
-                                                    }
-                                                }
-                                            });
+                                            ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册成功！");
+//                                            UserInfo userInfo=JMessageClient.getMyInfo();
+//                                            userInfo.setNickname(edNickname.getText().toString());
+//                                            JMessageClient.updateMyInfo(UserInfo.Field.nickname, JMessageClient.getMyInfo(), new BasicCallback() {
+//                                                @Override
+//                                                public void gotResult(int i, String s) {
+//                                                    if (i==0) {
+//                                                        ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册成功！");
+//                                                        finish();
+//                                                    }
+//                                                }
+//                                            });
 
                                         }else{
                                             ToastUtil.showToastInScreenCenter(RegisterActivity.this,"注册到IM失败，错误内容："+s);

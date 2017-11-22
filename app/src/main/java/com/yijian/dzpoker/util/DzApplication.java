@@ -200,6 +200,8 @@ public class DzApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
+        latitude =  "0";
+        longitude =  "0";
         context = getApplicationContext();
 
         // 设置http客户端

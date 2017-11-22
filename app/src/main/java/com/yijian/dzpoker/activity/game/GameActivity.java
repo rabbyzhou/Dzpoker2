@@ -229,6 +229,8 @@ public class GameActivity extends AppCompatActivity {
 
     private NotificationManager notificationManager;//状态栏通知
 
+    private Boolean bInitView=false;
+
 
 
 
@@ -1451,7 +1453,9 @@ public class GameActivity extends AppCompatActivity {
                             //进入牌局返回
                             JSONObject jsonReturn=new JSONObject(recData[1]);
                             if (jsonReturn.getInt("ret")!=0){
+
                                 ToastUtil.showToastInScreenCenter(GameActivity.this,"进入牌桌失败，错误原因为："+jsonReturn.getString("msg"));
+                                finish();
                             }
                         }else if (recData[0].equals(Constant.INFO_ENTER_TABLE)){
                             //收到别人进牌局的消息，如果是自己，则不作任何处理，是别人的，记录下来，也可以将来做提示，某人进入了牌桌
@@ -1497,12 +1501,24 @@ public class GameActivity extends AppCompatActivity {
                             for(int i=0;i<temp.length();i++){
                                 if (!temp.get(i).toString().equals("null")) {
                                     JSONObject jsonTemp = new JSONObject(temp.get(i).toString());
-                                    mTableInfo.seats[i].isbutton = jsonTemp.getBoolean("isbutton");
-                                    mTableInfo.seats[i].issb = jsonTemp.getBoolean("issb");
-                                    mTableInfo.seats[i].isbb = jsonTemp.getBoolean("isbb");
-                                    mTableInfo.seats[i].state = jsonTemp.getInt("state");
-                                    mTableInfo.seats[i].curholdtime = jsonTemp.getInt("curholdtime");
-                                    mTableInfo.seats[i].userid = jsonTemp.getInt("userid");
+                                    TableSeatInfo tableSeatInfo= new TableSeatInfo();
+
+                                    tableSeatInfo.isbutton = jsonTemp.getBoolean("isbutton");
+                                    tableSeatInfo.issb = jsonTemp.getBoolean("issb");
+                                    tableSeatInfo.isbb = jsonTemp.getBoolean("isbb");
+                                    tableSeatInfo.state = jsonTemp.getInt("state");
+                                    tableSeatInfo.curholdtime = jsonTemp.getInt("curholdtime");
+                                    tableSeatInfo.userid = jsonTemp.getInt("userid");
+                                    mTableInfo.seats[i]=tableSeatInfo;
+
+
+
+//                                    mTableInfo.seats[i].isbutton = jsonTemp.getBoolean("isbutton");
+//                                    mTableInfo.seats[i].issb = jsonTemp.getBoolean("issb");
+//                                    mTableInfo.seats[i].isbb = jsonTemp.getBoolean("isbb");
+//                                    mTableInfo.seats[i].state = jsonTemp.getInt("state");
+//                                    mTableInfo.seats[i].curholdtime = jsonTemp.getInt("curholdtime");
+//                                    mTableInfo.seats[i].userid = jsonTemp.getInt("userid");
                                 }
                             }
 
@@ -1847,6 +1863,18 @@ public class GameActivity extends AppCompatActivity {
 
                         }else if (operation==2){
                             //加入牌局,要判断自己是否还在牌局中
+                            try {
+                                String msg = "$" + Constant.GAME_ENTER_TABLE + "|";
+                                JSONObject jsonSend = new JSONObject();
+                                jsonSend.put("userid", application.getUserId());
+                                jsonSend.put("tableid", gameId);
+                                jsonSend.put("nickname",application.getUser().nickName);
+                                jsonSend.put("headpic",application.getUser().userHeadPic);
+                                msg+=jsonSend.toString().replace("$","￥");
+                                myBinder.sendInfo(msg);
+                            }catch (Exception e){
+                                ToastUtil.showToastInScreenCenter(GameActivity.this,"加入牌局失败！");
+                            }
 
                         }
 
@@ -2462,49 +2490,57 @@ public class GameActivity extends AppCompatActivity {
     // 收到tableinfo之后，初始化牌桌的信息
     private void InitGameInfo(){
 
+//        if (!bInitView){
+//            bInitView=true;
+//        }
+
+
         //先根据收到的table信息初始化桌面的控件
         //用户在创建table，或者加入别人的table，或者中途退出进入，从非活动转为活动会收到信息
         int iSeatnumber=mTableInfo.seats.length;//牌局座位数目，其中对象可以为空
-        initSeatXY(iSeatnumber);//根据人数来设定座位的位置
-        //重新设置座位位置  （筹码位置，D的位置，tip的位置，cardback ，翻牌位置在需要的时候设置）
-        if (iSeatnumber!=9) {
-            //如果不为9，重新设置控件的位置,座位的显示，chip，tip，cardback的显示位置
-            for (int i = 0; i < iSeatnumber; i++) {
-                View view = mSeatObjects.get(iSeatnumber);
-                AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mSeatViewWidth, mSeatViewHeight, 0, 0);
-                lp.x = iSeatValue[iSeatnumber][0];
-                lp.y = iSeatValue[iSeatnumber][1];
-                view.setLayoutParams(lp);
 
-            }
-            //chip
-            for (int i = 0; i < iSeatnumber; i++) {
-                View view = mChipObjects.get(iSeatnumber);
-                AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mAmountChipViewWidth, mAmountChipVieHeight, 0, 0);
-                lp.x = iAmountChipLocation[iSeatnumber][0];
-                lp.y = iAmountChipLocation[iSeatnumber][1];
-                view.setLayoutParams(lp);
+//        if (!bInitView) {
+            initSeatXY(iSeatnumber);//根据人数来设定座位的位置
+            //重新设置座位位置  （筹码位置，D的位置，tip的位置，cardback ，翻牌位置在需要的时候设置）
+            if (iSeatnumber != 9) {
+                //如果不为9，重新设置控件的位置,座位的显示，chip，tip，cardback的显示位置
+                for (int i = 0; i < iSeatnumber; i++) {
+                    View view = mSeatObjects.get(iSeatnumber);
+                    AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mSeatViewWidth, mSeatViewHeight, 0, 0);
+                    lp.x = iSeatValue[iSeatnumber][0];
+                    lp.y = iSeatValue[iSeatnumber][1];
+                    view.setLayoutParams(lp);
 
-            }
+                }
+                //chip
+                for (int i = 0; i < iSeatnumber; i++) {
+                    View view = mChipObjects.get(iSeatnumber);
+                    AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mAmountChipViewWidth, mAmountChipVieHeight, 0, 0);
+                    lp.x = iAmountChipLocation[iSeatnumber][0];
+                    lp.y = iAmountChipLocation[iSeatnumber][1];
+                    view.setLayoutParams(lp);
 
-            //tip
-            for (int i = 0; i < iSeatnumber; i++) {
-                View view = mTipObjects.get(iSeatnumber);
-                AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mTipViewWidth, mTipViewHeight, 0, 0);
-                lp.x = iTipLocation[iSeatnumber][0];
-                lp.y = iTipLocation[iSeatnumber][1];
-                view.setLayoutParams(lp);
+                }
 
+                //tip
+                for (int i = 0; i < iSeatnumber; i++) {
+                    View view = mTipObjects.get(iSeatnumber);
+                    AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mTipViewWidth, mTipViewHeight, 0, 0);
+                    lp.x = iTipLocation[iSeatnumber][0];
+                    lp.y = iTipLocation[iSeatnumber][1];
+                    view.setLayoutParams(lp);
+
+                }
+                //cardback都需要设置
+                for (int i = 0; i < iSeatnumber; i++) {
+                    View view = mCardBackObjects.get(iSeatnumber);
+                    AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mCardBackWidth, mCardBackHeight, 0, 0);
+                    lp.x = iCardBack[iSeatnumber][0];
+                    lp.y = iCardBack[iSeatnumber][1];
+                    view.setLayoutParams(lp);
+                }
             }
-            //cardback都需要设置
-            for (int i = 0; i < iSeatnumber; i++) {
-                View view = mCardBackObjects.get(iSeatnumber);
-                AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(mCardBackWidth, mCardBackHeight, 0, 0);
-                lp.x = iCardBack[iSeatnumber][0];
-                lp.y = iCardBack[iSeatnumber][1];
-                view.setLayoutParams(lp);
-            }
-        }
+//        }
 
 
         //底池
@@ -2646,10 +2682,10 @@ public class GameActivity extends AppCompatActivity {
             //用户在座位中，则移位置
             for (int i = 0; i < iSeatnumber; i++) {
                 int moveto= (i-userindex+iSeatnumber)%iSeatnumber;
-                setPosition(mSeatObjects.get(iSeatnumber),mSeatViewWidth,mSeatViewHeight,iSeatValue[moveto][0],iSeatValue[moveto][1]);
-                setPosition(mChipObjects.get(iSeatnumber),mAmountChipViewWidth,mAmountChipVieHeight,iAmountChipLocation[moveto][0],iAmountChipLocation[moveto][1]);
-                setPosition(mTipObjects.get(iSeatnumber),mTipViewWidth,mTipViewHeight,iTipLocation[moveto][0],iTipLocation[moveto][1]);
-                setPosition(mCardBackObjects.get(iSeatnumber),mCardBackWidth,mCardBackHeight,iCardBack[moveto][0],iCardBack[moveto][1]);
+                setPosition(mSeatObjects.get(i),mSeatViewWidth,mSeatViewHeight,iSeatValue[moveto][0],iSeatValue[moveto][1]);
+                setPosition(mChipObjects.get(i),mAmountChipViewWidth,mAmountChipVieHeight,iAmountChipLocation[moveto][0],iAmountChipLocation[moveto][1]);
+                setPosition(mTipObjects.get(i),mTipViewWidth,mTipViewHeight,iTipLocation[moveto][0],iTipLocation[moveto][1]);
+                setPosition(mCardBackObjects.get(i),mCardBackWidth,mCardBackHeight,iCardBack[moveto][0],iCardBack[moveto][1]);
             }
         }
 
@@ -2676,7 +2712,7 @@ public class GameActivity extends AppCompatActivity {
                         tv_name.setText(mTableInfo.players[j].nickname);
                         tv_name.setVisibility(View.VISIBLE);
 
-                        tv_goldcoin.setText(mTableInfo.players[j].remainchips);
+                        tv_goldcoin.setText(mTableInfo.players[j].remainchips+"");
                         tv_goldcoin.setVisibility(View.VISIBLE);
 
                         if (mTableInfo.players[j].headpic!=null && !mTableInfo.players[j].headpic.equals("")) {
@@ -2717,7 +2753,7 @@ public class GameActivity extends AppCompatActivity {
                             //Tip为大盲
                             View viewTip=  mTipObjects.get(mTableInfo.players[j].seatindex);
                             viewTip.setVisibility(View.VISIBLE);
-                            TextView tv_tip=(TextView)view.findViewById(R.id.tv_tip);
+                            TextView tv_tip=(TextView)viewTip.findViewById(R.id.tv_tip);
                             tv_tip.setText("等待");
                         }
 
@@ -2743,36 +2779,47 @@ public class GameActivity extends AppCompatActivity {
                             case 0:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("下注");
+                                break;
                             case 1:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("跟注");
+                                break;
                             case 2:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("弃牌");
+                                break;
                             case 3:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("看牌");
+                                break;
                             case 4:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("加注");
+                                break;
                             case 6:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("All In");
+                                break;
                             case 7:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("小盲");
+                                break;
                             case 8:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("大盲");
+                                break;
                             case 9:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("Straddle");
+                                break;
                             case 10:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("补盲");
+                                break;
                             case 11:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("Ante");
+                                break;
                         }
 
                         //已下注
@@ -2847,7 +2894,7 @@ public class GameActivity extends AppCompatActivity {
 
 
                         //有牌
-                        if(mTableInfo.players[j].cards.length>0){
+                        if(mTableInfo.players[j].cards!=null  &&  mTableInfo.players[j].cards.length>0){
                             //用户本身有牌，显示
                             if (mTableInfo.players[j].userid==application.getUserId()){
                                 for (int k=0;k<mTableInfo.players[j].cards.length;k++){

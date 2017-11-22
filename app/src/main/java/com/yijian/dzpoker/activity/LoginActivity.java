@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             Intent intent = new Intent();
                                             intent.setClass(LoginActivity.this, MainFragmentActivity.class);
                                             startActivity(intent);
-                                            ToastUtil.showToastInScreenCenter(LoginActivity.this,"注册成功！");
+                                            ToastUtil.showToastInScreenCenter(LoginActivity.this,"登录成功！");
                                             finish();
                                         }else{
                                             ToastUtil.showToastInScreenCenter(LoginActivity.this,"注册到IM失败，错误内容："+s);
