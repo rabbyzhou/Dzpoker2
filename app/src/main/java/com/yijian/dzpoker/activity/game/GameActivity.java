@@ -2773,7 +2773,23 @@ public class GameActivity extends AppCompatActivity {
                         View viewTip=  mTipObjects.get(mTableInfo.players[j].seatindex);
                         TextView tv_tip=(TextView)viewTip.findViewById(R.id.tv_tip);
 
+                        /*public enum PlayAction
+    {
+        Bet,    //押注 - 押上筹码
+        Call,   //跟进 - 跟随众人押上同等的注额
+        Fold,   //收牌 / 不跟 - 放弃继续牌局的机会
+        Check,  // 让牌 - 在无需跟进的情况下选择把决定“让”给下一位
+        Raise,  // 加注 - 把现有的注金抬高
+        Reraise,// 再加注 - 再别人加注以后回过来再加注
+        Allin,   //全押 - 一次过把手上的筹码全押上
+        NoAction,
+        SB,
+        BB,
+        Straddle,
+        ADDBB,  //补盲新加入局的玩家，补一个大盲。
+        ANTE,
 
+    }*/
 
                         switch (mTableInfo.players[j].lastplayaction){
                             case 0:
@@ -2801,22 +2817,26 @@ public class GameActivity extends AppCompatActivity {
                                 tv_tip.setText("All In");
                                 break;
                             case 7:
-                                viewTip.setVisibility(View.VISIBLE);
-                                tv_tip.setText("小盲");
+                                viewTip.setVisibility(View.INVISIBLE);
+                                tv_tip.setText("");
                                 break;
                             case 8:
                                 viewTip.setVisibility(View.VISIBLE);
-                                tv_tip.setText("大盲");
+                                tv_tip.setText("小盲");
                                 break;
                             case 9:
                                 viewTip.setVisibility(View.VISIBLE);
-                                tv_tip.setText("Straddle");
+                                tv_tip.setText("大盲");
                                 break;
                             case 10:
                                 viewTip.setVisibility(View.VISIBLE);
-                                tv_tip.setText("补盲");
+                                tv_tip.setText("Straddle");
                                 break;
                             case 11:
+                                viewTip.setVisibility(View.VISIBLE);
+                                tv_tip.setText("补盲");
+                                break;
+                            case 12:
                                 viewTip.setVisibility(View.VISIBLE);
                                 tv_tip.setText("Ante");
                                 break;
