@@ -12,12 +12,13 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.fragment.BaseFragment;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.ui.BottomControlPanel;
 import com.yijian.dzpoker.ui.HeadControlPanel;
 
-public class MainActivity extends AppCompatActivity implements BottomControlPanel.BottomPanelCallback {
+public class MainActivity extends BaseToolbarActivity implements BottomControlPanel.BottomPanelCallback {
     BottomControlPanel bottomPanel = null;
     HeadControlPanel headPanel = null;
 
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity implements BottomControlPane
         initUI();
         fragmentManager = getFragmentManager();
         setDefaultFirstFragment(Constant.FRAGMENT_FLAG_GAME);
+    }
+
+    @Override
+    public void setToolbarTitle(String text) {
+
     }
 
     @Override

@@ -13,7 +13,7 @@ public class AboutActivity extends BaseBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         tv_back.setOnClickListener(this);
-
+        setToolbarTitle("关于");
     }
 
     @Override

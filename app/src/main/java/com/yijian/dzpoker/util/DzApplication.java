@@ -260,7 +260,7 @@ public class DzApplication extends Application {
                     longitude = location.getLongitude() + "";
                 }
                 locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 6000, 10,locationListener);
-            } else {
+            } else if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)){
 
                 locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 1000, 0, locationListener);
                 Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);

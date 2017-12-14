@@ -15,9 +15,10 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.view.data.MainPageNews;
 
-public class DetailNewsActivity extends AppCompatActivity {
+public class DetailNewsActivity extends BaseToolbarActivity {
 
     private final String TAG = "DetailNewsActivity";
     private WebView mWebView;

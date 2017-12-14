@@ -17,6 +17,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
@@ -40,7 +41,7 @@ import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
  * Created by c_huangl on 0011, 11/11/2017.
  */
 
-public class GameDetailedHistoryActivity extends Activity
+public class GameDetailedHistoryActivity extends BaseToolbarActivity
         implements View.OnClickListener {
 
 
@@ -84,6 +85,7 @@ public class GameDetailedHistoryActivity extends Activity
         setContentView(R.layout.activity_game_detail_history);
         mTableId = getIntent().getIntExtra("gametableid", -1);
         initViews();
+        setToolbarTitle("战绩详情");
 
         new QueryDataTask().execute();
     }

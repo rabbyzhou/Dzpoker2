@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -29,7 +30,7 @@ import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
  * Created by c_huangl on 0011, 11/11/2017.
  */
 
-public class GamesRecordActivity extends Activity
+public class GamesRecordActivity extends BaseToolbarActivity
     implements View.OnClickListener {
 
     private String title = "战绩";
@@ -57,6 +58,7 @@ public class GamesRecordActivity extends Activity
 
         setContentView(R.layout.activity_game_record);
         initViews();
+        setToolbarTitle("战绩");
 
         new QueryDataTask().execute();
     }

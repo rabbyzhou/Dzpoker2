@@ -21,6 +21,7 @@ public class SysConfigActivity extends BaseBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setToolbarTitle("系统设置");
 
     }
 

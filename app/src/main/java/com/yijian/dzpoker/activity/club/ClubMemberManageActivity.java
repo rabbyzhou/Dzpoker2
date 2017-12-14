@@ -1,32 +1,21 @@
 package com.yijian.dzpoker.activity.club;
 
-import android.content.Intent;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.View;
-import android.widget.Toast;
 
-import com.squareup.picasso.MemoryPolicy;
-import com.squareup.picasso.NetworkPolicy;
-import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
-import com.yijian.dzpoker.activity.LoginActivity;
-import com.yijian.dzpoker.activity.MainActivity;
-import com.yijian.dzpoker.activity.WellcomeActivity;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.ui.ItemRemoveRecyclerView;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
-import com.yijian.dzpoker.view.CircleTransform;
 import com.yijian.dzpoker.view.OnItemClickListener;
 import com.yijian.dzpoker.view.adapter.RemoveItemdapter;
 import com.yijian.dzpoker.view.data.User;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.URL;

@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.fragment.GoldCoinBuyFragment;
 import com.yijian.dzpoker.activity.fragment.UserLevelFragment;
 import com.yijian.dzpoker.constant.Constant;
@@ -35,7 +36,7 @@ import okhttp3.Response;
 
 import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
-public class StoreActivity extends FragmentActivity implements
+public class StoreActivity extends BaseToolbarActivity implements
         View.OnClickListener,UserLevelFragment.OnLevelDealDoneListener, GoldCoinBuyFragment.OnDealDoneListener {
 
     private static final String TAG = "StoreActivity";
@@ -109,17 +110,18 @@ public class StoreActivity extends FragmentActivity implements
         mDiamondPlusImage = (ImageView)findViewById(R.id.diamond_plus);
         mShopVPager = (ViewPager) findViewById(R.id.vp_shop);
         mShoptab = (TabLayout) findViewById(R.id.tab_shop);
-        mBackText = (TextView) findViewById(R.id.tv_back);
-        mTitle = (TextView) findViewById(R.id.tv_title);
+//        mBackText = (TextView) findViewById(R.id.tv_back);
+//        mTitle = (TextView) findViewById(R.id.tv_title);
 
         String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
-        if (backText != null && !backText.isEmpty()) mBackText.setText(backText);
+//        if (backText != null && !backText.isEmpty()) mBackText.setText(backText);
 
         String title = getIntent().getStringExtra(Constant.INTENT_KEY_TITLE);
         if (title == null || title.isEmpty()) title = TITLE;
-        mTitle.setText(title);
+        setToolbarTitle(title);
+//        mTitle.setText(title);
 
-        mBackText.setOnClickListener(this);
+//        mBackText.setOnClickListener(this);
         mDiamondPlusImage.setOnClickListener(this);
         mShopVPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
 

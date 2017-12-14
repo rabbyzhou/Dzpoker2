@@ -9,10 +9,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 
-public class ApplyIntoClubActivity extends AppCompatActivity implements View.OnClickListener {
+public class ApplyIntoClubActivity extends BaseToolbarActivity implements View.OnClickListener {
     private EditText et_applyinfo;
     private Button btn_send;
     private String strLoginName;
@@ -33,7 +34,7 @@ public class ApplyIntoClubActivity extends AppCompatActivity implements View.OnC
         Intent intent = this.getIntent();
         clubId=intent.getIntExtra("clubid",0);
         initViews();
-
+        setToolbarTitle("俱乐部验证");
 
     }
 

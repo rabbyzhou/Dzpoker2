@@ -59,6 +59,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoManageActivity;
 import com.yijian.dzpoker.constant.Constant;
@@ -112,7 +113,7 @@ import static com.yijian.dzpoker.R.id.view;
 import static com.yijian.dzpoker.R.id.visible;
 import static com.yijian.dzpoker.util.Util.calculatePopWindowPos;
 
-public class GameActivity extends AppCompatActivity {
+public class GameActivity extends BaseToolbarActivity {
 
     private LinearLayout layout_parent;
     private PopupWindow popupWindow,popMenu,popApplyWindow;
@@ -1900,6 +1901,7 @@ public class GameActivity extends AppCompatActivity {
         mScreenWidth=displayHelper.getSCREEN_WIDTH_PIXELS();
         mScreenHeight=displayHelper.getSCREEN_HEIGHT_PIXELS();
         setContentView(R.layout.activity_game);
+        getSupportActionBar().hide();
 
         application=(DzApplication)getApplication();
         mContext=getApplicationContext();

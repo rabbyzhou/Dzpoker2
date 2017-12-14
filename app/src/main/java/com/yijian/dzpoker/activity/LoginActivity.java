@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.user.RegisterActivity;
 import com.yijian.dzpoker.activity.user.VerifyPhoneNumberActivity;
 import com.yijian.dzpoker.util.DzApplication;
@@ -30,7 +31,7 @@ import cn.jpush.im.api.BasicCallback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends BaseToolbarActivity implements View.OnClickListener {
     private  EditText edUserName;
     private  EditText edUserPWD;
 
@@ -39,6 +40,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getSupportActionBar().hide();
 
         TextView tvNewUser=(TextView)findViewById(R.id.tvNewUser);
         tvNewUser.setOnClickListener(this);

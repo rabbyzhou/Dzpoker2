@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -29,7 +30,7 @@ import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SelectClubToAddActivity extends AppCompatActivity {
+public class SelectClubToAddActivity extends BaseToolbarActivity {
 
     private List<ClubInfo> mClubInfoList=new ArrayList<ClubInfo>();
     private String strLoginName;
@@ -62,6 +63,7 @@ public class SelectClubToAddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_select_club_to_add);
         initViews();
+        setToolbarTitle("搜索结果");
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
         userId=settings.getInt("userid",0);

@@ -10,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:background="#003366"
-        android:orientation="vertical">
+        android:visibility="gone"
+        android:orientation="vertical">`
 
 
         <android.support.v7.widget.AppCompatTextView
@@ -20,6 +21,7 @@
             android:layout_gravity="center"
             android:text="德州扑克"
             android:textSize="24dp"
+            android:visibility="gone"
             android:layout_centerInParent="true"/>
 
 

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.fragment.ClubInfoFragment;
 import com.yijian.dzpoker.activity.game.fragment.FindGameFragment;
 import com.yijian.dzpoker.activity.fragment.HomeFragment;
@@ -25,7 +26,7 @@ import com.yijian.dzpoker.activity.fragment.UserFragment;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFragmentActivity extends FragmentActivity implements HomeFragment.OnFragmentInteractionListener,ClubInfoFragment.OnFragmentInteractionListener,PlayGameFragment.OnFragmentInteractionListener,UserFragment.OnFragmentInteractionListener,QuickGameFragment.OnFragmentInteractionListener,FindGameFragment.OnFragmentInteractionListener  {
+public class MainFragmentActivity extends BaseToolbarActivity implements HomeFragment.OnFragmentInteractionListener,ClubInfoFragment.OnFragmentInteractionListener,PlayGameFragment.OnFragmentInteractionListener,UserFragment.OnFragmentInteractionListener,QuickGameFragment.OnFragmentInteractionListener,FindGameFragment.OnFragmentInteractionListener  {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
@@ -62,7 +63,9 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
 
             @Override
             public void onPageSelected(int position) {
-                titleView.setText(titles[position]);
+//                titleView.setText(titles[position]);
+//                getSupportActionBar().setTitle(titles[position]);
+                setToolbarTitle(titles[position]);
             }
 
             @Override
@@ -79,8 +82,14 @@ public class MainFragmentActivity extends FragmentActivity implements HomeFragme
         }
 
         tabLayout.getTabAt(0).select();
-        titleView.setText(titles[0]);
+//        titleView.setText(titles[0]);
+//        getSupportActionBar().setTitle(titles[0]);
+        setToolbarTitle(titles[0]);
+    }
 
+    @Override
+    public void setToolbarTitle(String text) {
+        toolbarTitle.setText(text);
     }
 
     class MyAdapter extends FragmentPagerAdapter {

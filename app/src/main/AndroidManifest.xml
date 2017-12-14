@@ -43,7 +43,7 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/app"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.NoActionBar">
+        android:theme="@style/AppTheme">
 
         <!-- Required SDK 核心功能 -->
         <!-- 可配置android:process参数将PushService放在其他进程中 -->
@@ -122,7 +122,7 @@
             android:value="8036a9d95268659628337310" />
 
         <activity
-            android:name=".activity.WellcomeActivity"
+            android:name=".activity.WelcomeActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:screenOrientation="portrait"
             android:theme="@style/FullscreenTheme">
@@ -223,6 +223,7 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"/>
+        <activity android:name=".activity.base.BaseToolbarActivity" />
     </application>
 
 </manifest>

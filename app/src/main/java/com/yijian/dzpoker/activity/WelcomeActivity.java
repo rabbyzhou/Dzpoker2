@@ -1,15 +1,11 @@
 package com.yijian.dzpoker.activity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -33,7 +29,7 @@ import okhttp3.Response;
  * An example full-screen activity that shows and hides the system UI (i.e.
  * status bar and navigation/system bar) with user interaction.
  */
-public class WellcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity {
     /**
      * Whether or not the system UI should be auto-hidden after
      * {@link #AUTO_HIDE_DELAY_MILLIS} milliseconds.
@@ -213,7 +209,7 @@ public class WellcomeActivity extends AppCompatActivity {
             //跳转到登录界面
             isGotoLoginPage = true;
             Intent intent = new Intent();
-            intent.setClass(WellcomeActivity.this, LoginActivity.class);
+            intent.setClass(WelcomeActivity.this, LoginActivity.class);
             startActivity(intent);
         }else{
 
@@ -277,18 +273,18 @@ public class WellcomeActivity extends AppCompatActivity {
 
                                     //跳转到主界面
                                     Intent intent = new Intent();
-                                    //intent.setClass(WellcomeActivity.this, MainActivity.class);
-                                    intent.setClass(WellcomeActivity.this, MainFragmentActivity.class);
+                                    //intent.setClass(WelcomeActivity.this, MainActivity.class);
+                                    intent.setClass(WelcomeActivity.this, MainFragmentActivity.class);
                                     startActivity(intent);
                                     finish();
                                 }else{
-                                    ToastUtil.showToastInScreenCenter(WellcomeActivity.this,"注册到IM失败，错误内容："+s);
+                                    ToastUtil.showToastInScreenCenter(WelcomeActivity.this,"注册到IM失败，错误内容："+s);
                                 }
                             }
                         });
 
                     }catch (Exception e){
-                        ToastUtil.showToastInScreenCenter(WellcomeActivity.this,"与后台通讯出错，请稍后重试!");
+                        ToastUtil.showToastInScreenCenter(WelcomeActivity.this,"与后台通讯出错，请稍后重试!");
                     }
 
                 }

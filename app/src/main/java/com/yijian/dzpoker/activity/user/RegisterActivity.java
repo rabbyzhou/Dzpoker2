@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -24,7 +25,7 @@ import cn.jpush.im.api.BasicCallback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RegisterActivity extends AppCompatActivity implements View.OnClickListener {
+public class RegisterActivity extends BaseToolbarActivity implements View.OnClickListener {
     private String strPhoneNumber;
     private EditText edpassword;
     private EditText edNickname;
@@ -36,6 +37,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        setToolbarTitle("注册");
         Intent intent = getIntent();
         String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
         if ( backText != null && !backText.isEmpty()){

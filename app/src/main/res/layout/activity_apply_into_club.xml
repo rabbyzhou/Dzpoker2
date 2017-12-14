@@ -3,40 +3,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dip"
-        android:background="#003366"
-        android:orientation="vertical">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dip"-->
+        <!--android:background="#003366"-->
+        <!--android:orientation="vertical">-->
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:gravity="center_vertical">
+        <!--<LinearLayout-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_centerVertical="true"-->
+            <!--android:gravity="center_vertical">-->
 
-            <android.support.v7.widget.AppCompatTextView
-                android:id="@+id/tv_exit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:drawableLeft="@drawable/black_back"
-                android:drawablePadding="2dp"
-                android:text="返回"
-                android:textSize="16dp"/>
+            <!--<android.support.v7.widget.AppCompatTextView-->
+                <!--android:id="@+id/tv_exit"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_gravity="center_vertical"-->
+                <!--android:drawableLeft="@drawable/black_back"-->
+                <!--android:drawablePadding="2dp"-->
+                <!--android:text="返回"-->
+                <!--android:textSize="16dp"/>-->
 
-        </LinearLayout>
-        <android.support.v7.widget.AppCompatTextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="俱乐部验证"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+        <!--</LinearLayout>-->
+        <!--<android.support.v7.widget.AppCompatTextView-->
+            <!--android:id="@+id/title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:text="俱乐部验证"-->
+            <!--android:textSize="24dp"-->
+            <!--android:layout_centerInParent="true"/>-->
 
 
-    </RelativeLayout>
+    <!--</RelativeLayout>-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

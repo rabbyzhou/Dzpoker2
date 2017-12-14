@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
@@ -28,7 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectProvinceActivity extends AppCompatActivity {
+public class SelectProvinceActivity extends BaseToolbarActivity {
     private List<String> mlistProvince = new ArrayList<String>();
     private RecyclerView lv_province;
     private LinearLayoutManager mLayoutManager ;
@@ -47,7 +48,7 @@ public class SelectProvinceActivity extends AppCompatActivity {
                 finish();
             }
         });
-
+        setToolbarTitle("地区选择");
         Intent intent = getIntent();
         String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
         if ( backText != null && !backText.isEmpty()){

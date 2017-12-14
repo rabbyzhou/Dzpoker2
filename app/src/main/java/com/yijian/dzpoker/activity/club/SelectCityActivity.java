@@ -13,6 +13,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -31,7 +32,7 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SelectCityActivity extends AppCompatActivity {
+public class SelectCityActivity extends BaseToolbarActivity {
     private String  mProvince;
     private List<String> mlistCity= new ArrayList<String>();
     //private ListView lv_city;
@@ -56,6 +57,7 @@ public class SelectCityActivity extends AppCompatActivity {
             }
         });
 
+        setToolbarTitle("地区选择");
         String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
         if ( backText != null && !backText.isEmpty()){
             TextView exitText = (TextView)findViewById(R.id.tv_exit);

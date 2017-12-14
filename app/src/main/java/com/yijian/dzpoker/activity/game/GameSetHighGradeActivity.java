@@ -46,6 +46,7 @@ public class GameSetHighGradeActivity extends BaseBackActivity implements RangeS
         bIsGpsLimit=application.getGameParam().isGpsLimit;
         bIsIpLimit=application.getGameParam().isIpLimit;
         initData();
+        setToolbarTitle("高级设置");
 
     }
 

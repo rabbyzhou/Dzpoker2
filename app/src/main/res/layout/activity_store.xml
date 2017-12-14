@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context="com.yijian.dzpoker.activity.user.StoreActivity">
 
-    <include layout="@layout/layout_me_title"/>
+    <!--<include layout="@layout/layout_me_title"/>-->
 
     <TableLayout
         android:layout_width="match_parent"

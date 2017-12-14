@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet1;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet2;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet3;
@@ -28,7 +29,7 @@ import com.yijian.dzpoker.view.NoScrollViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSetActivity extends AppCompatActivity implements FragmentGameSet1.OnFragmentInteractionListener,FragmentGameSet2.OnFragmentInteractionListener,FragmentGameSet3.OnFragmentInteractionListener,FragmentGameSet4.OnFragmentInteractionListener,FragmentGameSet5.OnFragmentInteractionListener,FragmentGameSet6.OnFragmentInteractionListener{
+public class GameSetActivity extends BaseToolbarActivity implements FragmentGameSet1.OnFragmentInteractionListener,FragmentGameSet2.OnFragmentInteractionListener,FragmentGameSet3.OnFragmentInteractionListener,FragmentGameSet4.OnFragmentInteractionListener,FragmentGameSet5.OnFragmentInteractionListener,FragmentGameSet6.OnFragmentInteractionListener{
     private TabLayout tabLayout,tabLayout2;
     private String[] titles1 = {"德州扑克", "奥马哈"};
     private String[] titles2 = {"普通牌局", "SNG", "MTT"};
@@ -45,6 +46,7 @@ public class GameSetActivity extends AppCompatActivity implements FragmentGameSe
         tabLayout2 = (TabLayout) findViewById(R.id.tab_game2);
 
         tvBack = (TextView)findViewById(R.id.tv_back);
+        setToolbarTitle("创建牌局");
         String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
         if ( backText != null && !backText.isEmpty()){
             tvBack.setText(backText);

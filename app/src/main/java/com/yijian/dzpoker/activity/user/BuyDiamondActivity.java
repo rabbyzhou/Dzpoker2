@@ -142,6 +142,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
         rv_diamond_list.addItemDecoration(new DividerItemDecoration(
                 this, DividerItemDecoration.VERTICAL));
         rv_diamond_list.setAdapter(mAdapter);
+        setToolbarTitle("充值");
         //从服务器取购买钻石货物的列表
         Thread thread=new Thread(new Runnable()
         {

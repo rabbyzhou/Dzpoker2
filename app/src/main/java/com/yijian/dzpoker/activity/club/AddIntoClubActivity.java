@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -36,7 +37,7 @@ import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AddIntoClubActivity extends AppCompatActivity implements View.OnClickListener{
+public class AddIntoClubActivity extends BaseToolbarActivity implements View.OnClickListener{
 
     private TextView tv_exit;
     private RecyclerView rv_hotcity;
@@ -61,6 +62,7 @@ public class AddIntoClubActivity extends AppCompatActivity implements View.OnCli
         strLoginName=settings.getString("username","");
         userId=settings.getInt("userid",0);
         initViews();
+        setToolbarTitle("加入俱乐部");
         //从服务器获取数据，用来填充recyleview
         getInitData();
 

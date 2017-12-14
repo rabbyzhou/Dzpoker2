@@ -84,6 +84,7 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
         }
         tv_user_level.setText(application.getUser().levelname);
         et_user_personaltip.setText(application.getUser().personalTip);
+        setToolbarTitle("普通会员");
 
     }
 

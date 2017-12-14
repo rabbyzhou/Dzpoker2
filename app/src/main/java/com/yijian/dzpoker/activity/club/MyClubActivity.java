@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -36,7 +37,7 @@ import okhttp3.Response;
 
 import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
-public class MyClubActivity extends AppCompatActivity implements View.OnClickListener {
+public class MyClubActivity extends BaseToolbarActivity implements View.OnClickListener {
 
     private LinearLayout layout_clubList;
     private RelativeLayout layout_top;
@@ -130,6 +131,7 @@ public class MyClubActivity extends AppCompatActivity implements View.OnClickLis
         userId=settings.getInt("userid",0);
         //从服务器获得俱乐部列表，利用handlemessage来更新主页的显示
         initViews();
+        setToolbarTitle("我的俱乐部");
         initList();
 
     }

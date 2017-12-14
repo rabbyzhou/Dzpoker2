@@ -165,7 +165,7 @@ public class SocketService extends Service implements Runnable {
                                     Log.v("RABBY", "recMsg:"+recMsg);
                                 }else{
                                     //截取字符串，保证从$开始
-                                    recMsg=recMsg.substring(recMsg.indexOf("$"));
+//                                    recMsg=recMsg.substring(recMsg.indexOf("$"));
                                     Log.v("RABBY", "recMsg:"+recMsg);
                                     while(recMsg.indexOf("$",1)>0){
                                         String msgInfo=recMsg.substring(0,recMsg.indexOf("$",1));

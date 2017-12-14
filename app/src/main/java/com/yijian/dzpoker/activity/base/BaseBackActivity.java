@@ -14,7 +14,7 @@ import com.yijian.dzpoker.util.DzApplication;
 /**
  * 带有toolbar, back arrow的activity
  */
-public abstract class BaseBackActivity extends AppCompatActivity implements View.OnClickListener{
+public abstract class BaseBackActivity extends BaseToolbarActivity implements View.OnClickListener{
 
     protected TextView tv_back,tv_title;
     public DzApplication application;

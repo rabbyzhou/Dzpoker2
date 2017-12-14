@@ -27,6 +27,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.FileHelper;
@@ -53,7 +54,7 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CreateClubActivity extends AppCompatActivity implements View.OnClickListener {
+public class CreateClubActivity extends BaseToolbarActivity implements View.OnClickListener {
     private DzApplication myApp;
     private TextView tv_created_number;
     private EditText et_clubname;
@@ -108,6 +109,7 @@ public class CreateClubActivity extends AppCompatActivity implements View.OnClic
         mContext=getApplicationContext();
         setContentView(R.layout.activity_create_club);
         initViews();
+        setToolbarTitle("新建俱乐部");
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
         userId=settings.getInt("userid",0);

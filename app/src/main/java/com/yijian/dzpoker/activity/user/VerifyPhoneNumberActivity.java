@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.util.WeakRefHandler;
@@ -26,7 +27,7 @@ import java.util.TimerTask;
 import com.soundcloud.android.crop.Crop;
 import com.squareup.picasso.Picasso;
 
-public class VerifyPhoneNumberActivity extends AppCompatActivity implements View.OnClickListener {
+public class VerifyPhoneNumberActivity extends BaseToolbarActivity implements View.OnClickListener {
 
     private int opType;//从前一界面来的操作类型，1=注册，2：找回密码 3：修改密码
     static final int VERIFY_CODE_WAIT_SECONDS = 60; // 验证码等待60秒
@@ -42,7 +43,7 @@ public class VerifyPhoneNumberActivity extends AppCompatActivity implements View
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_phone_number);
-
+        setToolbarTitle("注册");
         Intent intent = getIntent();
         opType  = intent.getIntExtra("opType",0);
         String strPhoneNumber = intent.getStringExtra("phonenumber");

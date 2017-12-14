@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -21,7 +22,7 @@ import java.net.URL;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class ResetPWDActivity extends AppCompatActivity implements View.OnClickListener {
+public class ResetPWDActivity extends BaseToolbarActivity implements View.OnClickListener {
     private String strPhoneNumber;
     private EditText edpassword;
     private String mOldPassWord;
@@ -31,7 +32,7 @@ public class ResetPWDActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reset_pwd);
-
+        setToolbarTitle("设置密码");
         LinearLayout exitLayout = (LinearLayout)findViewById(R.id.exit) ;
         exitLayout.setOnClickListener(this);
 
