@@ -51,8 +51,6 @@ public class LoginActivity extends BaseToolbarActivity implements View.OnClickLi
         edUserName=(EditText)findViewById(R.id.edUserName);
         edUserPWD=(EditText)findViewById(R.id.edPWD);
 
-
-
     }
 
     @Override
