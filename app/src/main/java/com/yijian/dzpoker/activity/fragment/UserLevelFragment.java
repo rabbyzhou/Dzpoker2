@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -123,6 +124,7 @@ public class UserLevelFragment extends Fragment {
         mListView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mListView.setHasFixedSize(true);
         DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(getContext(), R.drawable.store_user_level_list_divide_drawable));
         mListView.addItemDecoration(decoration);
 
         mAdapter = new UserLevelAdapter(getActivity(), new UserLevelAdapter.OnRecordSelectListener() {

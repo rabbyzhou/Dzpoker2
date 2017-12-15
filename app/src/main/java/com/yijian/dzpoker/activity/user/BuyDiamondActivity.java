@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -139,8 +140,9 @@ public class BuyDiamondActivity extends BaseBackActivity {
         });
         rv_diamond_list.setLayoutManager(new LinearLayoutManager(this));
         rv_diamond_list.setHasFixedSize(true);
-        rv_diamond_list.addItemDecoration(new DividerItemDecoration(
-                this, DividerItemDecoration.VERTICAL));
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.store_user_level_list_divide_drawable));
+        rv_diamond_list.addItemDecoration(decoration);
         rv_diamond_list.setAdapter(mAdapter);
         setToolbarTitle("充值");
         //从服务器取购买钻石货物的列表
@@ -320,7 +322,7 @@ public class BuyDiamondActivity extends BaseBackActivity {
     protected void initViews() {
         super.initViews();
         rv_diamond_list=(RecyclerView)findViewById(R.id.rv_diamond_list);
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
     }
 
     @Override

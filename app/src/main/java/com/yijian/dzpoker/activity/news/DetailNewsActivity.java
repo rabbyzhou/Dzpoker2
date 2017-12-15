@@ -15,20 +15,24 @@ import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.view.data.MainPageNews;
 
-public class DetailNewsActivity extends BaseToolbarActivity {
+public class DetailNewsActivity extends BaseBackActivity {
 
     private final String TAG = "DetailNewsActivity";
     private WebView mWebView;
     private ProgressDialog mProgressDialog;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_detail_news;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail_news);
-
         mProgressDialog = new ProgressDialog(this);
         mProgressDialog.setTitle("请稍后....");
         mProgressDialog.setMessage("加载中....");
@@ -36,18 +40,18 @@ public class DetailNewsActivity extends BaseToolbarActivity {
         Intent intent = getIntent();
         MainPageNews news = (MainPageNews)intent.getSerializableExtra("news");
 
-        TextView backText = (TextView) findViewById(R.id.tv_back);
-        backText.setText("首页");
-        backText.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+//        TextView backText = (TextView) findViewById(R.id.tv_back);
+//        backText.setText("首页");
+//        backText.setOnClickListener(new View.OnClickListener(){
+//            @Override
+//            public void onClick(View v) {
+//                finish();
+//            }
+//        });
 
-        TextView titleText = (TextView) findViewById(R.id.tv_title);
-        titleText.setText(news.title);
-
+//        TextView titleText = (TextView) findViewById(R.id.tv_title);
+//        titleText.setText(news.title);
+        setToolbarTitle(news.title);
         mWebView = (WebView) findViewById(R.id.webView);
         Log.d(TAG, "link :" + news.link);
         WebSettings ws = mWebView.getSettings();
@@ -100,5 +104,10 @@ public class DetailNewsActivity extends BaseToolbarActivity {
         super.onDestroy();
         mWebView.destroy();
         mWebView = null;
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

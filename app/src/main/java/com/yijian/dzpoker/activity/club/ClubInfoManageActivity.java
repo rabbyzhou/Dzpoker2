@@ -151,7 +151,8 @@ public class ClubInfoManageActivity extends BaseBackActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
         et_club_name=(EditText)findViewById(R.id.et_club_name);
         et_club_location=(EditText)findViewById(R.id.et_club_location);
         et_club_abstract=(EditText)findViewById(R.id.et_club_abstract);
@@ -179,7 +180,8 @@ public class ClubInfoManageActivity extends BaseBackActivity {
 //                        intent.putExtra("phonenumber", edUserName.getText().toString());
                 intent.setClass(ClubInfoManageActivity.this, SelectProvinceActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 startActivityForResult(intent,  REQUEST_LOCATION_SELECT);
                 break;
             case R.id.iv_club_head:

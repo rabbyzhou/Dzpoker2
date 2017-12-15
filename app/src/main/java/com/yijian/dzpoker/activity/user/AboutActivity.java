@@ -12,7 +12,8 @@ public class AboutActivity extends BaseBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
         setToolbarTitle("关于");
     }
 

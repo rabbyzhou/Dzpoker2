@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.fragment.GoldCoinBuyFragment;
 import com.yijian.dzpoker.activity.fragment.UserLevelFragment;
@@ -36,7 +38,7 @@ import okhttp3.Response;
 
 import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
-public class StoreActivity extends BaseToolbarActivity implements
+public class StoreActivity extends BaseBackActivity implements
         View.OnClickListener,UserLevelFragment.OnLevelDealDoneListener, GoldCoinBuyFragment.OnDealDoneListener {
 
     private static final String TAG = "StoreActivity";
@@ -86,8 +88,6 @@ public class StoreActivity extends BaseToolbarActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_store);
         application=(DzApplication) getApplication();
         userId=application.getUserId();
         initViews();
@@ -103,6 +103,12 @@ public class StoreActivity extends BaseToolbarActivity implements
         showAccountData();
     }
 
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_store;
+    }
+
+    @Override
     protected void initViews() {
 
         mGoldCoinText = (TextView)findViewById(R.id.store_goldcoin);
@@ -110,6 +116,8 @@ public class StoreActivity extends BaseToolbarActivity implements
         mDiamondPlusImage = (ImageView)findViewById(R.id.diamond_plus);
         mShopVPager = (ViewPager) findViewById(R.id.vp_shop);
         mShoptab = (TabLayout) findViewById(R.id.tab_shop);
+        mShoptab.addTab(mShoptab.newTab().setText(mTitleList.get(0)));
+        mShoptab.addTab(mShoptab.newTab().setText(mTitleList.get(1)));
 //        mBackText = (TextView) findViewById(R.id.tv_back);
 //        mTitle = (TextView) findViewById(R.id.tv_title);
 

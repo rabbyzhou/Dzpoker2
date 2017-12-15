@@ -43,7 +43,8 @@ public class SysConfigActivity extends BaseBackActivity {
         tv_about.setOnClickListener(this);
         tv_changePWD.setOnClickListener(this);
         tv_logout.setOnClickListener(this);
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
     }
 
 
@@ -69,7 +70,8 @@ public class SysConfigActivity extends BaseBackActivity {
                 Intent intent = new Intent();
                 intent.setClass(SysConfigActivity.this, AboutActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 startActivity(intent);
                 break;
             case R.id.tv_logout:
@@ -92,7 +94,8 @@ public class SysConfigActivity extends BaseBackActivity {
                 intent1.putExtra("phonenumber", application.getLoginName());
                 intent1.setClass(SysConfigActivity.this, VerifyPhoneNumberActivity.class);
                 intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent1.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intent1.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 startActivity(intent1);
                 break;
         }

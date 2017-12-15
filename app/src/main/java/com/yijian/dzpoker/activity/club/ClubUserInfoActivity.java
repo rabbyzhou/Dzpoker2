@@ -84,8 +84,8 @@ public class ClubUserInfoActivity extends BaseBackActivity {
         //创建并设置Adapter
         mAdapter = new ClubListHorizontalAdapter(this);
         rv_club_user_list.setAdapter(mAdapter);
-        tv_back.setOnClickListener(this);
-
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
 
     }
 

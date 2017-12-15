@@ -99,11 +99,11 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_shop"
-            style="@style/ShopTabLayoutAppearance"
             android:layout_width="match_parent"
             android:layout_height="36dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
+            app:tabSelectedTextColor="@color/white"
             app:tabBackground="@drawable/bg_shop_tab"
             app:tabTextColor="@color/white"
             app:tabIndicatorHeight="0dp" />

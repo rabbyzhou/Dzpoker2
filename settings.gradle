@@ -1,1 +1,1 @@
-include ':app', ':reclib-qq', ':reclib-testemoticons'
+include ':app', ':reclib-qq', ':reclib-testemoticons', ':BaseLib'

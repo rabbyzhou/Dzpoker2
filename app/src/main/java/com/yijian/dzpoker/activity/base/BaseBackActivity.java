@@ -18,7 +18,7 @@ import com.yijian.dzpoker.util.DzApplication;
  */
 public abstract class BaseBackActivity extends BaseToolbarActivity implements View.OnClickListener{
 
-    protected TextView tv_back,tv_title;
+//    protected TextView tv_back,tv_title;
     public DzApplication application;
     protected String strLoginName;
     protected int userId;
@@ -28,9 +28,9 @@ public abstract class BaseBackActivity extends BaseToolbarActivity implements Vi
 
 
     protected void initViews(){
-        tv_back = (TextView) findViewById(R.id.tv_back);
-        tv_title = (TextView) findViewById(R.id.tv_title);
-        tv_back.setOnClickListener(this);
+//        tv_back = (TextView) findViewById(R.id.tv_back);
+//        tv_title = (TextView) findViewById(R.id.tv_title);
+//        tv_back.setOnClickListener(this);
 
     }
 
@@ -60,7 +60,7 @@ public abstract class BaseBackActivity extends BaseToolbarActivity implements Vi
         userId=application.getUserId();
         remoteURL=getString(R.string.url_remote);
 
-//        initViews();
+        initViews();
 
 //        Intent intent = getIntent();
 //        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);

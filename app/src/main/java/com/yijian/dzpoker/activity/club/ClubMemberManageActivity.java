@@ -126,7 +126,8 @@ public class ClubMemberManageActivity extends BaseBackActivity {
     protected void initViews() {
         super.initViews();
         rv_club_user_manage=(ItemRemoveRecyclerView)findViewById(R.id.rv_club_user_manange);
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
     }
 
     @Override

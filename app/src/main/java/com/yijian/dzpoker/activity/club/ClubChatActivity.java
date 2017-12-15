@@ -33,7 +33,8 @@ public class ClubChatActivity extends BaseBackActivity {
         super.initViews();
         tv_club_manage = (TextView) findViewById(R.id.tv_club_manage);
         tv_club_manage.setOnClickListener(this);
-        tv_title.setText(application.getClubInfo().clubName+"("+application.getClubInfo().clubMemberNumber+")");
+        //TODO:qipu
+//        tv_title.setText(application.getClubInfo().clubName+"("+application.getClubInfo().clubMemberNumber+")");
 
     }
 
@@ -49,7 +50,8 @@ public class ClubChatActivity extends BaseBackActivity {
                 intent.putExtra("clubid",mClubId);
                 //intent.putExtra("clubinfo",mClubInfo);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 intent.setClass(ClubChatActivity.this, ClubInfoActivity.class);
                 startActivityForResult(intent,1);
                 //startActivity(intent);
@@ -64,7 +66,8 @@ public class ClubChatActivity extends BaseBackActivity {
         /*1.退出俱乐部，2：离开俱乐部 3：从上一界面返回（有可能改名，改头像什么的，或者删除成员，这里需要更新界面的值）*/
         switch(resultCode){
             case 1:
-                tv_title.setText(application.getClubInfo().clubName+"("+application.getClubInfo().clubMemberNumber+")");
+//                tv_title.setText(application.getClubInfo().clubName+"("+application.getClubInfo().clubMemberNumber+")");
+                //TODO:qipu
                 setResult(1);//告诉上一界面，俱乐部有变化
 
             case 9:

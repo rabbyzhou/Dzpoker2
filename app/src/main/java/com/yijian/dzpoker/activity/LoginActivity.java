@@ -35,6 +35,7 @@ public class LoginActivity extends BaseToolbarActivity implements View.OnClickLi
     private  EditText edUserName;
     private  EditText edUserPWD;
 
+    private static final boolean DEBUG = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,12 +58,12 @@ public class LoginActivity extends BaseToolbarActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
-                Intent intent3 = new Intent();
-                intent3.setClass(LoginActivity.this, MainFragmentActivity.class);
-                startActivity(intent3);
-                ToastUtil.showToastInScreenCenter(LoginActivity.this,"登录成功！");
-                finish();
-                if (true) {
+                if (DEBUG) {
+                    Intent intent3 = new Intent();
+                    intent3.setClass(LoginActivity.this, MainFragmentActivity.class);
+                    startActivity(intent3);
+                    ToastUtil.showToastInScreenCenter(LoginActivity.this, "登录成功！");
+                    finish();
                     return;
                 }
 

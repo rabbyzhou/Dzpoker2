@@ -70,10 +70,11 @@ public class GameRecordLookBack extends BaseBackActivity {
         super.initViews();
 
         String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
-        if (backText != null && !backText.isEmpty()) tv_back.setText(backText);
-
-        tv_back.setOnClickListener(this);
-        tv_title.setText(TITLE);
+//        if (backText != null && !backText.isEmpty()) tv_back.setText(backText);
+//
+//        tv_back.setOnClickListener(this);
+//        tv_title.setText(TITLE);
+        //TODO:qipu
 
         mNoDataView = (TextView) findViewById(R.id.tv_no_data);
 

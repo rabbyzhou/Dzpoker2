@@ -528,7 +528,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 intentClubMemberManage.putExtra("manageruserid",userId);
                 intentClubMemberManage.putExtra("clubid",mClubId);
                 intentClubMemberManage.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intentClubMemberManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intentClubMemberManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 intentClubMemberManage.setClass(ClubInfoActivity.this, ClubMemberManageActivity.class);
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentClubMemberManage,1);
@@ -599,7 +600,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 Intent intentClubLevel = new Intent();
                 intentClubLevel.setClass(ClubInfoActivity.this, BuyClubLevelActivity.class);
                 intentClubLevel.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intentClubLevel.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intentClubLevel.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentClubLevel,3);
                 break;
@@ -608,7 +610,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 intentCLubInfoManage.putExtra("clubinfo",mClubInfo);
                 intentCLubInfoManage.setClass(ClubInfoActivity.this, ClubInfoManageActivity.class);
                 intentCLubInfoManage.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intentCLubInfoManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intentCLubInfoManage.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 //此处要等待会员管理结果，所以返回的时候要重刷界面，更改会员列表
                 startActivityForResult(intentCLubInfoManage,2);
 
@@ -620,7 +623,8 @@ public class ClubInfoActivity extends BaseBackActivity {
                 intent.putExtra("user", mCreator);
                 intent.setClass(ClubInfoActivity.this, ClubUserInfoActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+//                intent.putExtra(INTENT_KEY_BACKTEXT, tv_title.getText());
+                //TODO:qipu
                 startActivity(intent);
                 break;
             case R.id.tv_back:

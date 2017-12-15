@@ -285,7 +285,8 @@ public class GameSetHighGradeActivity extends BaseBackActivity implements RangeS
         rb_27.setOnClickListener(this);
         rb_gps_limit.setOnClickListener(this);
 
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
         seekBar_min_in=(SeekBar)findViewById(R.id.seekBar_min_in);
         seekBar_max_in=(SeekBar)findViewById(R.id.seekBar_max_in);
         seekBar_total_in=(SeekBar)findViewById(R.id.seekBar_total_in);

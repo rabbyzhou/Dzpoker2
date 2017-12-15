@@ -38,8 +38,8 @@ public class GameAddActivity   extends BaseBackActivity {
 
         String title = getIntent().getStringExtra(Constant.INTENT_KEY_TITLE);
         if (title == null || title.isEmpty()) title = TITLE;
-        tv_title.setText(title);
-
+//        tv_title.setText(title);
+        //TODO:qipu
     }
 
     @Override

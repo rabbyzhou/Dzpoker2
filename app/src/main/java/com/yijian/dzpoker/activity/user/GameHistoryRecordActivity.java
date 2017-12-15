@@ -53,10 +53,11 @@ public class GameHistoryRecordActivity extends BaseBackActivity
         super.initViews();
 
         String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
-        if (backText != null && !backText.isEmpty()) tv_back.setText(backText);
-
-        tv_back.setOnClickListener(this);
-		tv_title.setText(TITLE);
+//        if (backText != null && !backText.isEmpty()) tv_back.setText(backText);
+//
+//        tv_back.setOnClickListener(this);
+//		tv_title.setText(TITLE);
+        //TODO:qipu
 
         mReView = (RecyclerView) findViewById(R.id.rv_history);
         mNoDataView = (TextView) findViewById(R.id.tv_no_data);

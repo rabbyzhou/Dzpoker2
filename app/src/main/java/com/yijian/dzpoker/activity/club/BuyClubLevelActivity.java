@@ -346,7 +346,8 @@ public class BuyClubLevelActivity extends BaseBackActivity {
         iv_club_level_head=(ImageView) findViewById(R.id.iv_club_level_head);
         tv_current_user_diamond=(TextView)findViewById(R.id.tv_current_user_diamond);
         tv_current_club_level=(TextView)findViewById(R.id.tv_current_club_level);
-        tv_back.setOnClickListener(this);
+//        tv_back.setOnClickListener(this);
+        //TODO:qipu
     }
 
     @Override
