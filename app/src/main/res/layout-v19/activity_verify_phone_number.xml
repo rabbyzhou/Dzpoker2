@@ -8,7 +8,7 @@
         android:id="@+id/register_page_title"
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="35dp"
         android:orientation="vertical">
 
         <LinearLayout
@@ -57,7 +57,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="50dp"
         android:layout_below="@+id/register_page_title"
-        android:paddingTop="70dp"
         android:text="创建新用户"
         android:textSize="17dp"
         android:textColor="@color/white"/>

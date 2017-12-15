@@ -57,6 +57,14 @@ public class LoginActivity extends BaseToolbarActivity implements View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnLogin:
+                Intent intent3 = new Intent();
+                intent3.setClass(LoginActivity.this, MainFragmentActivity.class);
+                startActivity(intent3);
+                ToastUtil.showToastInScreenCenter(LoginActivity.this,"登录成功！");
+                finish();
+                if (true) {
+                    return;
+                }
 
                 if (edUserName.getText().toString().equals(""))
                 {

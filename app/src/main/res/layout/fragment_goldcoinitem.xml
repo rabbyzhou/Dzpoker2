@@ -13,7 +13,7 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_gravity="center_horizontal"
-        android:background="#8B7B8B"
+        android:background="@color/main_bg"
         android:orientation="vertical">
 
         <FrameLayout

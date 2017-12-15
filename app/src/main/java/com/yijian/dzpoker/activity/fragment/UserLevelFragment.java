@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,6 +23,7 @@ import com.yijian.dzpoker.util.ToastUtil;
 import com.yijian.dzpoker.util.Util;
 import com.yijian.dzpoker.utils.DialogCreator;
 import com.yijian.dzpoker.view.adapter.UserLevelAdapter;
+import com.yijian.dzpoker.view.adapter.UserLevelItemDecoration;
 import com.yijian.dzpoker.view.data.UserLevel;
 
 import org.json.JSONArray;
@@ -120,6 +122,8 @@ public class UserLevelFragment extends Fragment {
         mListView = (RecyclerView)layout.findViewById(R.id.list_userlevel);
         mListView.setLayoutManager(new GridLayoutManager(getActivity(),1));
         mListView.setHasFixedSize(true);
+        DividerItemDecoration decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        mListView.addItemDecoration(decoration);
 
         mAdapter = new UserLevelAdapter(getActivity(), new UserLevelAdapter.OnRecordSelectListener() {
             @Override

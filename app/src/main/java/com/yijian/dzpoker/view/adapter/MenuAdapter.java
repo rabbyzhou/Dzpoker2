@@ -21,11 +21,11 @@ public class MenuAdapter extends BaseListAdapter<MenuItemData, MenuAdapter.ViewH
 
     public MenuAdapter(Context context, OnRecordSelectListener listener) {
         super(context);
-        mListener=listener;
+        mListener = listener;
     }
 
     //接口供外部调用
-    public interface OnRecordSelectListener{
+    public interface OnRecordSelectListener {
         void onRecordSelected(MenuItemData menuItemData);
     }
 
@@ -44,39 +44,37 @@ public class MenuAdapter extends BaseListAdapter<MenuItemData, MenuAdapter.ViewH
         if (menuItemData == null) return;
 
         /**
-            Picasso.with(mContext)
-                    .load(menuItemData.menuImageId)
-                    .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                    .resize(100, 100)
-                    .error(R.drawable.default_club_level)
-                    .into(holder.mMenuPic);**/
+         Picasso.with(mContext)
+         .load(menuItemData.menuImageId)
+         .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+         .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+         .resize(100, 100)
+         .error(R.drawable.default_club_level)
+         .into(holder.mMenuPic);**/
         holder.mMenuPic.setImageDrawable(mContext.getResources().getDrawable(menuItemData.menuImageId));
         holder.mMenuname.setText(menuItemData.menuText);
 
         holder.mView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                mListener.onRecordSelected(menuItemData);      }
+                mListener.onRecordSelected(menuItemData);
+            }
         });
 
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder  {
+    static class ViewHolder extends RecyclerView.ViewHolder {
 
         public View mView;
-        public TextView  mMenuname;
+        public TextView mMenuname;
         public ImageView mMenuPic;
 
         public ViewHolder(View itemView) {
             super(itemView);
             mView = itemView;
-            mMenuPic=(ImageView)itemView.findViewById(R.id.iv_menu_pic);
-            mMenuname=(TextView) itemView.findViewById(R.id.tv_menu_name);
+            mMenuPic = (ImageView) itemView.findViewById(R.id.iv_menu_pic);
+            mMenuname = (TextView) itemView.findViewById(R.id.tv_menu_name);
 
         }
     }
-
-
-
 
 }

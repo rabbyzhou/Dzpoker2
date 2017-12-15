@@ -2,7 +2,9 @@ package com.yijian.dzpoker.activity.base;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -33,21 +35,38 @@ public abstract class BaseBackActivity extends BaseToolbarActivity implements Vi
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                this.finish();
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(getLayoutId());
+        ActionBar actionBar = getSupportActionBar();
+        if (null != actionBar) {
+            actionBar.setDisplayShowTitleEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setTitle("");
+        }
         application=(DzApplication) getApplication();
         strLoginName=application.getLoginName();
         userId=application.getUserId();
         remoteURL=getString(R.string.url_remote);
 
-        initViews();
+//        initViews();
 
-        Intent intent = getIntent();
-        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
-        if ( backText != null && !backText.isEmpty() && tv_back != null){
-             tv_back.setText(backText);
-        }
+//        Intent intent = getIntent();
+//        String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
+//        if ( backText != null && !backText.isEmpty() && tv_back != null){
+//             tv_back.setText(backText);
+//        }
 
     }
 

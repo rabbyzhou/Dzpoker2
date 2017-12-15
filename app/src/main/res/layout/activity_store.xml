@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg_secondary"
     android:orientation="vertical"
     tools:context="com.yijian.dzpoker.activity.user.StoreActivity">
 
@@ -22,7 +23,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:layout_weight="1"
-                android:background="@color/shop_goldcoin_selected">
+                android:background="@color/main_bg">
 
                 <ImageView
                     android:id="@+id/money_icon"
@@ -40,7 +41,7 @@
                     android:paddingLeft="6dp"
                     android:gravity="center"
                     android:layout_centerVertical="true"
-                    android:layout_toRightOf="@id/money_icon"
+                    android:layout_toRightOf="@+id/money_icon"
                     android:textSize="@dimen/game_record_text_small_size"
                     android:textColor="@color/white"
                     android:layout_gravity="center_vertical"/>
@@ -53,7 +54,7 @@
                 android:layout_weight="1"
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
-                android:background="@color/shop_goldcoin_selected">
+                android:background="@color/main_bg">
 
                 <ImageView
                     android:id="@+id/diamond_icon"
@@ -100,10 +101,11 @@
             android:id="@+id/tab_shop"
             style="@style/ShopTabLayoutAppearance"
             android:layout_width="match_parent"
-            android:layout_height="20dp"
+            android:layout_height="36dp"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             app:tabBackground="@drawable/bg_shop_tab"
+            app:tabTextColor="@color/white"
             app:tabIndicatorHeight="0dp" />
 
         <android.support.v4.view.ViewPager

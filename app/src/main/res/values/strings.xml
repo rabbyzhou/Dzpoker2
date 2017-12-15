@@ -19,6 +19,8 @@
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+    <string name="login_page_account">&#160;&#160;账号</string>
+    <string name="login_page_password">&#160;&#160;密码</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_main">主页</string>
     <string name="title_game">游戏</string>
