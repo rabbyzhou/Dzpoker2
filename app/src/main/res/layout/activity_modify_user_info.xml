@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/black">
+    android:background="@color/main_bg">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dip"
+        android:layout_height="40dp"
         android:visibility="gone"
         android:background="#003366"
         >
@@ -35,10 +35,10 @@
     </RelativeLayout>
 
     <android.support.v7.widget.AppCompatImageView
-        android:layout_marginTop="20px"
+        android:layout_marginTop="20dp"
         android:id="@+id/iv_user_head"
-        android:layout_width="200px"
-        android:layout_height="200px"
+        android:layout_width="140dp"
+        android:layout_height="140dp"
         android:src="@drawable/default_male_head"
         android:layout_gravity="center_horizontal"
         />

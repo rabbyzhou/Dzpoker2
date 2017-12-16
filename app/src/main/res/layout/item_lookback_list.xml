@@ -10,8 +10,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@color/shop_goldcoin_selected">
+        android:background="@color/black">
 
         <TextView
             android:id="@+id/start_time"
@@ -21,7 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:textSize="@dimen/game_record_text_medium_size"
-            android:textColor="@color/white"
+            android:textColor="@color/gray"
             tools:text="2017年11月 10:30"/>
 
         <TextView
@@ -51,10 +50,13 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_lookback"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:background="@color/gray"
         android:layout_weight="1"
         android:scrollbars="vertical"
-        android:layout_margin="10dp">
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginLeft="5dp">
     </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

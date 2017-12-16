@@ -6,9 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:paddingTop="@dimen/toolbar_padding_top"
-    android:background="#201e2e"
+    android:background="@color/main_bg"
     android:minHeight="?attr/actionBarSize"
-    app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+    app:theme="@style/ToolbarTheme"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
     <TextView
@@ -17,5 +17,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
+
+    <TextView
+        android:id="@+id/toolbar_right_view"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="26dp"
+        android:layout_height="18dp"
+        android:layout_marginRight="20dp"
+        android:background="@drawable/text_ic"
+        android:visibility="gone"
+        android:layout_gravity="right"/>
 
 </android.support.v7.widget.Toolbar>

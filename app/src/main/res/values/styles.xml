@@ -7,6 +7,16 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+        <item name="android:actionOverflowButtonStyle">@style/CustomToolbarMenu</item>
+        <item name="actionOverflowButtonStyle">@style/CustomToolbarMenu</item>
+    </style>
+
+    <style name="CustomToolbarMenu">
+        <item name="android:src">@drawable/text_ic</item>
+    </style>
+
     <style name="TextInputLayoutLineColor" parent="Theme.AppCompat.Light">
         <!--没有获取焦点时的颜色-->
         <item name="colorControlNormal">@color/white</item>

@@ -1,15 +1,18 @@
 package com.yijian.dzpoker.activity.user;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +20,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -30,6 +34,7 @@ import com.yijian.dzpoker.view.data.GameTableUserInfo;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import okhttp3.Request;
@@ -41,7 +46,7 @@ import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
  * Created by c_huangl on 0011, 11/11/2017.
  */
 
-public class GameDetailedHistoryActivity extends BaseToolbarActivity
+public class GameDetailedHistoryActivity extends BaseBackActivity
         implements View.OnClickListener {
 
 
@@ -78,20 +83,45 @@ public class GameDetailedHistoryActivity extends BaseToolbarActivity
     private String[] mTopFourName = new String[4];
     private GameTableUserAdapter mAdapter;
 
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_game_detail_history);
         mTableId = getIntent().getIntExtra("gametableid", -1);
         initViews();
         setToolbarTitle("战绩详情");
+        showToolbarRightView(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToLookBackPage();
+            }
+        });
+//        getOverflowMenu();
 
         new QueryDataTask().execute();
     }
 
-    private void initViews() {
+    private void getOverflowMenu() {
 
+        try {
+            ViewConfiguration config = ViewConfiguration.get(this);
+            Field menuKeyField = ViewConfiguration.class.getDeclaredField("sHasPermanentMenuKey");
+            if(menuKeyField != null) {
+                menuKeyField.setAccessible(true);
+                menuKeyField.setBoolean(config, false);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_game_detail_history;
+    }
+
+    @Override
+    public void initViews() {
         //标题栏
         mReviewEnter = (ImageView) findViewById(R.id.review_enter);
         mBackText = (TextView) findViewById(R.id.tv_back);
@@ -140,7 +170,9 @@ public class GameDetailedHistoryActivity extends BaseToolbarActivity
 
             }
         });
-
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.store_user_level_list_divide_drawable));
+        mUsersRView.addItemDecoration(decoration);
         mUsersRView.setAdapter(mAdapter);
 
 
@@ -148,6 +180,9 @@ public class GameDetailedHistoryActivity extends BaseToolbarActivity
     }
 
     private void updateUI(){
+        if (null == mGameTableRecord) {
+            return;
+        }
 
         //  = 需要解析
 		String startDate = Util.getFormatDate(this,mGameTableRecord.starttime);

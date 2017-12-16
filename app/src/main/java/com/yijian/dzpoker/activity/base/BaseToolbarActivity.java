@@ -21,6 +21,8 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
 
     LinearLayout rootLayout;
     public TextView toolbarTitle;
+    public TextView toolbarRightView;
+    private View.OnClickListener rightViewListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,6 +39,7 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (null != toolbar) {
             toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
+            toolbarRightView = (TextView) toolbar.findViewById(R.id.toolbar_right_view);
             setSupportActionBar(toolbar);
             if (toolbarTitle != null) {
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -46,6 +49,19 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
 
     public void setToolbarTitle(String text) {
         toolbarTitle.setText(text);
+    }
+
+    public void showToolbarRightView(View.OnClickListener listener) {
+        if (null != toolbarRightView) {
+            toolbarRightView.setVisibility(View.VISIBLE);
+            toolbarRightView.setOnClickListener(listener);
+        }
+    }
+
+    public void hideToolbarRightView() {
+        if (null != toolbarRightView) {
+            toolbarRightView.setVisibility(View.GONE);
+        }
     }
 
     @Override

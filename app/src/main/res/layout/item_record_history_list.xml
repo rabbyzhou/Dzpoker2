@@ -1,19 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
-    android:layout_marginRight="10dp"
-    android:layout_marginLeft="10dp"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
+    android:layout_height="40dp"
     >
 
     <LinearLayout
         android:layout_width="0.0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_gravity="center_vertical"
         android:layout_weight="2">
 
         <TextView
@@ -24,13 +21,14 @@
             android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            tools:text = "1"
+            android:text = "1"
             android:background="@drawable/game_range_bg"/>
 
         <ImageView
             android:id="@+id/ranking_headpic"
-            android:layout_width="30dp"
-            android:layout_height="30dp" />
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/default_male_head"/>
 
         <TextView
             android:id="@+id/ranking_nickname"
@@ -41,7 +39,7 @@
             android:textColor="@color/white"
             android:layout_gravity="center_vertical"
             android:gravity="center"
-            tools:text = "111111"/>
+            android:text = "111111"/>
 
     </LinearLayout>
 
@@ -53,7 +51,7 @@
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
-        tools:text="400"
+        android:text="400"
         android:textSize="@dimen/game_record_text_small_size" />
 
     <TextView
@@ -64,7 +62,7 @@
         android:textColor="@color/white"
         android:layout_gravity="center"
         android:gravity="center"
-        tools:text="400"
+        android:text="400"
         android:textSize="@dimen/game_record_text_small_size" />
 
     <TextView
@@ -72,10 +70,10 @@
         android:layout_width="0.0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:gravity="center"
+        android:gravity="right"
         android:layout_weight="1"
         android:textColor="@color/white"
-        tools:text="400"
+        android:text="400"
         android:textSize="@dimen/game_record_text_small_size" />
 
 </LinearLayout>

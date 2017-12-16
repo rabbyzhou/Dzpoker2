@@ -51,7 +51,7 @@ public class GameHistoryRecordActivity extends BaseBackActivity
     @Override
     protected void initViews() {
         super.initViews();
-
+        setToolbarTitle(TITLE);
         String backText = getIntent().getStringExtra(Constant.INTENT_KEY_BACKTEXT);
 //        if (backText != null && !backText.isEmpty()) tv_back.setText(backText);
 //
@@ -75,7 +75,7 @@ public class GameHistoryRecordActivity extends BaseBackActivity
             public void onRecordSelected(final HistoryGameTableInfo data) {
                 
 				//总手数为0, 不进入
-				if ( data.joinhands == 0) return;
+//				if ( data.joinhands == 0) return;
 				
 				//进入 战绩详情
                 Intent intent = new Intent(GameHistoryRecordActivity.this,

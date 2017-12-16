@@ -140,8 +140,8 @@
 
     <color name="game_play_precent_progress">#ff7e00</color>
     <color name="game_win_precent_progress">#FFD700</color>
-    <color name="game_play_precent_text">#ff7e00</color>
-    <color name="game_win_precent_text">#FFD700</color>
+    <color name="game_play_precent_text">#ffffff</color>
+    <color name="game_win_precent_text">#ffffff</color>
     <color name="game_ring_process_bg">#A6A6A6</color>
     <color name="tabBg">#59D</color>
 

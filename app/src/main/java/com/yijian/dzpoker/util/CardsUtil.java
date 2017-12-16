@@ -16,7 +16,7 @@ public class CardsUtil {
 
     public static Bitmap drawSingleCard(Context context, int suit, int member) {
 
-        Bitmap newBitmap = Bitmap.createBitmap(88,120, Bitmap.Config.ARGB_4444);
+        Bitmap newBitmap = Bitmap.createBitmap(165,220, Bitmap.Config.ARGB_4444);
         Canvas canvas = new Canvas(newBitmap);
         // 获取资源文件的引用res
         Resources res = context.getResources();

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="100dp">
 
@@ -9,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="@dimen/game_record_text_medium_size"
-        tools:text="11月11日"
+        android:text="11月11日"
         android:textColor="@color/orange" />
 
     <ImageView
@@ -39,7 +38,7 @@
         android:paddingLeft="10dp"
         android:textSize="@dimen/game_record_text_medium_size"
         android:layout_toRightOf ="@+id/time_icon"
-        tools:text="11月11日"
+        android:text="11月11日"
         android:textColor="@color/white" />
 
     <ImageView
@@ -50,7 +49,7 @@
         android:layout_marginTop="5dp"
         android:layout_toRightOf="@+id/line_icon"
         android:layout_below="@+id/time"
-        tools:src ="@drawable/default_male_head"/>
+        android:src ="@drawable/default_male_head"/>
 
     <TextView
         android:id="@+id/club_name"
@@ -59,7 +58,7 @@
         android:textSize="@dimen/game_record_text_medium_size"
         android:textColor="@color/white"
         android:layout_toRightOf="@id/user_head"
-        tools:text="aaaaaa"
+        android:text="aaaaaa"
         android:layout_below="@+id/time"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"/>
@@ -81,7 +80,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/game_record_text_small_size"
-        tools:text="30分钟"
+        android:text="30分钟"
         android:gravity="center"
         android:layout_toRightOf="@+id/duration_time_icon"
         android:layout_below="@+id/club_name"
@@ -105,7 +104,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/game_record_text_small_size"
-        tools:text="30分钟"
+        android:text="30分钟"
         android:gravity="center"
         android:layout_toRightOf="@+id/hands_icon"
         android:layout_below="@+id/club_name"
@@ -118,28 +117,27 @@
         android:layout_height="wrap_content"
         android:textColor="@color/white"
         android:textSize="@dimen/game_record_text_medium_size"
-        tools:text="30分钟"
+        android:text="30分钟"
         android:gravity="center"
         android:layout_alignParentRight="true"
         android:layout_marginRight="10dp"
         android:layout_centerVertical="true"
         />
-    
+
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="2dp"
+        android:layout_height="1dp"
         android:layout_alignLeft="@+id/line_icon"
         android:layout_below="@id/duration_time_icon"
         android:layout_marginTop="20dp"
-        android:background="@color/shop_goldcoin_selected"
+        android:background="@color/white"
         />
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_history"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scrollbars="vertical"
-        android:padding="10dp"
-        tools:listitem="@layout/item_record_history"
-        />
+    <!--<android.support.v7.widget.RecyclerView-->
+        <!--android:id="@+id/rv_history"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:scrollbars="vertical"-->
+        <!--android:padding="10dp"-->
+        <!--/>-->
 
 </RelativeLayout>

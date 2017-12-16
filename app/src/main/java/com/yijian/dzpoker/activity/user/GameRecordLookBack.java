@@ -3,6 +3,7 @@ package com.yijian.dzpoker.activity.user;
 import android.app.Dialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.GridLayoutManager;
@@ -105,6 +106,7 @@ public class GameRecordLookBack extends BaseBackActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        setToolbarTitle(TITLE);
         mGametableid = getIntent().getIntExtra("gametableid",-1);
 
         new QueryDataTask().execute();
@@ -422,8 +424,9 @@ public class GameRecordLookBack extends BaseBackActivity {
             mRVLookBack.setLayoutManager(new GridLayoutManager(GameRecordLookBack.this,1));
 
             mRVLookBack.setHasFixedSize(true);
-            mRVLookBack.addItemDecoration(new DividerItemDecoration(
-                    GameRecordLookBack.this, DividerItemDecoration.VERTICAL));
+            DividerItemDecoration decoration = new DividerItemDecoration(GameRecordLookBack.this, DividerItemDecoration.VERTICAL);
+            decoration.setDrawable(ContextCompat.getDrawable(GameRecordLookBack.this, R.drawable.store_user_level_list_divide_drawable));
+            mRVLookBack.addItemDecoration(decoration);
 
             GameLookBackUserInfoAdapter adapter = new GameLookBackUserInfoAdapter(GameRecordLookBack.this, roundInfo.cards);
             mRVLookBack.setAdapter(adapter);

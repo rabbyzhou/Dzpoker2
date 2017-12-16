@@ -96,7 +96,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     private void updateUI(){
         mUser=((DzApplication)getActivity().getApplication()).getUser();
 
-        if (mUser.userHeadPic!=null && !mUser.userHeadPic.equals("")){
+        if (null != mUser && mUser.userHeadPic!=null && !mUser.userHeadPic.equals("")){
             Picasso.with(getActivity())
                     .load(mUser.userHeadPic)
                     .placeholder(R.drawable.default_male_head)
