@@ -1,236 +1,290 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_window"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/main_bg_secondary">
+    android:background="@color/main_bg_secondary"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:visibility="gone"
         android:background="#003366"
-        >
+        android:visibility="gone">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20px"
             android:drawableLeft="@drawable/black_back"
             android:drawablePadding="2dp"
             android:text="返回"
-            android:textSize="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20px"/>
+            android:textSize="16dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="系统设置"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="24dp" />
 
     </RelativeLayout>
 
-
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
-        >
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
-            android:paddingLeft="20px"
-            android:layout_width="200px"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
             android:text="游戏音效"
-            android:textSize="24dp"
-            android:layout_weight="1"
-
+            android:textColor="@color/white"
+            android:textSize="14dp"
             />
-        <com.yijian.dzpoker.ui.SwitchButton
-            android:layout_marginRight="20px"
+
+        <com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch
             android:id="@+id/sb_audio"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="54dp"
+            toggle:tbOnColor="#2DD0CF"
+            toggle:tbOffColor="#332e4f"
+            toggle:tbSpotColor="#fff"
+            toggle:tbOffBorderColor="#fff"
+            toggle:tbBorderWidth="1dp"
+            toggle:tbAsDefaultOn="true"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp">
 
-        </com.yijian.dzpoker.ui.SwitchButton>
+        </com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch>
 
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
-        >
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
-            android:paddingLeft="20px"
-            android:layout_width="200px"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
             android:text="消息声音"
-            android:textSize="24dp"
-            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="14dp"
 
             />
-        <com.yijian.dzpoker.ui.SwitchButton
-            android:layout_marginRight="20px"
+
+        <com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch
             android:id="@+id/sb_msg_sound"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="54dp"
+            toggle:tbOnColor="#2DD0CF"
+            toggle:tbOffColor="#332e4f"
+            toggle:tbSpotColor="#fff"
+            toggle:tbOffBorderColor="#fff"
+            toggle:tbBorderWidth="1dp"
+            toggle:tbAsDefaultOn="true"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp">
 
-        </com.yijian.dzpoker.ui.SwitchButton>
+        </com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch>
 
 
     </LinearLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
-        >
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
-            android:paddingLeft="20px"
-            android:layout_width="200px"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
             android:text="消息震动"
-            android:textSize="24dp"
-            android:layout_weight="1"
-
+            android:textColor="@color/white"
+            android:textSize="14dp"
             />
-        <com.yijian.dzpoker.ui.SwitchButton
-            android:layout_marginRight="20px"
+        <com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch
             android:id="@+id/sb_msg_shake"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </com.yijian.dzpoker.ui.SwitchButton>
-
-
+            android:layout_width="54dp"
+            toggle:tbOnColor="#2DD0CF"
+            toggle:tbOffColor="#332e4f"
+            toggle:tbSpotColor="#fff"
+            toggle:tbOffBorderColor="#fff"
+            toggle:tbBorderWidth="1dp"
+            toggle:tbAsDefaultOn="true"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp">
+        </com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
-        >
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
         <TextView
-            android:paddingLeft="20px"
-            android:layout_width="200px"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
             android:text="隐藏俱乐部信息"
-            android:textSize="24dp"
-            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
-            />
-        <com.yijian.dzpoker.ui.SwitchButton
-            android:layout_marginRight="20px"
+        <com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch
             android:id="@+id/sb_hide_club_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_width="54dp"
+            toggle:tbOnColor="#2DD0CF"
+            toggle:tbOffColor="#332e4f"
+            toggle:tbSpotColor="#fff"
+            toggle:tbOffBorderColor="#fff"
+            toggle:tbBorderWidth="1dp"
+            toggle:tbAsDefaultOn="true"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp">
 
-        </com.yijian.dzpoker.ui.SwitchButton>
-
-
+        </com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch>
     </LinearLayout>
 
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="50px"
-        android:orientation="horizontal"
-        android:background="@color/gray"
-        >
-    </LinearLayout>
+        android:layout_height="2dp"
+        android:background="@color/gray">
+    </View>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:layout_marginTop="15dp"
         android:orientation="horizontal"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
-        >
+        android:visibility="gone">
+
         <TextView
-            android:paddingLeft="20px"
-            android:layout_width="200px"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="当前版本"
-            android:textSize="24dp"
             android:layout_weight="1"
-
-
-            />
+            android:paddingLeft="10dp"
+            android:text="当前版本"
+            android:textSize="14dp" />
         <TextView
-            android:paddingLeft="20px"
-            android:paddingRight="20px"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             android:text="V1.0"
-            android:textSize="24dp"
-
-
-            />
-
-
+            android:textSize="14dp" />
     </LinearLayout>
 
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="40dp"-->
+        <!--android:layout_marginBottom="15dp"-->
+        <!--android:layout_marginTop="15dp"-->
+        <!--android:orientation="horizontal">-->
+
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_weight="1"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:paddingLeft="10dp"-->
+            <!--android:text="修改密码"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="14dp"-->
+            <!--/>-->
+        <!--<ImageView-->
+            <!--android:id="@+id/settings_page_reset_pwd"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:gravity="center_vertical">-->
+        <!--</ImageView>-->
+        <!---->
+    <!--</LinearLayout>-->
     <TextView
         android:id="@+id/tv_changePWD"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="修改密码"
-        android:textSize="24dp"
+        android:layout_height="40dp"
         android:drawableRight="@drawable/arrow_right"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/white"
+        android:text="修改密码"
+        android:textSize="14dp"/>
 
-        />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
     <TextView
         android:id="@+id/tv_about"
-        android:paddingLeft="20px"
-        android:paddingRight="20px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="关于我们"
-        android:textSize="24dp"
+        android:layout_height="40dp"
         android:drawableRight="@drawable/arrow_right"
-        android:layout_marginTop="30px"
-        android:layout_marginBottom="30px"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:textColor="@color/white"
+        android:text="关于我们"
+        android:textSize="14dp"/>
 
-        />
-
-    <LinearLayout
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20px"
-        android:background="@color/black"
-        android:paddingTop="10px"
-        android:paddingBottom="10px"
-
-        >
-        <TextView
-            android:id="@+id/tv_logout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="退出登录"
-            android:textSize="20dp"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="1"
-            android:gravity="center"
-            />
-    </LinearLayout>
-
-
+        android:layout_height="1dp"
+        android:background="@color/white" />
+    <TextView
+        android:id="@+id/tv_logout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:gravity="center"
+        android:text="退出登录"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
 
 </LinearLayout>

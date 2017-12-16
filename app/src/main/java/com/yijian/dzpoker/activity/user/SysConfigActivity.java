@@ -10,12 +10,10 @@ import android.widget.TextView;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.LoginActivity;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
-import com.yijian.dzpoker.ui.SwitchButton;
-
-import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
+import com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch;
 
 public class SysConfigActivity extends BaseBackActivity {
-    private SwitchButton sb_audio,sb_msg_sound,sb_msg_shake,sb_hide_club_info;
+    private IosLikeSwitch sb_audio,sb_msg_sound,sb_msg_shake,sb_hide_club_info;
     private TextView tv_changePWD,tv_about,tv_logout;
 
     @Override
@@ -33,10 +31,10 @@ public class SysConfigActivity extends BaseBackActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        sb_audio=(SwitchButton)findViewById(R.id.sb_audio);
-        sb_msg_sound=(SwitchButton)findViewById(R.id.sb_msg_sound);
-        sb_msg_shake=(SwitchButton)findViewById(R.id.sb_msg_shake);
-        sb_hide_club_info=(SwitchButton)findViewById(R.id.sb_hide_club_info);
+        sb_audio=(IosLikeSwitch)findViewById(R.id.sb_audio);
+        sb_msg_sound=(IosLikeSwitch)findViewById(R.id.sb_msg_sound);
+        sb_msg_shake=(IosLikeSwitch)findViewById(R.id.sb_msg_shake);
+        sb_hide_club_info=(IosLikeSwitch)findViewById(R.id.sb_hide_club_info);
         tv_about=(TextView)findViewById(R.id.tv_about);
         tv_changePWD=(TextView)findViewById(R.id.tv_changePWD);
         tv_logout=(TextView)findViewById(R.id.tv_logout);
