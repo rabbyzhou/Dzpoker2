@@ -7,6 +7,8 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 
+import com.yijian.dzpoker.baselib.debug.Logger;
+import com.yijian.dzpoker.baselib.http.HttpRequestManager;
 import com.yijian.dzpoker.entity.NotificationClickEventReceiver;
 import com.yijian.dzpoker.utils.SharePreferenceManager;
 import com.yijian.dzpoker.view.data.ClubInfo;
@@ -24,6 +26,7 @@ import cn.jpush.im.android.api.model.GroupInfo;
 import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 
 /**
@@ -206,11 +209,21 @@ public class DzApplication extends Application {
 
         // 设置http客户端
         //  httpClient = new OkHttpClient();
-        httpClient = new OkHttpClient.Builder()
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+            @Override
+            public void log(String message) {
+                //打印retrofit日志
+                Logger.i("RetrofitLog","retrofitBack = "+message);
+            }
+        });
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        HttpRequestManager.okHttpClient = new OkHttpClient.Builder()
+                .addInterceptor(loggingInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .readTimeout(20, TimeUnit.SECONDS)
                 .writeTimeout(20, TimeUnit.SECONDS)
                 .build();
+        httpClient = HttpRequestManager.okHttpClient;
 
         JMessageClient.init(getApplicationContext(), true);
         JMessageClient.setDebugMode(true);

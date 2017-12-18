@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:support-vector-drawable:25.3.1'
     //http lib
     compile 'com.squareup.okhttp3:okhttp:3.8.1'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.8.1'
     compile 'com.squareup.okio:okio:1.5.0'
     compile 'com.squareup.retrofit2:retrofit:2.1picasso.0'
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'

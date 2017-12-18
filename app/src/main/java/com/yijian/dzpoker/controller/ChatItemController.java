@@ -24,7 +24,6 @@ import android.webkit.MimeTypeMap;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
@@ -1166,17 +1165,17 @@ public class ChatItemController {
     }
 
 
-    private DisplayImageOptions options = createImageOptions();
-
-    private boolean hasLoaded = false;
-
-    private static final DisplayImageOptions createImageOptions() {
-        return new DisplayImageOptions.Builder()
-                .cacheInMemory(true)
-                .cacheOnDisk(true)
-                .bitmapConfig(Bitmap.Config.RGB_565)
-                .build();
-    }
+//    private DisplayImageOptions options = createImageOptions();
+//
+//    private boolean hasLoaded = false;
+//
+//    private static final DisplayImageOptions createImageOptions() {
+//        return new DisplayImageOptions.Builder()
+//                .cacheInMemory(true)
+//                .cacheOnDisk(true)
+//                .bitmapConfig(Bitmap.Config.RGB_565)
+//                .build();
+//    }
 
     public void setAudioPlayByEarPhone(int state) {
         AudioManager audioManager = (AudioManager) mContext

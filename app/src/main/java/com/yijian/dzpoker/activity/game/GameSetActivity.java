@@ -16,6 +16,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet1;
 import com.yijian.dzpoker.activity.game.fragment.FragmentGameSet2;
@@ -29,7 +30,7 @@ import com.yijian.dzpoker.view.NoScrollViewPager;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameSetActivity extends BaseToolbarActivity implements FragmentGameSet1.OnFragmentInteractionListener,FragmentGameSet2.OnFragmentInteractionListener,FragmentGameSet3.OnFragmentInteractionListener,FragmentGameSet4.OnFragmentInteractionListener,FragmentGameSet5.OnFragmentInteractionListener,FragmentGameSet6.OnFragmentInteractionListener{
+public class GameSetActivity extends BaseBackActivity implements FragmentGameSet1.OnFragmentInteractionListener,FragmentGameSet2.OnFragmentInteractionListener,FragmentGameSet3.OnFragmentInteractionListener,FragmentGameSet4.OnFragmentInteractionListener,FragmentGameSet5.OnFragmentInteractionListener,FragmentGameSet6.OnFragmentInteractionListener{
     private TabLayout tabLayout,tabLayout2;
     private String[] titles1 = {"德州扑克", "奥马哈"};
     private String[] titles2 = {"普通牌局", "SNG", "MTT"};
@@ -39,9 +40,13 @@ public class GameSetActivity extends BaseToolbarActivity implements FragmentGame
     private TextView tvBack;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_game_set;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_game_set);
         tabLayout = (TabLayout) findViewById(R.id.tab_game);
         tabLayout2 = (TabLayout) findViewById(R.id.tab_game2);
 
@@ -129,25 +134,25 @@ public class GameSetActivity extends BaseToolbarActivity implements FragmentGame
                 if (tabLayout.getSelectedTabPosition()==0){
                     switch (tabLayout2.getSelectedTabPosition()){
                         case 0:
-                            //viewPager.setCurrentItem(0);
+                            viewPager.setCurrentItem(0);
                             break;
                         case 1:
-                           // viewPager.setCurrentItem(1);
+                            viewPager.setCurrentItem(1);
                             break;
                         case 2:
-                            //viewPager.setCurrentItem(2);
+                            viewPager.setCurrentItem(2);
                             break;
                     }
                 }else if (tabLayout.getSelectedTabPosition()==1){
                     switch (tabLayout2.getSelectedTabPosition()){
                         case 0:
-                           // viewPager.setCurrentItem(3);
+                            viewPager.setCurrentItem(3);
                             break;
                         case 1:
-                           // viewPager.setCurrentItem(4);
+                            viewPager.setCurrentItem(4);
                             break;
                         case 2:
-                            //viewPager.setCurrentItem(5);
+                            viewPager.setCurrentItem(5);
                             break;
                     }
                 }
@@ -175,22 +180,22 @@ public class GameSetActivity extends BaseToolbarActivity implements FragmentGame
                             viewPager.setCurrentItem(0);
                             break;
                         case 1:
-                           // viewPager.setCurrentItem(1);
+                            viewPager.setCurrentItem(1);
                             break;
                         case 2:
-                            //viewPager.setCurrentItem(2);
+                            viewPager.setCurrentItem(2);
                             break;
                     }
                 }else if (tabLayout.getSelectedTabPosition()==1){
                     switch (tabLayout2.getSelectedTabPosition()){
                         case 0:
-                            //viewPager.setCurrentItem(3);
+                            viewPager.setCurrentItem(3);
                             break;
                         case 1:
-                           // viewPager.setCurrentItem(4);
+                            viewPager.setCurrentItem(4);
                             break;
                         case 2:
-                           // viewPager.setCurrentItem(5);
+                            viewPager.setCurrentItem(5);
                            // viewPager.setCurrentItem(5);
                             break;
                     }
@@ -208,6 +213,11 @@ public class GameSetActivity extends BaseToolbarActivity implements FragmentGame
 
             }
         });
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 
     class MyAdapter extends FragmentPagerAdapter {

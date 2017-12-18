@@ -25,7 +25,6 @@ import java.util.Enumeration;
 /**
  * Created by rabby on 2017/8/9.
  */
-
 public class Util {
     public static byte[] readStream(InputStream inputStream) throws Exception {
         ByteArrayOutputStream bout = new ByteArrayOutputStream();

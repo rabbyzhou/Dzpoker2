@@ -2,78 +2,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:orientation="vertical">
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="40dip"-->
-        <!--android:background="#003366"-->
-        <!--android:orientation="vertical">-->
 
-        <!--<LinearLayout-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_centerVertical="true"-->
-            <!--android:gravity="center_vertical">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#003366"
+        android:orientation="vertical"
+        android:visibility="gone">
 
-            <!--<android.support.v7.widget.AppCompatTextView-->
-                <!--android:id="@+id/tv_exit"-->
-                <!--android:layout_width="wrap_content"-->
-                <!--android:layout_height="wrap_content"-->
-                <!--android:layout_gravity="center_vertical"-->
-                <!--android:drawableLeft="@drawable/black_back"-->
-                <!--android:drawablePadding="2dp"-->
-                <!--android:text="返回"-->
-                <!--android:textSize="16dp"/>-->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:gravity="center_vertical">
 
-        <!--</LinearLayout>-->
-        <!--<android.support.v7.widget.AppCompatTextView-->
-            <!--android:id="@+id/title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:text="俱乐部验证"-->
-            <!--android:textSize="24dp"-->
-            <!--android:layout_centerInParent="true"/>-->
+            <android.support.v7.widget.AppCompatTextView
+                android:id="@+id/tv_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/black_back"
+                android:drawablePadding="2dp"
+                android:text="返回"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="俱乐部验证"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
-    <!--</RelativeLayout>-->
+    </RelativeLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:orientation="vertical"
-       >
+        android:orientation="vertical">
 
-       <TextView
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_marginTop="80px"
-           android:layout_marginBottom="80px"
-           android:text="您需要发送验证申请，等待对方通过"
-           android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="20dp"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:text="您需要发送验证申请，等待对方通过" />
 
         <EditText
             android:id="@+id/et_applyinfo"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textMultiLine"
+            android:layout_height="160dp"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@color/main_bg_secondary"
             android:gravity="left|top"
-            android:layout_marginLeft="120px"
-            android:layout_marginRight="120px"
-            android:layout_marginBottom="80px"
+            android:inputType="textMultiLine"
             android:minLines="6"
-           />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
         <Button
             android:id="@+id/btn_send"
-            android:layout_width="480px"
-            android:layout_height="80px"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/denglu_normal"
-            android:layout_marginTop="20px"
-            android:text="发送" />
-
-
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/button_red"
+            android:text="发送"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
 
 
     </LinearLayout>

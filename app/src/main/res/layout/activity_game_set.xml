@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/main_bg">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="40dip"
+        android:layout_height="40dp"
         android:background="#003366"
         android:visibility="gone"
         >
@@ -36,13 +36,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="@color/shop_goldcoin_selected">
+        android:orientation="vertical">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_game"
             android:layout_width="match_parent"
-            android:layout_height="80px"
+            android:layout_height="40dp"
             android:layout_gravity="bottom"
             android:background="#4c4b54"
             android:fillViewport="false"
