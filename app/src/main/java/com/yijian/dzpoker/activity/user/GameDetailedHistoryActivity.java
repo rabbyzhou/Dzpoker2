@@ -88,9 +88,8 @@ public class GameDetailedHistoryActivity extends BaseBackActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mTableId = getIntent().getIntExtra("gametableid", -1);
-        initViews();
         setToolbarTitle("战绩详情");
-        showToolbarRightView(new View.OnClickListener() {
+        showToolbarRightImageViewDefault(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 goToLookBackPage();

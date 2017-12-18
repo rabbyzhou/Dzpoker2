@@ -9,16 +9,16 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_game"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_gravity="bottom"
-        android:background="#CDB5CD"
+        android:background="@color/background"
         android:fillViewport="false"
         app:tabMode="fixed"
         app:layout_scrollFlags="scroll"
-        app:tabIndicatorColor="@color/black"
+        app:tabIndicatorColor="@color/background"
         app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/black"
-        app:tabTextColor="@color/white">
+        app:tabSelectedTextColor="@color/white"
+        app:tabTextColor="@color/main_bg_secondary">
 
     <android.support.design.widget.TabItem
         android:layout_width="match_parent"

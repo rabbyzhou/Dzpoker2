@@ -12,13 +12,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -37,7 +40,7 @@ import okhttp3.Response;
 
 import static com.yijian.dzpoker.constant.Constant.INTENT_KEY_BACKTEXT;
 
-public class MyClubActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class MyClubActivity extends BaseBackActivity implements View.OnClickListener {
 
     private LinearLayout layout_clubList;
     private RelativeLayout layout_top;
@@ -67,7 +70,13 @@ public class MyClubActivity extends BaseToolbarActivity implements View.OnClickL
         }
     };
 
-    private void  initViews(){
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_my_club;
+    }
+
+    @Override
+    public void  initViews(){
 
         Intent intent = getIntent();
         String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
@@ -124,14 +133,37 @@ public class MyClubActivity extends BaseToolbarActivity implements View.OnClickL
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_my_club);
 
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
         userId=settings.getInt("userid",0);
         //从服务器获得俱乐部列表，利用handlemessage来更新主页的显示
-        initViews();
         setToolbarTitle("我的俱乐部");
+        showToolbarRightTextView("更多", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                showWindow(layout_top);
+                PopupMenu popupMenu = new PopupMenu(MyClubActivity.this, v);
+                popupMenu.getMenuInflater().inflate(R.menu.popmenu, popupMenu.getMenu());
+                popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem item) {
+                        switch (item.getItemId()) {
+                            case R.id.createclub:
+                                gotoCreateClubePage();
+                                break;
+                            case R.id.addtoclub:
+                                gotoAddIntoClubePage();
+                                break;
+                            default:
+                                break;
+                        }
+                        return true;
+                    }
+                });
+                popupMenu.show();
+            }
+        });
         initList();
 
     }
@@ -229,7 +261,7 @@ public class MyClubActivity extends BaseToolbarActivity implements View.OnClickL
         // 设置好参数之后再show
 
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int xOffset = parent.getWidth()  - contentView.getMeasuredWidth() ;
+        int xOffset = parent.getWidth() - contentView.getMeasuredWidth();
         popupWindow.showAsDropDown(parent,xOffset,20);    // 在mButton2的中间显示
     }
 
@@ -242,21 +274,10 @@ public class MyClubActivity extends BaseToolbarActivity implements View.OnClickL
             public void onClick(View v) {
                 switch (v.getId()) {
                     case R.id.tv_createclub:
-                        Intent intent = new Intent();
-//                        intent.putExtra("opType",1 );
-//                        intent.putExtra("phonenumber", edUserName.getText().toString());
-                        intent.setClass(MyClubActivity.this, CreateClubActivity.class);
-                        TextView titleView = (TextView)findViewById(R.id.title);
-                        intent.putExtra(INTENT_KEY_BACKTEXT, titleView.getText());
-                        startActivityForResult(intent,  1);
+                        gotoCreateClubePage();
                         break;
                     case R.id.tv_addtoclub:
-                        Intent intent1 = new Intent();
-                        intent1.setClass(MyClubActivity.this, AddIntoClubActivity.class);
-                        intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                        TextView titleView1 = (TextView)findViewById(R.id.title);
-                        intent1.putExtra(INTENT_KEY_BACKTEXT, titleView1.getText());
-                        startActivity(intent1);
+                        gotoAddIntoClubePage();
                         break;
                 }
 
@@ -269,6 +290,25 @@ public class MyClubActivity extends BaseToolbarActivity implements View.OnClickL
         contentView.findViewById(R.id.tv_addtoclub).setOnClickListener(menuItemOnClickListener);
 
         return contentView;
+    }
+
+    private void gotoAddIntoClubePage() {
+        Intent intent1 = new Intent();
+        intent1.setClass(MyClubActivity.this, AddIntoClubActivity.class);
+        intent1.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        TextView titleView1 = (TextView)findViewById(R.id.title);
+        intent1.putExtra(INTENT_KEY_BACKTEXT, titleView1.getText());
+        startActivity(intent1);
+    }
+
+    private void gotoCreateClubePage() {
+        Intent intent = new Intent();
+//                        intent.putExtra("opType",1 );
+//                        intent.putExtra("phonenumber", edUserName.getText().toString());
+        intent.setClass(MyClubActivity.this, CreateClubActivity.class);
+        TextView titleView = (TextView)findViewById(R.id.title);
+        intent.putExtra(INTENT_KEY_BACKTEXT, titleView.getText());
+        startActivityForResult(intent,  1);
     }
 
     @Override

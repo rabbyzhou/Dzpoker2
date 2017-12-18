@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,8 +22,8 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
 
     LinearLayout rootLayout;
     public TextView toolbarTitle;
-    public TextView toolbarRightView;
-    private View.OnClickListener rightViewListener;
+    public ImageView toolbarRightImageView;
+    public TextView toolbarRightTextView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,7 +40,8 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (null != toolbar) {
             toolbarTitle = (TextView) toolbar.findViewById(R.id.toolbar_title);
-            toolbarRightView = (TextView) toolbar.findViewById(R.id.toolbar_right_view);
+            toolbarRightTextView = (TextView) toolbar.findViewById(R.id.toolbar_right_tv);
+            toolbarRightImageView = (ImageView) toolbar.findViewById(R.id.toolbar_right_iv);
             setSupportActionBar(toolbar);
             if (toolbarTitle != null) {
                 getSupportActionBar().setDisplayShowTitleEnabled(false);
@@ -51,16 +53,24 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         toolbarTitle.setText(text);
     }
 
-    public void showToolbarRightView(View.OnClickListener listener) {
-        if (null != toolbarRightView) {
-            toolbarRightView.setVisibility(View.VISIBLE);
-            toolbarRightView.setOnClickListener(listener);
+    public void showToolbarRightImageViewDefault(View.OnClickListener listener) {
+        if (null != toolbarRightImageView) {
+            toolbarRightImageView.setVisibility(View.VISIBLE);
+            toolbarRightImageView.setOnClickListener(listener);
         }
     }
 
-    public void hideToolbarRightView() {
-        if (null != toolbarRightView) {
-            toolbarRightView.setVisibility(View.GONE);
+    public void hideToolbarRightImageView() {
+        if (null != toolbarRightImageView) {
+            toolbarRightImageView.setVisibility(View.GONE);
+        }
+    }
+
+    public void showToolbarRightTextView(String content, View.OnClickListener listener) {
+        if (null != toolbarRightTextView) {
+            toolbarRightTextView.setText(content);
+            toolbarRightTextView.setVisibility(View.VISIBLE);
+            toolbarRightTextView.setOnClickListener(listener);
         }
     }
 

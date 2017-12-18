@@ -1,60 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="50px"
-        android:layout_marginRight="50px"
-        android:layout_marginTop="50px"
-        android:layout_marginBottom="50px"
-        >
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_weight="1">
-
-            <ImageView
-                android:id="@+id/image_clubinfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/demo"
-                android:layout_gravity="center_horizontal"/>
-
-            <TextView
-                android:id="@+id/text_clubinfo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="官方资讯"
-                android:layout_gravity="center_horizontal" />
-
-        </LinearLayout>
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
+        android:layout_height="40dp"
+        android:background="@color/gray"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="1"
-            >
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:text="官方资讯"
+            android:gravity="center"/>
 
-            <ImageView
-                android:id="@+id/image_myclub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/demo"
-                android:layout_gravity="center_horizontal"/>
+        <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/main_bg_secondary"/>
 
-            <TextView
-                android:id="@+id/text_myclub"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="我的俱乐部"
-                android:layout_gravity="center_horizontal" />
+        <TextView
+            android:id="@+id/club_page_my_club"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="14dp"
+            android:textColor="@color/white"
+            android:text="我的俱乐部"
+            android:gravity="center"/>
 
-        </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout>
+    <android.support.v7.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+</LinearLayout>

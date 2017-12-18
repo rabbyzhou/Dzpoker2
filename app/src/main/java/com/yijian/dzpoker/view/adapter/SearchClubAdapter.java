@@ -62,10 +62,10 @@ public class SearchClubAdapter extends BaseListAdapter<ClubInfo, SearchClubAdapt
         holder.mClubLocation.setText(clubInfo.location );
         if (clubInfo.bInClub){
             holder.mAddIntoClub.setText("已加入");
-            holder.mAddIntoClub.setBackgroundColor(Color.GRAY);
+//            holder.mAddIntoClub.setBackgroundColor(Color.GRAY);
         }else{
             holder.mAddIntoClub.setText("加入");
-            holder.mAddIntoClub.setBackgroundColor(Color.YELLOW);
+//            holder.mAddIntoClub.setBackgroundColor(Color.YELLOW);
             holder.mAddIntoClub.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
                     //记录clubId,并传到下一activity

@@ -3,13 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:background="#003366"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/exit"
@@ -17,54 +19,47 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center_vertical">
+
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:drawableLeft="@drawable/black_back"
-                android:layout_gravity="center_vertical"/>
+                android:layout_gravity="center_vertical"
+                android:drawableLeft="@drawable/black_back" />
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="返回"
-                android:textSize="18dp"/>
+                android:textSize="18dp" />
 
         </LinearLayout>
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="地区选择"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="24dp" />
 
 
     </RelativeLayout>
-    <android.support.v7.widget.LinearLayoutCompat
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/black">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="选择地区"
-            android:textSize="20dp"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textColor="@color/white"/>
 
-    </android.support.v7.widget.LinearLayoutCompat>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="选择地区"
+        android:textColor="@color/white"
+        android:textSize="14dp" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_province"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
-
-
-
+        android:scrollbars="vertical" />
 
 </LinearLayout>

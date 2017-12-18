@@ -40,19 +40,19 @@ import java.util.List;
  * Use the {@link UserFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UserFragment extends Fragment implements View.OnClickListener{
+public class UserFragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<MenuItemData> mMenu=new ArrayList<MenuItemData>();
-    private  int mMenuId[]={R.drawable.collection,R.drawable.award_ico,R.drawable.record_ico,R.drawable.store_ico,R.drawable.customer_service,R.drawable.set_up};
-    private String mMenuText[]={"牌谱收藏","奖励中心","战绩","商店","客服","设置"};
+    private List<MenuItemData> mMenu = new ArrayList<MenuItemData>();
+    private int mMenuId[] = {R.drawable.collection, R.drawable.award_ico, R.drawable.record_ico, R.drawable.store_ico, R.drawable.customer_service, R.drawable.set_up};
+    private String mMenuText[] = {"牌谱收藏", "奖励中心", "战绩", "商店", "客服", "设置"};
     private RecyclerView rv_menu_list;
     private MenuAdapter mAdapter;
-    private User mUser=new User();
+    private User mUser = new User();
     private ImageView iv_user_head;
-    private TextView tv_user_name,tv_user_abstract,tv_goldcoin,tv_diamond,tv_user_level;
+    private TextView tv_user_name, tv_user_abstract, tv_goldcoin, tv_diamond, tv_user_level;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,25 +93,27 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         }
     }
 
-    private void updateUI(){
-        mUser=((DzApplication)getActivity().getApplication()).getUser();
+    private void updateUI() {
+        mUser = ((DzApplication) getActivity().getApplication()).getUser();
 
-        if (null != mUser && mUser.userHeadPic!=null && !mUser.userHeadPic.equals("")){
-            Picasso.with(getActivity())
-                    .load(mUser.userHeadPic)
-                    .placeholder(R.drawable.default_male_head)
-                    .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
-                    .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                    .resize(100, 100)
-                    .error(R.drawable.default_club_head)
-                    .transform(new CircleTransform())
-                    .into(iv_user_head);
+        if (null != mUser) {
+            if (mUser.userHeadPic != null && !mUser.userHeadPic.equals("")) {
+                Picasso.with(getActivity())
+                        .load(mUser.userHeadPic)
+                        .placeholder(R.drawable.default_male_head)
+                        .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
+                        .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
+                        .resize(100, 100)
+                        .error(R.drawable.default_club_head)
+                        .transform(new CircleTransform())
+                        .into(iv_user_head);
+            }
+            tv_user_name.setText(mUser.nickName);
+            tv_user_abstract.setText(mUser.personalTip);
+            tv_goldcoin.setText(mUser.goldcoin + "");
+            tv_diamond.setText(mUser.diamond + "");
+            tv_user_level.setText(mUser.levelname);
         }
-        tv_user_name.setText(mUser.nickName);
-        tv_user_abstract.setText(mUser.personalTip);
-        tv_goldcoin.setText(mUser.goldcoin+"");
-        tv_diamond.setText(mUser.diamond+"");
-        tv_user_level.setText(mUser.levelname);
     }
 
     @Override
@@ -120,22 +122,22 @@ public class UserFragment extends Fragment implements View.OnClickListener{
         View meLayout = inflater.inflate(R.layout.fragment_user,
                 container, false);
 
-        iv_user_head=(ImageView) meLayout.findViewById(R.id.iv_user_head);
-        tv_user_name=(TextView) meLayout.findViewById(R.id.tv_user_name);
-        tv_user_abstract=(TextView) meLayout.findViewById(R.id.tv_user_abstract);
-        tv_goldcoin=(TextView) meLayout.findViewById(R.id.tv_goldcoin);
-        tv_diamond=(TextView) meLayout.findViewById(R.id.tv_diamond);
-        tv_user_level=(TextView) meLayout.findViewById(R.id.tv_user_level);
+        iv_user_head = (ImageView) meLayout.findViewById(R.id.iv_user_head);
+        tv_user_name = (TextView) meLayout.findViewById(R.id.tv_user_name);
+        tv_user_abstract = (TextView) meLayout.findViewById(R.id.tv_user_abstract);
+        tv_goldcoin = (TextView) meLayout.findViewById(R.id.tv_goldcoin);
+        tv_diamond = (TextView) meLayout.findViewById(R.id.tv_diamond);
+        tv_user_level = (TextView) meLayout.findViewById(R.id.tv_user_level);
 
         iv_user_head.setOnClickListener(this);
 
         //初始化菜单选项
-        mMenu=new ArrayList<MenuItemData>();
-        for(int i=0;i<6;i++){
-            MenuItemData menuItemData=new MenuItemData();
-            menuItemData.menuId=i+1;
-            menuItemData.menuImageId=mMenuId[i];
-            menuItemData.menuText=mMenuText[i];
+        mMenu = new ArrayList<MenuItemData>();
+        for (int i = 0; i < 6; i++) {
+            MenuItemData menuItemData = new MenuItemData();
+            menuItemData.menuId = i + 1;
+            menuItemData.menuImageId = mMenuId[i];
+            menuItemData.menuText = mMenuText[i];
             mMenu.add(menuItemData);
         }
 
@@ -144,10 +146,10 @@ public class UserFragment extends Fragment implements View.OnClickListener{
             public void onRecordSelected(final MenuItemData menuItemData) {
 
                 //获取该页面的title, 传递给下级页面.
-                String title = ((MainFragmentActivity)getActivity()).getPageTitle();
+                String title = ((MainFragmentActivity) getActivity()).getPageTitle();
 
                 //点击菜单胡处理
-                switch (menuItemData.menuId){
+                switch (menuItemData.menuId) {
 
                     case 1://牌谱收藏
                         break;
@@ -157,15 +159,15 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                         Intent recordIntent = new Intent();
                         recordIntent.setClass(getActivity(), GamesRecordActivity.class);
                         recordIntent.putExtra(Constant.INTENT_KEY_BACKTEXT, title);
-                        recordIntent.putExtra(Constant.INTENT_KEY_TITLE,mMenuText[menuItemData.menuId-1]);
+                        recordIntent.putExtra(Constant.INTENT_KEY_TITLE, mMenuText[menuItemData.menuId - 1]);
                         startActivity(recordIntent);
                         break;
                     case 4://商店
                         Intent iStore = new Intent();
                         iStore.setClass(getActivity(), StoreActivity.class);
                         iStore.putExtra(Constant.INTENT_KEY_BACKTEXT, title);
-                        iStore.putExtra(Constant.INTENT_KEY_TITLE,mMenuText[menuItemData.menuId-1]);
-                        startActivityForResult(iStore,REQUEST_CODE);
+                        iStore.putExtra(Constant.INTENT_KEY_TITLE, mMenuText[menuItemData.menuId - 1]);
+                        startActivityForResult(iStore, REQUEST_CODE);
                         break;
                     case 5://客服
                         break;
@@ -173,22 +175,22 @@ public class UserFragment extends Fragment implements View.OnClickListener{
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), SysConfigActivity.class);
                         intent.putExtra(Constant.INTENT_KEY_BACKTEXT, title);
-                        intent.putExtra(Constant.INTENT_KEY_TITLE,mMenuText[menuItemData.menuId-1]);
-                        startActivityForResult(intent,REQUEST_CODE);
+                        intent.putExtra(Constant.INTENT_KEY_TITLE, mMenuText[menuItemData.menuId - 1]);
+                        startActivityForResult(intent, REQUEST_CODE);
                         break;
                 }
 
             }
         });
-        rv_menu_list=(RecyclerView)  meLayout.findViewById(R.id.rv_menu_list);
-        rv_menu_list.setLayoutManager(new GridLayoutManager(getActivity(),3));
+        rv_menu_list = (RecyclerView) meLayout.findViewById(R.id.rv_menu_list);
+        rv_menu_list.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         rv_menu_list.setHasFixedSize(true);
         /**
-        rv_menu_list.addItemDecoration(new DividerItemDecoration(
-                getActivity(), DividerItemDecoration.VERTICAL));
-        rv_menu_list.addItemDecoration(new DividerItemDecoration(
-                getActivity(), DividerItemDecoration.HORIZONTAL));
-        **/
+         rv_menu_list.addItemDecoration(new DividerItemDecoration(
+         getActivity(), DividerItemDecoration.VERTICAL));
+         rv_menu_list.addItemDecoration(new DividerItemDecoration(
+         getActivity(), DividerItemDecoration.HORIZONTAL));
+         **/
         rv_menu_list.setAdapter(mAdapter);
         mAdapter.setData(mMenu);
 
@@ -239,13 +241,13 @@ public class UserFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.iv_user_head:
                 Intent intent = new Intent();
                 intent.setClass(getActivity(), ModifyUserInfoActivity.class);
-                String title = ((MainFragmentActivity)getActivity()).getPageTitle();
+                String title = ((MainFragmentActivity) getActivity()).getPageTitle();
                 intent.putExtra(Constant.INTENT_KEY_BACKTEXT, title);
-                startActivityForResult(intent,1);
+                startActivityForResult(intent, 1);
 
         }
 
@@ -255,7 +257,7 @@ public class UserFragment extends Fragment implements View.OnClickListener{
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //从本界面打开奖励中心，商店，修改用户信息回来之后都要重新获得用户数据
-        if ( requestCode == REQUEST_CODE){
+        if (requestCode == REQUEST_CODE) {
             updateUI();
         }
     }

@@ -90,7 +90,6 @@ public class StoreActivity extends BaseBackActivity implements
         super.onCreate(savedInstanceState);
         application=(DzApplication) getApplication();
         userId=application.getUserId();
-        initViews();
 
         mAdapter = new MyAdapter(getSupportFragmentManager(), mTitleList, mFragmentList);
         mShopVPager.setAdapter(mAdapter);

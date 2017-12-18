@@ -35,6 +35,7 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
     private String mParam2;
 
     TextView tvMyclub;
+
     private OnFragmentInteractionListener mListener;
 
     public ClubInfoFragment() {
@@ -75,10 +76,7 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View clubLayout = inflater.inflate(R.layout.fragment_club_info, container, false);
-
-        ImageView ivMyclub=(ImageView)clubLayout.findViewById(R.id.image_myclub);
-        ivMyclub.setOnClickListener(this);
-        tvMyclub =(TextView)clubLayout.findViewById(R.id.text_myclub);
+        tvMyclub =(TextView)clubLayout.findViewById(R.id.club_page_my_club);
         tvMyclub.setOnClickListener(this);
         return clubLayout;
 
@@ -111,14 +109,11 @@ public class ClubInfoFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.image_myclub:
+            case R.id.club_page_my_club:
                 gotomyclub();
                 break;
-            case R.id.text_myclub:
-                gotomyclub();
+            default:
                 break;
-
-
         }
     }
 

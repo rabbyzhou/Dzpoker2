@@ -2,13 +2,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/main_bg"
     android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:background="#003366"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -24,24 +26,26 @@
                 android:drawableLeft="@drawable/black_back"
                 android:drawablePadding="2dp"
                 android:text="返回"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
 
         </LinearLayout>
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="搜索结果"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="24dp" />
 
 
     </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_club_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
 </LinearLayout>

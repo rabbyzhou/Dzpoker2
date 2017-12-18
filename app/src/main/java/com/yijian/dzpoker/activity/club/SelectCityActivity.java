@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -32,7 +34,7 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SelectCityActivity extends BaseToolbarActivity {
+public class SelectCityActivity extends BaseBackActivity {
     private String  mProvince;
     private List<String> mlistCity= new ArrayList<String>();
     //private ListView lv_city;
@@ -43,9 +45,13 @@ public class SelectCityActivity extends BaseToolbarActivity {
 
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_select_city;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_city);
         //获得传过来的province
         //mProvince="广东省";
         Intent intent = getIntent();
@@ -191,6 +197,9 @@ public class SelectCityActivity extends BaseToolbarActivity {
 
 
         });
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.store_user_level_list_divide_drawable));
+        lv_city.addItemDecoration(decoration);
         lv_city.setAdapter(mAdapter);
         mAdapter.setData(mCity);
  }
@@ -208,4 +217,8 @@ public class SelectCityActivity extends BaseToolbarActivity {
         }
     };
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

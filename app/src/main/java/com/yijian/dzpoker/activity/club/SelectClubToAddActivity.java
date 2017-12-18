@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -30,7 +31,7 @@ import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class SelectClubToAddActivity extends BaseToolbarActivity {
+public class SelectClubToAddActivity extends BaseBackActivity {
 
     private List<ClubInfo> mClubInfoList=new ArrayList<ClubInfo>();
     private String strLoginName;
@@ -61,8 +62,6 @@ public class SelectClubToAddActivity extends BaseToolbarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_club_to_add);
-        initViews();
         setToolbarTitle("搜索结果");
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
@@ -71,7 +70,13 @@ public class SelectClubToAddActivity extends BaseToolbarActivity {
         searchClub(intent.getStringExtra("condition"),intent.getIntExtra("serachtype",0));
     }
 
-    private void initViews(){
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_select_club_to_add;
+    }
+
+    @Override
+    public void initViews(){
         rv_club_list=(RecyclerView)findViewById(R.id.rv_club_list);
         //创建默认的线性LayoutManager
         mLayoutManager = new LinearLayoutManager(this);
@@ -200,4 +205,8 @@ public class SelectClubToAddActivity extends BaseToolbarActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+
+    }
 }

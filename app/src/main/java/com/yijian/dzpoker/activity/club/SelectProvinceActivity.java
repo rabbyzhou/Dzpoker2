@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.ToastUtil;
@@ -29,7 +31,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SelectProvinceActivity extends BaseToolbarActivity {
+public class SelectProvinceActivity extends BaseBackActivity {
     private List<String> mlistProvince = new ArrayList<String>();
     private RecyclerView lv_province;
     private LinearLayoutManager mLayoutManager ;
@@ -37,9 +39,13 @@ public class SelectProvinceActivity extends BaseToolbarActivity {
     private LinearLayout exitLayout;
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_select_province;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_select_province);
 
         exitLayout = (LinearLayout)findViewById(R.id.exit);
         exitLayout.setOnClickListener(new View.OnClickListener() {
@@ -132,12 +138,13 @@ public class SelectProvinceActivity extends BaseToolbarActivity {
                 intent.setClass(SelectProvinceActivity.this, SelectCityActivity.class);
                 startActivityForResult(intent,1);
                 //finish();
-
-
             }
 
 
         });
+        DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(ContextCompat.getDrawable(this, R.drawable.store_user_level_list_divide_drawable));
+        lv_province.addItemDecoration(decoration);
         lv_province.setAdapter(mAdapter);
         mAdapter.setData(mProvince);
 
@@ -168,5 +175,10 @@ public class SelectProvinceActivity extends BaseToolbarActivity {
             finish();
 
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+
     }
 }

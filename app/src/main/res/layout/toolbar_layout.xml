@@ -13,18 +13,31 @@
 
     <TextView
         android:id="@+id/toolbar_title"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:textSize="18dp"
+        android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"/>
 
-    <TextView
-        android:id="@+id/toolbar_right_view"
-        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+    <ImageView
+        android:id="@+id/toolbar_right_iv"
         android:layout_width="26dp"
         android:layout_height="18dp"
         android:layout_marginRight="20dp"
+        android:scaleType="fitCenter"
         android:background="@drawable/text_ic"
+        android:visibility="gone"
+        android:layout_gravity="right" />
+
+    <TextView
+        android:id="@+id/toolbar_right_tv"
+        style="@style/TextAppearance.AppCompat.Widget.ActionBar.Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18dp"
+        android:text="更多"
+        android:textColor="@color/white"
+        android:layout_marginRight="20dp"
         android:visibility="gone"
         android:layout_gravity="right"/>
 

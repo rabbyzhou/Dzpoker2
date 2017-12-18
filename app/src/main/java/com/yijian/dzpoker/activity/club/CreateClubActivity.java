@@ -27,6 +27,7 @@ import com.squareup.picasso.MemoryPolicy;
 import com.squareup.picasso.NetworkPolicy;
 import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -54,13 +55,14 @@ import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 
-public class CreateClubActivity extends BaseToolbarActivity implements View.OnClickListener {
+public class CreateClubActivity extends BaseBackActivity implements View.OnClickListener {
     private DzApplication myApp;
     private TextView tv_created_number;
     private EditText et_clubname;
     private Button btnCreateClub;
     private LinearLayout layout_location;
-    private EditText et_location;
+    private ImageView et_location;
+    private TextView clubLocation;
     private int canCreateClubNum;
     private String  strLoginName;
     private int userId;
@@ -107,8 +109,6 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext=getApplicationContext();
-        setContentView(R.layout.activity_create_club);
-        initViews();
         setToolbarTitle("新建俱乐部");
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
@@ -165,7 +165,13 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
 
     }
 
-    private void initViews(){
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_create_club;
+    }
+
+    @Override
+    public void initViews(){
 
         Intent intent = getIntent();
         String backText = intent.getStringExtra(Constant.INTENT_KEY_BACKTEXT);
@@ -180,8 +186,9 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
         btnCreateClub.setOnClickListener(this);
 //        layout_location=(LinearLayout)findViewById(R.id.layout_location);
 //        layout_location.setOnClickListener(this);
-        et_location=(EditText)findViewById(R.id.et_location);
+        et_location=(ImageView) findViewById(R.id.create_club_page_location_iv);
         et_location.setOnClickListener(this);
+        clubLocation = (TextView) findViewById(R.id.create_club_page_location_tv);
         layout_window=(LinearLayout)findViewById(R.id.layout_window);
         iv_club_head=(ImageView)findViewById(R.id.iv_club_head);
         iv_club_head.setOnClickListener(this);
@@ -210,7 +217,7 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
 
                     return;
                 }
-                if (et_location.getText().toString().equals(""))
+                if (clubLocation.getText().toString().equals(""))
                 {
                     ToastUtil.showToastInScreenCenter(CreateClubActivity.this,"请选择俱乐部所在地！");
                     return;
@@ -409,7 +416,7 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
                     });
                 }*/
                 break;
-            case R.id.et_location:
+            case R.id.create_club_page_location_iv:
                 //选择行政区划
                 Intent intent = new Intent();
 //                        intent.putExtra("opType",1 );
@@ -434,7 +441,7 @@ public class CreateClubActivity extends BaseToolbarActivity implements View.OnCl
             //刷新界面的数据
             province=data.getExtras().getString("province");
             city=data.getExtras().getString("city");
-            et_location.setText(data.getExtras().getString("location"));
+            clubLocation.setText(data.getExtras().getString("location"));
 
         }else  if(requestCode==Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             //选择照片返回

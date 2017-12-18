@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -37,7 +38,7 @@ import java.util.List;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class AddIntoClubActivity extends BaseToolbarActivity implements View.OnClickListener{
+public class AddIntoClubActivity extends BaseBackActivity implements View.OnClickListener{
 
     private TextView tv_exit;
     private RecyclerView rv_hotcity;
@@ -57,11 +58,9 @@ public class AddIntoClubActivity extends BaseToolbarActivity implements View.OnC
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_into_club);
         SharedPreferences settings = getSharedPreferences("depoker", 0);
         strLoginName=settings.getString("username","");
         userId=settings.getInt("userid",0);
-        initViews();
         setToolbarTitle("加入俱乐部");
         //从服务器获取数据，用来填充recyleview
         getInitData();
@@ -160,8 +159,8 @@ public class AddIntoClubActivity extends BaseToolbarActivity implements View.OnC
         rv_hotcity.setLayoutManager(gridLayoutManager);
         //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
         rv_hotcity.setHasFixedSize(true);
-        rv_hotcity.addItemDecoration(new DividerItemDecoration(
-                this, DividerItemDecoration.VERTICAL));
+//        rv_hotcity.addItemDecoration(new DividerItemDecoration(
+//                this, DividerItemDecoration.VERTICAL));
         //创建并设置Adapter
 
 
@@ -202,7 +201,13 @@ public class AddIntoClubActivity extends BaseToolbarActivity implements View.OnC
 
     }
 
-    private  void initViews(){
+    @Override
+    protected int getLayoutId() {
+        return R.layout.activity_add_into_club;
+    }
+
+    @Override
+    public void initViews(){
 
         tv_exit=(TextView)findViewById(R.id.tv_exit);
 

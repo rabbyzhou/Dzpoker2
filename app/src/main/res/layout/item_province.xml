@@ -2,32 +2,27 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:clickable="true"
     android:focusable="true"
-    >
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
 
     <TextView
-            android:id="@+id/tv_province"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="上海"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="24dp"
-            android:layout_weight="1"/>
+        android:id="@+id/tv_province"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_weight="1"
+        android:text="上海"
+        android:textColor="@color/white"
+        android:textSize="16dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/arrow_right"
-        android:layout_marginBottom="10px"
-        android:layout_marginTop="10px"
-        android:layout_marginLeft="10px"
-        android:layout_marginRight="10px"
-        />
-
+        android:layout_margin="10dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/return_arrow"
+        android:rotation="180"/>
 
 </LinearLayout>

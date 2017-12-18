@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/layout_window"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:id="@+id/layout_window">
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
         android:background="#003366"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -22,128 +24,154 @@
                 android:id="@+id/tv_exit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
                 android:layout_gravity="center_vertical"
-                android:gravity="center_vertical"
                 android:drawableLeft="@drawable/black_back"
                 android:drawablePadding="2dp"
+                android:gravity="center_vertical"
                 android:text="返回"
-                android:textSize="16dp"
-                android:layout_centerVertical="true" />
+                android:textSize="16dp" />
 
         </LinearLayout>
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="新建俱乐部"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
-
+            android:textSize="24dp" />
 
     </RelativeLayout>
-
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         android:layout_gravity="center"
-        android:layout_marginLeft="80px"
-        android:layout_marginRight="80px"
-        android:layout_marginBottom="80px"
-        android:layout_marginTop="80px"
-        >
+        android:layout_margin="20dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:layout_gravity="center_horizontal"
-            android:layout_marginTop="150px"
-            >
+            android:layout_marginTop="40dp"
+            android:orientation="vertical">
+
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_club_head"
-                android:layout_width="300px"
-                android:layout_height="300px"
-                android:src="@drawable/default_club_head"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
                 android:layout_gravity="center_horizontal"
-                />
+                android:src="@drawable/default_club_head" />
         </LinearLayout>
 
-            <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/tv_created_number"
-                android:text="已建立俱乐部数"
-                android:layout_marginTop="20px"
-                android:textSize="16dp"
-                android:gravity="center"
-                android:paddingBottom="20px"/>
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/tv_created_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:gravity="center"
+            android:paddingBottom="10dp"
+            android:text="已建立俱乐部数"
+            android:textColor="@color/white"
+            android:textSize="14dp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@color/main_bg_secondary"
+            android:orientation="horizontal">
 
             <android.support.v7.widget.AppCompatTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10px"
-                android:gravity="center"
-
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:gravity="center_vertical"
                 android:text="俱乐部名称"
-                android:textSize="20dp" />
+                android:textColor="@color/white"
+                android:textSize="14dp" />
 
-            <android.support.design.widget.TextInputEditText
+            <android.support.v7.widget.AppCompatEditText
                 android:id="@+id/et_clubname"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:maxLength="20"
-                android:hint="1-20字符"
-                android:gravity="center"
-                android:layout_marginTop="10px"/>
-
-            <LinearLayout
-                android:id="@+id/layout_location"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_gravity="center_vertical"
-                android:layout_marginTop="10px"
-                android:clickable="true"
-                android:focusable="true"
-                >
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/et_location"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLength="20"
-                    android:hint="所在地"
-                    android:gravity="center"
-                    android:layout_weight="1"
-                    android:drawableRight="@drawable/arrow_right"
-                    android:focusable="false"
-                    />
-
-
-
-
-            </LinearLayout>
-
-
-            <Button
-                android:id="@+id/btnCreateClub"
-                android:layout_marginTop="30px"
-                android:layout_width="match_parent"
-                android:layout_height="80px"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:background="@drawable/denglu_normal"
-
-                android:text="完成" />
-
-
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="5dp"
+                android:background="@null"
+                android:gravity="right|center_vertical"
+                android:hint="1-20个字符"
+                android:textColor="@color/white"
+                android:textColorHint="@color/gray"
+                android:textSize="14dp" />
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/main_bg_secondary"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
+                android:gravity="center_vertical"
+                android:text="所在地"
+                android:textColor="@color/white"
+                android:textSize="14dp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="right|center_vertical"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/create_club_page_location_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:gravity="right|center_vertical"
+                    android:textColor="@color/white"
+                    android:textSize="14dp" />
+
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/create_club_page_location_iv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_margin="5dp"
+                    android:layout_weight="0.5"
+                    android:gravity="right"
+                    android:rotation="180"
+                    android:scaleType="fitStart"
+                    android:src="@drawable/return_arrow" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btnCreateClub"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_red"
+            android:text="完成"
+            android:textColor="@color/white"
+            android:textSize="18dp" />
+
+    </LinearLayout>
 
 </LinearLayout>
