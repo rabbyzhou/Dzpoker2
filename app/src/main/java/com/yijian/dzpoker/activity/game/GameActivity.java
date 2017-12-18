@@ -62,6 +62,7 @@ import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoManageActivity;
+import com.yijian.dzpoker.baselib.debug.Logger;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.service.SocketService;
 import com.yijian.dzpoker.util.DisplayHelper;
@@ -115,6 +116,7 @@ import static com.yijian.dzpoker.util.Util.calculatePopWindowPos;
 
 public class GameActivity extends BaseToolbarActivity {
 
+    private static final String TAG = "GameActivity";
     private LinearLayout layout_parent;
     private PopupWindow popupWindow,popMenu,popApplyWindow;
     private SocketService.SocketBinder myBinder;
@@ -1436,13 +1438,14 @@ public class GameActivity extends BaseToolbarActivity {
                             //创建牌局返回,的调用进去牌桌接口
                             JSONObject jsonReturn=new JSONObject(recData[1]);
                             if (jsonReturn.getInt("ret")==0){
-                                String msg = "$" + Constant.GAME_ENTER_TABLE + "|";
+                                String msg = Constant.GAME_ENTER_TABLE + "|";
                                 JSONObject jsonSend = new JSONObject();
                                 jsonSend.put("userid", application.getUserId());
                                 jsonSend.put("tableid", gameId);
                                 jsonSend.put("nickname",application.getUser().nickName);
                                 jsonSend.put("headpic",application.getUser().userHeadPic);
                                 msg+=jsonSend.toString().replace("$","￥");
+                                msg += "$";
                                 myBinder.sendInfo(msg);
 
 
@@ -1852,11 +1855,13 @@ public class GameActivity extends BaseToolbarActivity {
                         if (operation==1){
                             //创建牌局
                             try {
-                                String msg = "$" + Constant.GAME_CREATE_TABLE + "|";
+                                String msg = Constant.GAME_CREATE_TABLE + "|";
                                 JSONObject jsonObject = new JSONObject();
                                 jsonObject.put("userid", application.getUserId());
                                 jsonObject.put("tableid", gameId);
                                 msg+=jsonObject.toString().replace("$","￥");
+                                msg += "$";
+                                Logger.i(TAG, "create table msg : " + msg);
                                 myBinder.sendInfo(msg);
                             }catch (Exception e){
                                 ToastUtil.showToastInScreenCenter(GameActivity.this,"创建牌局失败！");
@@ -1865,13 +1870,14 @@ public class GameActivity extends BaseToolbarActivity {
                         }else if (operation==2){
                             //加入牌局,要判断自己是否还在牌局中
                             try {
-                                String msg = "$" + Constant.GAME_ENTER_TABLE + "|";
+                                String msg = Constant.GAME_ENTER_TABLE + "|";
                                 JSONObject jsonSend = new JSONObject();
                                 jsonSend.put("userid", application.getUserId());
                                 jsonSend.put("tableid", gameId);
                                 jsonSend.put("nickname",application.getUser().nickName);
                                 jsonSend.put("headpic",application.getUser().userHeadPic);
                                 msg+=jsonSend.toString().replace("$","￥");
+                                msg += "$";
                                 myBinder.sendInfo(msg);
                             }catch (Exception e){
                                 ToastUtil.showToastInScreenCenter(GameActivity.this,"加入牌局失败！");
@@ -2101,13 +2107,14 @@ public class GameActivity extends BaseToolbarActivity {
                         handler.sendEmptyMessage(MESSAGE_DISMISS_POPMENU);
                         try{
                             //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                            String msg = "$" + Constant.GAME_LEAVE_SEAT + "|";
+                            String msg = Constant.GAME_LEAVE_SEAT + "|";
 
                             JSONObject jsonSend = new JSONObject();
                             jsonSend.put("userid", application.getUserId());
                             jsonSend.put("tableid", gameId);
                             jsonSend.put("seatindex",getUserIndex());
                             msg+=jsonSend.toString().replace("$","￥");
+                            msg += "$";
                             myBinder.sendInfo(msg);
                         }catch (Exception e){
                             ToastUtil.showToastInScreenCenter(GameActivity.this,"离开座位出错！");
@@ -2126,7 +2133,7 @@ public class GameActivity extends BaseToolbarActivity {
                         handler.sendEmptyMessage(MESSAGE_DISMISS_POPMENU);
                         try{
                             //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                            String msg = "$" + Constant.GAME_HOLD_SEAT + "|";
+                            String msg = Constant.GAME_HOLD_SEAT + "|";
 
                             JSONObject jsonSend = new JSONObject();
                             jsonSend.put("userid", application.getUserId());
@@ -2134,6 +2141,7 @@ public class GameActivity extends BaseToolbarActivity {
                             jsonSend.put("seatindex",getUserIndex());
                             jsonSend.put("holdseconds",0);
                             msg+=jsonSend.toString().replace("$","￥");
+                            msg += "$";
                             myBinder.sendInfo(msg);
                         }catch (Exception e){
                             ToastUtil.showToastInScreenCenter(GameActivity.this,"离开座位出错！");
@@ -2163,11 +2171,12 @@ public class GameActivity extends BaseToolbarActivity {
                                         try{
 
                                             //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                                            String msg = "$" + Constant.GAME_DISPOSE_TABLE + "|";
+                                            String msg = Constant.GAME_DISPOSE_TABLE + "|";
                                             JSONObject jsonSend = new JSONObject();
                                             jsonSend.put("userid", application.getUserId());
                                             jsonSend.put("tableid", gameId);
                                             msg+=jsonSend.toString().replace("$","￥");
+                                            msg += "$";
                                             myBinder.sendInfo(msg);
                                         }catch (Exception e){
                                             ToastUtil.showToastInScreenCenter(GameActivity.this,"解散房间出错！");
@@ -2201,11 +2210,12 @@ public class GameActivity extends BaseToolbarActivity {
                         try{
                             handler.sendEmptyMessage(MESSAGE_DISMISS_POPMENU);
                             //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                            String msg = "$" + Constant.GAME_LEAVE_TABLE + "|";
+                            String msg = Constant.GAME_LEAVE_TABLE + "|";
                             JSONObject jsonSend = new JSONObject();
                             jsonSend.put("userid", application.getUserId());
                             jsonSend.put("tableid", gameId);
                             msg+=jsonSend.toString().replace("$","￥");
+                            msg += "$";
                             myBinder.sendInfo(msg);
                         }catch (Exception e){
                             ToastUtil.showToastInScreenCenter(GameActivity.this,"离开座位出错！");
@@ -2284,7 +2294,7 @@ public class GameActivity extends BaseToolbarActivity {
                     //发送坐下
                     try{
                         //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                        String msg = "$" + Constant.GAME_SIT_SEAT + "|";
+                        String msg = Constant.GAME_SIT_SEAT + "|";
                         /* public class SitSeatParam
                         {
                             public int userid;
@@ -2306,6 +2316,7 @@ public class GameActivity extends BaseToolbarActivity {
                         jsonSend.put("gpsx",application.getLatitude());
                         jsonSend.put("gpsy",application.getLongitude());
                         msg+=jsonSend.toString().replace("$","￥");
+                        msg += "$";
                         myBinder.sendInfo(msg);
                     }catch (Exception e){
                         ToastUtil.showToastInScreenCenter(GameActivity.this,"坐下座位出错！");
@@ -3022,11 +3033,12 @@ public class GameActivity extends BaseToolbarActivity {
             public void onClick(View v) {
                 //GAME_START_TABLE
                 try {
-                    String msg = "$" + Constant.GAME_START_TABLE + "|";
+                    String msg = Constant.GAME_START_TABLE + "|";
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("userid", application.getUserId());
                     jsonObject.put("tableid", gameId);
                     msg+=jsonObject.toString().replace("$","￥");
+                    msg += "$";
                     myBinder.sendInfo(msg);
                 }catch (Exception e){
                     ToastUtil.showToastInScreenCenter(GameActivity.this,"开始牌局失败！");
@@ -3392,12 +3404,13 @@ public class GameActivity extends BaseToolbarActivity {
             public void onClick(View v) {
                 //发送回到座位
                 try{
-                    String msg = "$" + Constant.GAME_BACK_SEAT + "|";
+                    String msg = Constant.GAME_BACK_SEAT + "|";
                     JSONObject jsonSend = new JSONObject();
                     jsonSend.put("userid", application.getUserId());
                     jsonSend.put("tableid", gameId);
                     jsonSend.put("seatindex",getUserIndex());
                      msg+=jsonSend.toString().replace("$","￥");
+                     msg += "$";
                     myBinder.sendInfo(msg);
                 }catch (Exception e){
                     ToastUtil.showToastInScreenCenter(GameActivity.this,"返回座位出错！");

@@ -1,23 +1,13 @@
 package com.yijian.dzpoker.service;
 
 import android.app.Service;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.icu.text.IDNA;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Binder;
 import android.os.IBinder;
-import android.support.annotation.IntDef;
 import android.support.annotation.Nullable;
-import android.util.Log;
 
-
-import com.yijian.dzpoker.constant.Constant;
+import com.yijian.dzpoker.baselib.debug.Logger;
 import com.yijian.dzpoker.util.Util;
-
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -37,21 +27,20 @@ import java.util.Arrays;
 
 public class SocketService extends Service implements Runnable {
 
+    private static final String TAG = "SocketService";
     private Socket socket;
     private BufferedReader reader;//
     private PrintWriter writer;//
     //private Binder binder;
 
     private SocketBinder mBinder = new SocketBinder();
-
-    public static final String TAG = "SocketService";
     private Callback callback;
 
     private Thread td;// 线程，获取服务器端发送来的消息
 
     private String workStatus;// 当前工作状况，null表示正在处理，success表示处理成功，failure表示处理失败
     private String currAction; //标记当前请求头信息，在获取服务器端反馈的数据后，进行验证，以免出现反馈信息和当前请求不一致问题。比如现在发送第二个请求，但服务器端此时才响应第一个请求
-    private String  recMsg;
+    private String recMsg;
     private String serverIP;
     private int serverPort;
 
@@ -66,10 +55,10 @@ public class SocketService extends Service implements Runnable {
     public void onDestroy() {
         super.onDestroy();
         try {
-            if (socket!=null) {
+            if (socket != null) {
                 socket.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
     }
@@ -83,10 +72,10 @@ public class SocketService extends Service implements Runnable {
     @Override
     public boolean onUnbind(Intent intent) {
         try {
-            if (socket!=null) {
+            if (socket != null) {
                 socket.close();
             }
-        }catch (Exception e){
+        } catch (Exception e) {
 
         }
         return super.onUnbind(intent);
@@ -97,14 +86,14 @@ public class SocketService extends Service implements Runnable {
      * 连接服务器
      */
     private void connectService() {
-        Thread thread=new Thread(new Runnable() {
+        Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    recMsg="";
+                    recMsg = "";
                     //recMsg="fdsfsdf$sfsfsfs$dffsdfds";//创建service的时候为空
                     socket = new Socket();
-                    SocketAddress socAddress = new InetSocketAddress(serverIP,serverPort);
+                    SocketAddress socAddress = new InetSocketAddress(serverIP, serverPort);
                     socket.connect(socAddress, 3000);
 
                     reader = new BufferedReader(new InputStreamReader(
@@ -142,43 +131,42 @@ public class SocketService extends Service implements Runnable {
                     if (socket.isConnected()) {// 判断socket是否连接成功
                         if (!socket.isInputShutdown()) {
                             //读取服务器端返回的信息，以$开头
-                            Boolean canRead=true;
-                            while(canRead) {
-                                int charLen=1024;
+                            Boolean canRead = true;
+                            while (canRead) {
+                                int charLen = 1024;
                                 char[] cha = new char[charLen];
-                                int len = reader.read(cha,0,charLen);//这里缓冲区设置成1024
-                                if (len<=charLen && cha[len-1]=='}' )
-                                {
-                                    canRead=false;   //判断依据：最后一个是}，或者长度小于，丢包情况下，需要等下一个完整包
+                                int len = reader.read(cha, 0, charLen);//这里缓冲区设置成1024
+                                if (len <= charLen && cha[len - 1] == '}') {
+                                    canRead = false;   //判断依据：最后一个是}，或者长度小于，丢包情况下，需要等下一个完整包
                                 }
-                                char[] recInfo=Arrays.copyOfRange(cha, 0, len);
-                                Log.v("RABBY", "receivedata"+String.valueOf(recInfo));
+                                char[] recInfo = Arrays.copyOfRange(cha, 0, len);
+                                Logger.v(TAG, "receivedata" + String.valueOf(recInfo));
                                 recMsg += String.valueOf(recInfo);
-                                Log.v("RABBY", "recMsg:"+recMsg);
+                                Logger.v(TAG, "recMsg:" + recMsg);
                             }
                             //读完之后，解析字符串，调用回调函数
 
-                            if (recMsg.length()>1){
-                                if (recMsg.indexOf("$")==-1){
+                            if (recMsg.length() > 1) {
+                                if (recMsg.indexOf("$") == -1) {
                                     //这个串是无用的串，抛弃
-                                    recMsg="";
-                                    Log.v("RABBY", "recMsg:"+recMsg);
-                                }else{
+                                    recMsg = "";
+                                    Logger.v(TAG, "recMsg:" + recMsg);
+                                } else {
                                     //截取字符串，保证从$开始
 //                                    recMsg=recMsg.substring(recMsg.indexOf("$"));
-                                    Log.v("RABBY", "recMsg:"+recMsg);
-                                    while(recMsg.indexOf("$",1)>0){
-                                        String msgInfo=recMsg.substring(0,recMsg.indexOf("$",1));
-                                        recMsg=recMsg.substring(recMsg.indexOf("$",1));
+                                    Logger.v(TAG, "recMsg:" + recMsg);
+                                    while (recMsg.indexOf("$", 1) > 0) {
+                                        String msgInfo = recMsg.substring(0, recMsg.indexOf("$", 1));
+                                        recMsg = recMsg.substring(recMsg.indexOf("$", 1));
                                         callback.onReciveData(msgInfo);
-                                        Log.v("RABBY", "Msg:"+msgInfo);
-                                        Log.v("RABBY", "recMsg:"+recMsg);
+                                        Logger.v(TAG, "Msg:" + msgInfo);
+                                        Logger.v(TAG, "recMsg:" + recMsg);
                                     }
-                                    Log.v("RABBY", "Msg:"+recMsg);
-                                    Log.v("RABBY", "recMsg:"+recMsg);
+                                    Logger.v(TAG, "Msg:" + recMsg);
+                                    Logger.v(TAG, "recMsg:" + recMsg);
 
                                     callback.onReciveData(recMsg);
-                                    recMsg="";
+                                    recMsg = "";
 
 //                                    if(recMsg.indexOf("$",1)==-1){
 //                                        //只有一个，那么则认为是一条完整消息
@@ -277,17 +265,17 @@ public class SocketService extends Service implements Runnable {
             return SocketService.this;
         }
 
-        public void connect(String IP,int port) {
-           //连接到服务器，启动读的进程
-            serverIP=IP;
-            serverPort=port;
+        public void connect(String IP, int port) {
+            //连接到服务器，启动读的进程
+            serverIP = IP;
+            serverPort = port;
             connectService();
-
 
 
         }
 
-        public void sendInfo(String msg){
+        public void sendInfo(String msg) {
+            Logger.i(TAG, "sendInfo msg : " + msg);
             sendMessage(msg);
         }
 
@@ -298,9 +286,11 @@ public class SocketService extends Service implements Runnable {
     }
 
     public static interface Callback {
-         void onReciveData(String data);
-         void onSocketError();//此方法是告诉外部socket异常，让外部进行处理
-         void onScoketConnectSuccess();
-     }
+        void onReciveData(String data);
+
+        void onSocketError();//此方法是告诉外部socket异常，让外部进行处理
+
+        void onScoketConnectSuccess();
+    }
 
 }
