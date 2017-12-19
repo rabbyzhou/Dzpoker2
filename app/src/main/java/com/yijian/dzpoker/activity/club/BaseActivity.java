@@ -21,12 +21,13 @@ import cn.jpush.im.android.api.event.LoginStateChangeEvent;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.api.BasicCallback;
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.utils.DialogCreator;
 import com.yijian.dzpoker.utils.FileHelper;
 import com.yijian.dzpoker.utils.SharePreferenceManager;
 //import com.yijian.dzpoker.utils.swipeback.app.SwipeBackActivity;
 
-public class BaseActivity extends Activity {
+public abstract class BaseActivity extends BaseBackActivity {
 
     protected int mWidth;
     protected int mHeight;

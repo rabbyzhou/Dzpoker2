@@ -1,6 +1,7 @@
 package com.yijian.dzpoker.activity.base;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -8,12 +9,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * Created by QIPU on 2017/12/14.
@@ -30,8 +35,20 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         super.setContentView(R.layout.activity_base_toolbar);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+            Window window = getWindow();
+            WindowManager.LayoutParams layoutParams = window.getAttributes();
             layoutParams.flags = (WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS | layoutParams.flags);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                // 因为EMUI3.1系统与这种沉浸式方案API有点冲突，会没有沉浸式效果。
+                // 所以这里加了判断，EMUI3.1系统不清除FLAG_TRANSLUCENT_STATUS
+                if (!isEMUI3_1()) {
+                    window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+                }
+                window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.TRANSPARENT);
+            }
         }
         initToolbar();
     }
@@ -118,4 +135,29 @@ public abstract class BaseToolbarActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
     }
+
+    public static boolean isEMUI3_1() {
+        return "EmotionUI_3.1".equals(getEmuiVersion());
+    }
+
+    private static String getEmuiVersion(){
+        Class<?> classType = null;
+        try {
+            classType = Class.forName("android.os.SystemProperties");
+            Method getMethod = classType.getDeclaredMethod("get", String.class);
+            return (String)getMethod.invoke(classType, "ro.build.version.emui");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+        return "";
+    }
+
 }
