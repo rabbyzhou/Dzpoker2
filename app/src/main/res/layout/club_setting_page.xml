@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <com.yijian.dzpoker.baselib.widget.CustomCircleImageView
+        android:id="@+id/club_setting_page_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:src="@drawable/default_male_head"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@color/main_bg_secondary">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_setting_page_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="俱乐部名称"/>
+
+        <android.support.v7.widget.AppCompatEditText
+            android:id="@+id/club_info_page_club_name_et"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="俱乐部名称"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="@color/main_bg_secondary">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="所在地"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_setting_page_club_loc"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="所在地"/>
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:paddingLeft="10dp"
+        android:gravity="left|center_vertical"
+        android:background="@color/main_bg_secondary"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:text="俱乐部简介"/>
+    
+    <android.support.v7.widget.AppCompatEditText
+        android:id="@+id/club_setting_page_club_desc"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@color/main_bg_secondary"
+        android:layout_margin="10dp"
+        android:padding="5dp"
+        android:lines="5"/>
+
+    <Button
+        android:id="@+id/club_setting_page_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:background="@drawable/button_red"
+        android:text="确定"
+        android:textColor="@color/white"
+        android:textSize="18dp" />
+
+</LinearLayout>

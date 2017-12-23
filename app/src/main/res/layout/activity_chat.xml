@@ -72,6 +72,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <!--<include layout="@layout/chat_page_gambling_button" />-->
+
                 <com.yijian.dzpoker.view.listview.DropDownListView
                     android:id="@+id/lv_chat"
                     android:layout_width="match_parent"
@@ -97,6 +99,8 @@
                     android:text="有人@我"
                     android:textColor="#fff"
                     android:visibility="gone" />
+
+                <include layout="@layout/chat_page_gambling_button" />
             </FrameLayout>
         </LinearLayout>
 

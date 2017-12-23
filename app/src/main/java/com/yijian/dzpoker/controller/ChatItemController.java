@@ -552,7 +552,7 @@ public class ChatItemController {
     }
 
     //小视频
-//    public void handleVideo(final Message msg, final ViewHolder holder, int position) {
+//    public void handleVideo(final Message msg, final ExistTypeViewHolder holder, int position) {
 //        FileContent fileContent = (FileContent) msg.getContent();
 //        String videoPath = fileContent.getLocalPath();
 //        if (videoPath != null) {

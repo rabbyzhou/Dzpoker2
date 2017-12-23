@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_window"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="头像"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <com.yijian.dzpoker.baselib.widget.CustomCircleImageView
+            android:id="@+id/my_info_page_icon_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@+id/my_info_page_icon_narrow"
+            android:src="@drawable/default_male_head" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/my_info_page_icon_narrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="头像"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/my_info_page_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@+id/my_info_page_name_narrow"
+            android:gravity="center"
+            android:text="昵称"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/my_info_page_name_narrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_account"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="登陆账号"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/my_info_page_account_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_sex"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="性别"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <com.yijian.dzpoker.ui.SwitchButton
+            android:id="@+id/my_info_page_sex_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp">
+
+        </com.yijian.dzpoker.ui.SwitchButton>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_loc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="所在地"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/my_info_page_loc_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@+id/my_info_page_loc_narrow"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/my_info_page_loc_narrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_signature"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="个性签名"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/my_info_page_signature_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:layout_toLeftOf="@+id/my_info_page_signature_narrow"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/my_info_page_signature_narrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:rotation="180"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+    <RelativeLayout
+        android:id="@+id/my_info_page_level"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text="登陆账号"
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/my_info_page_level_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/white"
+            android:textSize="16dp" />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray" />
+
+</LinearLayout>

@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:toggle="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/main_bg">
+
+    <com.yijian.dzpoker.baselib.widget.CustomCircleImageView
+        android:id="@+id/club_info_page_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:src="@drawable/default_male_head"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_info_page_club_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:text="俱乐部" />
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_info_page_id_and_loc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_margin="10dp"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:text="俱乐部"/>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="会长"/>
+        <com.yijian.dzpoker.baselib.widget.CustomCircleImageView
+            android:id="@+id/club_info_page_master_icon"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/default_male_head"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_info_page_master_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="会长"/>
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_info_page_club_level"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="俱乐部等级"/>
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_info_page_club_level_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/club_info_page_club_level"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="俱乐部等级"/>
+
+        <android.support.v7.widget.AppCompatImageView
+            android:id="@+id/club_info_page_club_level_narrow"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow"
+            android:rotation="180"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:background="@color/default_cursor_color">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="会员"
+            />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:id="@+id/club_info_page_club_mem"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="会员"
+            />
+
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/club_info_page_club_mem_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/default_cursor_color"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:text="介绍"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_info_page_club_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:text="介绍"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:text="新消息通知"
+            android:textColor="@color/white"
+            android:textSize="16dp"
+            />
+
+        <com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch
+            android:id="@+id/sb_audio"
+            android:layout_width="54dp"
+            toggle:tbOnColor="#2DD0CF"
+            toggle:tbOffColor="#332e4f"
+            toggle:tbSpotColor="#fff"
+            toggle:tbOffBorderColor="#fff"
+            toggle:tbBorderWidth="1dp"
+            toggle:tbAsDefaultOn="true"
+            android:layout_height="30dp"
+            android:layout_marginRight="10dp">
+
+        </com.yijian.dzpoker.baselib.widget.switchbutton.IosLikeSwitch>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/white" />
+
+    <RelativeLayout
+        android:id="@+id/club_info_page_clear_chat_history"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:layout_alignParentLeft="true"
+            android:gravity="center"
+            android:textSize="16dp"
+            android:textColor="@color/white"
+            android:text="俱乐部等级"/>
+
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/return_arrow"
+            android:rotation="180"/>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/default_cursor_color"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_info_page_quit_club"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:text="推出俱乐部"/>
+
+</LinearLayout>

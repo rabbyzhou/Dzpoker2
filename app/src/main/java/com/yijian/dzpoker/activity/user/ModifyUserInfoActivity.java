@@ -23,6 +23,7 @@ import com.squareup.picasso.Picasso;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
 import com.yijian.dzpoker.activity.club.SelectProvinceActivity;
+import com.yijian.dzpoker.baselib.widget.CustomCircleImageView;
 import com.yijian.dzpoker.ui.SwitchButton;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.util.FileHelper;
@@ -46,12 +47,12 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class ModifyUserInfoActivity extends BaseBackActivity {
-    private ImageView iv_user_head;
-    private EditText et_user_nickname,et_user_account,et_user_location,et_user_personaltip;
+    private CustomCircleImageView iv_user_head;
+    private EditText et_user_nickname, et_user_account, et_user_location, et_user_personaltip;
     private SwitchButton sb_sex;
     private TextView tv_user_level;
     private Button btn_save;
-    private String mProvince,mCity,mLocation;
+    private String mProvince, mCity, mLocation;
     private LinearLayout layout_window;//弹出窗体需要一个父窗体做基准
     private PopupWindow popupWindow;
     private Uri mCurrentPhotoUri;//裁剪后的照片路径
@@ -65,20 +66,19 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mProvince=application.getUser().province;
-        mCity=application.getUser().city;
+        mProvince = application.getUser().province;
+        mCity = application.getUser().city;
         //初始化界面的值
         et_user_nickname.setText(application.getUser().nickName);
         et_user_account.setText(application.getUser().userLoginName);
 
         //此处数据库默认性别为男
-        if (application.getUser().sex==null){
+        if (application.getUser().sex == null) {
             sb_sex.setOn(true);
-        }else{
-            if (application.getUser().sex.equals("女"))
-            {
+        } else {
+            if (application.getUser().sex.equals("女")) {
                 sb_sex.setOn(false);
-            }else{
+            } else {
                 sb_sex.setOn(true);
             }
         }
@@ -90,27 +90,25 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_modify_user_info;
+        return R.layout.my_info_page;
     }
-
-
 
 
     @Override
     protected void initViews() {
         super.initViews();
-        iv_user_head=(ImageView)findViewById(R.id.iv_user_head);
-        et_user_nickname=(EditText)findViewById(R.id.et_user_nickname);
-        et_user_account=(EditText)findViewById(R.id.et_user_account);
-        et_user_location=(EditText)findViewById(R.id.et_user_location);
-        et_user_personaltip=(EditText)findViewById(R.id.et_user_personaltip);
-        tv_user_level=(TextView)findViewById(R.id.tv_user_level);
-        btn_save=(Button)findViewById(R.id.btn_save);
-        layout_window=(LinearLayout)findViewById(R.id.layout_window);
-        sb_sex=(SwitchButton)findViewById(R.id.sb_sex) ;
+        iv_user_head = (CustomCircleImageView) findViewById(R.id.my_info_page_icon_icon);
+        et_user_nickname = (EditText) findViewById(R.id.my_info_page_name_tv);
+        et_user_account = (EditText) findViewById(R.id.my_info_page_account_tv);
+        et_user_location = (EditText) findViewById(R.id.my_info_page_loc_tv);
+//        et_user_personaltip=(EditText)findViewById(R.id.et_user_personaltip);
+        tv_user_level = (TextView) findViewById(R.id.my_info_page_level_tv);
+//        btn_save=(Button)findViewById(R.id.btn_save);
+        layout_window = (LinearLayout) findViewById(R.id.layout_window);
+        sb_sex = (SwitchButton) findViewById(R.id.my_info_page_sex_btn);
         sb_sex.setImage(R.drawable.switch_bg2);
 
-        btn_save.setOnClickListener(this);
+//        btn_save.setOnClickListener(this);
         et_user_location.setOnClickListener(this);
         iv_user_head.setOnClickListener(this);
 
@@ -118,13 +116,11 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.btn_save:
-                Thread thread=new Thread(new Runnable()
-                {
+                Thread thread = new Thread(new Runnable() {
                     @Override
-                    public void run()
-                    {
+                    public void run() {
                         modifyUserInfo();
                     }
                 });
@@ -133,10 +129,10 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                 break;
             case R.id.et_user_location: //设置location
                 Intent intent = new Intent();
-                intent.putExtra("opType",1 );
+                intent.putExtra("opType", 1);
 //                        intent.putExtra("phonenumber", edUserName.getText().toString());
                 intent.setClass(ModifyUserInfoActivity.this, SelectProvinceActivity.class);
-                startActivityForResult(intent,  REQUEST_LOCATION_SELECT);
+                startActivityForResult(intent, REQUEST_LOCATION_SELECT);
                 break;
             case R.id.iv_user_head://替换头像
                 showWindow(layout_window);
@@ -148,11 +144,11 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
 
     }
 
-    private void modifyUserInfo(){
+    private void modifyUserInfo() {
 
-        try{
-            String head_path=application.getUser().userHeadPic;
-            if (mCurrentPhotoUri!=null) {
+        try {
+            String head_path = application.getUser().userHeadPic;
+            if (mCurrentPhotoUri != null) {
                 String ss = mCurrentPhotoUri.toString();
                 File file = new File(URI.create(mCurrentPhotoUri.toString()));
 
@@ -181,28 +177,28 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                     ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "上传头像失败，请稍后重试!错误原因为：" + response.body().string());
                     return;
                 }
-                String result=response.body().string();
+                String result = response.body().string();
                 JSONObject json = new JSONObject(result);
                 int ret = json.getInt("ret");
                 if (ret != 0) {
                     ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "上传头像失败，请稍后重试!");
                     return;
                 }
-                head_path=json.getString("path");
+                head_path = json.getString("path");
             }
 
-            JSONObject jsonParam= new JSONObject();
-            jsonParam.put("userid",application.getUserId());
-            jsonParam.put("nickname",et_user_nickname.getText().toString());
+            JSONObject jsonParam = new JSONObject();
+            jsonParam.put("userid", application.getUserId());
+            jsonParam.put("nickname", et_user_nickname.getText().toString());
             if (sb_sex.isOn()) {
-                jsonParam.put("sex","男");
-            }else{
-                jsonParam.put("sex","女");
+                jsonParam.put("sex", "男");
+            } else {
+                jsonParam.put("sex", "女");
             }
-            jsonParam.put("headpic",head_path);
-            jsonParam.put("personaltip",et_user_personaltip.getText().toString());
-            jsonParam.put("province",mProvince);
-            jsonParam.put("city",mCity);
+            jsonParam.put("headpic", head_path);
+            jsonParam.put("personaltip", et_user_personaltip.getText().toString());
+            jsonParam.put("province", mProvince);
+            jsonParam.put("city", mCity);
 
                     /*Int userid;
                         String nickname
@@ -212,16 +208,16 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                         String personaltip
                         String headpic
                     */
-            String strURL=getString(R.string.url_remote)+"func=modifyuserinfo&param="+jsonParam.toString();
+            String strURL = getString(R.string.url_remote) + "func=modifyuserinfo&param=" + jsonParam.toString();
             URL url = new URL(strURL);
             Request request = new Request.Builder().url(strURL).build();
             Response response = DzApplication.getHttpClient().newCall(request).execute();
-            String result=response.body().string();
+            String result = response.body().string();
 
-            JSONObject jsonResult=new JSONObject(result);
-            if (jsonResult.getInt("ret")!=0){
-                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息出错，错误内容:"+jsonResult.getString("msg"));
-            }else{
+            JSONObject jsonResult = new JSONObject(result);
+            if (jsonResult.getInt("ret") != 0) {
+                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "修改用户信息出错，错误内容:" + jsonResult.getString("msg"));
+            } else {
                /*UserInfo userInfo= JMessageClient.getMyInfo();
                 userInfo.setNickname(et_user_nickname.getText().toString());
                 JMessageClient.updateMyInfo(UserInfo.Field.nickname, userInfo, new BasicCallback() {
@@ -233,14 +229,13 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                         }
                     }
                 });*/
-               ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息成功");
+                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "修改用户信息成功");
             }
             //发送修改成功，主要是扣除钻石，展现钻石数
 
 
-
-        }catch (Exception e){
-            ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"修改用户信息出错，请稍后重试!");
+        } catch (Exception e) {
+            ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "修改用户信息出错，请稍后重试!");
         }
 
     }
@@ -251,7 +246,7 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
         View contentView = getPopupWindowContentView();
 //        popupWindow = new PopupWindow(contentView,getResources().getDisplayMetrics().widthPixels-160,240
 //                , true);
-        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT ,ViewGroup.LayoutParams.WRAP_CONTENT
+        popupWindow = new PopupWindow(contentView, ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT
                 , true);
         popupWindow.setFocusable(true);
         // 设置允许在外点击消失
@@ -261,9 +256,9 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
         // 设置好参数之后再show
 
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
-        int xOffset = parent.getWidth()  - contentView.getMeasuredWidth() ;
+        int xOffset = parent.getWidth() - contentView.getMeasuredWidth();
         //popupWindow.showAsDropDown(parent,xOffset,20);    // 在mButton2的中间显示
-        popupWindow.showAtLocation(parent, Gravity.CENTER,0,0);
+        popupWindow.showAtLocation(parent, Gravity.CENTER, 0, 0);
     }
 
     private View getPopupWindowContentView() {
@@ -300,25 +295,25 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode==REQUEST_LOCATION_SELECT && resultCode==1) {
+        if (requestCode == REQUEST_LOCATION_SELECT && resultCode == 1) {
             //刷新界面的数据
-            mProvince=data.getExtras().getString("province");
-            mCity=data.getExtras().getString("city");
+            mProvince = data.getExtras().getString("province");
+            mCity = data.getExtras().getString("city");
             et_user_location.setText(data.getExtras().getString("location"));
 
-        }else  if(requestCode==Crop.REQUEST_PICK && resultCode == RESULT_OK) {
+        } else if (requestCode == Crop.REQUEST_PICK && resultCode == RESULT_OK) {
             //选择照片返回
             // 裁剪
             beginCrop(data.getData());
-        } else if(requestCode==REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
+        } else if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
             //照相机返回，调用裁剪
             beginCrop(mCameraPhotoUri);
-        } else if(requestCode==Crop.REQUEST_CROP) {
+        } else if (requestCode == Crop.REQUEST_CROP) {
             //裁剪返回，更新界面
             //iv_club_head.setImageURI( Uri.fromFile(new File(getCacheDir(), "cropped")))
-            if (resultCode == Crop.RESULT_ERROR){
-                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this,"选择的图片不符合标准，建议使用照相机进行拍摄！");
-            }else {
+            if (resultCode == Crop.RESULT_ERROR) {
+                ToastUtil.showToastInScreenCenter(ModifyUserInfoActivity.this, "选择的图片不符合标准，建议使用照相机进行拍摄！");
+            } else {
                 Picasso.with(ModifyUserInfoActivity.this)
                         .load(mCurrentPhotoUri)
                         .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
@@ -332,7 +327,7 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
     }
 
     private void beginCrop(Uri source) {
-        mCurrentPhotoUri = Uri.fromFile(FileHelper.getTempFile(getApplicationContext(),new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date())+".jpg"));
+        mCurrentPhotoUri = Uri.fromFile(FileHelper.getTempFile(getApplicationContext(), new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date()) + ".jpg"));
         Crop.of(source, mCurrentPhotoUri).asSquare().start(this);
     }
 }

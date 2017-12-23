@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AbsListView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.sj.emoji.EmojiBean;
@@ -42,6 +43,7 @@ import cn.jpush.im.android.api.model.Message;
 import cn.jpush.im.android.api.model.UserInfo;
 import cn.jpush.im.android.eventbus.EventBus;
 import cn.jpush.im.api.BasicCallback;
+
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.adapter.ChattingListAdapter;
 import com.yijian.dzpoker.util.DzApplication;
@@ -60,8 +62,8 @@ import com.yijian.dzpoker.ui.keyboard.widget.EmoticonsEditText;
 import com.yijian.dzpoker.ui.keyboard.widget.FuncLayout;
 import com.yijian.dzpoker.ui.ChatView;
 import com.yijian.dzpoker.view.SimpleAppsGridView;
-import  com.yijian.dzpoker.view.TipItem;
-import  com.yijian.dzpoker.view.TipView;
+import com.yijian.dzpoker.view.TipItem;
+import com.yijian.dzpoker.view.TipView;
 import com.yijian.dzpoker.view.listview.DropDownListView;
 
 
@@ -105,11 +107,13 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
     private GroupInfo mGroupInfo;
     private UserInfo mMyInfo;
     private static final String GROUP_ID = "groupId";
-//    private int mAtMsgId;
+    //    private int mAtMsgId;
 //    private int mAtAllMsgId;
 //    private int mUnreadMsgCnt;
     private boolean mShowSoftInput = false;
     private List<UserInfo> forDel = new ArrayList<>();
+
+    private RelativeLayout gamblingBtn;
 
     Window mWindow;
     InputMethodManager mImm;
@@ -144,11 +148,18 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
         mTargetAppKey = intent.getStringExtra(TARGET_APP_KEY);
         mTitle = intent.getStringExtra(DzApplication.CONV_TITLE);
         mMyInfo = JMessageClient.getMyInfo();
+        setToolbarTitle(application.getClubInfo().clubName);
+        showToolbarRightTextView("详情", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startChatDetailActivity(mTargetId, mTargetAppKey, mGroupId);
+            }
+        });
         if (!TextUtils.isEmpty(mTargetId)) {
             //单聊
             mIsSingle = true;
             mChatView.setChatTitle(mTitle);
-            setToolbarTitle(mTitle);
+//            setToolbarTitle(mTitle);
             mConv = JMessageClient.getSingleConversation(mTargetId, mTargetAppKey);
             if (mConv == null) {
                 mConv = Conversation.createSingleConversation(mTargetId, mTargetAppKey);
@@ -157,15 +168,15 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
         } else {
             //群聊
             mIsSingle = false;
-            int  clubID=intent.getIntExtra("clubid", 0);
+            int clubID = intent.getIntExtra("clubid", 0);
             //mGroupId = intent.getLongExtra(GROUP_ID, 0);//这样取不到值得，必须用getIntExtra
             mGroupId = intent.getLongExtra(GROUP_ID, 0);
             final boolean fromGroup = intent.getBooleanExtra("fromGroup", false);
             if (fromGroup) {
                 mChatView.setChatTitle(mTitle, intent.getIntExtra(MEMBERS_COUNT, 0));
-                setToolbarTitle(mTitle);
+//                setToolbarTitle(mTitle);
                 mConv = JMessageClient.getGroupConversation(mGroupId);
-                mChatAdapter= new ChattingListAdapter(mContext, mConv, longClickListener);//长按聊天内容监听
+                mChatAdapter = new ChattingListAdapter(mContext, mConv, longClickListener);//长按聊天内容监听
             } else {
 //                mAtMsgId = intent.getIntExtra("atMsgId", -1);
 //                mAtAllMsgId = intent.getIntExtra("atAllMsgId", -1);
@@ -176,19 +187,19 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
                     //如果自己在群聊中，聊天标题显示群人数
                     if (userInfo != null) {
                         if (!TextUtils.isEmpty(groupInfo.getGroupName())) {
-                            setToolbarTitle(mTitle);
+//                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle, groupInfo.getGroupMembers().size());
                         } else {
-                            setToolbarTitle(mTitle);
+//                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle, groupInfo.getGroupMembers().size());
                         }
                         mChatView.showRightBtn();
                     } else {
                         if (!TextUtils.isEmpty(mTitle)) {
-                            setToolbarTitle(mTitle);
+//                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle);
                         } else {
-                            setToolbarTitle(getResources().getString(R.string.group));
+//                            setToolbarTitle(getResources().getString(R.string.group));
                             mChatView.setChatTitle(R.string.group);
                         }
                         mChatView.dismissRightBtn();
@@ -214,7 +225,7 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
 //                    }
 //                    mChatAdapter = new ChattingListAdapter(mContext, mConv, longClickListener, mAtMsgId);
 //                } else {
-                   mChatAdapter = new ChattingListAdapter(mContext, mConv, longClickListener);
+                mChatAdapter = new ChattingListAdapter(mContext, mConv, longClickListener);
 //                }
 
             }
@@ -241,6 +252,8 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
     }
 
     private void initView() {
+        gamblingBtn = (RelativeLayout) findViewById(R.id.chat_page_gambling_button);
+        gamblingBtn.setOnClickListener(this);
         lvChat = (DropDownListView) findViewById(R.id.lv_chat);
         ekBar = (XhsEmoticonsKeyBoard) findViewById(R.id.ek_bar);
         initEmoticonsKeyBoardBar();
@@ -369,6 +382,11 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
 //                    mChatView.setToPosition(mAtMsgId + mUnreadMsgCnt - mConv.getLatestMessage().getId());
 //                }
 //                break;
+            case R.id.chat_page_gambling_button:
+                Intent intent = new Intent();
+                intent.setClass(ChatActivity.this, GamblingListActivity.class);
+                startActivity(intent);
+                break;
             default:
                 break;
         }
@@ -408,12 +426,12 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
 
     public void startChatDetailActivity(String targetId, String appKey, long groupId) {
         //进入ChatDetail
-//        Intent intent = new Intent();
+        Intent intent = new Intent();
 //        intent.putExtra(TARGET_ID, targetId);
 //        intent.putExtra(TARGET_APP_KEY, appKey);
 //        intent.putExtra(GROUP_ID, groupId);
-//        intent.setClass(this, ChatDetailActivity.class);
-//        startActivityForResult(intent, DzApplication.REQUEST_CODE_CHAT_DETAIL);
+        intent.setClass(this, ClubInfoDetailActivity.class);
+        startActivityForResult(intent, DzApplication.REQUEST_CODE_CHAT_DETAIL);
     }
 
     EmoticonClickListener emoticonClickListener = new EmoticonClickListener() {

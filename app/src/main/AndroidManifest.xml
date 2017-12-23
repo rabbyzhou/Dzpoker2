@@ -170,7 +170,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.club.ChatActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"/>
         <!--<activity-->
             <!--android:name=".activity.club.BaseActivity"-->
             <!--android:screenOrientation="portrait" />-->
@@ -223,7 +223,8 @@
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"/>
-        <activity android:name=".activity.base.BaseToolbarActivity" />
+        <activity android:name=".activity.club.ClubInfoDetailActivity" />
+        <activity android:name=".activity.club.GamblingListActivity" />
     </application>
 
 </manifest>

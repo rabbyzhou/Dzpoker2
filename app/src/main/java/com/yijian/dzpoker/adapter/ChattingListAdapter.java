@@ -110,13 +110,15 @@ public class ChattingListAdapter extends BaseAdapter {
         mWidth = dm.widthPixels;
         mInflater = LayoutInflater.from(mContext);
         this.mConv = conv;
-        this.mMsgList = mConv.getMessagesFromNewest(0, mOffset);
+        if (null != mConv) {
+            this.mMsgList = mConv.getMessagesFromNewest(0, mOffset);
+        }
         reverse(mMsgList);
         mLongClickListener = longClickListener;
         this.mController = new ChatItemController(this, context, conv, mMsgList, dm.density,
                 longClickListener);
         mStart = mOffset;
-        if (mConv.getType() == ConversationType.single) {
+        if (null != mConv && mConv.getType() == ConversationType.single) {
             UserInfo userInfo = (UserInfo) mConv.getTargetInfo();
             if (!TextUtils.isEmpty(userInfo.getAvatar())) {
                 userInfo.getAvatarBitmap(new GetAvatarBitmapCallback() {
@@ -130,8 +132,10 @@ public class ChattingListAdapter extends BaseAdapter {
             }
         } else {
             //群聊
-            GroupInfo groupInfo = (GroupInfo) mConv.getTargetInfo();
-            mGroupId = groupInfo.getGroupID();
+            if (null != mConv) {
+                GroupInfo groupInfo = (GroupInfo) mConv.getTargetInfo();
+                mGroupId = groupInfo.getGroupID();
+            }
         }
         checkSendingImgMsg();
     }
@@ -146,19 +150,23 @@ public class ChattingListAdapter extends BaseAdapter {
 
         mInflater = LayoutInflater.from(mContext);
         this.mConv = conv;
-        if (mConv.getUnReadMsgCnt() > PAGE_MESSAGE_COUNT) {
+        if (null != mConv && mConv.getUnReadMsgCnt() > PAGE_MESSAGE_COUNT) {
             this.mMsgList = mConv.getMessagesFromNewest(0, mConv.getUnReadMsgCnt());
             mStart = mConv.getUnReadMsgCnt();
         } else {
-            this.mMsgList = mConv.getMessagesFromNewest(0, mOffset);
+            if (null != mConv) {
+                this.mMsgList = mConv.getMessagesFromNewest(0, mOffset);
+            }
             mStart = mOffset;
         }
         reverse(mMsgList);
         mLongClickListener = longClickListener;
         this.mController = new ChatItemController(this, context, conv, mMsgList, dm.density,
                 longClickListener);
-        GroupInfo groupInfo = (GroupInfo) mConv.getTargetInfo();
-        mGroupId = groupInfo.getGroupID();
+        if (null != mConv) {
+            GroupInfo groupInfo = (GroupInfo) mConv.getTargetInfo();
+            mGroupId = groupInfo.getGroupID();
+        }
         checkSendingImgMsg();
 
     }
@@ -219,7 +227,7 @@ public class ChattingListAdapter extends BaseAdapter {
 
         if (mMsgQueue.size() > 0) {
             Message message = mMsgQueue.element();
-            if (mConv.getType() == ConversationType.single) {
+            if (null != mConv && mConv.getType() == ConversationType.single) {
                 UserInfo userInfo = (UserInfo) message.getTargetInfo();
                 sendNextImgMsg(message);
             } else {
@@ -231,6 +239,9 @@ public class ChattingListAdapter extends BaseAdapter {
     }
 
     public void setSendMsgs(int msgIds) {
+        if (null == mConv) {
+            return;
+        }
         Message msg = mConv.getMessage(msgIds);
         if (msg != null) {
             mMsgList.add(msg);
