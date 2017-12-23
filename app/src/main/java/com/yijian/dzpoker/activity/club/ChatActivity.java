@@ -1,19 +1,14 @@
 package com.yijian.dzpoker.activity.club;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.content.ContextCompat;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -34,9 +29,7 @@ import java.util.List;
 import cn.jpush.im.android.api.JMessageClient;
 import cn.jpush.im.android.api.callback.GetGroupInfoCallback;
 import cn.jpush.im.android.api.content.EventNotificationContent;
-import cn.jpush.im.android.api.content.FileContent;
 import cn.jpush.im.android.api.content.ImageContent;
-import cn.jpush.im.android.api.content.LocationContent;
 import cn.jpush.im.android.api.content.TextContent;
 import cn.jpush.im.android.api.enums.ContentType;
 import cn.jpush.im.android.api.enums.ConversationType;
@@ -54,27 +47,17 @@ import com.yijian.dzpoker.adapter.ChattingListAdapter;
 import com.yijian.dzpoker.util.DzApplication;
 import com.yijian.dzpoker.entity.Event;
 import com.yijian.dzpoker.entity.EventType;
-//import jiguang.chat.location.activity.MapPickerActivity;
 import com.yijian.dzpoker.model.Constants;
-//import jiguang.chat.pickerimage.PickImageActivity;
-//import jiguang.chat.pickerimage.utils.Extras;
-//import jiguang.chat.pickerimage.utils.RequestCode;
-//import jiguang.chat.pickerimage.utils.SendImageHelper;
-//import jiguang.chat.pickerimage.utils.StorageType;
-//import jiguang.chat.pickerimage.utils.StorageUtil;
-//import jiguang.chat.pickerimage.utils.StringUtil;
 import com.yijian.dzpoker.utils.IdHelper;
 import com.yijian.dzpoker.utils.SimpleCommonUtils;
 import com.yijian.dzpoker.utils.ToastUtil;
 import com.yijian.dzpoker.utils.event.ImageEvent;
-//import com.yijian.dzpoker.utils.imagepicker.bean.ImageItem;
 import com.yijian.dzpoker.ui.keyboard.XhsEmoticonsKeyBoard;
 import com.yijian.dzpoker.ui.keyboard.data.EmoticonEntity;
 import com.yijian.dzpoker.ui.keyboard.interfaces.EmoticonClickListener;
 import com.yijian.dzpoker.ui.keyboard.utils.EmoticonsKeyboardUtils;
 import com.yijian.dzpoker.ui.keyboard.widget.EmoticonsEditText;
 import com.yijian.dzpoker.ui.keyboard.widget.FuncLayout;
-//import com.yijian.dzpoker.ui.photovideo.takevideo.CameraActivity;
 import com.yijian.dzpoker.ui.ChatView;
 import com.yijian.dzpoker.view.SimpleAppsGridView;
 import  com.yijian.dzpoker.view.TipItem;
@@ -135,12 +118,15 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
 
 
     @Override
+    protected int getLayoutId() {
+        return R.layout.activity_chat;
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         mContext = this;
-
-        setContentView(R.layout.activity_chat);
+        initView();
         mChatView = (ChatView) findViewById(R.id.chat_view);
         mChatView.initModule(mDensity, mDensityDpi);
 
@@ -148,7 +134,6 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
         this.mImm = (InputMethodManager) mContext.getSystemService(Context.INPUT_METHOD_SERVICE);
         mChatView.setListeners(this);
         initData();
-        initView();
 
     }
 
@@ -163,6 +148,7 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
             //单聊
             mIsSingle = true;
             mChatView.setChatTitle(mTitle);
+            setToolbarTitle(mTitle);
             mConv = JMessageClient.getSingleConversation(mTargetId, mTargetAppKey);
             if (mConv == null) {
                 mConv = Conversation.createSingleConversation(mTargetId, mTargetAppKey);
@@ -177,6 +163,7 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
             final boolean fromGroup = intent.getBooleanExtra("fromGroup", false);
             if (fromGroup) {
                 mChatView.setChatTitle(mTitle, intent.getIntExtra(MEMBERS_COUNT, 0));
+                setToolbarTitle(mTitle);
                 mConv = JMessageClient.getGroupConversation(mGroupId);
                 mChatAdapter= new ChattingListAdapter(mContext, mConv, longClickListener);//长按聊天内容监听
             } else {
@@ -189,15 +176,19 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
                     //如果自己在群聊中，聊天标题显示群人数
                     if (userInfo != null) {
                         if (!TextUtils.isEmpty(groupInfo.getGroupName())) {
+                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle, groupInfo.getGroupMembers().size());
                         } else {
+                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle, groupInfo.getGroupMembers().size());
                         }
                         mChatView.showRightBtn();
                     } else {
                         if (!TextUtils.isEmpty(mTitle)) {
+                            setToolbarTitle(mTitle);
                             mChatView.setChatTitle(mTitle);
                         } else {
+                            setToolbarTitle(getResources().getString(R.string.group));
                             mChatView.setChatTitle(R.string.group);
                         }
                         mChatView.dismissRightBtn();

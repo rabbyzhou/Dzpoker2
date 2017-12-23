@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:fitsSystemWindows="true"
     android:background="@drawable/game_bj">
 
     <!--游戏主界面
@@ -15,7 +16,7 @@
         android:layout_height="match_parent"
         >
         <RelativeLayout
-            android:layout_margin="40px"
+            android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/chess_tables"></RelativeLayout>
@@ -30,38 +31,38 @@
         <ImageView
             android:id="@+id/iv_menu"
             android:background="@drawable/menu_operate"
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:layout_marginLeft="40px"
-            android:layout_marginTop="20px"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="top|left"
             />
         <ImageView
             android:id="@+id/iv_apply"
             android:background="@drawable/rule"
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:layout_marginRight="100px"
-            android:layout_marginTop="20px"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="50dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="top|right"
             />
         <ImageView
             android:id="@+id/iv_game_info"
             android:background="@drawable/menu_operate"
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:layout_marginRight="10px"
-            android:layout_marginTop="20px"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="10dp"
             android:layout_gravity="top|right"
             />
 
         <ImageView
             android:id="@+id/iv_info"
             android:background="@drawable/menu_operate"
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:layout_marginLeft="40px"
-            android:layout_marginBottom="20px"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="bottom|left"
             />
 
@@ -69,10 +70,10 @@
         <ImageView
             android:id="@+id/iv_voice"
             android:background="@drawable/sound"
-            android:layout_width="80px"
-            android:layout_height="80px"
-            android:layout_marginRight="40px"
-            android:layout_marginBottom="20px"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
             android:layout_gravity="bottom|right"
             />
 

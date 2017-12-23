@@ -45,7 +45,7 @@ public abstract class BaseActivity extends BaseBackActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_base);
+//        setContentView(R.layout.activity_base);
         //注册sdk的event用于接收各种event事件
         JMessageClient.registerEventReceiver(this);
         DisplayMetrics dm = new DisplayMetrics();

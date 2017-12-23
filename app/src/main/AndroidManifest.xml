@@ -171,9 +171,9 @@
         <activity
             android:name=".activity.club.ChatActivity"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".activity.club.BaseActivity"
-            android:screenOrientation="portrait" />
+        <!--<activity-->
+            <!--android:name=".activity.club.BaseActivity"-->
+            <!--android:screenOrientation="portrait" />-->
         <activity
             android:name=".activity.club.AddIntoClubActivity"
             android:screenOrientation="portrait" />
