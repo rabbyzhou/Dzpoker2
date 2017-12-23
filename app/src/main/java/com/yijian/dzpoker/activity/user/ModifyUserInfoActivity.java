@@ -48,7 +48,7 @@ import okhttp3.Response;
 
 public class ModifyUserInfoActivity extends BaseBackActivity {
     private CustomCircleImageView iv_user_head;
-    private EditText et_user_nickname, et_user_account, et_user_location, et_user_personaltip;
+    private TextView et_user_nickname, et_user_account, et_user_location, et_user_personaltip;
     private SwitchButton sb_sex;
     private TextView tv_user_level;
     private Button btn_save;
@@ -83,7 +83,7 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
             }
         }
         tv_user_level.setText(application.getUser().levelname);
-        et_user_personaltip.setText(application.getUser().personalTip);
+//        et_user_personaltip.setText(application.getUser().personalTip);
         setToolbarTitle(application.getUser().levelname);
 
     }
@@ -98,9 +98,9 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
     protected void initViews() {
         super.initViews();
         iv_user_head = (CustomCircleImageView) findViewById(R.id.my_info_page_icon_icon);
-        et_user_nickname = (EditText) findViewById(R.id.my_info_page_name_tv);
-        et_user_account = (EditText) findViewById(R.id.my_info_page_account_tv);
-        et_user_location = (EditText) findViewById(R.id.my_info_page_loc_tv);
+        et_user_nickname = (TextView) findViewById(R.id.my_info_page_name_tv);
+        et_user_account = (TextView) findViewById(R.id.my_info_page_account_tv);
+        et_user_location = (TextView) findViewById(R.id.my_info_page_loc_tv);
 //        et_user_personaltip=(EditText)findViewById(R.id.et_user_personaltip);
         tv_user_level = (TextView) findViewById(R.id.my_info_page_level_tv);
 //        btn_save=(Button)findViewById(R.id.btn_save);
@@ -127,14 +127,14 @@ public class ModifyUserInfoActivity extends BaseBackActivity {
                 thread.start();
 
                 break;
-            case R.id.et_user_location: //设置location
+            case R.id.my_info_page_loc_tv: //设置location
                 Intent intent = new Intent();
                 intent.putExtra("opType", 1);
 //                        intent.putExtra("phonenumber", edUserName.getText().toString());
                 intent.setClass(ModifyUserInfoActivity.this, SelectProvinceActivity.class);
                 startActivityForResult(intent, REQUEST_LOCATION_SELECT);
                 break;
-            case R.id.iv_user_head://替换头像
+            case R.id.my_info_page_icon_icon://替换头像
                 showWindow(layout_window);
                 break;
             case R.id.tv_back:

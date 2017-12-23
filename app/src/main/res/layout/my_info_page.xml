@@ -25,7 +25,7 @@
             android:gravity="center"
             android:text="头像"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <com.yijian.dzpoker.baselib.widget.CustomCircleImageView
             android:id="@+id/my_info_page_icon_icon"
@@ -68,7 +68,7 @@
             android:gravity="center"
             android:text="头像"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/my_info_page_name_tv"
@@ -80,7 +80,7 @@
             android:gravity="center"
             android:text="昵称"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/my_info_page_name_narrow"
@@ -114,7 +114,7 @@
             android:gravity="center"
             android:text="登陆账号"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/my_info_page_account_tv"
@@ -126,7 +126,7 @@
             android:gravity="center"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
     </RelativeLayout>
 
@@ -149,7 +149,7 @@
             android:gravity="center"
             android:text="性别"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <com.yijian.dzpoker.ui.SwitchButton
             android:id="@+id/my_info_page_sex_btn"
@@ -181,7 +181,7 @@
             android:gravity="center"
             android:text="所在地"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/my_info_page_loc_tv"
@@ -193,7 +193,7 @@
             android:gravity="center"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/my_info_page_loc_narrow"
@@ -227,7 +227,7 @@
             android:gravity="center"
             android:text="个性签名"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/my_info_page_signature_tv"
@@ -239,7 +239,7 @@
             android:gravity="center"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatImageView
             android:id="@+id/my_info_page_signature_narrow"
@@ -271,9 +271,9 @@
             android:layout_centerVertical="true"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="登陆账号"
+            android:text="等级"
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/my_info_page_level_tv"
@@ -285,7 +285,7 @@
             android:gravity="center"
             android:text=""
             android:textColor="@color/white"
-            android:textSize="16dp" />
+            android:textSize="14dp" />
 
     </RelativeLayout>
 
