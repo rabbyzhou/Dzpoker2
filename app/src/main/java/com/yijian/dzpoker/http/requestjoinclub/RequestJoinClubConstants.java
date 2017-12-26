@@ -1,4 +1,4 @@
-package com.yijian.dzpoker.http;
+package com.yijian.dzpoker.http.requestjoinclub;
 
 /**
  * Created by QIPU on 2017/12/18.

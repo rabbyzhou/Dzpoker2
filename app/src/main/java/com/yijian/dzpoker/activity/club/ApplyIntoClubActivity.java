@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
-import com.yijian.dzpoker.baselib.http.httpapi.HttpRequestBaseApi;
+import com.yijian.dzpoker.http.requestjoinclub.RequestJoinClubApi;
 import com.yijian.dzpoker.baselib.debug.Logger;
-import com.yijian.dzpoker.http.RequestJoinClubConstants;
+import com.yijian.dzpoker.http.requestjoinclub.RequestJoinClubConstants;
 import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.util.DzApplication;
@@ -95,7 +95,7 @@ public class ApplyIntoClubActivity extends BaseBackActivity implements View.OnCl
     }
 
     private void sendRequest() {
-        HttpRequestBaseApi httpRequestBaseApi = RetrofitApiGenerator.createRequestApi(HttpRequestBaseApi.class);
+        RequestJoinClubApi httpRequestBaseApi = RetrofitApiGenerator.createRequestApi(RequestJoinClubApi.class);
 
         try {
             JSONObject params = new JSONObject();

@@ -225,6 +225,7 @@
             android:screenOrientation="behind"/>
         <activity android:name=".activity.club.ClubInfoDetailActivity" />
         <activity android:name=".activity.club.GamblingListActivity" />
+        <activity android:name=".activity.club.ClubManagerActivity" />
     </application>
 
 </manifest>

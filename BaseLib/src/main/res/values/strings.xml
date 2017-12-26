@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BaseLib</string>
+
+    <string name="default_progressbar">Default Progressbar:</string>
 </resources>

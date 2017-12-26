@@ -39,7 +39,7 @@ android {
             proguardFile('proguard.cfg')
         }
         release {
-            minifyEnabled true
+            minifyEnabled false
             proguardFile('proguard.cfg')
         }
     }

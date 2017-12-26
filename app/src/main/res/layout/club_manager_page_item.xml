@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_manager_item_main_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:textSize="16dp"
+        android:textColor="@color/white"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"/>
+
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_manager_item_detail_msg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/club_manager_item_main_msg"
+        android:layout_alignLeft="@id/club_manager_item_main_msg"
+        android:textSize="10dp"
+        android:textColor="@color/white"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_manager_item_reject"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_below="@+id/club_manager_item_detail_msg"
+        android:layout_alignLeft="@id/club_manager_item_main_msg"
+        android:layout_marginBottom="10dp"
+        android:background="@color/red"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:text="拒绝"
+        android:gravity="center"/>
+
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/club_manager_item_agree"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
+        android:layout_toRightOf="@+id/club_manager_item_reject"
+        android:layout_alignBottom="@id/club_manager_item_reject"
+        android:layout_marginLeft="40dp"
+        android:background="@color/blue"
+        android:textColor="@color/white"
+        android:textSize="14dp"
+        android:text="同意"
+        android:gravity="center"/>
+
+
+</RelativeLayout>
