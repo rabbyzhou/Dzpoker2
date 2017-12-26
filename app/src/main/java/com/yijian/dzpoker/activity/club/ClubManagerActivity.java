@@ -41,7 +41,7 @@ public class ClubManagerActivity extends BaseBackActivity {
     private static final String TAG = "ClubManagerActivity";
 
     private RecyclerView clubInfoCyclerView;
-    private List<ClubManagerBean> datas = new ArrayList<ClubManagerBean>();
+    private ArrayList<ClubManagerBean> datas = new ArrayList<ClubManagerBean>();
     private DzProgressBar progressBar;
     private ClubManagerAdapter adapter;
 
@@ -112,26 +112,28 @@ public class ClubManagerActivity extends BaseBackActivity {
             JSONObject params = new JSONObject();
             params.put(GetClubApplyRequestInfo.PARAM_KEY_USER_ID, application.getUserId());
             Logger.i(TAG, "response=" + params.toString());
-            Call<ResponseBody> call = getClubApplyApi.getResponse(GetClubApplyRequestInfo.FUNC_NAME, params.toString());
+            Call<GetClubApplyBean> call = getClubApplyApi.getResponse(GetClubApplyRequestInfo.FUNC_NAME, params.toString());
 
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<GetClubApplyBean>() {
                 @Override
-                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                public void onResponse(Call<GetClubApplyBean> call, Response<GetClubApplyBean> response) {
                     try {
-                        ResponseBody applyBean = response.body();
-//                        Logger.i(TAG, "responseid =" + response.body().getRequestid());
-//                        ClubManagerBean bean = new ClubManagerBean();
-//                        bean.setMainMsg(applyBean.getNickname() + " 申请加入俱乐部-" + applyBean.getClubname());
-//                        bean.setDetailMsg(applyBean.getRequestmsg());
-//                        datas.add(bean);
-//                        mainHandler.sendEmptyMessage(UPDATE_UI);
+                        GetClubApplyBean applyBean = response.body();
+                        Logger.i(TAG, "applyBean =" + response.body());
+                        for (GetClubApplyBean.SingleRequestInfo info : applyBean.getRequestinfo()) {
+                            ClubManagerBean bean = new ClubManagerBean();
+                            bean.setMainMsg(info.getNickname() + " 申请加入俱乐部-" + info.getClubname());
+                            bean.setDetailMsg(info.getRequestmsg());
+                            datas.add(bean);
+                        }
+                        mainHandler.sendEmptyMessage(UPDATE_UI);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
                 @Override
-                public void onFailure(Call<ResponseBody> call, Throwable t) {
+                public void onFailure(Call<GetClubApplyBean> call, Throwable t) {
                     ToastUtil.showToastInScreenCenter(ClubManagerActivity.this, "发送请求失败，请尝试重新添加！");
                 }
             });

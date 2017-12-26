@@ -1,12 +1,25 @@
 package com.yijian.dzpoker.http.getclubapply;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
  * Created by qipu.qp on 2017/12/25.
  */
 public class GetClubApplyBean {
+
+
+    private List<SingleRequestInfo> requestinfo = null;
+
+    public List<SingleRequestInfo> getRequestinfo() {
+        return requestinfo;
+    }
+
+    public void setRequestinfo(List<SingleRequestInfo> requestinfo) {
+        this.requestinfo = requestinfo;
+    }
+
     /**
      * requestid : 18
      * userid : 1003
@@ -18,86 +31,89 @@ public class GetClubApplyBean {
      * ispermit : 2
      */
 
-    private Integer requestid;
-    private Integer userid;
-    private String nickname;
-    private Integer clubid;
-    private String clubname;
-    private String requesttime;
-    private String requestmsg;
-    private Integer ispermit;
-    private Map<String, Object> additionalProperties = new HashMap<String, Object>();
+    public static class SingleRequestInfo {
 
-    public Integer getRequestid() {
-        return requestid;
-    }
+        private Integer requestid;
+        private Integer userid;
+        private String nickname;
+        private Integer clubid;
+        private String clubname;
+        private String requesttime;
+        private String requestmsg;
+        private Integer ispermit;
+        private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    public void setRequestid(Integer requestid) {
-        this.requestid = requestid;
-    }
+        public Integer getRequestid() {
+            return requestid;
+        }
 
-    public Integer getUserid() {
-        return userid;
-    }
+        public void setRequestid(Integer requestid) {
+            this.requestid = requestid;
+        }
 
-    public void setUserid(Integer userid) {
-        this.userid = userid;
-    }
+        public Integer getUserid() {
+            return userid;
+        }
 
-    public String getNickname() {
-        return nickname;
-    }
+        public void setUserid(Integer userid) {
+            this.userid = userid;
+        }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
+        public String getNickname() {
+            return nickname;
+        }
 
-    public Integer getClubid() {
-        return clubid;
-    }
+        public void setNickname(String nickname) {
+            this.nickname = nickname;
+        }
 
-    public void setClubid(Integer clubid) {
-        this.clubid = clubid;
-    }
+        public Integer getClubid() {
+            return clubid;
+        }
 
-    public String getClubname() {
-        return clubname;
-    }
+        public void setClubid(Integer clubid) {
+            this.clubid = clubid;
+        }
 
-    public void setClubname(String clubname) {
-        this.clubname = clubname;
-    }
+        public String getClubname() {
+            return clubname;
+        }
 
-    public String getRequesttime() {
-        return requesttime;
-    }
+        public void setClubname(String clubname) {
+            this.clubname = clubname;
+        }
 
-    public void setRequesttime(String requesttime) {
-        this.requesttime = requesttime;
-    }
+        public String getRequesttime() {
+            return requesttime;
+        }
 
-    public String getRequestmsg() {
-        return requestmsg;
-    }
+        public void setRequesttime(String requesttime) {
+            this.requesttime = requesttime;
+        }
 
-    public void setRequestmsg(String requestmsg) {
-        this.requestmsg = requestmsg;
-    }
+        public String getRequestmsg() {
+            return requestmsg;
+        }
 
-    public Integer getIspermit() {
-        return ispermit;
-    }
+        public void setRequestmsg(String requestmsg) {
+            this.requestmsg = requestmsg;
+        }
 
-    public void setIspermit(Integer ispermit) {
-        this.ispermit = ispermit;
-    }
+        public Integer getIspermit() {
+            return ispermit;
+        }
 
-    public Map<String, Object> getAdditionalProperties() {
-        return this.additionalProperties;
-    }
+        public void setIspermit(Integer ispermit) {
+            this.ispermit = ispermit;
+        }
 
-    public void setAdditionalProperty(String name, Object value) {
-        this.additionalProperties.put(name, value);
+        public Map<String, Object> getAdditionalProperties() {
+            return this.additionalProperties;
+        }
+
+        public void setAdditionalProperty(String name, Object value) {
+            this.additionalProperties.put(name, value);
+        }
     }
 
 }

@@ -24,10 +24,9 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
         this.data = data;
     }
 
-    public void updateData(List<ClubManagerBean> list) {
+    public void updateData(ArrayList<ClubManagerBean> list) {
         if (null != list) {
             if (null != data) {
-                data.clear();
                 data.addAll(list);
                 notifyDataSetChanged();
             }

@@ -11,5 +11,5 @@ import retrofit2.http.Query;
 
 public interface GetClubApplyApi {
     @GET("func.ashx")
-    Call<ResponseBody> getResponse(@Query("func") String funcName, @Query("param") String params);
+    Call<GetClubApplyBean> getResponse(@Query("func") String funcName, @Query("param") String params);
 }
