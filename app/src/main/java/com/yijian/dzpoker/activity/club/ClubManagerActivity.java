@@ -124,6 +124,8 @@ public class ClubManagerActivity extends BaseBackActivity {
                             ClubManagerBean bean = new ClubManagerBean();
                             bean.setMainMsg(info.getNickname() + " 申请加入俱乐部-" + info.getClubname());
                             bean.setDetailMsg(info.getRequestmsg());
+                            bean.setUserId(info.getUserid());
+                            bean.setRequestId(info.getRequestid());
                             datas.add(bean);
                         }
                         mainHandler.sendEmptyMessage(UPDATE_UI);

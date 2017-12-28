@@ -9,6 +9,25 @@ public class ClubManagerBean {
     private String mainMsg;
     private String detailMsg;
 
+    private int userId;
+    private int requestId;
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public int getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(int requestId) {
+        this.requestId = requestId;
+    }
+
     public String getMainMsg() {
         return mainMsg;
     }

@@ -7,16 +7,29 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.baselib.debug.Logger;
+import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
 import com.yijian.dzpoker.entity.ClubManagerBean;
+import com.yijian.dzpoker.http.clubapplyres.ClubApplyResponseApi;
+import com.yijian.dzpoker.http.clubapplyres.ClubApplyResponseCons;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by qipu.qp on 2017/12/27.
  */
 
 public class ClubManagerAdapter extends RecyclerView.Adapter {
+
+    private static final String TAG = "ClubManagerAdapter";
 
     private List<ClubManagerBean> data = new ArrayList<ClubManagerBean>();
 
@@ -40,7 +53,7 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         if (null == data) {
             return;
         }
@@ -49,13 +62,13 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
         ((ClubManagerViewHolder) holder).rejectButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:reject
+                handleApply(data.get(position), false);
             }
         });
         ((ClubManagerViewHolder) holder).agreeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO:agree
+                handleApply(data.get(position), true);
             }
         });
     }
@@ -63,6 +76,35 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
     @Override
     public int getItemCount() {
         return null != data ? data.size() : 0;
+    }
+
+    private void handleApply(ClubManagerBean bean, boolean reject) {
+        ClubApplyResponseApi clubApplyResponseApi = RetrofitApiGenerator.createRequestApi(ClubApplyResponseApi.class);
+
+        try {
+            JSONObject params = new JSONObject();
+            params.put(ClubApplyResponseCons.PARAM_KEY_USERID, bean.getUserId());
+            params.put(ClubApplyResponseCons.PARAM_KEY_REQUESTID, bean.getRequestId());
+            params.put(ClubApplyResponseCons.PARAM_KEY_PERMIT, reject);
+
+            Call<ResponseBody> call = clubApplyResponseApi.getResponse(ClubApplyResponseCons.FUNC_NAME, params.toString());
+            call.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Logger.d(TAG, "onResponse : " + response.body());
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            Logger.e(TAG, "exception e : " + e);
+        }
+
     }
 
     static class ClubManagerViewHolder extends RecyclerView.ViewHolder {
