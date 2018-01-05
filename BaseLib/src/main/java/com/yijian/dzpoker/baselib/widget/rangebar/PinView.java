@@ -25,6 +25,7 @@ import android.support.v4.content.ContextCompat;
 import android.util.TypedValue;
 import android.view.View;
 
+import com.yijian.dzpoker.baselib.R;
 
 
 /**
@@ -105,7 +106,7 @@ class PinView extends View {
 
     // Initialization //////////////////////////////////////////////////////////
 
-    public void setFormatter(com.appyvet.materialrangebar.IRangeBarFormatter mFormatter) {
+    public void setFormatter(IRangeBarFormatter mFormatter) {
         this.formatter = mFormatter;
     }
 

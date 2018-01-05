@@ -39,6 +39,8 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 
+import com.yijian.dzpoker.baselib.R;
+
 import java.util.HashMap;
 
 /**

@@ -347,7 +347,6 @@ public class FragmentGameSet1 extends Fragment implements RangeSliderBar.OnSelec
         tv_game_info.setText("9人桌 | 最小带入：2000 | 最大带入：10000 | 开启2/7玩法 | 自动埋牌");
         DzApplication application =(DzApplication) getActivity().getApplication();
         tv_personl_money.setText(application.getUser().goldcoin+"");
-        et_game_name.setText("我的房间");
 
         gameParam.player_number=9;
         gameParam.blinds=10;//小盲注的值

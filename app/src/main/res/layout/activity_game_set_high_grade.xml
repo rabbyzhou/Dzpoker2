@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background">
+    android:background="@color/main_bg">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
@@ -36,12 +36,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginLeft="30px"
-        android:layout_marginRight="30px">
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:layout_gravity="center_horizontal">
 
@@ -50,7 +50,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text="人数"
-                android:textSize="18sp"
+                android:textSize="16dp"
+                android:textColor="@color/white"
                 android:gravity="bottom"/>
             <com.yijian.dzpoker.view.RangeSliderBar
                 android:layout_centerInParent="true"
@@ -63,8 +64,8 @@
                 rsv:emptyColor="#a8aeb8"
                 rsv:rangeCount="7"
                 rsv:cursorDrawable="@mipmap/cursor2"
-                rsv:barHeight="10px"
-                rsv:circleRadius="40px" />
+                rsv:barHeight="5dp"
+                rsv:circleRadius="20dp" />
 
         </LinearLayout>
 
@@ -72,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
            android:orientation="horizontal"
-            android:layout_marginTop="20px"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical">
 
             <TextView
@@ -80,15 +81,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="最小带入："
-                android:textSize="18sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/tv_min_in"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1000"
-                android:textSize="18sp"
-                android:textColor="#ad7b43"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
 
 
         </LinearLayout>
@@ -96,18 +98,20 @@
             android:id="@+id/seekBar_min_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:maxHeight="10dip"
-            android:minHeight="10dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:max="9"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
             android:progress="5"
-            android:progressDrawable="@drawable/seekbar_progress_custom"
-            android:thumb="@drawable/seekbar_thumb_normal"
+            android:progressDrawable="@drawable/custom_seekbar_layer"
+            android:thumb="@drawable/custom_seekbar_shape"
         />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -116,31 +120,35 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="最大带入："
-                android:textSize="18sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/tv_max_in"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1000"
-                android:textSize="18sp"
-                android:textColor="#ad7b43"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <SeekBar
             android:id="@+id/seekBar_max_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="10dip"
-            android:minHeight="10dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:max="10"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
             android:progress="5"
-            android:progressDrawable="@drawable/seekbar_progress_custom"
-            android:thumb="@drawable/seekbar_thumb_normal"
+            android:progressDrawable="@drawable/custom_seekbar_layer"
+            android:thumb="@drawable/custom_seekbar_shape"
             />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -149,26 +157,30 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="总带入："
-                android:textSize="18sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/tv_total_in"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1000"
-                android:textSize="18sp"
-                android:textColor="#ad7b43"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <SeekBar
             android:id="@+id/seekBar_total_in"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:maxHeight="10dip"
-            android:minHeight="10dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:max="21"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
             android:progress="5"
-            android:progressDrawable="@drawable/seekbar_progress_custom"
-            android:thumb="@drawable/seekbar_thumb_normal"
+            android:progressDrawable="@drawable/custom_seekbar_layer"
+            android:thumb="@drawable/custom_seekbar_shape"
             />
         <LinearLayout
             android:layout_width="match_parent"
@@ -181,34 +193,38 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ante："
-                android:textSize="18sp"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
             <TextView
                 android:id="@+id/tv_ante"
                 android:gravity="center_vertical"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="1000"
-                android:textSize="18sp"
-                android:textColor="#ad7b43"/>
+                android:textSize="16dp"
+                android:textColor="@color/white"/>
         </LinearLayout>
         <SeekBar
             android:id="@+id/seekBar_ante"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-           android:maxHeight="10dip"
-            android:minHeight="10dip"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
             android:max="10"
+            android:maxHeight="2dp"
+            android:minHeight="2dp"
             android:progress="5"
-            android:progressDrawable="@drawable/seekbar_progress_custom"
-            android:thumb="@drawable/seekbar_thumb_normal"
+            android:progressDrawable="@drawable/custom_seekbar_layer"
+            android:thumb="@drawable/custom_seekbar_shape"
             />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30px"
-            android:layout_marginLeft="50px"
-            android:layout_marginRight="50px"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="25dp"
+            android:layout_marginRight="25dp"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -229,7 +245,9 @@
                         android:id="@+id/tv_rb_straddle"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="强制straddle"/>
+                        android:text="强制straddle"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -245,7 +263,9 @@
                         android:id="@+id/tv_rb_auto_card"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="自动埋牌"/>
+                        android:text="自动埋牌"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -261,7 +281,9 @@
                         android:id="@+id/tv_rb_ip_limit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="IP限制"/>
+                        android:text="IP限制"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
             </LinearLayout>
@@ -285,7 +307,9 @@
                         android:id="@+id/tv_rb_27"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="2/7玩法"/>
+                        android:text="2/7玩法"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -301,22 +325,29 @@
                         android:id="@+id/tv_rb_gps_limit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="GPS限制"/>
+                        android:text="GPS限制"
+                        android:textColor="@color/white"
+                        android:textSize="16dp"/>
 
                 </LinearLayout>
 
             </LinearLayout>
 
         </LinearLayout>
+
+
         <Button
             android:id="@+id/btn_confirm"
-            android:layout_width="240px"
-            android:layout_height="80px"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_gravity="center"
-            android:background="@drawable/btn_bg_green"
-            android:layout_marginTop="20px"
+            android:layout_marginLeft="36dp"
+            android:layout_marginRight="36dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/button_red"
             android:text="确定"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
     </LinearLayout>
 

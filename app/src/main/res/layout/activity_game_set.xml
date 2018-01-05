@@ -3,39 +3,39 @@
     android:id="@+id/layout_window"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/main_bg">
+    android:background="@color/main_bg"
+    android:orientation="vertical">
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="#003366"
-        android:visibility="gone"
-        >
+        android:visibility="gone">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
             android:drawableLeft="@drawable/black_back"
             android:drawablePadding="2dp"
             android:text="返回"
-            android:textSize="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20dp"/>
+            android:textSize="16dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="创建牌局"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="24dp" />
 
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <android.support.design.widget.TabLayout
@@ -43,39 +43,45 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_gravity="bottom"
-            android:background="#4c4b54"
+            android:layout_margin="2dp"
             android:fillViewport="false"
-            app:tabMode="fixed"
             app:layout_scrollFlags="scroll"
-            app:tabIndicatorColor="#057523"
-            app:tabIndicatorHeight="0dp"
-            app:tabSelectedTextColor="#057523"
-            app:tabTextColor="#FFFFFF"
             app:tabBackground="@drawable/tab_background"
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/white"
 
             >
 
 
         </android.support.design.widget.TabLayout>
+
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_game2"
             android:layout_width="match_parent"
-            android:layout_height="80px"
+            android:layout_height="40dp"
             android:layout_gravity="bottom"
-            android:background="#4c4b54"
-            android:layout_margin="1dip"
+            android:layout_marginBottom="2dp"
+            android:layout_marginLeft="2dp"
+            android:layout_marginRight="2dp"
             android:fillViewport="false"
-            app:tabMode="fixed"
             app:layout_scrollFlags="scroll"
-            app:tabIndicatorColor="@color/red"
-            app:tabIndicatorHeight="0dp"
-            app:tabTextColor="#FFFFFF"
             app:tabBackground="@drawable/tab_background"
-            >
+            app:tabIndicatorColor="@color/white"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:tabSelectedTextColor="@color/black"
+            app:tabTextColor="@color/white">
 
 
         </android.support.design.widget.TabLayout>
     </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp" />
 
     <com.yijian.dzpoker.view.NoScrollViewPager
         android:id="@+id/view_pager"
