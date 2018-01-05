@@ -115,6 +115,8 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
 
     private RelativeLayout gamblingBtn;
 
+    private int clubId = -1;
+
     Window mWindow;
     InputMethodManager mImm;
     private final UIHandler mUIHandler = new UIHandler(this);
@@ -168,7 +170,7 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
         } else {
             //群聊
             mIsSingle = false;
-            int clubID = intent.getIntExtra("clubid", 0);
+            clubId = intent.getIntExtra("clubid", 0);
             //mGroupId = intent.getLongExtra(GROUP_ID, 0);//这样取不到值得，必须用getIntExtra
             mGroupId = intent.getLongExtra(GROUP_ID, 0);
             final boolean fromGroup = intent.getBooleanExtra("fromGroup", false);
@@ -385,6 +387,7 @@ public class ChatActivity extends BaseActivity implements FuncLayout.OnFuncKeyBo
             case R.id.chat_page_gambling_button:
                 Intent intent = new Intent();
                 intent.setClass(ChatActivity.this, GamblingListActivity.class);
+                intent.putExtra("club_id", clubId);
                 startActivity(intent);
                 break;
             default:

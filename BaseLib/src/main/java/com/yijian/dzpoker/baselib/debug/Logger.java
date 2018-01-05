@@ -12,7 +12,7 @@ public class Logger {
     public static final boolean DEBUGABLE = true;
 
     /**Main log tag*/
-    private static final String MAIN_TAG = "KINGLEORIC";
+    private static final String MAIN_TAG = "DZPOKER_LOG";
 
     private static final int LEVEL_I = 0;
     private static final int LEVEL_D = 1;

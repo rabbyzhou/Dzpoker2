@@ -2169,7 +2169,6 @@ public class GameActivity extends BaseToolbarActivity {
                                     public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
 
                                         try{
-
                                             //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
                                             String msg = Constant.GAME_DISPOSE_TABLE + "|";
                                             JSONObject jsonSend = new JSONObject();
