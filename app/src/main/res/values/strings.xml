@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">指尖德州</string>
+    <string name="app_name">扑克竞技联盟</string>
     <!-- 单位:毫秒 -->
     <integer name="welcome_page_show_time">2000</integer>
 
