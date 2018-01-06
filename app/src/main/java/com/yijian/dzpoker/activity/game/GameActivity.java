@@ -1431,9 +1431,9 @@ public class GameActivity extends BaseToolbarActivity {
                 @Override
                 public void onReciveData(String data) {
                     //收到数据，进行处理，这里都是处理之后的数据
+                    Logger.i(TAG, "onReciveData data : " + data);
                     try{
                         String[] recData=data.split("\\|");
-                        recData[0]=recData[0].substring(1);
                         if (recData[0].equals(Constant.RET_CREATE_TABLE)){
                             //创建牌局返回,的调用进去牌桌接口
                             JSONObject jsonReturn=new JSONObject(recData[1]);
@@ -3191,7 +3191,7 @@ public class GameActivity extends BaseToolbarActivity {
                         if (actionChip>minChip) {
                             try {
                                 //按钮上有两种状态，bet raise  ，bet的时候可以下全部，但是action是bet，raise的时候，allin 要发allin，amountchips要差值
-                                String msg = "$" + Constant.GAME_DO_ACTION + "|";
+                                String msg = Constant.GAME_DO_ACTION + "|";
                                 JSONObject jsonSend = new JSONObject();
                                 jsonSend.put("userid", application.getUserId());
                                 jsonSend.put("seatindex", getUserIndex());
@@ -3207,6 +3207,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 jsonSend.put("amountchips", actionChip-minChip);
                                 jsonSend.put("tableid", gameId);
                                 msg += jsonSend.toString().replace("$", "￥");
+                                msg += "$";
                                 myBinder.sendInfo(msg);
                             } catch (Exception e) {
                                 ToastUtil.showToastInScreenCenter(GameActivity.this, "操作出错！");
@@ -3234,7 +3235,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 public int amountchips;
                                 public int tableid;
                             }*/
-                    String msg = "$" + Constant.GAME_DO_ACTION + "|";
+                    String msg = Constant.GAME_DO_ACTION + "|";
                     JSONObject jsonSend = new JSONObject();
                     jsonSend.put("userid", application.getUserId());
                     jsonSend.put("seatindex", getUserIndex());
@@ -3242,6 +3243,7 @@ public class GameActivity extends BaseToolbarActivity {
                     jsonSend.put("amountchips", 0);
                     jsonSend.put("tableid", gameId);
                     msg += jsonSend.toString().replace("$", "￥");
+                    msg += "$";
                     myBinder.sendInfo(msg);
                 } catch (Exception e) {
                     ToastUtil.showToastInScreenCenter(GameActivity.this, "弃牌出错！");
@@ -3257,7 +3259,7 @@ public class GameActivity extends BaseToolbarActivity {
                 //右侧按钮
                 try {
 
-                    String msg = "$" + Constant.GAME_DO_ACTION + "|";
+                    String msg = Constant.GAME_DO_ACTION + "|";
                     JSONObject jsonSend = new JSONObject();
                     jsonSend.put("userid", application.getUserId());
                     jsonSend.put("seatindex", getUserIndex());
@@ -3278,6 +3280,7 @@ public class GameActivity extends BaseToolbarActivity {
                     }
                     jsonSend.put("tableid", gameId);
                     msg += jsonSend.toString().replace("$", "￥");
+                    msg += "$";
                     myBinder.sendInfo(msg);
                 } catch (Exception e) {
                     ToastUtil.showToastInScreenCenter(GameActivity.this, "弃牌出错！");
@@ -4226,7 +4229,7 @@ public class GameActivity extends BaseToolbarActivity {
                         if (isFirstBuyCore) {
                             //首次购买，发送sitseat指令
                             try {
-                                String msg = "$" + Constant.GAME_SIT_SEAT + "|";
+                                String msg = Constant.GAME_SIT_SEAT + "|";
                                 JSONObject jsonSend = new JSONObject();
                                 jsonSend.put("userid", application.getUserId());
                                 jsonSend.put("tableid", gameId);
@@ -4236,6 +4239,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 jsonSend.put("gpsx", application.getLatitude());
                                 jsonSend.put("gpsy", application.getLongitude());
                                 msg += jsonSend.toString().replace("$", "￥");
+                                msg += "$";
                                 myBinder.sendInfo(msg);
                             } catch (Exception e) {
                                 ToastUtil.showToastInScreenCenter(GameActivity.this, "坐下座位出错！");
@@ -4246,13 +4250,14 @@ public class GameActivity extends BaseToolbarActivity {
                             //非首次购买，发送addchip指令
 
                             try {
-                                String msg = "$" + Constant.GAME_ADD_CHIPS + "|";
+                                String msg = Constant.GAME_ADD_CHIPS + "|";
                                 JSONObject jsonSend = new JSONObject();
                                 jsonSend.put("userid", application.getUserId());
                                 jsonSend.put("tableid", gameId);
                                 jsonSend.put("chips", buycore);
 
                                 msg += jsonSend.toString().replace("$", "￥");
+                                msg += "$";
                                 myBinder.sendInfo(msg);
                             } catch (Exception e) {
                                 ToastUtil.showToastInScreenCenter(GameActivity.this, "坐下座位出错！");
