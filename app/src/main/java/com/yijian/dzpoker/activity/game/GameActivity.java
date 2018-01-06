@@ -388,7 +388,7 @@ public class GameActivity extends BaseToolbarActivity {
                         mp=MediaPlayer.create(GameActivity.this,R.raw.chairsitsound);
                         mp.start();
                         String dataInfo = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_SIT_SEAT:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_SIT_SEAT:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataInfo);
                         int userid=jsonReturn.getInt("userid");
                         int seatIndex=jsonReturn.getInt("seatindex");
@@ -405,7 +405,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 setPosition(mSeatObjects.get(i),mSeatViewWidth,mSeatViewHeight,iSeatValue[moveto][0],iSeatValue[moveto][1]);
                                 View view=mSeatObjects.get(i);
                                 view.setVisibility(View.VISIBLE);
-                                ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
+                                ImageView iv = view.findViewById(R.id.iv_user_head);
                                 iv.setClickable(false);
                                 setPosition(mChipObjects.get(i),mAmountChipViewWidth,mAmountChipVieHeight,iAmountChipLocation[moveto][0],iAmountChipLocation[moveto][1]);
                                 setPosition(mTipObjects.get(i),mTipViewWidth,mTipViewHeight,iTipLocation[moveto][0],iTipLocation[moveto][1]);
@@ -416,9 +416,9 @@ public class GameActivity extends BaseToolbarActivity {
                         //坐下
                         View view=mSeatObjects.get(seatIndex);
                         view.setVisibility(View.VISIBLE);
-                        ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
-                        TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        ImageView iv = view.findViewById(R.id.iv_user_head);
+                        TextView tv_name = view.findViewById(R.id.tv_user_name);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
 
                         tv_name.setText(mGameUser.get(userid).nickName);
                         tv_name.setVisibility(View.VISIBLE);
@@ -474,7 +474,7 @@ public class GameActivity extends BaseToolbarActivity {
                             }*/
                     try {
                         String dataInfo = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_DOACTION:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_DOACTION:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataInfo);
                         int userid=jsonReturn.getInt("userid");
                         int seatIndex=jsonReturn.getInt("seatindex");
@@ -506,13 +506,13 @@ public class GameActivity extends BaseToolbarActivity {
 
 
                         View view=mSeatObjects.get(seatIndex);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
                         tv_goldcoin.setText(remainchips+"");
                         View viewTip=mTipObjects.get(seatIndex);
-                        TextView tv_tip=(TextView)viewTip.findViewById(R.id.tv_tip);
+                        TextView tv_tip= viewTip.findViewById(R.id.tv_tip);
                         View viewChip=mChipObjects.get(seatIndex);
                         viewChip.setVisibility(View.VISIBLE);
-                        TextView tv_chip=(TextView)viewChip.findViewById(R.id.tv_chip);
+                        TextView tv_chip= viewChip.findViewById(R.id.tv_chip);
                         tv_chip.setText(amountchips+"");
                         View viewCardBack=mCardBackObjects.get(seatIndex);
 //                        viewCardBack.setVisibility(View.VISIBLE);
@@ -601,7 +601,7 @@ public class GameActivity extends BaseToolbarActivity {
                         //先清空对象
                         mPlayerHolebjects = new HashMap<Integer, PlayerHole>();
                         String dataPlayerHole = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_HOLE:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_HOLE:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataPlayerHole);
 
                         JSONArray temp = jsonReturn.getJSONArray("playerhole");
@@ -656,7 +656,7 @@ public class GameActivity extends BaseToolbarActivity {
                         mp=MediaPlayer.create(GameActivity.this,R.raw.dealcardflop);
                         mp.start();
                         String dataFlop = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_FLOP:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_FLOP:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataFlop);
                         JSONArray temp = jsonReturn.getJSONArray("flopcards");
                         mGameCards.setVisibility(View.VISIBLE);
@@ -688,7 +688,7 @@ public class GameActivity extends BaseToolbarActivity {
                         mp=MediaPlayer.create(GameActivity.this,R.raw.dealcard);
                         mp.start();
                         String dataTurn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_TURN:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_TURN:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataTurn);
                         JSONObject jsonCard = new JSONObject(jsonReturn.getString("turncard"));
                         CardInfo turncard=new CardInfo();//转牌
@@ -710,7 +710,7 @@ public class GameActivity extends BaseToolbarActivity {
                         mp=MediaPlayer.create(GameActivity.this,R.raw.dealcard);
                         mp.start();
                         String dataRiver = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_RIVER:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_RIVER:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataRiver);
                         JSONObject jsonCard = new JSONObject(jsonReturn.getString("rivercard"));
                         CardInfo rivercard=new CardInfo();//转牌
@@ -733,7 +733,7 @@ public class GameActivity extends BaseToolbarActivity {
                             mChipObjects.get(key).setVisibility(View.INVISIBLE);
                         }
                         String pots = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_DO_POT:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_DO_POT:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(pots);
                         JSONArray jsonPots=jsonReturn.getJSONArray("pots");
                         int[] potsInfo=new int[jsonPots.length()];//底池
@@ -798,7 +798,7 @@ public class GameActivity extends BaseToolbarActivity {
                         //设置庄家位, 只做D的选择
                         int buttonseatindex,smallblindseatindex,bigblindseatindex,straddleseatindex;
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_START_ROUND:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_START_ROUND:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
                         buttonseatindex=jsonReturn.getInt("buttonseatindex");
                         if (getUserIndex()!=-1){
@@ -819,7 +819,7 @@ public class GameActivity extends BaseToolbarActivity {
                     try {
                         //等待操作
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_WAIT_ACTION:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_WAIT_ACTION:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
 
                         if(jsonReturn.getInt("userid")==application.getUserId()){
@@ -837,7 +837,7 @@ public class GameActivity extends BaseToolbarActivity {
                             JSONArray jsonNeedAction=jsonReturn.getJSONArray("needaction");
                             for (int i=0;i<jsonNeedAction.length();i++){
                                 int action=jsonNeedAction.getInt(i);
-                                TextView tv_goldcoin = (TextView) mSeatObjects.get(getUserIndex()).findViewById(R.id.tv_goldcoin);
+                                TextView tv_goldcoin = mSeatObjects.get(getUserIndex()).findViewById(R.id.tv_goldcoin);
                                 maxChip=Integer.parseInt(tv_goldcoin.getText().toString());
                                 switch (action){
                                     case 0:
@@ -871,8 +871,8 @@ public class GameActivity extends BaseToolbarActivity {
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText("加注");
                                         maxpaidchips=jsonReturn.getInt("maxpaidchips");
-                                        TextView tv_chip=(TextView)mChipObjects.get(getUserIndex()).findViewById(R.id.tv_chip);
-                                        minChip=maxpaidchips-Integer.parseInt(tv_chip.getText().toString());;
+                                        TextView tv_chip= mChipObjects.get(getUserIndex()).findViewById(R.id.tv_chip);
+                                        minChip=maxpaidchips-Integer.parseInt(tv_chip.getText().toString());
 
                                         break;
                                     case 6:
@@ -921,7 +921,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                     try {
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_SEE_NEXT_CARD:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_SEE_NEXT_CARD:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
                         int roundState=jsonReturn.getInt("state");
 
@@ -932,7 +932,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 CardInfo[] flopCards=new CardInfo[temp.length()];//公牌
                                 for(int i=0;i<3;i++){
                                     if (!temp.get(i).toString().equals("null")) {
-                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());;//每一个人的底牌
+                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());//每一个人的底牌
                                         flopCards[i].suit=jsonCard.getInt("suit");
                                         flopCards[i].member=jsonCard.getInt("member");
                                         flopCards[i].name=jsonCard.getString("name");
@@ -946,7 +946,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 CardInfo[] turnCards=new CardInfo[temp.length()];//公牌
                                 for(int i=0;i<1;i++){
                                     if (!temp.get(i).toString().equals("null")) {
-                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());;//每一个人的底牌
+                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());//每一个人的底牌
                                         turnCards[i].suit=jsonCard.getInt("suit");
                                         turnCards[i].member=jsonCard.getInt("member");
                                         turnCards[i].name=jsonCard.getString("name");
@@ -961,7 +961,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 CardInfo[] riverCards=new CardInfo[temp.length()];//公牌
                                 for(int i=0;i<1;i++){
                                     if (!temp.get(i).toString().equals("null")) {
-                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());;//每一个人的底牌
+                                        JSONObject jsonCard=new JSONObject(temp.get(i).toString());//每一个人的底牌
                                         riverCards[i].suit=jsonCard.getInt("suit");
                                         riverCards[i].member=jsonCard.getInt("member");
                                         riverCards[i].name=jsonCard.getString("name");
@@ -984,7 +984,7 @@ public class GameActivity extends BaseToolbarActivity {
                     try {
                         //等待操作
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_SHOW_CARD:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_SHOW_CARD:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
                         int seatindex=jsonReturn.getInt("seatindex");
                         int userid=jsonReturn.getInt("userid");
@@ -996,9 +996,9 @@ public class GameActivity extends BaseToolbarActivity {
                             }
 
                             setPosition(mShowCards, 120, 80, iSeatValue[iRealIndex][0], iSeatValue[iRealIndex][1] + mNameTextHeight);
-                            ImageView iv5 = (ImageView) mShowCards.findViewById(R.id.iv_card1);
+                            ImageView iv5 = mShowCards.findViewById(R.id.iv_card1);
                             iv5.setImageBitmap(drawSingleCard(mPlayerHolebjects.get(userid).hole[0].suit, mPlayerHolebjects.get(userid).hole[0].member));
-                            ImageView iv6 = (ImageView) mShowCards.findViewById(R.id.iv_card2);
+                            ImageView iv6 = mShowCards.findViewById(R.id.iv_card2);
                             iv6.setImageBitmap(drawSingleCard(mPlayerHolebjects.get(userid).hole[1].suit, mPlayerHolebjects.get(userid).hole[1].member));
                         }
 
@@ -1010,7 +1010,7 @@ public class GameActivity extends BaseToolbarActivity {
                 case MESSAGE_START_GAME:
                     try {
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_START_GAME:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_START_GAME:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
                         if (jsonReturn.getInt("ret")==0){
                             //开始游戏按钮隐藏
@@ -1035,15 +1035,15 @@ public class GameActivity extends BaseToolbarActivity {
                         mp.start();
                         //等待操作
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_LEAVE_SEAT:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_LEAVE_SEAT:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
                         int seatindex=jsonReturn.getInt("seatindex");
                         int userid=jsonReturn.getInt("userid");
 
                         View view=mSeatObjects.get(seatindex);
-                        ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
-                        TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        ImageView iv = view.findViewById(R.id.iv_user_head);
+                        TextView tv_name = view.findViewById(R.id.tv_user_name);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
                         tv_name.setText("");
                         tv_name.setVisibility(View.INVISIBLE);
                         tv_goldcoin.setText("");
@@ -1062,14 +1062,14 @@ public class GameActivity extends BaseToolbarActivity {
                             //将空座位设置成可坐 ，就是说可以click
                             for (int i=0;i<mTableInfo.seats.length;i++){
                                 View viewSeat=mSeatObjects.get(i);
-                                ImageView ivHead = (ImageView) viewSeat.findViewById(R.id.iv_user_head);
+                                ImageView ivHead = viewSeat.findViewById(R.id.iv_user_head);
                                 ivHead.setClickable(true);
 
                             }
                             for (int key : mGameUser.keySet()) {
                                 if (mGameUser.get(key).seatindex!=-1) {
                                     View viewSeat = mSeatObjects.get(mGameUser.get(key).seatindex);
-                                    ImageView ivHead = (ImageView) viewSeat.findViewById(R.id.iv_user_head);
+                                    ImageView ivHead = viewSeat.findViewById(R.id.iv_user_head);
                                     ivHead.setClickable(false);
                                 }
                             }
@@ -1086,14 +1086,14 @@ public class GameActivity extends BaseToolbarActivity {
 
                         //等待操作
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_ADD_CHIPS:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_ADD_CHIPS:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
 
                         int userid=jsonReturn.getInt("userid");
                         int chips=jsonReturn.getInt("chips");
                         mGameUser.get(userid).remainchips+=chips;
                         View view=mSeatObjects.get( mGameUser.get(userid).seatindex);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
                         tv_goldcoin.setText(mGameUser.get(userid).remainchips);
 
                     }catch (Exception e){
@@ -1106,7 +1106,7 @@ public class GameActivity extends BaseToolbarActivity {
                     try {
                        //收到保位留桌
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_HOLD_SEAT:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_HOLD_SEAT:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
 
                         int userid=jsonReturn.getInt("userid");
@@ -1114,9 +1114,9 @@ public class GameActivity extends BaseToolbarActivity {
                         int holdseconds=jsonReturn.getInt("holdseconds");
 
                         View view=mSeatObjects.get(seatindex);
-                        ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
-                        TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        ImageView iv = view.findViewById(R.id.iv_user_head);
+                        TextView tv_name = view.findViewById(R.id.tv_user_name);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
                         tv_name.setText("");
                         tv_name.setVisibility(View.INVISIBLE);
                         tv_goldcoin.setText("");
@@ -1168,7 +1168,7 @@ public class GameActivity extends BaseToolbarActivity {
                     */
                     try {
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_BACK_SEAT:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_BACK_SEAT:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
 
                         int userid=jsonReturn.getInt("userid");
@@ -1190,9 +1190,9 @@ public class GameActivity extends BaseToolbarActivity {
 
                         View view=mSeatObjects.get(seatindex);
                         view.setVisibility(View.VISIBLE);
-                        ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
-                        TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        ImageView iv = view.findViewById(R.id.iv_user_head);
+                        TextView tv_name = view.findViewById(R.id.tv_user_name);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
 
                         tv_name.setText(mGameUser.get(userid).nickName);
                         tv_name.setVisibility(View.VISIBLE);
@@ -1225,7 +1225,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                     try {
                         String dataReturn = (String) msg.obj;
-                        Log.v("RABBY","MESSAGE_INFO_DISPOSE_TABLE:"+(String)msg.obj);
+                        Log.v("RABBY","MESSAGE_INFO_DISPOSE_TABLE:"+ msg.obj);
                         JSONObject jsonReturn = new JSONObject(dataReturn);
 
                         int userid=jsonReturn.getInt("userid");
@@ -1265,7 +1265,7 @@ public class GameActivity extends BaseToolbarActivity {
                     int layoutId = R.layout.popupwindow_apply;   // 布局ID
                     View contentView = LayoutInflater.from(GameActivity.this).inflate(layoutId, null);
                     //绑定数据
-                    ImageView iv_close_Apply=(ImageView)contentView.findViewById(R.id.iv_close);
+                    ImageView iv_close_Apply= contentView.findViewById(R.id.iv_close);
                     iv_close_Apply.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -1273,7 +1273,7 @@ public class GameActivity extends BaseToolbarActivity {
                             popApplyWindow.dismiss();
                         }
                     });
-                    rv_apply_info=(RecyclerView) contentView.findViewById(R.id.rv_apply_info);
+                    rv_apply_info= contentView.findViewById(R.id.rv_apply_info);
                     mLayoutManager = new LinearLayoutManager(GameActivity.this);
                     rv_apply_info.setLayoutManager(mLayoutManager);
                     //如果可以确定每个item的高度是固定的，设置这个选项可以提高性能
@@ -1410,7 +1410,7 @@ public class GameActivity extends BaseToolbarActivity {
                     // 如果不设置PopupWindow的背景，有些版本就会出现一个问题：无论是点击外部区域还是Back键都无法dismiss弹框
                     popApplyWindow.setBackgroundDrawable(new ColorDrawable());
                     // 设置好参数之后再show
-                    popApplyWindow.showAtLocation(GameActivity.this.getWindow().getDecorView(), Gravity.CENTER,0,0);;
+                    popApplyWindow.showAtLocation(GameActivity.this.getWindow().getDecorView(), Gravity.CENTER,0,0);
 
                     break;
                 case  MESSAGE_UPDATE_APPLY_INFO:
@@ -2082,7 +2082,7 @@ public class GameActivity extends BaseToolbarActivity {
                     view.setVisibility(View.GONE);
                 }
                 //规则说明
-                TextView tv_1=(TextView)contentView.findViewById(R.id.tv_1);
+                TextView tv_1= contentView.findViewById(R.id.tv_1);
                 tv_1.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2092,7 +2092,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //设置
-                TextView tv_2=(TextView)contentView.findViewById(R.id.tv_2);
+                TextView tv_2= contentView.findViewById(R.id.tv_2);
                 tv_2.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2102,7 +2102,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //商城
-                TextView tv_3=(TextView)contentView.findViewById(R.id.tv_3);
+                TextView tv_3= contentView.findViewById(R.id.tv_3);
                 tv_3.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2112,7 +2112,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //补充记分牌
-                TextView tv_4=(TextView)contentView.findViewById(R.id.tv_4);
+                TextView tv_4= contentView.findViewById(R.id.tv_4);
                 tv_4.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2125,7 +2125,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //站起围观
-                TextView tv_5=(TextView)contentView.findViewById(R.id.tv_5);
+                TextView tv_5= contentView.findViewById(R.id.tv_5);
                 tv_5.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2157,7 +2157,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //保位留桌
-                TextView tv_6=(TextView)contentView.findViewById(R.id.tv_6);
+                TextView tv_6= contentView.findViewById(R.id.tv_6);
                 tv_6.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2184,7 +2184,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //解散房间
-                TextView tv_7=(TextView)contentView.findViewById(R.id.tv_7);
+                TextView tv_7= contentView.findViewById(R.id.tv_7);
                 tv_7.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2233,7 +2233,7 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //退出牌局
-                TextView tv_8=(TextView)contentView.findViewById(R.id.tv_8);
+                TextView tv_8= contentView.findViewById(R.id.tv_8);
                 tv_8.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -2302,15 +2302,15 @@ public class GameActivity extends BaseToolbarActivity {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.layout_seat, null);
             //iv_user_head  //tv_user_name tv_goldcoin
-            final ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
+            final ImageView iv = view.findViewById(R.id.iv_user_head);
             iv.post(new Runnable() {
                 @Override
                 public void run() {
 
                 }
             });
-            TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-            TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+            TextView tv_name = view.findViewById(R.id.tv_user_name);
+            TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
             tv_name.setVisibility(View.INVISIBLE);//INVISIBLE继续占用布局空间
             tv_goldcoin.setVisibility(View.INVISIBLE);
             iv.setImageBitmap(getEmptySeatBitMap(userIconWidth, userIconHeight, "坐下"));
@@ -2377,27 +2377,27 @@ public class GameActivity extends BaseToolbarActivity {
         //增加5张公牌
         addGameCards();
 //        mGameCards.setVisibility(View.VISIBLE);
-        ImageView iv7=(ImageView)mGameCards.findViewById(R.id.iv_card1);
+        ImageView iv7= mGameCards.findViewById(R.id.iv_card1);
         mGameCardsObjects.put(0,iv7);
-        ImageView iv8=(ImageView)mGameCards.findViewById(R.id.iv_card2);
+        ImageView iv8= mGameCards.findViewById(R.id.iv_card2);
         mGameCardsObjects.put(1,iv8);
-        ImageView iv9=(ImageView)mGameCards.findViewById(R.id.iv_card3);
+        ImageView iv9= mGameCards.findViewById(R.id.iv_card3);
         mGameCardsObjects.put(2,iv9);
-        ImageView iv10=(ImageView)mGameCards.findViewById(R.id.iv_card4);
+        ImageView iv10= mGameCards.findViewById(R.id.iv_card4);
         mGameCardsObjects.put(3,iv10);
-        ImageView iv11=(ImageView)mGameCards.findViewById(R.id.iv_card5);
+        ImageView iv11= mGameCards.findViewById(R.id.iv_card5);
         mGameCardsObjects.put(4,iv11);
 
 
         // 增加自己的牌
         addMyCards();
-        ImageView iv1=(ImageView)mMyCards.findViewById(R.id.iv_card1);
+        ImageView iv1= mMyCards.findViewById(R.id.iv_card1);
         mMyCardsObjects.put(0,iv1);
-        ImageView iv2=(ImageView)mMyCards.findViewById(R.id.iv_card2);
+        ImageView iv2= mMyCards.findViewById(R.id.iv_card2);
         mMyCardsObjects.put(1,iv2);
-        ImageView iv3=(ImageView)mMyCards.findViewById(R.id.iv_card3);
+        ImageView iv3= mMyCards.findViewById(R.id.iv_card3);
         mMyCardsObjects.put(2,iv3);
-        ImageView iv4=(ImageView)mMyCards.findViewById(R.id.iv_card4);
+        ImageView iv4= mMyCards.findViewById(R.id.iv_card4);
         mMyCardsObjects.put(3,iv4);
 
         //增加赢家翻牌
@@ -2413,7 +2413,7 @@ public class GameActivity extends BaseToolbarActivity {
         for (int i=0;i<maxNumber;i++){
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View viewChip = inflater.inflate(R.layout.layout_chip, null);
-            TextView tv=(TextView)viewChip.findViewById(R.id.tv_chip);
+            TextView tv= viewChip.findViewById(R.id.tv_chip);
             tv.setText("000");
             setPosition(viewChip,mAmountChipViewWidth,mAmountChipVieHeight,iAmountChipLocation[i][0],iAmountChipLocation[i][1]);
             layout_game.addView(viewChip);
@@ -2426,7 +2426,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.layout_cardback, null);
-            ImageView ivCardBack=(ImageView)view.findViewById(R.id.iv_cardback);
+            ImageView ivCardBack= view.findViewById(R.id.iv_cardback);
             ivCardBack.setImageBitmap(drawCardBack());
             setPosition(view,mCardBackWidth,mCardBackHeight, iCardBack[i][0],iCardBack[i][1]);
             layout_game.addView(view);
@@ -2440,7 +2440,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.layout_tip, null);
-            TextView tv_tip=(TextView)view.findViewById(R.id.tv_tip);
+            TextView tv_tip= view.findViewById(R.id.tv_tip);
             tv_tip.setText("盲注");
             setPosition(view,mTipViewWidth,mTipViewHeight,iTipLocation[i][0],iTipLocation[i][1]);
             layout_game.addView(view);
@@ -2492,7 +2492,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             @Override
             public void onFinish() {
-                ((TextView) (mTimerViewObjects.get(seatindex))).setVisibility(View.GONE);
+                mTimerViewObjects.get(seatindex).setVisibility(View.GONE);
             }
         };
         timer.start();
@@ -2681,28 +2681,28 @@ public class GameActivity extends BaseToolbarActivity {
 
                 switch (i) {
                     case 0:
-                        iv=(ImageView)mGameCards.findViewById(R.id.iv_card1);
+                        iv= mGameCards.findViewById(R.id.iv_card1);
                         iv.setVisibility(View.VISIBLE);
                         iv.setImageBitmap(drawSingleCard(mTableInfo.comunitycards[i].suit,mTableInfo.comunitycards[i].member));
 
                         break;
                     case 1:
-                        iv=(ImageView)mGameCards.findViewById(R.id.iv_card2);
+                        iv= mGameCards.findViewById(R.id.iv_card2);
                         iv.setVisibility(View.VISIBLE);
                         iv.setImageBitmap(drawSingleCard(mTableInfo.comunitycards[i].suit,mTableInfo.comunitycards[i].member));
                         break;
                     case 2:
-                        iv=(ImageView)mGameCards.findViewById(R.id.iv_card3);
+                        iv= mGameCards.findViewById(R.id.iv_card3);
                         iv.setVisibility(View.VISIBLE);
                         iv.setImageBitmap(drawSingleCard(mTableInfo.comunitycards[i].suit,mTableInfo.comunitycards[i].member));
                         break;
                     case 3:
-                        iv=(ImageView)mGameCards.findViewById(R.id.iv_card4);
+                        iv= mGameCards.findViewById(R.id.iv_card4);
                         iv.setVisibility(View.VISIBLE);
                         iv.setImageBitmap(drawSingleCard(mTableInfo.comunitycards[i].suit,mTableInfo.comunitycards[i].member));
                         break;
                     case 4:
-                        iv=(ImageView)mGameCards.findViewById(R.id.iv_card5);
+                        iv= mGameCards.findViewById(R.id.iv_card5);
                         iv.setVisibility(View.VISIBLE);
                         iv.setImageBitmap(drawSingleCard(mTableInfo.comunitycards[i].suit,mTableInfo.comunitycards[i].member));
                         break;
@@ -2754,9 +2754,9 @@ public class GameActivity extends BaseToolbarActivity {
                         //设置头像，金币值，名字
                         //此处不判断seatindex的值，因为是根据座位中的userid来的
                         View view=mSeatObjects.get(mTableInfo.players[j].seatindex);
-                        ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
-                        TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
-                        TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
+                        ImageView iv = view.findViewById(R.id.iv_user_head);
+                        TextView tv_name = view.findViewById(R.id.tv_user_name);
+                        TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
 
                         tv_name.setText(mTableInfo.players[j].nickname);
                         tv_name.setVisibility(View.VISIBLE);
@@ -2802,7 +2802,7 @@ public class GameActivity extends BaseToolbarActivity {
                             //Tip为大盲
                             View viewTip=  mTipObjects.get(mTableInfo.players[j].seatindex);
                             viewTip.setVisibility(View.VISIBLE);
-                            TextView tv_tip=(TextView)viewTip.findViewById(R.id.tv_tip);
+                            TextView tv_tip= viewTip.findViewById(R.id.tv_tip);
                             tv_tip.setText("等待");
                         }
 
@@ -2820,7 +2820,7 @@ public class GameActivity extends BaseToolbarActivity {
 
 
                         View viewTip=  mTipObjects.get(mTableInfo.players[j].seatindex);
-                        TextView tv_tip=(TextView)viewTip.findViewById(R.id.tv_tip);
+                        TextView tv_tip= viewTip.findViewById(R.id.tv_tip);
 
                         /*public enum PlayAction
     {
@@ -2894,7 +2894,7 @@ public class GameActivity extends BaseToolbarActivity {
                         //已下注
                         if (mTableInfo.players[j].amountchips>0){
                             View  viewChip=mChipObjects.get(mTableInfo.players[j].seatindex);
-                            TextView tv=(TextView)viewChip.findViewById(R.id.tv_chip);
+                            TextView tv= viewChip.findViewById(R.id.tv_chip);
                             tv.setText(mTableInfo.players[j].amountchips+"");
                         }
 
@@ -2947,7 +2947,7 @@ public class GameActivity extends BaseToolbarActivity {
                                             mTVRaise.setText("加注");
                                             maxpaidchips=mTableInfo.players[j].waitactionparam.maxpaidchips;
 
-                                            minChip=maxpaidchips-mTableInfo.players[j].amountchips;;
+                                            minChip=maxpaidchips-mTableInfo.players[j].amountchips;
                                             break;
                                         case 6:
                                             mButtonRaise.setVisibility(View.VISIBLE);
@@ -2970,23 +2970,23 @@ public class GameActivity extends BaseToolbarActivity {
                                     ImageView ivMyCards;
                                     switch (i) {
                                         case 0:
-                                            iv=(ImageView)mMyCards.findViewById(R.id.iv_card1);
+                                            iv= mMyCards.findViewById(R.id.iv_card1);
                                             iv.setVisibility(View.VISIBLE);
                                             iv.setImageBitmap(drawSingleCard(mTableInfo.players[j].cards[k].suit,mTableInfo.players[j].cards[k].member));
 
                                             break;
                                         case 1:
-                                            iv=(ImageView)mMyCards.findViewById(R.id.iv_card2);
+                                            iv= mMyCards.findViewById(R.id.iv_card2);
                                             iv.setVisibility(View.VISIBLE);
                                             iv.setImageBitmap(drawSingleCard(mTableInfo.players[j].cards[k].suit,mTableInfo.players[j].cards[k].member));
                                             break;
                                         case 2:
-                                            iv=(ImageView)mMyCards.findViewById(R.id.iv_card3);
+                                            iv= mMyCards.findViewById(R.id.iv_card3);
                                             iv.setVisibility(View.VISIBLE);
                                             iv.setImageBitmap(drawSingleCard(mTableInfo.players[j].cards[k].suit,mTableInfo.players[j].cards[k].member));
                                             break;
                                         case 3:
-                                            iv=(ImageView)mMyCards.findViewById(R.id.iv_card4);
+                                            iv= mMyCards.findViewById(R.id.iv_card4);
                                             iv.setVisibility(View.VISIBLE);
                                             iv.setImageBitmap(drawSingleCard(mTableInfo.players[j].cards[k].suit,mTableInfo.players[j].cards[k].member));
                                             break;
@@ -3019,7 +3019,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                 }else{
                     mMessage.setVisibility(View.VISIBLE);
-                    TextView tv_message=(TextView)mMessage.findViewById(R.id.tv_message);
+                    TextView tv_message= mMessage.findViewById(R.id.tv_message);
                     tv_message.setText("等待房主开始游戏");
 
                 }
@@ -3031,7 +3031,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                 }else{
                     mMessage.setVisibility(View.VISIBLE);
-                    TextView tv_message=(TextView)mMessage.findViewById(R.id.tv_message);
+                    TextView tv_message= mMessage.findViewById(R.id.tv_message);
                     tv_message.setText("游戏暂停中，等待房主开始游戏");
 
                 }
@@ -3344,12 +3344,12 @@ public class GameActivity extends BaseToolbarActivity {
         mAction.setLayoutParams(lp);
         layout_game.addView(mAction);
         //给三个按钮加响应事件
-        mButtonFold=(Button)mAction.findViewById(R.id.button_fold);
-        mButtonRaise=(Button)mAction.findViewById(R.id.button_raise);
-        mButtonCheck=(Button)mAction.findViewById(R.id.button_check);
-        mTVFold=(TextView)mAction.findViewById(R.id.tv_fold);
-        mTVRaise=(TextView)mAction.findViewById(R.id.tv_raise);
-        mTVCheck=(TextView)mAction.findViewById(R.id.tv_check);
+        mButtonFold= mAction.findViewById(R.id.button_fold);
+        mButtonRaise= mAction.findViewById(R.id.button_raise);
+        mButtonCheck= mAction.findViewById(R.id.button_check);
+        mTVFold= mAction.findViewById(R.id.tv_fold);
+        mTVRaise= mAction.findViewById(R.id.tv_raise);
+        mTVCheck= mAction.findViewById(R.id.tv_check);
 
     }
 
@@ -3368,7 +3368,7 @@ public class GameActivity extends BaseToolbarActivity {
         textMoveLayout=new TextMoveLayout(this);
         AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(width, height, 0, 0);
 
-        lp.x = (300-90)/2;;
+        lp.x = (300-90)/2;
         lp.y =0;//  (mScreenHeight-80)/2-60;;
         textMoveLayout.setLayoutParams(lp);
         ((AbsoluteLayout)mAction).addView(textMoveLayout);
@@ -3441,7 +3441,7 @@ public class GameActivity extends BaseToolbarActivity {
     private void addReturnSeatButton(){
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mReturnSeat = inflater.inflate(R.layout.layout_returnseat, null);
-        TextView tv=(TextView)mReturnSeat.findViewById(R.id.tv_returnseat) ;
+        TextView tv= mReturnSeat.findViewById(R.id.tv_returnseat);
         tv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -3478,7 +3478,7 @@ public class GameActivity extends BaseToolbarActivity {
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mMessage = inflater.inflate(R.layout.layout_message, null);
 
-        TextView tv_message = (TextView) mMessage.findViewById(R.id.tv_message);
+        TextView tv_message = mMessage.findViewById(R.id.tv_message);
         tv_message.setText("等待开始" );
         mMessage.setLayoutParams(lp);
         layout_game.addView(mMessage);
@@ -4151,7 +4151,7 @@ public class GameActivity extends BaseToolbarActivity {
         contentView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED);
         //int xOffset = parent.getWidth()  - contentView.getMeasuredWidth() ;
         //popupWindow.showAsDropDown(parent,xOffset,20);    // 在mButton2的中间显示
-        int windowPos[] = calculatePopWindowPos((View)parent, contentView);
+        int windowPos[] = calculatePopWindowPos(parent, contentView);
         popupWindow.showAtLocation(GameActivity.this.getWindow().getDecorView(), Gravity.CENTER,0,0);
         // popupWindow.showAtLocation(parent,Gravity.TOP | Gravity.START, windowPos[0], windowPos[1]);
     }
@@ -4170,7 +4170,7 @@ public class GameActivity extends BaseToolbarActivity {
         View contentView = LayoutInflater.from(this).inflate(layoutId, null);
 
 
-        tv_buy_coin=(TextView)contentView.findViewById(R.id.tv_buy_coin);
+        tv_buy_coin= contentView.findViewById(R.id.tv_buy_coin);
         tv_buy_coin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -4178,21 +4178,21 @@ public class GameActivity extends BaseToolbarActivity {
             }
         });
 
-        tv_message=(TextView)contentView.findViewById(R.id.tv_message);
+        tv_message= contentView.findViewById(R.id.tv_message);
         tv_message.setVisibility(View.INVISIBLE);
         if (mTableInfo.mintakeinchips>application.getUser().goldcoin){
             tv_message.setVisibility(View.VISIBLE);
             tv_message.setText("个人财富不足，不能补充记分牌");
         }
 
-        tv_core=(TextView)contentView.findViewById(R.id.tv_core);
+        tv_core= contentView.findViewById(R.id.tv_core);
         tv_core.setText(mTableInfo.mintakeinchips+"");
 
-        tv_coin=(TextView)contentView.findViewById(R.id.tv_coin);
+        tv_coin= contentView.findViewById(R.id.tv_coin);
         tv_coin.setText(application.getUser().goldcoin+"");
-        tv_service_coin=(TextView)contentView.findViewById(R.id.tv_service_coin);
+        tv_service_coin= contentView.findViewById(R.id.tv_service_coin);
         tv_service_coin.setText(mTableInfo.mintakeinchips/10+"");
-        tv_in_coin=(TextView)contentView.findViewById(R.id.tv_in_coin);
+        tv_in_coin= contentView.findViewById(R.id.tv_in_coin);
         if (mTableInfo.iscontroltakein){
             //控制带入
             tv_in_coin.setText(takeinchips+"/"+permittakeinchips);
@@ -4206,7 +4206,7 @@ public class GameActivity extends BaseToolbarActivity {
         }
 
 
-        iv_close=(ImageView)contentView.findViewById(R.id.iv_close);
+        iv_close= contentView.findViewById(R.id.iv_close);
         iv_close.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -4216,7 +4216,7 @@ public class GameActivity extends BaseToolbarActivity {
         });
 
 
-        seekbar_core=(RangeSliderBar2)contentView.findViewById(R.id.seekbar_core);
+        seekbar_core= contentView.findViewById(R.id.seekbar_core);
         seekbar_core.setRangeCount((mTableInfo.maxtakeinchips-mTableInfo.mintakeinchips)/(mTableInfo.smallblind*100)+1);
         seekbar_core.setOnSelectRangeBarListener(new RangeSliderBar2.OnSelectRangeBarListener() {
             @Override
@@ -4408,7 +4408,6 @@ public class GameActivity extends BaseToolbarActivity {
            }else {
                button_apply.setText("确定");
            }
-          ;
 
        }else{
            //非控制带入
