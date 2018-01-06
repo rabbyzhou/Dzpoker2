@@ -1,48 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:rsv="http://schemas.android.com/apk/res-auto"
-    android:layout_width="600px"
-    android:layout_height="620px"
+    android:layout_width="300dp"
+    android:layout_height="310dp"
 
-    android:paddingLeft="50px"
-    android:paddingRight="50px"
-    android:paddingTop="10px"
-    android:paddingBottom="10px"
     android:background="#152323"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="5dp"
+    android:paddingLeft="25dp"
+    android:paddingRight="25dp"
+    android:paddingTop="5dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30px"
-        android:orientation="horizontal"
-        android:layout_marginBottom="20px">
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="15dp"
+        android:orientation="horizontal">
 
         <TextView
             android:id="@+id/tv_buy_coin"
-            android:layout_width="140px"
-            android:layout_height="40px"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:background="@drawable/game_bj"
             android:text="普通局消息"
             android:textColor="@color/black"
-            android:textSize="14sp"
-            android:background="@drawable/game_bj"/>
+            android:textSize="14sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=""
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:text="" />
+
         <ImageView
             android:id="@+id/iv_close"
-            android:layout_width="40px"
-            android:layout_height="40px"
-            android:src="@drawable/close"
-           />
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/close" />
     </LinearLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_apply_info"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:scrollbars="vertical"/>
+        android:scrollbars="vertical" />
 
 </LinearLayout>
 

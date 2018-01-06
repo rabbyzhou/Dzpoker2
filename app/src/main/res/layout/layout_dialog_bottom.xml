@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white"
     android:gravity="center_horizontal"
-    android:orientation="vertical" >
+    android:orientation="vertical">
 
 
     <Button
@@ -20,7 +20,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="1px"
+        android:layout_height="1dp"
         android:background="#4D000000" />
 
     <Button

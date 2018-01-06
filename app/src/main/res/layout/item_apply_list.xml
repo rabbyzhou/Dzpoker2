@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_apply"
     android:layout_width="fill_parent"
-    android:layout_height="260px"
-    android:orientation="vertical"
+    android:layout_height="130dp"
+    android:background="@drawable/game_bj"
     android:clickable="true"
     android:focusable="true"
-    android:paddingTop="20px"
-    android:paddingBottom="20px"
-    android:id="@+id/layout_apply"
-    android:background="@drawable/game_bj"
-    >
+    android:orientation="vertical"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,38 +18,39 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
             android:text="房间："
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-           />
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tv_house_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
+            android:layout_weight="1"
             android:text="我的房间"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-            android:layout_weight="1"/>
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tv_apply_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="40px"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="4dp"
             android:text="20:31"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-            />
+            android:textSize="12dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -58,26 +59,26 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
             android:text="玩家："
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-            />
+            android:textSize="12dp" />
+
         <TextView
             android:id="@+id/tv_player"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
             android:text="游戏者"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-            />
+            android:textSize="12dp" />
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -87,48 +88,45 @@
             android:id="@+id/tv_apply_info"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="4dp"
             android:text="@string/apply_info"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:layout_marginBottom="8px"
-            android:layout_marginTop="8px"
-            android:layout_marginLeft="20px"
-            android:textSize="12dp"
-            />
+            android:textSize="12dp" />
 
 
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
-        android:paddingRight="40px"
-        android:layout_marginTop="20px"
-        android:layout_gravity="right">
+        android:paddingRight="20dp">
+
         <Button
             android:id="@+id/button_refuse"
+            android:layout_width="60dp"
+            android:layout_height="22dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="120px"
-            android:layout_height="44px"
+            android:background="@drawable/apply_cancel"
             android:text="拒绝"
-            android:textColor="@color/black"
-            android:background="@drawable/apply_cancel"/>
+            android:textColor="@color/black" />
+
         <Button
             android:id="@+id/button_apply"
-            android:layout_marginLeft="40px"
+            android:layout_width="60dp"
+            android:layout_height="22dp"
             android:layout_gravity="center_horizontal"
-            android:layout_width="120px"
-            android:layout_height="44px"
+            android:layout_marginLeft="20dp"
+            android:background="@drawable/buy_score_bj"
             android:text="同意"
-            android:textColor="@color/black"
-            android:background="@drawable/buy_score_bj"/>
-
-
-
+            android:textColor="@color/black" />
 
 
     </LinearLayout>
-
-
 
 
 </LinearLayout>

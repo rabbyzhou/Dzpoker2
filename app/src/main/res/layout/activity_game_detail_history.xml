@@ -1,45 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/main_bg_secondary">
+    android:background="@color/main_bg_secondary"
+    android:orientation="vertical">
 
     <!-- 标题栏 -->
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="40dip"
-        android:visibility="gone"
-        android:background="#003366">
+        android:background="#003366"
+        android:visibility="gone">
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:drawableLeft="@drawable/black_back"
             android:drawablePadding="2dp"
             android:text="返回"
-            android:textSize="16dp"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="20px"/>
+            android:textSize="16dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:textSize="20dp"
-            tools:text="战绩详情"
-            android:layout_centerInParent="true"/>
+            tools:text="战绩详情" />
 
         <ImageView
             android:id="@+id/review_enter"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:src="@drawable/text_ic"
-            android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="10dp"/>
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/text_ic" />
 
     </RelativeLayout>
 
@@ -47,13 +47,12 @@
         android:id="@+id/total_time_desc"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/white"
-        android:layout_marginTop="5dp"
-        android:textSize="@dimen/game_record_text_small_size"
         android:layout_gravity="center"
+        android:layout_marginTop="5dp"
         android:gravity="center"
-        tools:text=" 11月10 10:00 - 11月10 10:30 (总时长: 30分钟)"
-        />
+        android:textColor="@color/white"
+        android:textSize="@dimen/game_record_text_small_size"
+        tools:text=" 11月10 10:00 - 11月10 10:30 (总时长: 30分钟)" />
 
     <!--  -->
     <TableLayout
@@ -66,80 +65,79 @@
         <!-- 第一行表头-->
         <TableRow
             android:layout_width="match_parent"
-            android:background="@color/main_bg"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:background="@color/main_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="小盲/大盲"
                 android:textColor="@color/white"
-                android:text="小盲/大盲"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="类型"
                 android:textColor="@color/white"
-                android:text="类型"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="俱乐部"
                 android:textColor="@color/white"
-                android:text="俱乐部"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
         </TableRow>
 
         <!-- 第一行数据 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/blind_size"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="1/2"
-                />
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="1/2" />
 
             <TextView
                 android:id="@+id/type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="9人桌"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="9人桌" />
 
             <TextView
                 android:id="@+id/club_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="俱乐部"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="俱乐部" />
 
         </TableRow>
 
@@ -147,80 +145,79 @@
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/main_bg"
-            android:layout_marginTop="5dp">
+            android:layout_marginTop="5dp"
+            android:background="@color/main_bg">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="本局总手数"
                 android:textColor="@color/white"
-                android:text="本局总手数"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="本局总带入"
                 android:textColor="@color/white"
-                android:text="本局总带入"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
+                android:text="本局最大POT"
                 android:textColor="@color/white"
-                android:text="本局最大POT"/>
+                android:textSize="@dimen/game_record_text_small_size" />
 
         </TableRow>
 
         <!-- 第二行数据 -->
         <TableRow
             android:layout_width="match_parent"
-            android:layout_marginTop="5dp"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <TextView
                 android:id="@+id/all_hands"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="7"
-                />
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="7" />
 
             <TextView
                 android:id="@+id/all_join"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="800"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="800" />
 
             <TextView
                 android:id="@+id/max_pot"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="600"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="600" />
 
         </TableRow>
     </TableLayout>
@@ -240,123 +237,122 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
+            android:text="房间:"
             android:textColor="@color/white"
-            android:text="房间:"/>
+            android:textSize="@dimen/game_record_text_small_size" />
 
         <TextView
             android:id="@+id/room_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:textColor="@color/white"
             android:layout_toRightOf="@+id/tv_room"
-            tools:text="房间1"/>
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="@dimen/game_record_text_small_size"
+            tools:text="房间1" />
 
         <TextView
             android:id="@+id/tv_room_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:textColor="@color/white"
             android:layout_toLeftOf="@+id/room_owner"
-            android:text="房主:"/>
+            android:gravity="center"
+            android:text="房主:"
+            android:textColor="@color/white"
+            android:textSize="@dimen/game_record_text_small_size" />
 
         <TextView
             android:id="@+id/room_owner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
             android:textColor="@color/white"
-            android:layout_alignParentRight="true"
-            tools:text="房间1111111"/>
+            android:textSize="@dimen/game_record_text_small_size"
+            tools:text="房间1111111" />
 
     </RelativeLayout>
 
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="10dp">
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp">
 
         <!-- 表头-->
         <TableRow
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent">
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:id="@+id/shark_icon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:src="@drawable/shark_img"/>
+                android:src="@drawable/shark_img" />
 
             <ImageView
                 android:id="@+id/big_fish_icon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:src="@drawable/big_fish"/>
+                android:src="@drawable/big_fish" />
 
             <ImageView
                 android:id="@+id/rish_icon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:src="@drawable/vulgar_tycoon"/>
+                android:src="@drawable/vulgar_tycoon" />
 
             <ImageView
                 android:id="@+id/worker_model_icon"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_weight="1"
-                android:src="@drawable/model_worker"/>
+                android:src="@drawable/model_worker" />
 
         </TableRow>
 
         <!-- 头像-->
         <TableRow
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
             android:layout_width="match_parent"
-            >
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp">
 
             <ImageView
                 android:id="@+id/shark_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                tools:src="@drawable/default_male_head"/>
+                tools:src="@drawable/default_male_head" />
 
             <ImageView
                 android:id="@+id/big_fish_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                tools:src="@drawable/default_male_head"/>
+                tools:src="@drawable/default_male_head" />
 
             <ImageView
                 android:id="@+id/rish_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                tools:src="@drawable/default_male_head"/>
+                tools:src="@drawable/default_male_head" />
 
             <ImageView
                 android:id="@+id/worker_model_head"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                tools:src="@drawable/default_male_head"/>
+                tools:src="@drawable/default_male_head" />
 
         </TableRow>
         <!-- 数据-->
@@ -369,45 +365,45 @@
                 android:id="@+id/shark_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="鲨鱼"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="鲨鱼" />
 
             <TextView
                 android:id="@+id/big_fish_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="大鱼"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="大鱼" />
 
             <TextView
                 android:id="@+id/rich_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="土豪"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="土豪" />
 
             <TextView
                 android:id="@+id/worker_model_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                tools:text="劳模"/>
+                android:textSize="@dimen/game_record_text_small_size"
+                tools:text="劳模" />
 
         </TableRow>
     </TableLayout>
@@ -416,200 +412,196 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
-        android:background="@color/main_bg">
+        android:background="@color/main_bg"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="0.0dp"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:layout_weight="2"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
             android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="昵称"/>
-
-        <TextView
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:text="昵称"
             android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="带入"/>
-
-        <TextView
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="手数"/>
+            android:textSize="@dimen/game_record_text_small_size" />
 
         <TextView
             android:layout_width="0.0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:gravity="center"
             android:layout_weight="1"
+            android:gravity="center"
+            android:text="带入"
             android:textColor="@color/white"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="战绩"/>
+            android:textSize="@dimen/game_record_text_small_size" />
+
+        <TextView
+            android:layout_width="0.0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="手数"
+            android:textColor="@color/white"
+            android:textSize="@dimen/game_record_text_small_size" />
+
+        <TextView
+            android:layout_width="0.0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="战绩"
+            android:textColor="@color/white"
+            android:textSize="@dimen/game_record_text_small_size" />
 
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_marginTop="3dp"
+        android:layout_height="1dp"
         android:layout_marginBottom="3dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:background="@color/main_bg">
-
-    <!-- 保险池-->
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="center_vertical"
-        android:gravity="center_vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
-
-        <TextView
-            android:layout_width="0.0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="2"
-            android:textColor="@color/orange"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="保险池"/>
-
-        <TextView
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size" />
-
-        <TextView
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size" />
-
-        <TextView
-            android:id="@+id/surancepot"
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textColor="@color/orange"
-            android:textSize="@dimen/game_record_text_small_size" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
         android:layout_marginTop="3dp"
-        android:layout_marginBottom="3dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        />
-    <!-- 2/7 jackpot-->
+        android:background="@color/gray" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp">
+        android:layout_gravity="center_vertical"
+        android:background="@color/main_bg"
+        android:gravity="center_vertical"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="0.0dp"
+        <!-- 保险池-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:textColor="@color/btn_primary_color"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size"
-            android:text="2/7 JackPot"/>
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0.0dp"
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="保险池"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:id="@+id/surancepot"
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/orange"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginBottom="3dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/gray" />
+        <!-- 2/7 jackpot-->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size" />
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="0.0dp"
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="2/7 JackPot"
+                android:textColor="@color/btn_primary_color"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+            <TextView
+                android:id="@+id/jackpot"
+                android:layout_width="0.0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/btn_primary_color"
+                android:textSize="@dimen/game_record_text_small_size" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="3dp"
+            android:background="@color/gray" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/detail_list"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/white"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:textSize="@dimen/game_record_text_small_size" />
-
-        <TextView
-            android:id="@+id/jackpot"
-            android:layout_width="0.0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_weight="1"
-            android:textColor="@color/btn_primary_color"
-            android:textSize="@dimen/game_record_text_small_size" />
-
-    </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_marginTop="3dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_height="1dp"
-        android:background="@color/gray"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/detail_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="vertical"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:padding="10dp"
-        />
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:padding="10dp"
+            android:scrollbars="vertical" />
     </LinearLayout>
 </LinearLayout>

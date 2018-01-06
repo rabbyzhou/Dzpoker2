@@ -7,12 +7,12 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/layout_top"
+        android:layout_width="match_parent"
         android:layout_height="40dip"
         android:background="#003366"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/exit"
@@ -20,12 +20,14 @@
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:gravity="center_vertical">
+
             <android.support.v7.widget.AppCompatImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/black_back"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="20dp"
-                android:layout_gravity="center_vertical"/>
+                android:src="@drawable/black_back" />
+
             <android.support.v7.widget.AppCompatTextView
                 android:id="@+id/tv_exit"
                 android:layout_width="wrap_content"
@@ -33,45 +35,47 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="2dp"
                 android:text="返回"
-                android:textSize="16dp"/>
+                android:textSize="16dp" />
 
         </LinearLayout>
+
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:layout_gravity="center"
             android:text="我的俱乐部"
-            android:textSize="24dp"
-            android:layout_centerInParent="true"/>
+            android:textSize="24dp" />
 
         <android.support.v7.widget.AppCompatTextView
             android:id="@+id/tv_more"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="更多"
-            android:layout_marginRight="20px"
             android:layout_centerVertical="true"
-            android:textSize="18dp"/>
+            android:layout_marginRight="10dp"
+            android:text="更多"
+            android:textSize="18dp" />
 
     </RelativeLayout>
 
 
     <LinearLayout
+        android:id="@+id/layout_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/layout_main"
-        android:orientation="vertical"
         android:layout_gravity="center"
         android:layout_marginLeft="5dp"
+        android:orientation="vertical"
 
         >
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/lv_club_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
 
     </LinearLayout>
 

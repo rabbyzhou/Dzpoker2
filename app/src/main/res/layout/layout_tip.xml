@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="60px"
-    android:layout_height="35px"
+    android:layout_width="30dp"
+    android:layout_height="17dp"
     android:orientation="horizontal"
     android:background="@drawable/back_tip">
 
@@ -9,10 +9,10 @@
 
     <TextView
         android:id="@+id/tv_tip"
-        android:layout_width="60px"
-        android:layout_height="35px"
+        android:layout_width="30dp"
+        android:layout_height="17dp"
         android:text="弃牌"
-        android:textSize="9dp"
+        android:textSize="8dp"
         android:gravity="center"
         android:textColor="@color/white"
 

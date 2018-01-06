@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="90px"
-    android:layout_height="35px"
+    android:layout_width="45dp"
+    android:layout_height="17dp"
     android:orientation="horizontal"
     android:background="@drawable/bg_001">
 
     <ImageView
         android:layout_gravity="center_vertical"
-        android:layout_width="24px"
-        android:layout_height="24px"
+        android:layout_width="12dp"
+        android:layout_height="12dp"
         android:src="@drawable/chip"/>
 
 

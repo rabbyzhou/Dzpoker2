@@ -1,133 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:orientation="vertical"
-        >
+        android:orientation="vertical">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@drawable/me_bg"
             android:layout_gravity="center"
+            android:background="@drawable/me_bg"
             android:orientation="vertical">
 
             <android.support.v7.widget.AppCompatImageView
                 android:id="@+id/iv_user_head"
-                android:layout_marginTop="10dp"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/default_club_head"
                 android:layout_gravity="center_horizontal"
-                />
-            <TextView
                 android:layout_marginTop="10dp"
+                android:src="@drawable/default_club_head" />
+
+            <TextView
                 android:id="@+id/tv_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="用户名"
-                android:textSize="@dimen/game_record_text_medium_size"
-                android:textColor="@color/white"
-                android:layout_gravity="center_horizontal"/>
-            <TextView
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
+                android:text="用户名"
+                android:textColor="@color/white"
+                android:textSize="@dimen/game_record_text_medium_size" />
+
+            <TextView
                 android:id="@+id/tv_user_abstract"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="10dp"
                 android:text="暂无简介"
-                android:textSize="@dimen/game_record_text_small_size"
                 android:textColor="@color/white"
-                android:layout_gravity="center_horizontal"/>
+                android:textSize="@dimen/game_record_text_small_size" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
                 android:layout_marginBottom="10dp"
-                >
+                android:layout_marginTop="10dp"
+                android:gravity="center">
+
                 <LinearLayout
                     android:layout_width="80dp"
                     android:layout_height="20dp"
-                    android:orientation="horizontal"
                     android:background="@drawable/money_bj"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:paddingLeft="5dp"
-                        android:src="@drawable/money_ico"/>
+                        android:src="@drawable/money_ico" />
 
                     <TextView
                         android:id="@+id/tv_goldcoin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000"
+                        android:layout_gravity="center_vertical"
                         android:paddingLeft="6dp"
-                        android:textSize="10dp"
+                        android:text="1000"
                         android:textColor="@color/white"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="10dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="80dp"
                     android:layout_height="20dp"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="8px"
+                    android:layout_marginLeft="4dp"
                     android:background="@drawable/masonry_bj"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:paddingLeft="5dp"
-                        android:src="@drawable/masonry_ico"/>
+                        android:src="@drawable/masonry_ico" />
 
                     <TextView
                         android:id="@+id/tv_diamond"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="1000"
-                        android:textSize="10dp"
+                        android:layout_gravity="center_vertical"
                         android:paddingLeft="6dp"
+                        android:text="1000"
                         android:textColor="@color/white"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="10dp" />
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:layout_width="80dp"
                     android:layout_height="20dp"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="8px"
+                    android:layout_marginLeft="4dp"
                     android:background="@drawable/member_bj"
-                    android:gravity="center_vertical">
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
                     <ImageView
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:paddingLeft="5dp"
-                        android:src="@drawable/member_ico"/>
+                        android:src="@drawable/member_ico" />
 
                     <TextView
                         android:id="@+id/tv_user_level"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="初级会员"
+                        android:layout_gravity="center_vertical"
                         android:paddingLeft="6dp"
-                        android:textSize="10dp"
+                        android:text="初级会员"
                         android:textColor="@color/white"
-                        android:layout_gravity="center_vertical"/>
+                        android:textSize="10dp" />
                 </LinearLayout>
 
             </LinearLayout>
         </LinearLayout>
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_menu_list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/main_bg_secondary"
             android:paddingTop="15dp"
-            android:scrollbars="vertical"/>
+            android:scrollbars="vertical" />
     </LinearLayout>
 </RelativeLayout>

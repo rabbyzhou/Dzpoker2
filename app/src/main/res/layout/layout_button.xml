@@ -1,22 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="40px"
-    android:layout_height="40px"
+    android:layout_width="20dp"
+    android:layout_height="20dp"
     android:orientation="vertical"
-    android:padding="0px"
     android:weightSum="1">
 
 
     <ImageView
         android:id="@+id/ivbutton"
-        android:layout_width="40px"
-        android:layout_height="40px"
-        android:src="@drawable/button"
-         />
-
-
-
-
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:src="@drawable/button" />
 
 
 </LinearLayout>
