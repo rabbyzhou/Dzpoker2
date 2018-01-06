@@ -63,6 +63,7 @@ import com.yijian.dzpoker.activity.base.BaseToolbarActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoActivity;
 import com.yijian.dzpoker.activity.club.ClubInfoManageActivity;
 import com.yijian.dzpoker.baselib.debug.Logger;
+import com.yijian.dzpoker.baselib.utils.UITools;
 import com.yijian.dzpoker.constant.Constant;
 import com.yijian.dzpoker.service.SocketService;
 import com.yijian.dzpoker.util.DisplayHelper;
@@ -117,7 +118,7 @@ import static com.yijian.dzpoker.util.Util.calculatePopWindowPos;
 public class GameActivity extends BaseToolbarActivity {
 
     private static final String TAG = "GameActivity";
-    private LinearLayout layout_parent;
+    private RelativeLayout layout_parent;
     private PopupWindow popupWindow,popMenu,popApplyWindow;
     private SocketService.SocketBinder myBinder;
     private String ip;
@@ -157,6 +158,8 @@ public class GameActivity extends BaseToolbarActivity {
     private Button mButtonFold,mButtonRaise,mButtonCheck;
     private TextView mTVFold,mTVRaise,mTVCheck;
 
+    private RelativeLayout rootLayout;
+
 
     private DisplayHelper displayHelper;
 
@@ -169,8 +172,8 @@ public class GameActivity extends BaseToolbarActivity {
     private int iCardBack[][];//有牌的用户加上这个背景
 
     private Context mContext;
-    private int mSeatViewWidth=120; //座位
-    private int mSeatViewHeight=140;
+    private int mSeatViewWidth=200; //座位
+    private int mSeatViewHeight=200;
     private int mNameTextHeight=30;
     private int mHeadImageHeight=80;
     private int mHeadImageWidth=80;
@@ -235,6 +238,9 @@ public class GameActivity extends BaseToolbarActivity {
     private Boolean bInitView=false;
 
 
+    private int userIconWidth = 40;
+    private int userIconHeight = 40;
+    private int onSeatTextSize = 24;
 
 
 
@@ -425,11 +431,12 @@ public class GameActivity extends BaseToolbarActivity {
                                     .load(mGameUser.get(userid).userHeadPic)
                                     .networkPolicy(NetworkPolicy.NO_CACHE, NetworkPolicy.NO_STORE)
                                     .memoryPolicy(MemoryPolicy.NO_CACHE, MemoryPolicy.NO_STORE)
-                                    .resize(80, 80)
+                                    .resize(mHeadImageWidth, mHeadImageHeight)
                                     .error(R.drawable.seat_empty)
                                     .transform(new CircleTransform())
                                     .into(iv);
                         }
+                        iv.setImageDrawable(getResources().getDrawable(R.drawable.default_female_head));
                         iv.setClickable(false);
 
 
@@ -1909,6 +1916,8 @@ public class GameActivity extends BaseToolbarActivity {
         setContentView(R.layout.activity_game);
         getSupportActionBar().hide();
 
+        initUIValues();
+
         application=(DzApplication)getApplication();
         mContext=getApplicationContext();
         notificationManager=(NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
@@ -1932,11 +1941,33 @@ public class GameActivity extends BaseToolbarActivity {
         bindService(startIntent, connection, BIND_AUTO_CREATE);
     }
 
+    private void initUIValues() {
+
+        onSeatTextSize = UITools.convertDpToPixel(12, this);
+        userIconWidth = UITools.convertDpToPixel(50, this);
+        userIconHeight = UITools.convertDpToPixel(50, this);
+        mSeatViewWidth = UITools.convertDpToPixel(80, this);
+        mSeatViewHeight = UITools.convertDpToPixel(80, this);
+        mNameTextHeight = UITools.convertDpToPixel(15, this);
+        mHeadImageHeight = UITools.convertDpToPixel(50, this);
+        mHeadImageWidth = UITools.convertDpToPixel(50, this);
+        mTipViewWidth = UITools.convertDpToPixel(30, this);
+        mTipViewHeight = UITools.convertDpToPixel(17, this);
+        mAmountChipViewWidth = UITools.convertDpToPixel(45, this);
+        mAmountChipVieHeight = UITools.convertDpToPixel(17, this);
+        mDViewWidth = UITools.convertDpToPixel(20, this);
+        mDViewHeight = UITools.convertDpToPixel(20, this);
+        mCardBackWidth = UITools.convertDpToPixel(20, this);
+        mCardBackHeight = UITools.convertDpToPixel(19, this);
+        mPoolWidth = UITools.convertDpToPixel(160, this);
+        mPoolHeight = UITools.convertDpToPixel(150, this);
+    }
+
 
     @SuppressLint("WrongViewCast")
     private void initViews(){
 
-        layout_parent=(LinearLayout)findViewById(R.id.layout_main);
+        layout_parent=(RelativeLayout) findViewById(R.id.layout_main);
         //此处设置成clickable =false,在INFOtable中放开，怕接受服务器消息的时间差
         iv_voice=(ImageView)findViewById(R.id.iv_voice);
         iv_voice.setClickable(false);
@@ -2271,12 +2302,18 @@ public class GameActivity extends BaseToolbarActivity {
             LayoutInflater inflater = LayoutInflater.from(mContext);
             View view = inflater.inflate(R.layout.layout_seat, null);
             //iv_user_head  //tv_user_name tv_goldcoin
-            ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
+            final ImageView iv = (ImageView) view.findViewById(R.id.iv_user_head);
+            iv.post(new Runnable() {
+                @Override
+                public void run() {
+
+                }
+            });
             TextView tv_name = (TextView) view.findViewById(R.id.tv_user_name);
             TextView tv_goldcoin = (TextView) view.findViewById(R.id.tv_goldcoin);
             tv_name.setVisibility(View.INVISIBLE);//INVISIBLE继续占用布局空间
             tv_goldcoin.setVisibility(View.INVISIBLE);
-            iv.setImageBitmap(getEmptySeatBitMap(80, 80, "坐下"));
+            iv.setImageBitmap(getEmptySeatBitMap(userIconWidth, userIconHeight, "坐下"));
             iv.setTag(i + "");
             //此处响应事件在需要的时候加
             iv.setOnClickListener(new View.OnClickListener() {
@@ -2471,7 +2508,7 @@ public class GameActivity extends BaseToolbarActivity {
         //边框：#92a8bd  背景：#20364e
         //文字颜色#8ba6c1
         int line_width=6;//设置画线的宽度
-        Bitmap newBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_4444);
+        Bitmap newBitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(newBitmap);
 
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -2488,7 +2525,7 @@ public class GameActivity extends BaseToolbarActivity {
         //canvas.drawBitmap(bmp, 0, 0, null);
         TextPaint textPaint = new TextPaint();
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(24.0F);
+        textPaint.setTextSize(onSeatTextSize);
         textPaint.setColor(Color.parseColor("#8ba6c1"));
         //canvas.drawText();text是左下角的坐标为画的起始值
 
@@ -3021,12 +3058,16 @@ public class GameActivity extends BaseToolbarActivity {
     }
 
     private void addStartButon(){
-        btnStartGame=new Button(this);
-        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(226, 60, 0, 0);
-        lp.x =(mScreenWidth-226)/2;
-        lp.y = (mScreenHeight-60)/2;
+        btnStartGame = new Button(this);
+//        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(226, 60, 0, 0);
+//        lp.x =(mScreenWidth-226)/2;
+//        lp.y = (mScreenHeight-60)/2;
+        int width = UITools.convertDpToPixel(113, this);
+        int height = UITools.convertDpToPixel(30, this);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(width, height);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
         btnStartGame.setBackgroundResource(R.drawable.startgame);
-        btnStartGame.setLayoutParams(lp);
+        btnStartGame.setLayoutParams(layoutParams);
         btnStartGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -3046,7 +3087,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             }
         });
-        layout_game.addView(btnStartGame);
+        layout_parent.addView(btnStartGame);
         btnStartGame.setVisibility(View.INVISIBLE);
     }
 
@@ -3483,7 +3524,8 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void setPosition(View view,int width,int height,int px,int py){
         AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(width,height, 0, 0);
-        lp.x =px;
+//        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(view.getLayoutParams());
+        lp.x = px;
         lp.y = py;
         view.setLayoutParams(lp);
 
@@ -3504,6 +3546,12 @@ public class GameActivity extends BaseToolbarActivity {
         int rightPading=15;
         int topPading=20;
         int bottomPading=10;
+
+        leftPading = UITools.convertDpToPixel(10, this);
+        rightPading = UITools.convertDpToPixel(10, this);
+        topPading = UITools.convertDpToPixel(10, this);
+        bottomPading = UITools.convertDpToPixel(5, this);
+
         switch(seatNum){
             case 2:
 
@@ -3532,7 +3580,7 @@ public class GameActivity extends BaseToolbarActivity {
                 break;
             case 9:
                 iSeatValue[0][0]=(mScreenWidth-mSeatViewWidth)/2;
-                iSeatValue[0][1]=mScreenHeight-mSeatViewHeight-bottomPading-60;//60为手机顶部状态栏的高度
+                iSeatValue[0][1]=mScreenHeight-mSeatViewHeight-bottomPading - UITools.convertDpToPixel(40, this);//60为手机顶部状态栏的高度
                 //底部，在名字的上面标明，是否大小盲注，然后再上面是下注额度
                 iAmountChipLocation[0][0]=(mScreenWidth-mAmountChipViewWidth)/2;
                 iAmountChipLocation[0][1]= iSeatValue[0][1]-mAmountChipVieHeight;
@@ -4083,10 +4131,13 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void showWindow(View parent) {
 
+        int width = UITools.convertDpToPixel(300, this);
+        int height = UITools.convertDpToPixel(310, this);
+
         View contentView = getPopupWindowContentView();
 //        popupWindow = new PopupWindow(contentView,getResources().getDisplayMetrics().widthPixels-160,240
 //                , true);
-        popupWindow = new PopupWindow(contentView,600 ,620
+        popupWindow = new PopupWindow(contentView,width ,height
                 , true);
 //        popupWindow = new PopupWindow(contentView, contentView.getMeasuredWidth(),contentView.getMeasuredHeight()
 //                , true);

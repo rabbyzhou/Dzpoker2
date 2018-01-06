@@ -1,8 +1,7 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/layout_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:fitsSystemWindows="true"
     android:background="@drawable/game_bj">
 
@@ -19,7 +18,9 @@
             android:layout_margin="20dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/chess_tables"></RelativeLayout>
+            android:background="@drawable/chess_tables">
+
+        </RelativeLayout>
 
        <AbsoluteLayout
            android:id="@+id/layout_game"
@@ -40,10 +41,10 @@
         <ImageView
             android:id="@+id/iv_apply"
             android:background="@drawable/rule"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginRight="50dp"
-            android:layout_marginTop="10dp"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginRight="70dp"
+            android:layout_marginTop="15dp"
             android:layout_gravity="top|right"
             />
         <ImageView
@@ -79,5 +80,5 @@
 
     </FrameLayout>
 
-</LinearLayout>
+</RelativeLayout>
 
