@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
 
 import com.yijian.dzpoker.baselib.debug.Logger;
 import com.yijian.dzpoker.util.Util;
@@ -20,6 +21,8 @@ import java.net.SocketAddress;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.Arrays;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Created by rabby on 2017/10/9.
@@ -44,9 +47,22 @@ public class SocketService extends Service implements Runnable {
     private String serverIP;
     private int serverPort;
 
+    private String needToExecMsg = "";
+
+    ExecutorService handleSocketMsgThreadExecutor;
+    ExecutorService handleSingleMsgThreadExecutor;
+    ExecutorService handleSendSocketMsgThreadExecutor;
+
+    private static String partOfNextMsg = "";
+
+    private boolean canRead = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
+        handleSocketMsgThreadExecutor = Executors.newCachedThreadPool();
+        handleSingleMsgThreadExecutor = Executors.newSingleThreadExecutor();
+        handleSendSocketMsgThreadExecutor = Executors.newCachedThreadPool();
 
     }
 
@@ -75,6 +91,7 @@ public class SocketService extends Service implements Runnable {
             if (socket != null) {
                 socket.close();
             }
+            canRead = false;
         } catch (Exception e) {
 
         }
@@ -105,6 +122,8 @@ public class SocketService extends Service implements Runnable {
                     td = new Thread(SocketService.this);// 启动线程
                     td.start();
 
+                    canRead = true;
+
                     callback.onScoketConnectSuccess();
 
                 } catch (SocketException ex) {
@@ -130,77 +149,97 @@ public class SocketService extends Service implements Runnable {
                 if (socket != null && !socket.isClosed()) {// 如果socket没有被关闭
                     if (socket.isConnected()) {// 判断socket是否连接成功
                         if (!socket.isInputShutdown()) {
-                            //读取服务器端返回的信息，以$开头
-                            Boolean canRead = true;
+                            //读取服务器端返回的信息，以$结尾
+
+                            canRead = true;
                             while (canRead) {
-                                int charLen = 1024;
-                                char[] cha = new char[charLen];
-                                int len = reader.read(cha, 0, charLen);//这里缓冲区设置成1024
-                                if (len <= charLen && cha[len - 1] == '}') {
-                                    canRead = false;   //判断依据：最后一个是}，或者长度小于，丢包情况下，需要等下一个完整包
+                                int bufferSize = 1024;
+                                char[] singleBuffer = new char[bufferSize];
+                                int len = reader.read(singleBuffer, 0, bufferSize);
+                                if (len <= bufferSize) {
+                                    canRead = false;
                                 }
-                                char[] recInfo = Arrays.copyOfRange(cha, 0, len);
-                                Logger.v(TAG, "receivedata" + String.valueOf(recInfo));
+                                char[] recInfo = Arrays.copyOfRange(singleBuffer, 0, len);
                                 recMsg += String.valueOf(recInfo);
-                                Logger.v(TAG, "recMsg:" + recMsg);
+                                Logger.i(TAG, "receive msg recInfo : " + String.valueOf(recInfo));
                             }
-                            //读完之后，解析字符串，调用回调函数
-
-                            if (recMsg.length() > 1) {
-                                if (recMsg.indexOf("$") == -1) {
-                                    //这个串是无用的串，抛弃
-                                    recMsg = "";
-                                    Logger.v(TAG, "recMsg:" + recMsg);
-                                } else {
-                                    //截取字符串，保证从$开始
-//                                    recMsg=recMsg.substring(recMsg.indexOf("$"));
-                                    Logger.v(TAG, "recMsg:" + recMsg);
-                                    while (recMsg.indexOf("$", 1) > 0) {
-                                        String msgInfo = recMsg.substring(0, recMsg.indexOf("$", 1));
-                                        recMsg = recMsg.substring(recMsg.indexOf("$", 1));
-                                        callback.onReciveData(msgInfo);
-                                        Logger.v(TAG, "Msg:" + msgInfo);
-                                        Logger.v(TAG, "recMsg:" + recMsg);
-                                    }
-                                    Logger.v(TAG, "Msg:" + recMsg);
-                                    Logger.v(TAG, "recMsg:" + recMsg);
-
-                                    callback.onReciveData(recMsg);
-                                    recMsg = "";
-
-//                                    if(recMsg.indexOf("$",1)==-1){
-//                                        //只有一个，那么则认为是一条完整消息
-//                                        String msg=recMsg;
-//                                        recMsg="";
-//                                        Log.v("RABBY", "Msg:"+msg);
-//                                        Log.v("RABBY", "recMsg:"+recMsg);
-//                                        callback.onReciveData(msg);
-//                                    }else{
-//                                        //截取字符串，只做一条消息处理
-//                                        String msg=recMsg.substring(0,recMsg.indexOf("$",1)-1);
-//                                        callback.onReciveData(msg);
-//                                        recMsg=recMsg.substring(recMsg.indexOf("$",1));
-//                                        Log.v("RABBY", "Msg:"+msg);
-//                                        Log.v("RABBY", "recMsg:"+recMsg);
-//                                        callback.onReciveData(msg);
-//                                    }
-                                }
-
-                            }
+                            Logger.i(TAG, "receive msg recMsg : " + recMsg);
+                            needToExecMsg = recMsg;
+                            recMsg = "";
+                            handleSocketMsgThreadExecutor.execute(new handleReceivedSocketMsg(needToExecMsg));
                         }
                     }
                 }
             }
         } catch (Exception ex) {
 
+            Logger.e(TAG, "readLine Exception: " + ex.getMessage());
             try {
                 callback.onSocketError();
                 socket.close();
+                canRead = false;
             } catch (Exception e) {
                 callback.onSocketError();
                 e.printStackTrace();
+                canRead = false;
             }
 
+        }
+    }
+
+
+    private class handleReceivedSocketMsg implements Runnable {
+
+        private String msg;
+
+        public handleReceivedSocketMsg(String s) {
+            this.msg = s;
+            Logger.i(TAG, "handleReceivedSocketMsg s : " + s);
+        }
+
+        @Override
+        public void run() {
+
+            if (TextUtils.isEmpty(msg)) {
+                return;
+            }
+            try {
+                String[] messages = msg.split("\\$");
+                for (String str : messages) {
+                    Logger.i(TAG, "handleReceivedSocketMsg : " + str);
+                }
+                //没有$符号，可能是某个消息的一部分
+                if (messages.length == 0) {
+                    partOfNextMsg += msg;
+                } else {
+                    for (String data : messages) {
+                        if (TextUtils.isEmpty(partOfNextMsg)) {
+                            handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(data));
+                        } else {
+                            handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(partOfNextMsg + data));
+                            partOfNextMsg = "";
+                        }
+                    }
+                }
+
+            } catch (Throwable throwable) {
+                Logger.e(TAG, "handleReceivedSocketMsg error : " + throwable.getMessage());
+            }
+
+        }
+    }
+
+    private class ExecSingleMsg implements Runnable {
+
+        private String data;
+
+        public ExecSingleMsg(String data) {
+            this.data = data;
+        }
+
+        @Override
+        public void run() {
+            callback.onReciveData(data);
         }
     }
 
@@ -209,7 +248,17 @@ public class SocketService extends Service implements Runnable {
      *
      * @param msg
      */
-    private void sendMessage(String msg) {
+    private void sendMessage(final String msg) {
+        handleSendSocketMsgThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                sendMessageInternal(msg);
+            }
+        });
+
+    }
+
+    private void sendMessageInternal(String msg) {
         if (!Util.isNetworkConnected(this))// 如果当前网络连接不可用,直接提示网络连接不可用，并退出执行。
         {
             callback.onSocketError();
@@ -219,25 +268,6 @@ public class SocketService extends Service implements Runnable {
             connectService();
         if (!SocketService.this.td.isAlive())// 如果当前线程没有处于存活状态，重启线程
             (td = new Thread(SocketService.this)).start();
-//        if (!socket.isConnected() || (socket.isClosed())) // isConnected（）返回的是是否曾经连接过，isClosed()返回是否处于关闭状态，只有当isConnected（）返回true，isClosed（）返回false的时候，网络处于连接状态
-//        {
-//            Log.v("QLQ", "workStatus is not connected!111222");
-//            for (int i = 0; i < 3 && workStatus == null; i++) {// 如果连接处于关闭状态，重试三次，如果连接正常了，跳出循环
-//                socket = null;
-//                connectService();
-//                if (socket.isConnected() && (!socket.isClosed())) {
-//                    Log.v("QLQ", "workStatus is not connected!11333");
-//                    break;
-//                }
-//            }
-//            if (!socket.isConnected() || (socket.isClosed()))// 如果此时连接还是不正常，提示错误，并跳出循环
-//            {
-//                workStatus = Constant.TAG_CONNECTFAILURE;
-//                Log.v("QLQ", "workStatus is not connected!111444");
-//                return;
-//            }
-//
-//        }
 
         if (!socket.isOutputShutdown()) {// 输入输出流是否关闭
             try {
@@ -285,7 +315,7 @@ public class SocketService extends Service implements Runnable {
         this.callback = callback;
     }
 
-    public static interface Callback {
+    public interface Callback {
         void onReciveData(String data);
 
         void onSocketError();//此方法是告诉外部socket异常，让外部进行处理
