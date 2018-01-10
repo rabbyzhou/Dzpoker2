@@ -1,5 +1,16 @@
 apply plugin: 'com.android.application'
 
+
+def Properties localProps = new Properties()
+localProps.load(new FileInputStream(file('../local.properties')))
+def Properties keyProps = new Properties()
+
+if (localProps['keystore.props.file']) {
+    keyProps.load(new FileInputStream(file(localProps['keystore.props.file'])))
+}
+
+println 'store : ' + localProps['keystore.props.file']
+
 android {
     compileSdkVersion 26
     buildToolsVersion '26.0.2'
@@ -35,6 +46,19 @@ android {
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
     }
+
+    signingConfigs {
+
+        release {
+            assert localProps['keystore.props.file']
+            storeFile file(keyProps["storeFile"])
+            println 'store : ' + storeFile
+            storePassword keyProps["storePassword"]
+            keyAlias keyProps["keyAlias"]
+            keyPassword keyProps["keyPassword"]
+        }
+    }
+
     buildTypes {
         debug {
             minifyEnabled false
@@ -43,6 +67,7 @@ android {
         release {
             minifyEnabled true
             proguardFile('proguard.cfg')
+            signingConfig signingConfigs.release
         }
     }
     lintOptions {
