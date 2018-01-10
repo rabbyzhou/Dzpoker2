@@ -1,55 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300px"
-    android:layout_height="590px"
-    android:padding="0px"
-
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="240dp"
+    android:layout_height="120dp"
     >
-    <Button
-        android:id="@+id/button_fold"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:background="@drawable/fold_1"
-        android:layout_x="0px"
-        android:layout_y="480px"/>
+    
     <TextView
         android:id="@+id/tv_fold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:gravity="center"
         android:text="弃牌"
-        android:layout_x="30px"
-        android:layout_y="560px"
-        android:textSize="10dp"/>
-    <Button
-        android:id="@+id/button_check"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:background="@drawable/check_1"
-        android:layout_x="200px"
-        android:layout_y="480px"/>
-    <TextView
-        android:id="@+id/tv_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="跟注"
-        android:layout_x="230px"
-        android:layout_y="560px"
-        android:textSize="10dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true"
+        android:drawableTop="@drawable/fold_1"/>
 
-    <Button
-        android:id="@+id/button_raise"
-        android:layout_width="100px"
-        android:layout_height="100px"
-        android:background="@drawable/raise_1"
-        android:layout_x="100px"
-        android:layout_y="400px"/>
     <TextView
         android:id="@+id/tv_raise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=" bet"
-        android:layout_x="130px"
-        android:layout_y="480px"
-        android:textSize="10dp"/>
+        android:layout_marginBottom="40dp"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="跟注"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:drawableTop="@drawable/raise_1"/>
 
-</AbsoluteLayout>
+    <TextView
+        android:id="@+id/tv_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12dp"
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:text="bet"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:drawableTop="@drawable/check_1"/>
+
+</RelativeLayout>

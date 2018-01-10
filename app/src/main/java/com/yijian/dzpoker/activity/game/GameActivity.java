@@ -127,7 +127,7 @@ public class GameActivity extends BaseToolbarActivity {
     private TextMoveLayout textMoveLayout;
     private Button button_bottom, button_middle, button_top;//滑动下注的三个显示按钮，无事件操作
     private View mAction;
-    private Button mButtonFold, mButtonRaise, mButtonCheck;
+//    private Button mButtonFold, mButtonRaise, mButtonCheck;
     private TextView mTVFold, mTVRaise, mTVCheck;
 
     private RelativeLayout rootLayout;
@@ -1487,9 +1487,9 @@ public class GameActivity extends BaseToolbarActivity {
                         //更改用户的筹码额度
                         if (userid == application.getUserId()) {
                             //自己操作，则隐藏按钮
-                            mButtonRaise.setVisibility(View.INVISIBLE);
-                            mButtonCheck.setVisibility(View.INVISIBLE);
-                            mButtonFold.setVisibility(View.INVISIBLE);
+//                            mButtonRaise.setVisibility(View.INVISIBLE);
+//                            mButtonCheck.setVisibility(View.INVISIBLE);
+//                            mButtonFold.setVisibility(View.INVISIBLE);
                             mTVRaise.setVisibility(View.INVISIBLE);
                             mTVCheck.setVisibility(View.INVISIBLE);
                             mTVFold.setVisibility(View.INVISIBLE);
@@ -1826,11 +1826,11 @@ public class GameActivity extends BaseToolbarActivity {
                             mp = MediaPlayer.create(GameActivity.this, R.raw.waitaction);
                             mp.start();
                             mAction.setVisibility(View.VISIBLE);
-                            mButtonRaise.setVisibility(View.INVISIBLE);
+//                            mButtonRaise.setVisibility(View.INVISIBLE);
                             mTVRaise.setVisibility(View.INVISIBLE);
-                            mButtonCheck.setVisibility(View.INVISIBLE);
+//                            mButtonCheck.setVisibility(View.INVISIBLE);
                             mTVCheck.setVisibility(View.INVISIBLE);
-                            mButtonFold.setVisibility(View.INVISIBLE);
+//                            mButtonFold.setVisibility(View.INVISIBLE);
                             mTVFold.setVisibility(View.INVISIBLE);
 
                             JSONArray jsonNeedAction = jsonReturn.getJSONArray("needaction");
@@ -1841,32 +1841,32 @@ public class GameActivity extends BaseToolbarActivity {
                                 switch (action) {
                                     case 0:
                                         //bet
-                                        mButtonRaise.setVisibility(View.VISIBLE);
+//                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText(" bet");
                                         minChip = 1;
 
                                         break;
                                     case 1:
-                                        mButtonCheck.setVisibility(View.VISIBLE);
+//                                        mButtonCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setText("跟注");
 
                                         break;
                                     case 2:
-                                        mButtonFold.setVisibility(View.VISIBLE);
+//                                        mButtonFold.setVisibility(View.VISIBLE);
                                         mTVFold.setVisibility(View.VISIBLE);
                                         mTVFold.setText("弃牌");
 
                                         break;
                                     case 3:
-                                        mButtonCheck.setVisibility(View.VISIBLE);
+//                                        mButtonCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setText("看牌");
 
                                         break;
                                     case 4:
-                                        mButtonRaise.setVisibility(View.VISIBLE);
+//                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText("加注");
                                         maxpaidchips = jsonReturn.getInt("maxpaidchips");
@@ -1875,7 +1875,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                                         break;
                                     case 6:
-                                        mButtonRaise.setVisibility(View.VISIBLE);
+//                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText("AllIn");
                                         break;
@@ -2844,11 +2844,11 @@ public class GameActivity extends BaseToolbarActivity {
                             addTimer(iRealIndex, mTableInfo.players[j].needwaitactiontime);
                             if (mTableInfo.players[j].userid == application.getUserId()) {
                                 mAction.setVisibility(View.VISIBLE);
-                                mButtonRaise.setVisibility(View.INVISIBLE);
+//                                mButtonRaise.setVisibility(View.INVISIBLE);
                                 mTVRaise.setVisibility(View.INVISIBLE);
-                                mButtonCheck.setVisibility(View.INVISIBLE);
+//                                mButtonCheck.setVisibility(View.INVISIBLE);
                                 mTVCheck.setVisibility(View.INVISIBLE);
-                                mButtonFold.setVisibility(View.INVISIBLE);
+//                                mButtonFold.setVisibility(View.INVISIBLE);
                                 mTVFold.setVisibility(View.INVISIBLE);
 
                                 List<Integer> operate = mTableInfo.players[j].waitactionparam.needaction;
@@ -2858,7 +2858,7 @@ public class GameActivity extends BaseToolbarActivity {
                                     int operateValue = (int) it.next();
                                     switch (operateValue) {
                                         case 0:
-                                            mButtonRaise.setVisibility(View.VISIBLE);
+//                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText(" bet");
                                             minChip = 1;
@@ -2866,23 +2866,23 @@ public class GameActivity extends BaseToolbarActivity {
 
                                             break;
                                         case 1:
-                                            mButtonCheck.setVisibility(View.VISIBLE);
+//                                            mButtonCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setText("跟注");
                                             break;
                                         case 2:
-                                            mButtonFold.setVisibility(View.VISIBLE);
+//                                            mButtonFold.setVisibility(View.VISIBLE);
                                             mTVFold.setVisibility(View.VISIBLE);
                                             mTVFold.setText("弃牌");
                                             break;
 
                                         case 3:
-                                            mButtonCheck.setVisibility(View.VISIBLE);
+//                                            mButtonCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setText("看牌");
                                             break;
                                         case 4:
-                                            mButtonRaise.setVisibility(View.VISIBLE);
+//                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText("加注");
                                             maxpaidchips = mTableInfo.players[j].waitactionparam.maxpaidchips;
@@ -2890,7 +2890,7 @@ public class GameActivity extends BaseToolbarActivity {
                                             minChip = maxpaidchips - mTableInfo.players[j].amountchips;
                                             break;
                                         case 6:
-                                            mButtonRaise.setVisibility(View.VISIBLE);
+//                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText("AllIn");
                                             break;
@@ -3089,7 +3089,7 @@ public class GameActivity extends BaseToolbarActivity {
         addChipSelector();
 
         //增加按钮处理事件
-        mButtonRaise.setOnTouchListener(new View.OnTouchListener() {
+        mTVRaise.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 float y = event.getY();
@@ -3200,7 +3200,7 @@ public class GameActivity extends BaseToolbarActivity {
             }
         });
 
-        mButtonFold.setOnClickListener(new View.OnClickListener() {
+        mTVFold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //弃牌按钮
@@ -3230,7 +3230,7 @@ public class GameActivity extends BaseToolbarActivity {
             }
         });
 
-        mButtonCheck.setOnClickListener(new View.OnClickListener() {
+        mTVCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -3273,22 +3273,26 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void addActionButon() {
 
+        int pixel480 = UITools.convertDpToPixel(240, GameActivity.this);
+        int pixel240 = UITools.convertDpToPixel(120, GameActivity.this);
         int pixel300 = UITools.convertDpToPixel(150, GameActivity.this);
-        int pixel600 = UITools.convertDpToPixel(300, GameActivity.this);
-        int pixel80 = UITools.convertDpToPixel(40, GameActivity.this);
         int pixel180 = UITools.convertDpToPixel(90, GameActivity.this);
 
-        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel300, pixel600, 0, 0);
-        lp.x = (mScreenWidth - pixel300) / 2;
-        lp.y = (mScreenHeight - pixel80) / 2 - pixel180;
+//        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel300, pixel600, 0, 0);
+//        lp.x = (mScreenWidth - pixel300) / 2;
+//        lp.y = (mScreenHeight - pixel80) / 2 - pixel180;
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mAction = inflater.inflate(R.layout.layout_actionbutton, null);
-        mAction.setLayoutParams(lp);
-        layout_game.addView(mAction);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(pixel480, pixel240);
+        layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        layoutParams.bottomMargin = pixel300;
+        mAction.setLayoutParams(layoutParams);
+        layout_parent.addView(mAction);
         //给三个按钮加响应事件
-        mButtonFold = mAction.findViewById(R.id.button_fold);
-        mButtonRaise = mAction.findViewById(R.id.button_raise);
-        mButtonCheck = mAction.findViewById(R.id.button_check);
+//        mButtonFold = mAction.findViewById(R.id.button_fold);
+//        mButtonRaise = mAction.findViewById(R.id.button_raise);
+//        mButtonCheck = mAction.findViewById(R.id.button_check);
         mTVFold = mAction.findViewById(R.id.tv_fold);
         mTVRaise = mAction.findViewById(R.id.tv_raise);
         mTVCheck = mAction.findViewById(R.id.tv_check);
@@ -3320,7 +3324,8 @@ public class GameActivity extends BaseToolbarActivity {
         lp.x = (pixel300 - pixel90) / 2;
         lp.y = 0;//  (mScreenHeight-80)/2-60;;
         textMoveLayout.setLayoutParams(lp);
-        ((AbsoluteLayout) mAction).addView(textMoveLayout);
+//        RelativeLayout.LayoutParams layoutParams1 =
+        ((RelativeLayout) mAction).addView(textMoveLayout);
 
         //虚线
         ImageView iv_line = new ImageView(this);
@@ -3450,33 +3455,44 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void addMyCards() {
 
-        int pixel240 = UITools.convertDpToPixel(120, GameActivity.this);
-        int pixel80 = UITools.convertDpToPixel(40, GameActivity.this);
+        int pixel280 = UITools.convertDpToPixel(140, GameActivity.this);
+        int pixel110 = UITools.convertDpToPixel(55, GameActivity.this);
+        int pixel6 = UITools.convertDpToPixel(3, GameActivity.this);
+        int pixel40 = UITools.convertDpToPixel(20, GameActivity.this);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mMyCards = inflater.inflate(R.layout.layout_mycard, null);
-        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel240, pixel80, 0, 0);
-        lp.x = iSeatValue[0][0] + mSeatViewWidth;
-        lp.y = iSeatValue[0][1] + mNameTextHeight;
-        mMyCards.setLayoutParams(lp);
-        layout_game.addView(mMyCards);
+//        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel280, pixel110, 0, 0);
+//        lp.x = iSeatValue[0][0] + mSeatViewWidth;
+//        lp.y = iSeatValue[0][1] + mNameTextHeight;
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(pixel280, pixel110);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, RelativeLayout.TRUE);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
+        layoutParams.leftMargin = pixel6;
+        layoutParams.bottomMargin = pixel40;
+        mMyCards.setLayoutParams(layoutParams);
+        layout_parent.addView(mMyCards);
+//        mMyCards.setLayoutParams(lp);
+//        layout_game.addView(mMyCards);
         mMyCards.setVisibility(View.INVISIBLE);
 
     }
 
     private void addGameCards() {
 
-        int pixel370 = UITools.convertDpToPixel(185, GameActivity.this);
-        int pixel80 = UITools.convertDpToPixel(40, GameActivity.this);
+        int pixel360 = UITools.convertDpToPixel(180, GameActivity.this);
+        int pixel110 = UITools.convertDpToPixel(55, GameActivity.this);
         int pixel100 = UITools.convertDpToPixel(50, GameActivity.this);
 
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mGameCards = inflater.inflate(R.layout.layout_gamecard, null);
-        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel370, pixel100, 0, 0);
-        lp.x = (mScreenWidth - pixel370) / 2;
-        lp.y = (mScreenHeight - pixel80) / 2 + pixel100;
-        mGameCards.setLayoutParams(lp);
-        layout_game.addView(mGameCards);
+//        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel370, pixel100, 0, 0);
+//        lp.x = (mScreenWidth - pixel370) / 2;
+//        lp.y = (mScreenHeight - pixel80) / 2 + pixel100;
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(pixel360, pixel110);
+        layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, RelativeLayout.TRUE);
+        mGameCards.setLayoutParams(layoutParams);
+        layout_parent.addView(mGameCards);
         mGameCards.setVisibility(View.INVISIBLE);
 
     }
