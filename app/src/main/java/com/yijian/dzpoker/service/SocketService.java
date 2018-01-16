@@ -204,6 +204,7 @@ public class SocketService extends Service implements Runnable {
                 return;
             }
             try {
+                boolean lastIsNotComplete = false;
                 String[] messages = msg.split("\\$");
                 for (String str : messages) {
                     Logger.i(TAG, "handleReceivedSocketMsg : " + str);
@@ -212,12 +213,19 @@ public class SocketService extends Service implements Runnable {
                 if (messages.length == 0) {
                     partOfNextMsg += msg;
                 } else {
-                    for (String data : messages) {
-                        if (TextUtils.isEmpty(partOfNextMsg)) {
-                            handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(data));
+                    if (msg.charAt(msg.length() - 1) != '$') {
+                        lastIsNotComplete = true;
+                    }
+                    for (int i = 0; i < messages.length; i++) {
+                        if (lastIsNotComplete && i == messages.length - 1) {
+                            partOfNextMsg += messages[i];
                         } else {
-                            handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(partOfNextMsg + data));
-                            partOfNextMsg = "";
+                            if (TextUtils.isEmpty(partOfNextMsg)) {
+                                handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(messages[i]));
+                            } else {
+                                handleSingleMsgThreadExecutor.execute(new ExecSingleMsg(partOfNextMsg + messages[i]));
+                                partOfNextMsg = "";
+                            }
                         }
                     }
                 }
