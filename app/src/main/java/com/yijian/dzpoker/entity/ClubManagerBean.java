@@ -11,6 +11,15 @@ public class ClubManagerBean {
 
     private int userId;
     private int requestId;
+    private int clubId;
+
+    public int getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(int clubId) {
+        this.clubId = clubId;
+    }
 
     public int getUserId() {
         return userId;

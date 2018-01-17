@@ -75,7 +75,7 @@ public class ClubManagerActivity extends BaseBackActivity {
     @Override
     public void initViews() {
         clubInfoCyclerView = (RecyclerView) findViewById(R.id.club_manager_page_recycler_view);
-        adapter = new ClubManagerAdapter(datas);
+        adapter = new ClubManagerAdapter(datas, this);
         clubInfoCyclerView.setLayoutManager(new LinearLayoutManager(this));
         clubInfoCyclerView.setHasFixedSize(true);
         DividerItemDecoration decoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
@@ -125,6 +125,7 @@ public class ClubManagerActivity extends BaseBackActivity {
                             bean.setMainMsg(info.getNickname() + " 申请加入俱乐部-" + info.getClubname());
                             bean.setDetailMsg(info.getRequestmsg());
                             bean.setUserId(info.getUserid());
+                            bean.setClubId(info.getClubid());
                             bean.setRequestId(info.getRequestid());
                             datas.add(bean);
                         }

@@ -100,6 +100,7 @@ public class CreateClubActivity extends BaseBackActivity implements View.OnClick
             if (msg.what == MESAGE_CREATECLUB_OK) {
                 tv_created_number.setText("已建立俱乐部数"+createdclub+"/"+maxclub);
                 ToastUtil.showToastInScreenCenter(CreateClubActivity.this,"创建俱乐部成功!");
+                finish();
             }
         }
     };

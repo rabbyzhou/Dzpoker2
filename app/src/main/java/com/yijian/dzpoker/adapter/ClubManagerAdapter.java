@@ -1,5 +1,6 @@
 package com.yijian.dzpoker.adapter;
 
+import android.app.Activity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +13,18 @@ import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
 import com.yijian.dzpoker.entity.ClubManagerBean;
 import com.yijian.dzpoker.http.clubapplyres.ClubApplyResponseApi;
 import com.yijian.dzpoker.http.clubapplyres.ClubApplyResponseCons;
+import com.yijian.dzpoker.http.getclubinfo.GetClubInfoApi;
+import com.yijian.dzpoker.http.getclubinfo.GetClubInfoCons;
+import com.yijian.dzpoker.util.DzApplication;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
+import cn.jpush.im.android.api.JMessageClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,8 +40,11 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
 
     private List<ClubManagerBean> data = new ArrayList<ClubManagerBean>();
 
-    public ClubManagerAdapter(List<ClubManagerBean> data) {
+    private Activity activity;
+
+    public ClubManagerAdapter(List<ClubManagerBean> data, Activity a) {
         this.data = data;
+        this.activity = a;
     }
 
     public void updateData(ArrayList<ClubManagerBean> list) {
@@ -78,11 +88,11 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
         return null != data ? data.size() : 0;
     }
 
-    private void handleApply(ClubManagerBean bean, boolean reject) {
+    private void handleApply(final ClubManagerBean bean, boolean reject) {
         ClubApplyResponseApi clubApplyResponseApi = RetrofitApiGenerator.createRequestApi(ClubApplyResponseApi.class);
 
         try {
-            JSONObject params = new JSONObject();
+            final JSONObject params = new JSONObject();
             params.put(ClubApplyResponseCons.PARAM_KEY_USERID, bean.getUserId());
             params.put(ClubApplyResponseCons.PARAM_KEY_REQUESTID, bean.getRequestId());
             params.put(ClubApplyResponseCons.PARAM_KEY_PERMIT, reject);
@@ -92,6 +102,9 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Logger.d(TAG, "onResponse : " + response.body());
+//                    同意之后调用获取clubinfo的接口，获取groupid，然后将用户加入到im group
+                    putUserIntoClubIMGroup(bean);
+
                 }
 
                 @Override
@@ -100,11 +113,55 @@ public class ClubManagerAdapter extends RecyclerView.Adapter {
                 }
             });
 
+
         } catch (Exception e) {
             e.printStackTrace();
             Logger.e(TAG, "exception e : " + e);
         }
 
+    }
+
+    private void putUserIntoClubIMGroup(final ClubManagerBean bean) {
+        DzApplication application = (DzApplication) activity.getApplication();
+        try {
+            GetClubInfoApi getClubInfoApi = RetrofitApiGenerator.createRequestApi(GetClubInfoApi.class);
+            JSONObject param = new JSONObject();
+            param.put(GetClubInfoCons.PARAM_KEY_USERID, application.getUserId());
+
+            Call<ResponseBody> callForClubInfo = getClubInfoApi.getResponse(GetClubInfoCons.FUNC_NAME, param.toString());
+            callForClubInfo.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                    Logger.i(TAG, "callForClubInfo response : " + response.body().toString());
+                    try {
+                        JSONArray jsonArray = new JSONArray(response.body().string());
+                        if (null != jsonArray && jsonArray.length() > 0) {
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+                                if (null != jsonObject) {
+                                    if (jsonObject.optInt("clubid") == bean.getClubId()) {
+                                        int groupId = jsonObject.optInt("imgroupid");
+
+                                        List<String> userList = new ArrayList<String>();
+                                        userList.add(String.valueOf(bean.getUserId()));
+                                        JMessageClient.addGroupMembers(groupId, userList, null);
+                                    }
+                                }
+                            }
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     static class ClubManagerViewHolder extends RecyclerView.ViewHolder {
