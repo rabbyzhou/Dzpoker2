@@ -39,6 +39,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.squareup.picasso.MemoryPolicy;
@@ -127,8 +128,14 @@ public class GameActivity extends BaseToolbarActivity {
     private TextMoveLayout textMoveLayout;
     private Button button_bottom, button_middle, button_top;//滑动下注的三个显示按钮，无事件操作
     private View mAction;
-//    private Button mButtonFold, mButtonRaise, mButtonCheck;
+    private Button mButtonFold, mButtonRaise, mButtonCheck;
     private TextView mTVFold, mTVRaise, mTVCheck;
+    private SeekBar seekBarRaise;
+    private RelativeLayout blind_layout;
+    private TextView blind_count;
+
+    private TextView shareCode, tableName, blindCount, assurance;
+    private TextView doubleBlind, tripleBlind, fourBlind;
 
     private RelativeLayout rootLayout;
 
@@ -347,6 +354,12 @@ public class GameActivity extends BaseToolbarActivity {
 
         initViews();
 
+        shareCode = layout_parent.findViewById(R.id.share_code);
+        tableName = layout_parent.findViewById(R.id.table_name);
+        blindCount = layout_parent.findViewById(R.id.blind_count);
+        assurance = layout_parent.findViewById(R.id.assurance);
+
+
         //获得传来的值
         /*intent.putExtra("operation",1);//1表示创建牌局，2表示加入牌局
                                 intent.putExtra("gameid",ssid);
@@ -354,7 +367,7 @@ public class GameActivity extends BaseToolbarActivity {
                                 intent.putExtra("port",port);*/
         Intent intent = getIntent();
         operation = intent.getIntExtra("operation", 0);
-        gameId = Integer.parseInt(intent.getStringExtra("gameid"));
+        gameId = intent.getIntExtra("gameid", 0);
         ip = intent.getStringExtra("ip");
         port = intent.getIntExtra("port", 0);
         flag = true;
@@ -666,6 +679,7 @@ public class GameActivity extends BaseToolbarActivity {
                             msg += jsonSend.toString().replace("$", "￥");
                             msg += "$";
                             myBinder.sendInfo(msg);
+                            finish();
                         } catch (Exception e) {
                             ToastUtil.showToastInScreenCenter(GameActivity.this, "离开座位出错！");
 
@@ -1081,6 +1095,7 @@ public class GameActivity extends BaseToolbarActivity {
                             mTableInfo.curactionseatindex = jsonReturn.getInt("curactionseatindex");
                             mTableInfo.curactionwaittime = jsonReturn.getInt("curactionwaittime");
                             mTableInfo.tablename = jsonReturn.getString("tablename");
+                            mTableInfo.shareCode = jsonReturn.getInt("sharecode");
                             gameHouseName = mTableInfo.tablename;
 
                             //此处注册接受消息
@@ -1487,9 +1502,11 @@ public class GameActivity extends BaseToolbarActivity {
                         //更改用户的筹码额度
                         if (userid == application.getUserId()) {
                             //自己操作，则隐藏按钮
-//                            mButtonRaise.setVisibility(View.INVISIBLE);
-//                            mButtonCheck.setVisibility(View.INVISIBLE);
-//                            mButtonFold.setVisibility(View.INVISIBLE);
+                            seekBarRaise.setVisibility(View.INVISIBLE);
+                            mButtonRaise.setVisibility(View.INVISIBLE);
+                            mButtonCheck.setVisibility(View.INVISIBLE);
+                            mButtonFold.setVisibility(View.INVISIBLE);
+                            blind_layout.setVisibility(View.INVISIBLE);
                             mTVRaise.setVisibility(View.INVISIBLE);
                             mTVCheck.setVisibility(View.INVISIBLE);
                             mTVFold.setVisibility(View.INVISIBLE);
@@ -1826,11 +1843,12 @@ public class GameActivity extends BaseToolbarActivity {
                             mp = MediaPlayer.create(GameActivity.this, R.raw.waitaction);
                             mp.start();
                             mAction.setVisibility(View.VISIBLE);
-//                            mButtonRaise.setVisibility(View.INVISIBLE);
+                            mButtonRaise.setVisibility(View.INVISIBLE);
+                            blind_layout.setVisibility(View.INVISIBLE);
                             mTVRaise.setVisibility(View.INVISIBLE);
-//                            mButtonCheck.setVisibility(View.INVISIBLE);
+                            mButtonCheck.setVisibility(View.INVISIBLE);
                             mTVCheck.setVisibility(View.INVISIBLE);
-//                            mButtonFold.setVisibility(View.INVISIBLE);
+                            mButtonFold.setVisibility(View.INVISIBLE);
                             mTVFold.setVisibility(View.INVISIBLE);
 
                             JSONArray jsonNeedAction = jsonReturn.getJSONArray("needaction");
@@ -1838,35 +1856,36 @@ public class GameActivity extends BaseToolbarActivity {
                                 int action = jsonNeedAction.getInt(i);
                                 TextView tv_goldcoin = mSeatObjects.get(getUserIndex()).findViewById(R.id.tv_goldcoin);
                                 maxChip = Integer.parseInt(tv_goldcoin.getText().toString());
+                                blind_layout.setVisibility(View.VISIBLE);
                                 switch (action) {
                                     case 0:
                                         //bet
-//                                        mButtonRaise.setVisibility(View.VISIBLE);
+                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText(" bet");
                                         minChip = 1;
 
                                         break;
                                     case 1:
-//                                        mButtonCheck.setVisibility(View.VISIBLE);
+                                        mButtonCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setText("跟注");
 
                                         break;
                                     case 2:
-//                                        mButtonFold.setVisibility(View.VISIBLE);
+                                        mButtonFold.setVisibility(View.VISIBLE);
                                         mTVFold.setVisibility(View.VISIBLE);
                                         mTVFold.setText("弃牌");
 
                                         break;
                                     case 3:
-//                                        mButtonCheck.setVisibility(View.VISIBLE);
+                                        mButtonCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setVisibility(View.VISIBLE);
                                         mTVCheck.setText("看牌");
 
                                         break;
                                     case 4:
-//                                        mButtonRaise.setVisibility(View.VISIBLE);
+                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText("加注");
                                         maxpaidchips = jsonReturn.getInt("maxpaidchips");
@@ -1875,7 +1894,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                                         break;
                                     case 6:
-//                                        mButtonRaise.setVisibility(View.VISIBLE);
+                                        mButtonRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setVisibility(View.VISIBLE);
                                         mTVRaise.setText("AllIn");
                                         break;
@@ -2480,6 +2499,10 @@ public class GameActivity extends BaseToolbarActivity {
 //        if (!bInitView){
 //            bInitView=true;
 //        }
+        shareCode.setText("邀请码:" + mTableInfo.shareCode);
+        tableName.setText("牌桌名:" + mTableInfo.tablename);
+        blindCount.setText("盲注:" + mTableInfo.smallblind + "/" + mTableInfo.bigblind);
+        assurance.setText("保险:" + "27");
 
 
         //先根据收到的table信息初始化桌面的控件
@@ -2844,21 +2867,23 @@ public class GameActivity extends BaseToolbarActivity {
                             addTimer(iRealIndex, mTableInfo.players[j].needwaitactiontime);
                             if (mTableInfo.players[j].userid == application.getUserId()) {
                                 mAction.setVisibility(View.VISIBLE);
-//                                mButtonRaise.setVisibility(View.INVISIBLE);
+                                mButtonRaise.setVisibility(View.INVISIBLE);
+                                blind_layout.setVisibility(View.INVISIBLE);
                                 mTVRaise.setVisibility(View.INVISIBLE);
-//                                mButtonCheck.setVisibility(View.INVISIBLE);
+                                mButtonCheck.setVisibility(View.INVISIBLE);
                                 mTVCheck.setVisibility(View.INVISIBLE);
-//                                mButtonFold.setVisibility(View.INVISIBLE);
+                                mButtonFold.setVisibility(View.INVISIBLE);
                                 mTVFold.setVisibility(View.INVISIBLE);
 
                                 List<Integer> operate = mTableInfo.players[j].waitactionparam.needaction;
                                 maxChip = mTableInfo.players[j].remainchips;
                                 Iterator it = operate.iterator();
+                                blind_layout.setVisibility(View.VISIBLE);
                                 while (it.hasNext()) {
                                     int operateValue = (int) it.next();
                                     switch (operateValue) {
                                         case 0:
-//                                            mButtonRaise.setVisibility(View.VISIBLE);
+                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText(" bet");
                                             minChip = 1;
@@ -2866,23 +2891,23 @@ public class GameActivity extends BaseToolbarActivity {
 
                                             break;
                                         case 1:
-//                                            mButtonCheck.setVisibility(View.VISIBLE);
+                                            mButtonCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setText("跟注");
                                             break;
                                         case 2:
-//                                            mButtonFold.setVisibility(View.VISIBLE);
+                                            mButtonFold.setVisibility(View.VISIBLE);
                                             mTVFold.setVisibility(View.VISIBLE);
                                             mTVFold.setText("弃牌");
                                             break;
 
                                         case 3:
-//                                            mButtonCheck.setVisibility(View.VISIBLE);
+                                            mButtonCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setVisibility(View.VISIBLE);
                                             mTVCheck.setText("看牌");
                                             break;
                                         case 4:
-//                                            mButtonRaise.setVisibility(View.VISIBLE);
+                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText("加注");
                                             maxpaidchips = mTableInfo.players[j].waitactionparam.maxpaidchips;
@@ -2890,7 +2915,7 @@ public class GameActivity extends BaseToolbarActivity {
                                             minChip = maxpaidchips - mTableInfo.players[j].amountchips;
                                             break;
                                         case 6:
-//                                            mButtonRaise.setVisibility(View.VISIBLE);
+                                            mButtonRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setVisibility(View.VISIBLE);
                                             mTVRaise.setText("AllIn");
                                             break;
@@ -3086,121 +3111,123 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void addActionView() {
         addActionButon();
-        addChipSelector();
+//        addChipSelector();
 
         //增加按钮处理事件
-        mTVRaise.setOnTouchListener(new View.OnTouchListener() {
+        mButtonRaise.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                float y = event.getY();
-                float x = event.getX();
-                final int action = event.getActionMasked();
-                switch (action) {
-                    case MotionEvent.ACTION_DOWN:
-                        downX = x;
-                        downY = y;
-                        currentY = (int) y;
-                        textMoveLayout.setVisibility(View.VISIBLE);
-                        button_bottom.setVisibility(View.VISIBLE);
-                        button_bottom.setText(minChip + "");
-                        button_top.setText(maxChip + "");
-                        button_middle.setVisibility(View.GONE);
-                        break;
-
-                    case MotionEvent.ACTION_MOVE:
-                        if (currentY - y > 20 || y - currentY > 20) {
-                            if (mp != null) {
-                                mp.stop();
-                                mp.reset();
-                                mp = MediaPlayer.create(GameActivity.this, R.raw.slider);
-                                //mp.setLooping(true);
-                                //mp.prepare();
-                                mp.start();
-
-
-                            }
-                            currentY = (int) y;
-                        }
-
-
-//                        mp.stop();
-//                        mp.reset();
-//                        mp.set(R.raw.slider);
-//                        mediaPlayer.prepare();
-//                        mediaPlayer.start();
-//                        mp=MediaPlayer.create(GameActivity.this,R.raw.slider);
-//                        mp.start();
-                        if (y > downY) {
-                            button_bottom.setVisibility(View.VISIBLE);
-                            button_middle.setVisibility(View.GONE);
-                            actionChip = minChip;
-
-                        } else {
-                            int p90 = UITools.convertDpToPixel(45, GameActivity.this);
-                            int p50 = UITools.convertDpToPixel(25, GameActivity.this);
-                            int p350 = UITools.convertDpToPixel(175, GameActivity.this);
-                            int p400 = UITools.convertDpToPixel(200, GameActivity.this);
-                            if (downY - y > p350) {
-                                button_bottom.setVisibility(View.GONE);
-                                button_middle.setText("All In");
-                                button_middle.layout(0, 0, p90, p50);
-                                actionChip = maxChip;
-
-                            } else {
-                                button_bottom.setVisibility(View.GONE);
-                                button_middle.setVisibility(View.VISIBLE);
-                                button_top.setText(maxChip + "");
-                                float value = (downY - y) * (maxChip - minChip) / p350;
-                                actionChip = (int) value;
-                                button_middle.setText((int) value + "");
-                                button_middle.layout(0, (int) (p350 - (downY - y)), p90, (int) (p400 - (downY - y)));
-                            }
-                        }
-
-                        break;
-
-                    case MotionEvent.ACTION_UP:
-                        //
-                        if (actionChip == maxChip) {
-                            mp = MediaPlayer.create(GameActivity.this, R.raw.slider_top);
-                            mp.start();
-                        }
-                        textMoveLayout.setVisibility(View.GONE);
-                        if (actionChip > minChip) {
-                            try {
-                                //按钮上有两种状态，bet raise  ，bet的时候可以下全部，但是action是bet，raise的时候，allin 要发allin，amountchips要差值
-                                String msg = Constant.GAME_DO_ACTION + "|";
-                                JSONObject jsonSend = new JSONObject();
-                                jsonSend.put("userid", application.getUserId());
-                                jsonSend.put("seatindex", getUserIndex());
-                                if (mTVRaise.getText().toString().equals("加注")) {
-                                    if (actionChip == maxChip) {
-                                        jsonSend.put("action", 6);
-                                    } else {
-                                        jsonSend.put("action", 4);
-                                    }
-                                } else {
-                                    jsonSend.put("action", 0);
-                                }
-                                jsonSend.put("amountchips", actionChip - minChip);
-                                jsonSend.put("tableid", gameId);
-                                msg += jsonSend.toString().replace("$", "￥");
-                                msg += "$";
-                                myBinder.sendInfo(msg);
-                            } catch (Exception e) {
-                                ToastUtil.showToastInScreenCenter(GameActivity.this, "操作出错！");
-                            }
-                        }
-                        //发送下注
-                        break;
-
-                }
-                return true;
+                seekBarRaise.setVisibility(View.VISIBLE);
+                return seekBarRaise.onTouchEvent(event);
+//                float y = event.getY();
+//                float x = event.getX();
+//                final int action = event.getActionMasked();
+//                switch (action) {
+//                    case MotionEvent.ACTION_DOWN:
+//                        downX = x;
+//                        downY = y;
+//                        currentY = (int) y;
+//                        textMoveLayout.setVisibility(View.VISIBLE);
+//                        button_bottom.setVisibility(View.VISIBLE);
+//                        button_bottom.setText(minChip + "");
+//                        button_top.setText(maxChip + "");
+//                        button_middle.setVisibility(View.GONE);
+//                        break;
+//
+//                    case MotionEvent.ACTION_MOVE:
+//                        if (currentY - y > 20 || y - currentY > 20) {
+//                            if (mp != null) {
+//                                mp.stop();
+//                                mp.reset();
+//                                mp = MediaPlayer.create(GameActivity.this, R.raw.slider);
+//                                //mp.setLooping(true);
+//                                //mp.prepare();
+//                                mp.start();
+//
+//
+//                            }
+//                            currentY = (int) y;
+//                        }
+//
+//
+////                        mp.stop();
+////                        mp.reset();
+////                        mp.set(R.raw.slider);
+////                        mediaPlayer.prepare();
+////                        mediaPlayer.start();
+////                        mp=MediaPlayer.create(GameActivity.this,R.raw.slider);
+////                        mp.start();
+//                        if (y > downY) {
+//                            button_bottom.setVisibility(View.VISIBLE);
+//                            button_middle.setVisibility(View.GONE);
+//                            actionChip = minChip;
+//
+//                        } else {
+//                            int p90 = UITools.convertDpToPixel(45, GameActivity.this);
+//                            int p50 = UITools.convertDpToPixel(25, GameActivity.this);
+//                            int p350 = UITools.convertDpToPixel(175, GameActivity.this);
+//                            int p400 = UITools.convertDpToPixel(200, GameActivity.this);
+//                            if (downY - y > p350) {
+//                                button_bottom.setVisibility(View.GONE);
+//                                button_middle.setText("All In");
+//                                button_middle.layout(0, 0, p90, p50);
+//                                actionChip = maxChip;
+//
+//                            } else {
+//                                button_bottom.setVisibility(View.GONE);
+//                                button_middle.setVisibility(View.VISIBLE);
+//                                button_top.setText(maxChip + "");
+//                                float value = (downY - y) * (maxChip - minChip) / p350;
+//                                actionChip = (int) value;
+//                                button_middle.setText((int) value + "");
+//                                button_middle.layout(0, (int) (p350 - (downY - y)), p90, (int) (p400 - (downY - y)));
+//                            }
+//                        }
+//
+//                        break;
+//
+//                    case MotionEvent.ACTION_UP:
+//                        //
+//                        if (actionChip == maxChip) {
+//                            mp = MediaPlayer.create(GameActivity.this, R.raw.slider_top);
+//                            mp.start();
+//                        }
+//                        textMoveLayout.setVisibility(View.GONE);
+//                        if (actionChip > minChip) {
+//                            try {
+//                                //按钮上有两种状态，bet raise  ，bet的时候可以下全部，但是action是bet，raise的时候，allin 要发allin，amountchips要差值
+//                                String msg = Constant.GAME_DO_ACTION + "|";
+//                                JSONObject jsonSend = new JSONObject();
+//                                jsonSend.put("userid", application.getUserId());
+//                                jsonSend.put("seatindex", getUserIndex());
+//                                if (mTVRaise.getText().toString().equals("加注")) {
+//                                    if (actionChip == maxChip) {
+//                                        jsonSend.put("action", 6);
+//                                    } else {
+//                                        jsonSend.put("action", 4);
+//                                    }
+//                                } else {
+//                                    jsonSend.put("action", 0);
+//                                }
+//                                jsonSend.put("amountchips", actionChip - minChip);
+//                                jsonSend.put("tableid", gameId);
+//                                msg += jsonSend.toString().replace("$", "￥");
+//                                msg += "$";
+//                                myBinder.sendInfo(msg);
+//                            } catch (Exception e) {
+//                                ToastUtil.showToastInScreenCenter(GameActivity.this, "操作出错！");
+//                            }
+//                        }
+//                        //发送下注
+//                        break;
+//
+//                }
+//                return true;
 
             }
         });
 
-        mTVFold.setOnClickListener(new View.OnClickListener() {
+        mButtonFold.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //弃牌按钮
@@ -3230,7 +3257,7 @@ public class GameActivity extends BaseToolbarActivity {
             }
         });
 
-        mTVCheck.setOnClickListener(new View.OnClickListener() {
+        mButtonCheck.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -3273,29 +3300,57 @@ public class GameActivity extends BaseToolbarActivity {
 
     private void addActionButon() {
 
-        int pixel480 = UITools.convertDpToPixel(240, GameActivity.this);
-        int pixel240 = UITools.convertDpToPixel(120, GameActivity.this);
-        int pixel300 = UITools.convertDpToPixel(150, GameActivity.this);
+        int pixel400 = UITools.convertDpToPixel(200, GameActivity.this);
+        int pixel800 = UITools.convertDpToPixel(400, GameActivity.this);
+        int pixel260 = UITools.convertDpToPixel(130, GameActivity.this);
         int pixel180 = UITools.convertDpToPixel(90, GameActivity.this);
+        int pixel20= UITools.convertDpToPixel(10, GameActivity.this);
 
 //        AbsoluteLayout.LayoutParams lp = new AbsoluteLayout.LayoutParams(pixel300, pixel600, 0, 0);
 //        lp.x = (mScreenWidth - pixel300) / 2;
 //        lp.y = (mScreenHeight - pixel80) / 2 - pixel180;
         LayoutInflater inflater = LayoutInflater.from(mContext);
         mAction = inflater.inflate(R.layout.layout_actionbutton, null);
-        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(pixel480, pixel240);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(pixel400, pixel800);
         layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, RelativeLayout.TRUE);
         layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, RelativeLayout.TRUE);
-        layoutParams.bottomMargin = pixel300;
+        layoutParams.bottomMargin = pixel260;
         mAction.setLayoutParams(layoutParams);
         layout_parent.addView(mAction);
         //给三个按钮加响应事件
-//        mButtonFold = mAction.findViewById(R.id.button_fold);
-//        mButtonRaise = mAction.findViewById(R.id.button_raise);
-//        mButtonCheck = mAction.findViewById(R.id.button_check);
+        seekBarRaise = mAction.findViewById(R.id.game_action_raise_seekbar);
+        seekBarRaise.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                blind_count.setText("100" + progress);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                blind_count.setText("DONE");
+
+            }
+        });
+        seekBarRaise.setProgress(0);
+        mButtonFold = mAction.findViewById(R.id.game_action_abandon);
+        mButtonRaise = mAction.findViewById(R.id.game_action_raise);
+        mButtonCheck = mAction.findViewById(R.id.game_action_call);
         mTVFold = mAction.findViewById(R.id.tv_fold);
         mTVRaise = mAction.findViewById(R.id.tv_raise);
         mTVCheck = mAction.findViewById(R.id.tv_check);
+        blind_layout = mAction.findViewById(R.id.blind_layout);
+        blind_count = mAction.findViewById(R.id.seek_text);
+
+//        doubleBlind = mAction.findViewById(R.id.game_action_double);
+//        doubleBlind.setOnClickListener();
+//        tripleBlind = mAction.findViewById(R.id.game_action_triple);
+//        fourBlind = mAction.findViewById(R.id.game_action_quadruple);
 
     }
 
@@ -4163,7 +4218,8 @@ public class GameActivity extends BaseToolbarActivity {
 
         tv_message = contentView.findViewById(R.id.tv_message);
         tv_message.setVisibility(View.INVISIBLE);
-        if (mTableInfo.mintakeinchips > application.getUser().goldcoin) {
+        //TODO: mTableInfo is null???
+        if (null != mTableInfo && mTableInfo.mintakeinchips > application.getUser().goldcoin) {
             tv_message.setVisibility(View.VISIBLE);
             tv_message.setText("个人财富不足，不能补充记分牌");
         }
@@ -4423,6 +4479,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                     JSONObject jsonObject = new JSONObject(result);
                     takeinchips = jsonObject.getInt("takeinchips");
+                    seekBarRaise.setMax(takeinchips);
                     permittakeinchips = jsonObject.getInt("permittakeinchips");
                     tablecreateuserid = jsonObject.getInt("tablecreateuserid");
                     //告诉主线程，从后台取takein数据成功

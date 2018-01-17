@@ -29,8 +29,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="规则说明"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -60,8 +60,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="设    置"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -91,8 +91,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="商    城"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -122,8 +122,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="补充记分牌"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -153,8 +153,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="站起围观"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -184,8 +184,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="保位留桌"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -215,8 +215,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="解散房间"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>
@@ -246,8 +246,8 @@
             android:layout_marginTop="4dp"
             android:layout_weight="1"
             android:text="退出牌局"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="16dp" />
+            android:textColor="@color/white"
+            android:textSize="14dp" />
 
 
     </LinearLayout>

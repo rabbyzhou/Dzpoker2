@@ -1,6 +1,7 @@
 package com.yijian.dzpoker.activity.game;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
@@ -131,6 +132,7 @@ public class GameSetActivity extends BaseBackActivity implements FragmentGameSet
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                ((TextView)(tab.getCustomView().findViewById(R.id.tv_title))).setTextColor(Color.BLACK);
                 if (tabLayout.getSelectedTabPosition()==0){
                     switch (tabLayout2.getSelectedTabPosition()){
                         case 0:
@@ -174,6 +176,7 @@ public class GameSetActivity extends BaseBackActivity implements FragmentGameSet
         tabLayout2.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
+                ((TextView)(tab.getCustomView().findViewById(R.id.tv_title))).setTextColor(Color.BLACK);
                 if (tabLayout.getSelectedTabPosition()==0){
                     switch (tabLayout2.getSelectedTabPosition()){
                         case 0:

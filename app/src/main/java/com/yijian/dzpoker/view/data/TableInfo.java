@@ -28,6 +28,7 @@ public class TableInfo {
     public int createuserid;
     public int curactionseatindex;
     public int curactionwaittime;
+    public int shareCode;
 
 
     /* public CardInfo[] comunitycards;

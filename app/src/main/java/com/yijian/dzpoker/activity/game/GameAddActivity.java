@@ -8,8 +8,19 @@ import android.widget.EditText;
 
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
+import com.yijian.dzpoker.baselib.debug.Logger;
+import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
 import com.yijian.dzpoker.constant.Constant;
+import com.yijian.dzpoker.http.getgametype.GetGameTypeApi;
+import com.yijian.dzpoker.http.getgametype.GetGameTypeCons;
 import com.yijian.dzpoker.util.ToastUtil;
+
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by c_huangl on 0015, 11/15/2017.
@@ -18,6 +29,8 @@ import com.yijian.dzpoker.util.ToastUtil;
 public class GameAddActivity extends BaseBackActivity {
     private EditText et_game_id;
     private Button btn_confirm;
+
+    private static final String TAG = "GameAddActivity";
 
 
     @Override
@@ -55,16 +68,65 @@ public class GameAddActivity extends BaseBackActivity {
                 if (et_game_id.getText().toString().equals("")) {
                     ToastUtil.showToastInScreenCenter(GameAddActivity.this, "请输入牌局桌号！");
                 }
-                //106.14.221.253:11820
-                Intent intent = new Intent();
-                intent.putExtra("operation", 2);//1表示创建牌局，2表示加入牌局
-                intent.putExtra("gameid", et_game_id.getText().toString());
-                intent.putExtra("ip", "106.14.221.253");
-                intent.putExtra("port", 11820);
-                intent.setClass(GameAddActivity.this, GameActivity.class);
-                startActivity(intent);
-                finish();
+                getGameType(et_game_id.getText().toString());
                 break;
+
+//                //106.14.221.253:11820
+//                Intent intent = new Intent();
+//                intent.putExtra("operation", 2);//1表示创建牌局，2表示加入牌局
+//                intent.putExtra("gameid", et_game_id.getText().toString());
+//                intent.putExtra("ip", "106.14.221.253");
+//                intent.putExtra("port", 11820);
+//                intent.setClass(GameAddActivity.this, GameActivity.class);
+//                startActivity(intent);
+//                finish();
+//                break;
+        }
+    }
+
+    private void getGameType(String shareCode) {
+        try {
+            GetGameTypeApi getClubInfoApi = RetrofitApiGenerator.createRequestApi(GetGameTypeApi.class);
+            JSONObject param = new JSONObject();
+            param.put(GetGameTypeCons.PARAM_KEY_SHARE_CODE, shareCode);
+
+            Call<ResponseBody> getGameTypeCall = getClubInfoApi.getResponse(GetGameTypeCons.FUNC_NAME, param.toString());
+            getGameTypeCall.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+//                    Logger.i(TAG, "getGameTypeCall response : " + response.body().toString());
+                    try {
+                        JSONObject jsonObject = new JSONObject(response.body().string());
+                        int gameType = jsonObject.optInt("gametype");
+                        int matchType = jsonObject.optInt("matchtype");
+                        int gameId = jsonObject.optInt("gameid");
+                        String ip = jsonObject.optString("ip");
+                        int port = jsonObject.optInt("port");
+                        if (matchType == -1) {
+                            Intent intent = new Intent();
+                            intent.putExtra("operation", 2);//1表示创建牌局，2表示加入牌局
+                            intent.putExtra("gameid", gameId);
+                            intent.putExtra("ip", ip);
+                            intent.putExtra("port", port);
+                            intent.setClass(GameAddActivity.this, GameActivity.class);
+                            startActivity(intent);
+                            finish();
+                        } else {
+                            ToastUtil.showToastInScreenCenter(GameAddActivity.this, "当前不支持比赛");
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 

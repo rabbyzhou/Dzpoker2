@@ -50,7 +50,7 @@
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/black"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white"
 
             >
@@ -72,7 +72,7 @@
             app:tabIndicatorColor="@color/white"
             app:tabIndicatorHeight="0dp"
             app:tabMode="fixed"
-            app:tabSelectedTextColor="@color/black"
+            app:tabSelectedTextColor="@color/white"
             app:tabTextColor="@color/white">
 
 

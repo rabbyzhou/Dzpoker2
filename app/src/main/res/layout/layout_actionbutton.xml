@@ -1,44 +1,247 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="240dp"
-    android:layout_height="120dp"
-    >
-    
-    <TextView
-        android:id="@+id/tv_fold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12dp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:text="弃牌"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
-        android:drawableTop="@drawable/fold_1"/>
+    android:layout_width="200dp"
+    android:layout_height="500dp"
+    android:padding="5dp">
 
     <TextView
-        android:id="@+id/tv_raise"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:textSize="12dp"
+        android:id="@+id/seek_text"
+        android:textSize="10dp"
         android:textColor="@color/white"
-        android:gravity="center"
-        android:text="跟注"
+        android:layout_above="@+id/game_action_raise_seekbar"
         android:layout_centerHorizontal="true"
-        android:layout_alignParentTop="true"
-        android:drawableTop="@drawable/raise_1"/>
+        android:text="100"/>
 
-    <TextView
-        android:id="@+id/tv_check"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="12dp"
-        android:textColor="@color/white"
-        android:gravity="center"
-        android:text="bet"
-        android:layout_alignParentRight="true"
+
+    <SeekBar
+        android:id="@+id/game_action_raise_seekbar"
+        android:layout_width="300dp"
+        android:layout_height="200dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="-90dp"
+        android:max="10"
+        android:maxHeight="2dp"
+        android:minHeight="2dp"
+        android:progress="0"
+        android:rotation="270"
+        android:layout_above="@+id/game_action_button_layout"
+        android:progressDrawable="@drawable/custom_seekbar_layer"
+        android:thumb="@drawable/custom_seekbar_shape"
+
+        />
+
+    <LinearLayout
+        android:id="@+id/game_action_button_layout"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
         android:layout_alignParentBottom="true"
-        android:drawableTop="@drawable/check_1"/>
+        android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:id="@+id/blind_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/game_action_double"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/little_raise_1"
+            android:gravity="center"
+            android:text="2倍大盲"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_double"
+            android:layout_alignRight="@id/game_action_double"
+            android:layout_below="@id/game_action_double"
+            android:gravity="center"
+            android:text="4"
+            android:layout_marginTop="-10dp"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/game_action_triple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/little_raise_1"
+            android:gravity="center"
+            android:text="3倍大盲"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_triple"
+            android:layout_alignRight="@id/game_action_triple"
+            android:layout_below="@id/game_action_triple"
+            android:gravity="center"
+            android:text="6"
+            android:layout_marginTop="-10dp"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:id="@+id/game_action_quadruple"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/little_raise_1"
+            android:gravity="center"
+            android:text="4倍大盲"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_quadruple"
+            android:layout_alignRight="@id/game_action_quadruple"
+            android:layout_below="@id/game_action_quadruple"
+            android:gravity="center"
+            android:layout_marginTop="-10dp"
+            android:text="8"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_fold"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentLeft="true"-->
+            <!--android:drawableTop="@drawable/fold_1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="弃牌"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_raise"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentTop="true"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_marginBottom="40dp"-->
+            <!--android:drawableTop="@drawable/raise_1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="跟注"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12dp" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_check"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="50dp"-->
+            <!--android:layout_alignParentBottom="true"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--android:drawableTop="@drawable/check_1"-->
+            <!--android:gravity="center"-->
+            <!--android:text="bet"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="12dp" />-->
+
+        <!--<SeekBar-->
+            <!--android:id="@+id/game_action_raise_seekbar_1"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="200dp"-->
+            <!--android:layout_marginLeft="10dp"-->
+            <!--android:layout_marginRight="10dp"-->
+            <!--android:layout_marginTop="10dp"-->
+            <!--android:max="10"-->
+            <!--android:maxHeight="2dp"-->
+            <!--android:minHeight="2dp"-->
+            <!--android:progress="5"-->
+            <!--android:rotation="90"-->
+            <!--android:layout_above="@+id/game_action_raise"-->
+            <!--android:progressDrawable="@drawable/custom_seekbar_layer"-->
+            <!--android:thumb="@drawable/custom_seekbar_shape"-->
+
+            <!--/>-->
+
+        <Button
+            android:id="@+id/game_action_abandon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/fold_1" />
+
+        <TextView
+            android:id="@+id/tv_fold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_abandon"
+            android:layout_alignRight="@id/game_action_abandon"
+            android:layout_below="@id/game_action_abandon"
+            android:gravity="center"
+            android:layout_marginTop="-10dp"
+            android:text="4"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/game_action_raise"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:background="@drawable/raise_1" />
+
+        <TextView
+            android:id="@+id/tv_raise"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_raise"
+            android:layout_alignRight="@id/game_action_raise"
+            android:layout_below="@id/game_action_raise"
+            android:gravity="center"
+            android:layout_marginTop="-10dp"
+            android:text="4"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/game_action_call"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/check_1" />
+
+        <TextView
+            android:id="@+id/tv_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@id/game_action_call"
+            android:layout_alignRight="@id/game_action_call"
+            android:layout_below="@id/game_action_call"
+            android:gravity="center"
+            android:layout_marginTop="-10dp"
+            android:text="4"
+            android:textColor="@color/white"
+            android:textSize="10dp" />
+    </RelativeLayout>
+
+    </LinearLayout>
 
 </RelativeLayout>

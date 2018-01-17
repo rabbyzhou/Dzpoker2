@@ -64,7 +64,7 @@
             android:layout_height="40dp"
             android:layout_marginLeft="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="bottom|left"
+            android:layout_gravity="bottom|right"
             />
 
 
@@ -75,10 +75,64 @@
             android:layout_height="40dp"
             android:layout_marginRight="20dp"
             android:layout_marginBottom="10dp"
-            android:layout_gravity="bottom|right"
+            android:layout_gravity="bottom|left"
             />
 
+
+
     </FrameLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_marginBottom="160dp">
+
+        <TextView
+            android:id="@+id/share_code"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:textSize="10dp"
+            android:gravity="center"
+            android:text="邀请码:"/>
+
+        <TextView
+            android:id="@+id/table_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:textSize="10dp"
+            android:gravity="center"
+            android:text="牌桌名"/>
+
+        <TextView
+            android:id="@+id/blind_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="10dp"
+            android:text="盲注"/>
+
+        <TextView
+            android:id="@+id/assurance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:textSize="10dp"
+            android:text="保险"/>
+
+    </LinearLayout>
 
 </RelativeLayout>
 

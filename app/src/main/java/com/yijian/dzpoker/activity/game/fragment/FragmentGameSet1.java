@@ -267,7 +267,7 @@ public class FragmentGameSet1 extends Fragment implements RangeSliderBar.OnSelec
 
                                 Intent intent = new Intent();
                                 intent.putExtra("operation",1);//1表示创建牌局，2表示加入牌局
-                                intent.putExtra("gameid",ssid);
+                                intent.putExtra("gameid",Integer.valueOf(ssid));
                                 intent.putExtra("ip",ip);
                                 intent.putExtra("port",port);
 

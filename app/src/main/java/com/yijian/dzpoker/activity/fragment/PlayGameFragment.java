@@ -150,6 +150,9 @@ public class PlayGameFragment extends Fragment implements QuickGameFragment.OnFr
 
         @Override
         public Fragment getItem(int position) {
+            if (list.get(position) instanceof FindGameFragment) {
+                ((FindGameFragment) list.get(position)).getGames(getActivity());
+            }
              return list.get(position);
         }
 
