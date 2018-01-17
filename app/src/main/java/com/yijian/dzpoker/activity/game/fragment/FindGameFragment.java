@@ -1,5 +1,6 @@
 package com.yijian.dzpoker.activity.game.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
@@ -9,7 +10,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yijian.dzpoker.R;
+import com.yijian.dzpoker.baselib.debug.Logger;
+import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
+import com.yijian.dzpoker.http.getmygame.GetMyGameTableApi;
+import com.yijian.dzpoker.http.getmygame.GetMyGameTableCons;
+import com.yijian.dzpoker.http.getmygame.GetMyMatchApi;
+import com.yijian.dzpoker.http.getmygame.GetMyMatchCons;
+import com.yijian.dzpoker.util.DzApplication;
 
+import org.json.JSONObject;
+
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -23,6 +37,8 @@ public class FindGameFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static final String TAG = "FindGameFragment";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -59,6 +75,71 @@ public class FindGameFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+//        "getmymatch";
+//        "getmygametable";——》entertable
+    }
+
+    public void getGames(Activity activity) {
+        getMyMatches(activity);
+        getMyGameTables(activity);
+    }
+
+
+    private void getMyMatches(Activity activity) {
+        DzApplication application = (DzApplication) activity.getApplication();
+        try {
+            GetMyMatchApi getMyMatchApi = RetrofitApiGenerator.createRequestApi(GetMyMatchApi.class);
+            JSONObject param = new JSONObject();
+            param.put(GetMyMatchCons.PARAM_KEY_USERID, application.getUserId());
+
+            Call<ResponseBody> callForMyMatches = getMyMatchApi.getResponse(GetMyMatchCons.FUNC_NAME, param.toString());
+            callForMyMatches.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Logger.i(TAG, "callForMyMatches response : " + response.body().toString());
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    private void getMyGameTables(Activity activity) {
+        DzApplication application = (DzApplication) activity.getApplication();
+        try {
+            GetMyGameTableApi getMyGameTableApi = RetrofitApiGenerator.createRequestApi(GetMyGameTableApi.class);
+            JSONObject param = new JSONObject();
+            param.put(GetMyGameTableCons.PARAM_KEY_USERID, application.getUserId());
+
+            Call<ResponseBody> callForMyGameTables = getMyGameTableApi.getResponse(GetMyGameTableCons.FUNC_NAME, param.toString());
+            callForMyGameTables.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    Logger.i(TAG, "callForMyGameTables response : " + response.body().toString());
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getMyMatches(getActivity());
+        getMyGameTables(getActivity());
     }
 
     @Override
