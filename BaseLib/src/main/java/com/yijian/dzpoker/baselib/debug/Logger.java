@@ -9,7 +9,7 @@ import android.util.Log;
 public class Logger {
 
     /**Log switch*/
-    public static final boolean DEBUGABLE = false;
+    public static final boolean DEBUGABLE = true;
 
     /**Main log tag*/
     private static final String MAIN_TAG = "DZPOKER_LOG";

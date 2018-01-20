@@ -23,6 +23,7 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Bundle;
+import android.support.annotation.Keep;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -87,7 +88,7 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 import static com.yijian.dzpoker.util.Util.calculatePopWindowPos;
-
+@Keep
 public class GameActivity extends BaseToolbarActivity {
 
     private static final String TAG = "GameActivity";
@@ -1314,6 +1315,7 @@ public class GameActivity extends BaseToolbarActivity {
 
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         ToastUtil.showToastInScreenCenter(GameActivity.this, "处理服务器返回的数据异常！");
 
                     }

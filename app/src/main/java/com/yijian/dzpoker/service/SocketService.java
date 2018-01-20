@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.support.annotation.Keep;
 import android.support.annotation.Nullable;
 import android.text.TextUtils;
 
@@ -27,7 +28,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by rabby on 2017/10/9.
  */
-
+@Keep
 public class SocketService extends Service implements Runnable {
 
     private static final String TAG = "SocketService";
