@@ -113,7 +113,7 @@ public class ClubInfoDetailActivity extends BaseBackActivity {
         }
 //        masterName.setText(clubInfo.createuserid + "");
 
-        masterName.setText(clubInfo.clubID);
+        masterName.setText(String.valueOf(clubInfo.clubID));
         clubLevel.setText(clubInfo.clubLevelName);
         clubDesc.setText(clubInfo.clubCreatetime);
         members.setText(clubInfo.clubMemberNumber + "/" + clubInfo.maxCLubMemberNumber);

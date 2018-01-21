@@ -129,6 +129,7 @@ public class ClubManagerActivity extends BaseBackActivity {
                             bean.setRequestId(info.getRequestid());
                             datas.add(bean);
                         }
+                        Logger.i(TAG, "applyBean =" + response.body());
                         mainHandler.sendEmptyMessage(UPDATE_UI);
                     } catch (Exception e) {
                         e.printStackTrace();
