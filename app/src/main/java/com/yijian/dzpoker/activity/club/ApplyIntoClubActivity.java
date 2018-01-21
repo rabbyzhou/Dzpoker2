@@ -22,6 +22,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
+import cn.jpush.im.android.api.JMessageClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -36,6 +37,7 @@ public class ApplyIntoClubActivity extends BaseBackActivity implements View.OnCl
     private int clubId;
     private final static int MESAGE_GETCLUBLIST_OK = 0x1001;
     private TextView exitText;
+    private int createuserid;
 
     private static final String TAG = "ApplyIntoClubActivity";
 
@@ -48,6 +50,7 @@ public class ApplyIntoClubActivity extends BaseBackActivity implements View.OnCl
         userId = application.getUserId();
         Intent intent = this.getIntent();
         clubId = intent.getIntExtra("clubid", 0);
+        createuserid = intent.getIntExtra("createUserId", 0);
         setToolbarTitle("俱乐部验证");
 
     }
@@ -95,13 +98,17 @@ public class ApplyIntoClubActivity extends BaseBackActivity implements View.OnCl
     }
 
     private void sendRequest() {
+
+        DzApplication dzApplication = (DzApplication) getApplication();
+        final String userName = dzApplication.getUser().nickName;
         RequestJoinClubApi httpRequestBaseApi = RetrofitApiGenerator.createRequestApi(RequestJoinClubApi.class);
+        final String message = et_applyinfo.getText().toString();
 
         try {
             JSONObject params = new JSONObject();
             params.put(RequestJoinClubConstants.PARAM_KEY_USER_ID, userId);
             params.put(RequestJoinClubConstants.PARAM_KEY_CLUB_ID, clubId);
-            params.put(RequestJoinClubConstants.PARAM_KEY_REQUEST_MSG, et_applyinfo.getText());
+            params.put(RequestJoinClubConstants.PARAM_KEY_REQUEST_MSG, et_applyinfo.getText().toString());
             Logger.i(TAG, "response=" + params.toString());
             Call<ResponseBody> call = httpRequestBaseApi.getResponse(RequestJoinClubConstants.FUNC_NAME, params.toString());
 
@@ -110,6 +117,9 @@ public class ApplyIntoClubActivity extends BaseBackActivity implements View.OnCl
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     try {
                         Logger.i(TAG, "response=" + response.body().string());
+                        String msg = "RequestAddToClub|{'username':'" + userName + "','requestmsg':'" + message +"'}";
+                        cn.jpush.im.android.api.model.Message message = JMessageClient.createSingleTextMessage(createuserid + "", getString(R.string.app_key), msg);
+                        JMessageClient.sendMessage(message);
                         finish();
                     } catch (IOException e) {
                         e.printStackTrace();
