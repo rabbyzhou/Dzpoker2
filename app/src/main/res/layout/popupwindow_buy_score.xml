@@ -194,21 +194,21 @@
             android:textColor="@color/white"
             android:textSize="14dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="2dp"
-            android:textSize="8dp"
-            android:textColor="@color/white"
-            android:text="在下一局开始前，为您补充所购记分牌"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textColor="@color/white"
-            android:textSize="8dp"
-            android:text="牌局结束后，会自动将记分牌兑换成您的财富"/>
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:layout_marginTop="2dp"-->
+            <!--android:textSize="8dp"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:text="在下一局开始前，为您补充所购记分牌"/>-->
+        <!--<TextView-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="8dp"-->
+            <!--android:text="牌局结束后，会自动将记分牌兑换成您的财富"/>-->
     </LinearLayout>
 
 

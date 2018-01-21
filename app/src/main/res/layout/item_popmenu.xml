@@ -190,36 +190,36 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/layout_7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="2dp"
-        android:background="#332e4f"
-        android:orientation="horizontal"
-        android:paddingLeft="5dp"
-        android:paddingRight="10dp">
+    <!--<LinearLayout-->
+        <!--android:id="@+id/layout_7"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="2dp"-->
+        <!--android:background="#332e4f"-->
+        <!--android:orientation="horizontal"-->
+        <!--android:paddingLeft="5dp"-->
+        <!--android:paddingRight="10dp">-->
 
-        <ImageView
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/defend_ico" />
+        <!--<ImageView-->
+            <!--android:layout_width="20dp"-->
+            <!--android:layout_height="20dp"-->
+            <!--android:layout_gravity="center_vertical"-->
+            <!--android:src="@drawable/defend_ico" />-->
 
-        <TextView
-            android:id="@+id/tv_7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="4dp"
-            android:layout_marginLeft="3dp"
-            android:layout_marginTop="4dp"
-            android:layout_weight="1"
-            android:text="解散房间"
-            android:textColor="@color/white"
-            android:textSize="14dp" />
+        <!--&lt;!&ndash;<TextView&ndash;&gt;-->
+            <!--&lt;!&ndash;android:id="@+id/tv_7"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_width="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginBottom="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginLeft="3dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_marginTop="4dp"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:layout_weight="1"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:text="解散房间"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textColor="@color/white"&ndash;&gt;-->
+            <!--&lt;!&ndash;android:textSize="14dp" />&ndash;&gt;-->
 
 
-    </LinearLayout>
+    <!--</LinearLayout>-->
 
     <LinearLayout
         android:id="@+id/layout_8"

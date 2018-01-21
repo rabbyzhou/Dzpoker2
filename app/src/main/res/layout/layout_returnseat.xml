@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="45dp"
-    android:layout_height="17dp"
+    android:layout_width="60dp"
+    android:layout_height="24dp"
     android:orientation="vertical">
 
     <TextView
@@ -13,6 +13,6 @@
         android:gravity="center"
         android:text="回到座位"
         android:textColor="@color/white"
-        android:textSize="8dp" />
+        android:textSize="12dp" />
 </LinearLayout>
 

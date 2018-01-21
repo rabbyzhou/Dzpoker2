@@ -510,10 +510,10 @@ public class GameActivity extends BaseToolbarActivity {
                     view = contentView.findViewById(R.id.layout_6);
                     view.setVisibility(View.GONE);
                 }
-                if (mTableInfo.createuserid != application.getUserId()) {
-                    View view = contentView.findViewById(R.id.layout_7);
-                    view.setVisibility(View.GONE);
-                }
+//                if (mTableInfo.createuserid != application.getUserId()) {
+//                    View view = contentView.findViewById(R.id.layout_7);
+//                    view.setVisibility(View.GONE);
+//                }
                 //规则说明
                 TextView tv_1 = contentView.findViewById(R.id.tv_1);
                 tv_1.setOnClickListener(new View.OnClickListener() {
@@ -617,53 +617,53 @@ public class GameActivity extends BaseToolbarActivity {
                 });
 
                 //解散房间
-                TextView tv_7 = contentView.findViewById(R.id.tv_7);
-                tv_7.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        mainThreadHandler.sendEmptyMessage(MESSAGE_DISMISS_POPMENU);
-                        new AlertDialog.Builder(GameActivity.this).setTitle("系统提示")//设置对话框标题
-
-                                .setMessage("确认解散牌局？")//设置显示的内容
-
-                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
-
-                                    @Override
-
-                                    public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
-
-                                        try {
-                                            //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
-                                            String msg = Constant.GAME_DISPOSE_TABLE + "|";
-                                            JSONObject jsonSend = new JSONObject();
-                                            jsonSend.put("userid", application.getUserId());
-                                            jsonSend.put("tableid", gameId);
-                                            msg += jsonSend.toString().replace("$", "￥");
-                                            msg += "$";
-                                            myBinder.sendInfo(msg);
-                                        } catch (Exception e) {
-                                            ToastUtil.showToastInScreenCenter(GameActivity.this, "解散房间出错！");
-
-                                        }
-                                    }
-
-                                }).setNegativeButton("返回", new DialogInterface.OnClickListener() {//添加返回按钮
-
-                            @Override
-
-                            public void onClick(DialogInterface dialog, int which) {//响应事件
-
-                                // TODO Auto-generated method stub
-
-                                Log.i("alertdialog", " 请保存数据！");
-
-                            }
-
-                        }).show();//在按键响应事件中显示此对话框
-
-
-                    }
-                });
+//                TextView tv_7 = contentView.findViewById(R.id.tv_7);
+//                tv_7.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        mainThreadHandler.sendEmptyMessage(MESSAGE_DISMISS_POPMENU);
+//                        new AlertDialog.Builder(GameActivity.this).setTitle("系统提示")//设置对话框标题
+//
+//                                .setMessage("确认解散牌局？")//设置显示的内容
+//
+//                                .setPositiveButton("确定", new DialogInterface.OnClickListener() {//添加确定按钮
+//
+//                                    @Override
+//
+//                                    public void onClick(DialogInterface dialog, int which) {//确定按钮的响应事件
+//
+//                                        try {
+//                                            //ToastUtil.showToastInScreenCenter(GameActivity.this,v.getTag().toString());
+//                                            String msg = Constant.GAME_DISPOSE_TABLE + "|";
+//                                            JSONObject jsonSend = new JSONObject();
+//                                            jsonSend.put("userid", application.getUserId());
+//                                            jsonSend.put("tableid", gameId);
+//                                            msg += jsonSend.toString().replace("$", "￥");
+//                                            msg += "$";
+//                                            myBinder.sendInfo(msg);
+//                                        } catch (Exception e) {
+//                                            ToastUtil.showToastInScreenCenter(GameActivity.this, "解散房间出错！");
+//
+//                                        }
+//                                    }
+//
+//                                }).setNegativeButton("返回", new DialogInterface.OnClickListener() {//添加返回按钮
+//
+//                            @Override
+//
+//                            public void onClick(DialogInterface dialog, int which) {//响应事件
+//
+//                                // TODO Auto-generated method stub
+//
+//                                Log.i("alertdialog", " 请保存数据！");
+//
+//                            }
+//
+//                        }).show();//在按键响应事件中显示此对话框
+//
+//
+//                    }
+//                });
 
                 //退出牌局
                 TextView tv_8 = contentView.findViewById(R.id.tv_8);
@@ -1125,7 +1125,7 @@ public class GameActivity extends BaseToolbarActivity {
                             JSONObject jsonReturn = new JSONObject(recData[1]);
                             /*  public int ret; //0成功
                                 public string msg;*/
-                            if (jsonReturn.getInt("ret") == 0) {
+                            if (jsonReturn.getInt("ret") == 0 && tv_service_coin != null && tv_core != null) {
                                 application.getUser().goldcoin -= Integer.parseInt(tv_service_coin.getText().toString()) + Integer.parseInt(tv_core.getText().toString());
                                 mainThreadHandler.sendEmptyMessage(MESSAGE_DISMISS_POPWINDOW);
 
@@ -2049,6 +2049,9 @@ public class GameActivity extends BaseToolbarActivity {
                     /*   public int userid;
                         public int tableid;
                          public int seatindex;*/
+                    if (null != mReturnSeat) {
+                        mReturnSeat.setVisibility(View.INVISIBLE);
+                    }
                     try {
                         mp = MediaPlayer.create(GameActivity.this, R.raw.chairstandsound);
                         mp.start();
@@ -2113,7 +2116,7 @@ public class GameActivity extends BaseToolbarActivity {
                         mGameUser.get(userid).remainchips += chips;
                         View view = mSeatObjects.get(mGameUser.get(userid).seatindex);
                         TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
-                        tv_goldcoin.setText(mGameUser.get(userid).remainchips);
+                        tv_goldcoin.setText(String.valueOf(mGameUser.get(userid).remainchips));
 
                     } catch (Exception e) {
                         ToastUtil.showToastInScreenCenter(GameActivity.this, "处理INFO_ADD_CHIPS错误，错误内容为" + e.getMessage());
@@ -2136,16 +2139,16 @@ public class GameActivity extends BaseToolbarActivity {
                         ImageView iv = view.findViewById(R.id.iv_user_head);
                         TextView tv_name = view.findViewById(R.id.tv_user_name);
                         TextView tv_goldcoin = view.findViewById(R.id.tv_goldcoin);
-                        tv_name.setText("");
-                        tv_name.setVisibility(View.INVISIBLE);
-                        tv_goldcoin.setText("");
-                        tv_goldcoin.setVisibility(View.INVISIBLE);
-                        iv.setImageResource(R.drawable.seat_empty);
+//                        tv_name.setText("");
+//                        tv_name.setVisibility(View.INVISIBLE);
+//                        tv_goldcoin.setText("");
+//                        tv_goldcoin.setVisibility(View.INVISIBLE);
+//                        iv.setImageResource(R.drawable.seat_empty);
 
 
-                        mTipObjects.get(seatindex).setVisibility(View.INVISIBLE);
-                        mChipObjects.get(seatindex).setVisibility(View.INVISIBLE);
-                        mCardBackObjects.get(seatindex).setVisibility(View.INVISIBLE);
+//                        mTipObjects.get(seatindex).setVisibility(View.INVISIBLE);
+//                        mChipObjects.get(seatindex).setVisibility(View.INVISIBLE);
+//                        mCardBackObjects.get(seatindex).setVisibility(View.INVISIBLE);
 
                         //先离开座位，然后判断是否自己，如果是自己，显示回到座位按钮，别人则显示倒计时
                         if (userid == application.getUserId()) {
@@ -2212,7 +2215,7 @@ public class GameActivity extends BaseToolbarActivity {
 
                         tv_name.setText(mGameUser.get(userid).nickName);
                         tv_name.setVisibility(View.VISIBLE);
-                        tv_goldcoin.setText(mGameUser.get(userid).remainchips);
+                        tv_goldcoin.setText(String.valueOf(mGameUser.get(userid).remainchips));
 
                         //mTableUser.get( mUserSeat.get(seatindex)).
                         //tv_goldcoin.setText(intochips+"");
@@ -2234,6 +2237,7 @@ public class GameActivity extends BaseToolbarActivity {
                         iv.setClickable(false);
 
                     } catch (Exception e) {
+                        e.printStackTrace();
                         ToastUtil.showToastInScreenCenter(GameActivity.this, "处理IMESSAGE_INFO_BACK_SEAT错误，错误内容为" + e.getMessage());
                     }
 
@@ -2438,6 +2442,8 @@ public class GameActivity extends BaseToolbarActivity {
         tv.setGravity(Gravity.CENTER);
         tv.setText(timelen + "");
         tv.setTextColor(Color.RED);
+        TextPaint textPaint = tv.getPaint();
+        textPaint.setFakeBoldText(true);
         layout_game.addView(tv);
         setPosition(tv, mHeadImageWidth, mHeadImageHeight, iSeatValue[seatindex][0] + (mSeatViewWidth - mHeadImageWidth) / 2, iSeatValue[seatindex][1] + mNameTextHeight);
         mTimerViewObjects.put(seatindex, tv);
@@ -2504,7 +2510,10 @@ public class GameActivity extends BaseToolbarActivity {
         shareCode.setText("邀请码:" + mTableInfo.shareCode);
         tableName.setText("牌桌名:" + mTableInfo.tablename);
         blindCount.setText("盲注:" + mTableInfo.smallblind + "/" + mTableInfo.bigblind);
-        assurance.setText("保险:" + "27");
+        String control = mTableInfo.iscontroltakein ? "控制带入 " : "";
+        String assuranceMsg = mTableInfo.issurance ? "保险 " : "";
+        String ass27 = mTableInfo.is27 ? "27" : "";
+        assurance.setText(control + assuranceMsg + ass27);
 
 
         //先根据收到的table信息初始化桌面的控件
@@ -3273,7 +3282,7 @@ public class GameActivity extends BaseToolbarActivity {
                     switch (mTVCheck.getText().toString()) {
                         case "跟注":
                             jsonSend.put("action", 1);
-                            jsonSend.put("amountchips", maxpaidchips);
+                            jsonSend.put("amountchips", maxpaidchips - minChip);
 
                             break;
                         case "看牌":
@@ -3325,7 +3334,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                blind_count.setText("100" + progress);
+//                blind_count.setText("100" + progress);
             }
 
             @Override
@@ -3335,7 +3344,7 @@ public class GameActivity extends BaseToolbarActivity {
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                blind_count.setText("DONE");
+//                blind_count.setText("DONE");
 
             }
         });

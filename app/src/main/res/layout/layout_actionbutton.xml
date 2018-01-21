@@ -8,6 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/seek_text"
+        android:visibility="gone"
         android:textSize="10dp"
         android:textColor="@color/white"
         android:layout_above="@+id/game_action_raise_seekbar"
