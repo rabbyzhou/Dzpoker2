@@ -73,6 +73,7 @@ public class SearchClubAdapter extends BaseListAdapter<ClubInfo, SearchClubAdapt
                     intent.putExtra("clubid",clubInfo.clubID);
                     intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
                     intent.putExtra(INTENT_KEY_BACKTEXT, mTitle);
+                    intent.putExtra("createUserId", clubInfo.createuserid);
                     intent.setClass(mContext, ApplyIntoClubActivity.class);
                     mContext.startActivity(intent);
                 }
