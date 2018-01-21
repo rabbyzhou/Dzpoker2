@@ -1,21 +1,44 @@
 package com.yijian.dzpoker.activity.club;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yijian.dzpoker.R;
 import com.yijian.dzpoker.activity.base.BaseBackActivity;
+import com.yijian.dzpoker.activity.game.GameActivity;
+import com.yijian.dzpoker.activity.game.fragment.FindGameFragment;
 import com.yijian.dzpoker.adapter.GamblingAdapter;
 import com.yijian.dzpoker.baselib.debug.Logger;
 import com.yijian.dzpoker.baselib.http.RetrofitApiGenerator;
+import com.yijian.dzpoker.entity.MyGamesBean;
 import com.yijian.dzpoker.http.getclubgames.GetClubGamesApi;
 import com.yijian.dzpoker.http.getclubgames.GetClubGamesCons;
+import com.yijian.dzpoker.http.getgametype.GetGameTypeApi;
+import com.yijian.dzpoker.http.getgametype.GetGameTypeCons;
+import com.yijian.dzpoker.http.getmygame.GetMyGameTableApi;
+import com.yijian.dzpoker.http.getmygame.GetMyGameTableCons;
+import com.yijian.dzpoker.util.DzApplication;
+import com.yijian.dzpoker.util.ToastUtil;
 
 import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -31,12 +54,32 @@ public class GamblingListActivity extends BaseBackActivity {
     private RecyclerView gamblingRecyclerView;
     private int clubId;
 
+    private List<MyGamesBean> games = new ArrayList<MyGamesBean>();
+
+    private Handler mainHandler;
+
+    private GamblingAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setToolbarTitle("牌局");
         getClubId(getIntent());
         getClubGames();
+        getMyGameTables();
+
+        mainHandler = new Handler() {
+            @Override
+            public void handleMessage(Message message) {
+                switch (message.what) {
+                    case 0:
+                        adapter.updateUI(games);
+                        break;
+                    default:
+                        break;
+                }
+            }
+        };
     }
 
     private void getClubId(Intent intent) {
@@ -55,7 +98,8 @@ public class GamblingListActivity extends BaseBackActivity {
         gamblingRecyclerView = (RecyclerView) findViewById(R.id.gambling_list);
         gamblingRecyclerView.setLayoutManager(new GridLayoutManager(this, 2));
         gamblingRecyclerView.addItemDecoration(new SpaceItemDecoration(8));
-        gamblingRecyclerView.setAdapter(new GamblingAdapter(this, null));
+        adapter = new GamblingAdapter(this, games);
+        gamblingRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -85,6 +129,44 @@ public class GamblingListActivity extends BaseBackActivity {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    private void getMyGameTables() {
+        DzApplication application = (DzApplication) getApplication();
+        try {
+            GetMyGameTableApi getMyGameTableApi = RetrofitApiGenerator.createRequestApi(GetMyGameTableApi.class);
+            JSONObject param = new JSONObject();
+            param.put(GetMyGameTableCons.PARAM_KEY_USERID, application.getUserId());
+
+            Call<ResponseBody> callForMyGameTables = getMyGameTableApi.getResponse(GetMyGameTableCons.FUNC_NAME, param.toString());
+            callForMyGameTables.enqueue(new Callback<ResponseBody>() {
+                @Override
+                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                    try {
+                        Gson gson = new Gson();
+                        Type type = new TypeToken<List<MyGamesBean>>(){}.getType();
+                        List<MyGamesBean> datas = gson.fromJson(response.body().string(), type);
+                        if (null != datas) {
+                            games.addAll(datas);
+//                            Message message = new Message();
+//                            message.what = 0;
+                            mainHandler.sendEmptyMessage(0);
+                        }
+                    } catch (Throwable e) {
+                        e.printStackTrace();
+                    }
+//                    Logger.i(TAG, "callForMyGameTables response : " + response.body().toString());
+
+                }
+
+                @Override
+                public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                }
+            });
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
     }
 
